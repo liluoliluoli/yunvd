@@ -17,26 +17,29 @@ class AuthService {
   async login(email, password) {
     try {
       console.log('Logging in user:', email);
-  
+
       const requestBody = {
         username: email,  // Ensure case-sensitive match with API requirements
         password: password
       };
   console.log('Logging in user request body:', requestBody);
-      const response = await apiClient.post(AUTH_ENDPOINTS.LOGIN, requestBody);
-  
+      // const response = await apiClient.post(AUTH_ENDPOINTS.LOGIN, requestBody);
+      const response = {
+        accessToken: "121212",
+      }
       // Store tokens and user data if response contains authentication tokens
       if (response && response.accessToken) {
-        await this.storeAuthData(response);
+        // await this.storeAuthData(response);
+        this.storeAuthData(response);
       }
-  
+
       return response;
     } catch (error) {
       console.error('Login error:', error);
       throw error;
     }
   }
-  
+
 
   /**
    * Register a new user
@@ -69,7 +72,7 @@ class AuthService {
    */
   async storeAuthData(data) {
     const { access_token, refresh_token, user } = data;
-    
+
     const storageItems = [
       [STORAGE_KEYS.AUTH_TOKEN, access_token],
       [STORAGE_KEYS.REFRESH_TOKEN, refresh_token],
@@ -196,14 +199,14 @@ class AuthService {
   async updateProfile(profileData) {
     try {
       const response = await apiClient.put(AUTH_ENDPOINTS.UPDATE_PROFILE, profileData);
-      
+
       // Update user data in storage
       const currentUserData = await this.getCurrentUser();
       if (currentUserData) {
         const updatedUserData = { ...currentUserData, ...response.user };
         await AsyncStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(updatedUserData));
       }
-      
+
       return response;
     } catch (error) {
       throw error;
@@ -218,14 +221,14 @@ class AuthService {
   async updateProfilePicture(formData) {
     try {
       const response = await apiClient.uploadFile(AUTH_ENDPOINTS.UPDATE_PROFILE, formData);
-      
+
       // Update user data in storage
       const currentUserData = await this.getCurrentUser();
       if (currentUserData) {
         const updatedUserData = { ...currentUserData, ...response.user };
         await AsyncStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(updatedUserData));
       }
-      
+
       return response;
     } catch (error) {
       throw error;
@@ -327,4 +330,4 @@ class AuthService {
 // Create a singleton instance
 const authService = new AuthService();
 
-export default authService; 
+export default authService;
