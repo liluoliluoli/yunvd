@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  StyleSheet, 
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
   FlatList,
   Image,
   TextInput,
@@ -31,7 +31,7 @@ export default function HomeScreen({ navigation }) {
   const [filteredVideos, setFilteredVideos] = useState([]);
   const [isLoadingMockData, setIsLoadingMockData] = useState(true);
   const [mockError, setMockError] = useState(null);
-  
+
   const { logout } = useAuthViewModel();
 
   // Load the mock videos directly from VideoService
@@ -39,7 +39,7 @@ export default function HomeScreen({ navigation }) {
     try {
       setIsLoadingMockData(true);
       setMockError(null);
-      
+
       // Import the mock data directly to avoid network requests
       const mockVideos = [
         {
@@ -58,7 +58,36 @@ export default function HomeScreen({ navigation }) {
           },
           isFavorite: false,
           rating: 4.8,
-          publishDate: '2008-05-20'
+          publishDate: '2008-05-20',
+          episodeCount:20,
+          episodes: [{
+            episode:1,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          },{
+            episode:2,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          },{
+            episode:3,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          },{
+            episode:1,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          },{
+            episode:2,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          },{
+            episode:3,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          },{
+            episode:1,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          },{
+            episode:2,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          },{
+            episode:3,
+            videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+          }]
         },
         {
           id: '2',
@@ -97,7 +126,7 @@ export default function HomeScreen({ navigation }) {
           publishDate: '2010-09-30'
         }
       ];
-      
+
       // Add some extra variety by creating copies with different IDs
       const extraVideos = mockVideos.map(video => ({
         ...video,
@@ -105,11 +134,11 @@ export default function HomeScreen({ navigation }) {
         isFavorite: Math.random() > 0.5,
         views: Math.floor(video.views * (0.5 + Math.random()))
       }));
-      
+
       // Combine original and extra videos
       setMockVideosData([...mockVideos, ...extraVideos]);
       console.log(`Loaded ${mockVideos.length + extraVideos.length} mock videos successfully`);
-      
+
     } catch (error) {
       console.error('Error loading mock videos:', error);
       setMockError('Failed to load videos. Please try again.');
@@ -139,17 +168,17 @@ export default function HomeScreen({ navigation }) {
     if (searchQuery.trim()) {
       try {
         setIsLoadingMockData(true);
-        
+
         // Filter the videos locally based on search query
-        const filtered = mockVideosData.filter(video => 
-          video.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        const filtered = mockVideosData.filter(video =>
+          video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           video.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
           (video.author?.name && video.author.name.toLowerCase().includes(searchQuery.toLowerCase()))
         );
-        
+
         // Set filtered videos
         setFilteredVideos(filtered);
-        
+
         // Log results
         if (filtered.length === 0) {
           console.log('No videos match the search query');
@@ -203,9 +232,9 @@ export default function HomeScreen({ navigation }) {
 
   const handleToggleFavorite = (videoId) => {
     // Update the mock videos data to toggle favorite
-    setMockVideosData(prevVideos => 
-      prevVideos.map(video => 
-        video.id === videoId 
+    setMockVideosData(prevVideos =>
+      prevVideos.map(video =>
+        video.id === videoId
           ? { ...video, isFavorite: !video.isFavorite }
           : video
       )
@@ -213,21 +242,21 @@ export default function HomeScreen({ navigation }) {
   };
 
   const renderVideoItem = ({ item }) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.videoItem}
       onPress={() => navigateToVideoDetails(item)}
     >
       <View style={styles.thumbnailContainer}>
-        <Image 
-          source={{ uri: item.thumbnail }} 
+        <Image
+          source={{ uri: item.thumbnail }}
           style={styles.thumbnail}
           resizeMode="cover"
         />
         <View style={styles.durationContainer}>
           <Text style={styles.durationText}>{item.duration}</Text>
         </View>
-        
-        <TouchableOpacity 
+
+        <TouchableOpacity
           style={styles.favoriteButton}
           onPress={() => handleToggleFavorite(item.id)}
         >
@@ -237,12 +266,12 @@ export default function HomeScreen({ navigation }) {
 
       <View style={styles.videoDetails}>
         {item.author?.avatar && (
-          <Image 
-            source={{ uri: item.author.avatar }} 
+          <Image
+            source={{ uri: item.author.avatar }}
             style={styles.channelAvatar}
           />
         )}
-        
+
         <View style={styles.videoTextContent}>
           <Text style={styles.videoTitle} numberOfLines={2}>{item.title}</Text>
           <Text style={styles.videoSubtitle} numberOfLines={1}>
@@ -259,15 +288,15 @@ export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      
+
       {/* Header */}
       <View style={styles.header}>
-        <Image 
-          source={LogoImage} 
+        <Image
+          source={LogoImage}
           style={styles.logo}
           resizeMode="contain"
         />
-        
+
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.searchInput}
@@ -281,12 +310,12 @@ export default function HomeScreen({ navigation }) {
             <Text style={styles.searchButtonText}>🔍</Text>
           </TouchableOpacity>
         </View>
-        
+
         <TouchableOpacity onPress={toggleMenu} style={styles.menuButton}>
           <Text style={styles.menuIcon}>☰</Text>
         </TouchableOpacity>
       </View>
-      
+
       {/* Main Content */}
       {isLoading && videos.length === 0 ? (
         <View style={styles.loaderContainer}>
@@ -323,7 +352,7 @@ export default function HomeScreen({ navigation }) {
           }
         />
       )}
-      
+
       {/* Hamburger Menu Modal */}
       <Modal
         visible={showMenu}
@@ -331,22 +360,22 @@ export default function HomeScreen({ navigation }) {
         animationType="fade"
         onRequestClose={() => setShowMenu(false)}
       >
-        <TouchableOpacity 
-          style={styles.modalOverlay} 
-          activeOpacity={1} 
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
           onPress={() => setShowMenu(false)}
         >
           <View style={styles.menuContainer}>
-            <TouchableOpacity 
+            <TouchableOpacity
               style={styles.menuItem}
               onPress={navigateToProfile}
             >
               <Text style={styles.menuItemText}>Profile</Text>
             </TouchableOpacity>
-            
+
             <View style={styles.menuDivider} />
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={styles.menuItem}
               onPress={handleLogout}
             >
@@ -553,4 +582,4 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#e0e0e0',
   },
-}); 
+});

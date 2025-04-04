@@ -45,49 +45,49 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator 
+      <Stack.Navigator
         screenOptions={{ headerShown: false }}
         initialRouteName={isAuthenticated ? 'Home' : 'Login'}
       >
         {/* Auth Screens */}
-        <Stack.Screen 
-          name="Login" 
+        <Stack.Screen
+          name="Login"
           component={LoginScreen}
           options={{ animationEnabled: true }}
         />
-        <Stack.Screen 
-          name="SignUp" 
+        <Stack.Screen
+          name="SignUp"
           component={SignUpScreen}
           options={{ animationEnabled: true }}
         />
-        <Stack.Screen 
-          name="ForgotPassword" 
+        <Stack.Screen
+          name="ForgotPassword"
           component={ForgotPasswordScreen}
           options={{ animationEnabled: true }}
         />
-        
+
         {/* App Screens */}
-        <Stack.Screen 
-          name="Home" 
+        <Stack.Screen
+          name="Home"
           component={HomeScreen}
           options={{ animationEnabled: true }}
         />
-        <Stack.Screen 
-          name="Profile" 
+        <Stack.Screen
+          name="Profile"
           component={ProfileScreen}
           options={{ animationEnabled: true }}
         />
-        <Stack.Screen 
-          name="VideoPlayer" 
+        <Stack.Screen
+          name="VideoPlayer"
           component={VideoPlayerScreen}
-          options={{ 
+          options={{
             animationEnabled: true,
             headerShown: false,
-            orientation: 'landscape',
+            orientation: 'portrait',
             gestureEnabled: false
           }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
-} 
+}

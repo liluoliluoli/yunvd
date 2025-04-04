@@ -9,32 +9,55 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
-  BackHandler
+  BackHandler, ScrollView
 } from 'react-native';
+import { VideoView,useVideoPlayer } from "expo-video";
+import * as ScreenOrientation from 'expo-screen-orientation';
 
-let Video = null;
-if (Platform.OS !== 'web') {
-  try {
-    const ExpoAV = require('expo-av');
-    Video = ExpoAV.Video;
-  } catch (error) {
-    console.error('Failed to load expo-av:', error);
-  }
-}
+// let VideoView = null;
+// if (Platform.OS !== 'web') {
+//   try {
+//     const ExpoAV = require('expo-video');
+//     VideoView = ExpoAV.VideoView;
+//   } catch (error) {
+//     console.error('Failed to load expo-av:', error);
+//   }
+// }
 
 const VideoPlayerScreen = ({ route, navigation }) => {
   const passedVideo = route.params?.video;
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const videoRef = useRef(null);
   const [dimensions, setDimensions] = useState(Dimensions.get('window'));
+  const player = useVideoPlayer(passedVideo.videoUrl, player => {
+    player.currentTime = 100;
+    player.play();
+  });
+  const toggleFullscreen = async () => {
+    if (!isFullscreen) {
+      // 进入全屏并锁定横屏
+      await ScreenOrientation.lockAsync(
+          ScreenOrientation.OrientationLock.LANDSCAPE
+      );
+      setIsFullscreen(true);
+    } else {
+      // 退出全屏恢复竖屏
+      await ScreenOrientation.lockAsync(
+          ScreenOrientation.OrientationLock.PORTRAIT
+      );
+      setIsFullscreen(false);
+    }
+  };
 
   useEffect(() => {
-    StatusBar.setHidden(true);
-    const subscription = Dimensions.addEventListener('change', ({ window }) => {
+    // StatusBar.setHidden(true);
+    handleTap();
+    const windowSubscription = Dimensions.addEventListener('change', ({ window }) => {
       setDimensions(window);
     });
 
@@ -43,23 +66,33 @@ const VideoPlayerScreen = ({ route, navigation }) => {
       return true;
     });
 
+    const playerSubscription = player.addListener('statusChange', ({ status, error }) => {
+      console.log('Player status changed: ', status);
+      if (status === "loading") {
+        setIsLoading(true);
+      } else {
+        setIsLoading(false);
+      }
+    });
+
     return () => {
-      StatusBar.setHidden(false);
-      subscription.remove();
+      // StatusBar.setHidden(false);
+      windowSubscription.remove();
       backHandler.remove();
+      playerSubscription.remove();
     };
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (videoRef.current && Platform.OS !== 'web' && Video) {
-        videoRef.current.unloadAsync().catch(err => console.error('Error unloading video:', err));
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     if (videoRef.current && Platform.OS !== 'web' && Video) {
+  //       videoRef.current.unloadAsync().catch(err => console.error('Error unloading video:', err));
+  //     }
+  //   };
+  // }, []);
 
   const handleBack = useCallback(() => {
-    StatusBar.setHidden(false);
+    // StatusBar.setHidden(false);
     navigation.goBack();
   }, [navigation]);
 
@@ -83,7 +116,7 @@ const VideoPlayerScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar hidden={true} />
+      {/*<StatusBar hidden={true} />*/}
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <Text style={styles.backButtonText}>←</Text>
@@ -91,27 +124,23 @@ const VideoPlayerScreen = ({ route, navigation }) => {
       </View>
       <TouchableOpacity style={styles.videoContainer} activeOpacity={1} onPress={handleTap}>
         {Platform.OS === 'web' ? (
-          <video 
+          <video
             style={styles.video}
             src={passedVideo.videoUrl}
             poster={passedVideo.thumbnail}
             controls
             autoPlay
           />
-        ) : Video ? (
-          <Video
+        ) : VideoView ? (
+          <VideoView
             ref={videoRef}
-            source={{ uri: passedVideo.videoUrl }}
             style={styles.video}
-            resizeMode="contain"
-            shouldPlay
-            useNativeControls={true}
-            onLoadStart={() => setIsLoading(true)}
-            onLoad={() => setIsLoading(false)}
-            onPlaybackStatusUpdate={(status) => {
-              setIsPlaying(status.isPlaying);
-              setIsLoading(status.isBuffering);
-            }}
+            allowsFullscreen
+            allowsPictureInPicture
+            nativeControls
+            player = {player}
+            onFullscreenEnter={toggleFullscreen}
+            onFullscreenExit={toggleFullscreen}
             onError={() => setError('Video playback error')}
           />
         ) : (
@@ -131,6 +160,28 @@ const VideoPlayerScreen = ({ route, navigation }) => {
           </View>
         )}
       </TouchableOpacity>
+
+      {/* 添加影片信息 */}
+      <View style={styles.videoInfoContainer}>
+        <Text style={styles.videoInfoText}>影片描述: {passedVideo.description}</Text>
+        <Text style={styles.videoInfoText}>演员: {passedVideo.description}</Text>
+
+      </View>
+      <View style={styles.episodeHeadContainer}>
+        <Text style={styles.episodeListTitle}>集数列表</Text>
+      </View>
+      {/* 添加集数列表 */}
+      <ScrollView style={styles.episodeListContainer}>
+        {passedVideo.episodes && passedVideo.episodes.map((episode, index) => (
+            <TouchableOpacity
+                key={index}
+                style={styles.episodeItem}
+                // onPress={() => handleEpisodePress(episode)}
+            >
+              <Text style={styles.episodeItemText}>第 {episode.episode } 集</Text>
+            </TouchableOpacity>
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -147,7 +198,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   backButton: {
-    padding: 10,
+    padding: 5,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     borderRadius: 5,
   },
@@ -157,12 +208,13 @@ const styles = StyleSheet.create({
   },
   videoContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    backgroundColor: 'rgba(255, 0, 0, 0.1)',
   },
   video: {
     width: '100%',
-    height: '100%',
+    flex: 1,
   },
   videoTitleContainer: {
     position: 'absolute',
@@ -205,6 +257,46 @@ const styles = StyleSheet.create({
   loadingText: {
     color: '#fff',
     marginTop: 10,
+  },
+
+  videoInfoContainer: {
+    backgroundColor: '#111',
+    width: '100%',
+    flex: 0.4,
+  },
+  videoInfoText: {
+    color: '#fff',
+    fontSize: 14,
+    marginBottom: 5,
+  },
+
+  episodeHeadContainer: {
+    backgroundColor: '#111',
+    width: '100%',
+    height: 30,
+  },
+
+  episodeListContainer: {
+    padding: 10,
+    backgroundColor: '#111',
+    width: '100%',
+    flex: 1,
+  },
+  episodeListTitle: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  episodeItem: {
+    padding: 10,
+    backgroundColor: '#222',
+    marginBottom: 5,
+    borderRadius: 5,
+  },
+  episodeItemText: {
+    color: '#fff',
+    fontSize: 14,
   },
 });
 

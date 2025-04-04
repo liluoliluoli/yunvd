@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ReactNativeVideoApp.iml" filepath="$PROJECT_DIR$/.idea/ReactNativeVideoApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/yunvd.iml" filepath="$PROJECT_DIR$/.idea/yunvd.iml" />
     </modules>
   </component>
 </project>
