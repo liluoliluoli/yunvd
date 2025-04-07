@@ -394,7 +394,7 @@ export default function HomeScreen({navigation}) {
                         data={videos}
                         renderItem={renderVideoItem}
                         keyExtractor={(item) => item.id.toString()}
-                        numColumns={2} // 2 列布局
+                        numColumns={3} // 2 列布局
                         contentContainerStyle={[styles.videoList, {minHeight: Dimensions.get('window').height}]}
                         showsVerticalScrollIndicator={true}
                         refreshControl={

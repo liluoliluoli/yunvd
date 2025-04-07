@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "RNVideo",
-    "slug": "RNVideo",
+    "name": "yunvd",
+    "slug": "yunvd",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -26,7 +26,7 @@
         "NSMicrophoneUsageDescription": "This app uses the microphone to record audio for videos.",
         "NSPhotoLibraryUsageDescription": "This app uses the photo library to allow you to upload existing videos."
       },
-      "bundleIdentifier": "com.neeraj-joshi.RNVideo"
+      "bundleIdentifier": "com.zyun.yunvd"
     },
     "android": {
       "adaptiveIcon": {
@@ -40,7 +40,7 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ],
-      "package": "com.neeraj_joshi.RNVideo"
+      "package": "com.zyun.yunvd"
     },
     "web": {
       "favicon": "./assets/favicon.png"

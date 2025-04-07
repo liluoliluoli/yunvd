@@ -1,4 +1,4 @@
-package com.neeraj_joshi.RNVideo
+package com.zyun.yunvd
 
 import android.os.Build
 import android.os.Bundle

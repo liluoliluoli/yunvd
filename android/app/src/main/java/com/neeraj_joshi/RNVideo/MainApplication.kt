@@ -1,4 +1,4 @@
-package com.neeraj_joshi.RNVideo
+package com.zyun.yunvd
 
 import android.app.Application
 import android.content.res.Configuration

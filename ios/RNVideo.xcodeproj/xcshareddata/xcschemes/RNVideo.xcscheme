@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "RNVideo.app"
-               BlueprintName = "RNVideo"
-               ReferencedContainer = "container:RNVideo.xcodeproj">
+               BuildableName = "yunvd.app"
+               BlueprintName = "yunvd"
+               ReferencedContainer = "container:yunvd.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "RNVideoTests.xctest"
-               BlueprintName = "RNVideoTests"
-               ReferencedContainer = "container:RNVideo.xcodeproj">
+               BuildableName = "yunvdTests.xctest"
+               BlueprintName = "yunvdTests"
+               ReferencedContainer = "container:yunvd.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RNVideo.app"
-            BlueprintName = "RNVideo"
-            ReferencedContainer = "container:RNVideo.xcodeproj">
+            BuildableName = "yunvd.app"
+            BlueprintName = "yunvd"
+            ReferencedContainer = "container:yunvd.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RNVideo.app"
-            BlueprintName = "RNVideo"
-            ReferencedContainer = "container:RNVideo.xcodeproj">
+            BuildableName = "yunvd.app"
+            BlueprintName = "yunvd"
+            ReferencedContainer = "container:yunvd.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
