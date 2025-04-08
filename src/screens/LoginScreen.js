@@ -51,6 +51,12 @@ export default function LoginScreen({navigation}) {
         }
     };
 
+    const handleKeyPress = ({nativeEvent: {key}}) => {
+        if (key === 'Enter' && isFormValid) {
+            handleLogin();
+        }
+    };
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -78,6 +84,9 @@ export default function LoginScreen({navigation}) {
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry
+                        onKeyPress={handleKeyPress}
+                        returnKeyType="go"
+                        onSubmitEditing={isFormValid ? handleLogin : null}
                     />
 
                     <TouchableOpacity style={styles.forgotPasswordContainer}

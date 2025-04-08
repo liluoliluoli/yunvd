@@ -42,7 +42,7 @@ export default function HomeScreen({navigation}) {
     const [mockError, setMockError] = useState(null);
     const [index, setIndex] = useState(0);
     const [routes] = useState([
-        {key: 'home', title: '主页'},
+        {key: 'home', title: '推荐'},
         {key: 'movies', title: '电影'},
         {key: 'tvSeries', title: '电视剧'},
         {key: 'tvShows', title: '综艺'},
