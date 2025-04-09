@@ -34,7 +34,6 @@ interface CarouselItem {
 }
 
 export default function HomeScreen({navigation}) {
-    const [showMenu, setShowMenu] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [mockVideosData, setMockVideosData] = useState([]);
     const [filteredVideos, setFilteredVideos] = useState([]);
@@ -144,11 +143,11 @@ export default function HomeScreen({navigation}) {
                     duration: '9:56',
                     views: 10482,
                     likes: 849,
-                    categories: ['Animation', 'Short'],
-                    author: {
-                        name: 'Blender Foundation',
-                        avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Blender_logo_no_text.svg/1200px-Blender_logo_no_text.svg.png'
-                    },
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
                     isFavorite: false,
                     rating: 4.8,
                     publishDate: '2008-05-20',
@@ -162,13 +161,14 @@ export default function HomeScreen({navigation}) {
                     }, {
                         episode: 3,
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }]
+                    }],
+
                 },
                 {
                     id: '2',
                     title: 'Elephant Dream',
                     description: 'The first Blender Open Movie from 2006',
-                    thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Elephants_Dream_16-9.jpg/320px-Elephants_Dream_16-9.jpg',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
                     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
                     duration: '10:54',
                     views: 8362,
@@ -186,7 +186,7 @@ export default function HomeScreen({navigation}) {
                     id: '3',
                     title: 'Sintel',
                     description: 'Sintel is a fantasy computer animated short movie made by the Blender Institute.',
-                    thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Sintel_movie_poster.jpg/320px-Sintel_movie_poster.jpg',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
                     videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
                     duration: '14:48',
                     views: 12893,
@@ -279,21 +279,8 @@ export default function HomeScreen({navigation}) {
         }
     };
 
-    const handleLogout = async () => {
-        const success = await logout();
-        if (success) {
-            navigation.navigate('Login');
-        }
-        setShowMenu(false);
-    };
-
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
-    };
-
     const navigateToProfile = () => {
         navigation.navigate('Profile');
-        setShowMenu(false);
     };
 
     const navigateToVideoDetails = (video) => {
@@ -344,16 +331,10 @@ export default function HomeScreen({navigation}) {
             </View>
 
             <View style={styles.videoDetails}>
-                {item.author?.avatar && (
-                    <Image
-                        source={{uri: item.author.avatar}}
-                        style={styles.channelAvatar}
-                    />
-                )}
                 <View style={styles.videoTextContent}>
                     <Text style={styles.videoTitle} numberOfLines={2}>{item.title}</Text>
                     <Text style={styles.videoSubtitle} numberOfLines={1}>
-                        {item.author?.name || item.channel}
+                        {item.actors?.join(',')}
                     </Text>
                     <Text style={styles.videoInfo} numberOfLines={1}>
                         {item.views} views • {item.publishDate || 'Unknown date'}
@@ -375,7 +356,7 @@ export default function HomeScreen({navigation}) {
                             borderRadius: 5,
                             backgroundColor: '#FFFFFF'
                         }}
-                        autoPlay={false}
+                        autoPlay={true}
                         autoPlayTime={2000}
                         renderItem={(item: CarouselItem) => (
                             <Image
@@ -394,7 +375,7 @@ export default function HomeScreen({navigation}) {
                         data={videos}
                         renderItem={renderVideoItem}
                         keyExtractor={(item) => item.id.toString()}
-                        numColumns={3} // 2 列布局
+                        numColumns={5}
                         contentContainerStyle={[styles.videoList, {minHeight: Dimensions.get('window').height}]}
                         showsVerticalScrollIndicator={true}
                         refreshControl={
@@ -419,7 +400,6 @@ export default function HomeScreen({navigation}) {
         movies: () => (
             <View style={{flex: 1}}>
                 <View style={styles.filterContainer}>
-                    {/* 第一行：最新、最热、好评 */}
                     <ScrollView horizontal style={styles.filterRow}>
                         {['最新', '最热', '好评'].map(option => (
                             <TouchableOpacity
@@ -484,7 +464,7 @@ export default function HomeScreen({navigation}) {
                     data={videos}
                     renderItem={renderVideoItem}
                     keyExtractor={(item) => item.id.toString()}
-                    numColumns={3} // 2 列布局
+                    numColumns={5}
                     contentContainerStyle={[styles.videoList, {minHeight: Dimensions.get('window').height}]}
                     showsVerticalScrollIndicator={true}
                     refreshControl={
@@ -547,7 +527,7 @@ export default function HomeScreen({navigation}) {
                     </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity onPress={toggleMenu} style={styles.menuButton}>
+                <TouchableOpacity onPress={navigateToProfile} style={styles.menuButton}>
                     <Text style={styles.menuIcon}>☰</Text>
                 </TouchableOpacity>
             </View>
@@ -559,37 +539,6 @@ export default function HomeScreen({navigation}) {
                 initialLayout={{width: Dimensions.get('window').width}}
             />
 
-            {/* Hamburger Menu Modal */}
-            <Modal
-                visible={showMenu}
-                transparent={true}
-                animationType="fade"
-                onRequestClose={() => setShowMenu(false)}
-            >
-                <TouchableOpacity
-                    style={styles.modalOverlay}
-                    activeOpacity={1}
-                    onPress={() => setShowMenu(false)}
-                >
-                    <View style={styles.menuContainer}>
-                        <TouchableOpacity
-                            style={styles.menuItem}
-                            onPress={navigateToProfile}
-                        >
-                            <Text style={styles.menuItemText}>Profile</Text>
-                        </TouchableOpacity>
-
-                        <View style={styles.menuDivider}/>
-
-                        <TouchableOpacity
-                            style={styles.menuItem}
-                            onPress={handleLogout}
-                        >
-                            <Text style={styles.menuItemText}>Logout</Text>
-                        </TouchableOpacity>
-                    </View>
-                </TouchableOpacity>
-            </Modal>
         </SafeAreaView>
     );
 }
@@ -645,7 +594,7 @@ const styles = StyleSheet.create({
     thumbnailContainer: {
         position: 'relative',
         width: '100%',
-        aspectRatio: 16 / 9,  // 确保缩略图区域保持16:9
+        aspectRatio: 1,
     },
     thumbnail: {
         width: '100%',
@@ -682,17 +631,12 @@ const styles = StyleSheet.create({
     favoriteIcon: {
         color: 'gold',
         fontSize: 18,
+        marginBottom: 4,
     },
     videoDetails: {
         flexDirection: 'row',
         padding: 8,  // 减小内边距
         alignItems: 'flex-start',
-    },
-    channelAvatar: {
-        width: 28,  // 减小尺寸
-        height: 28,
-        borderRadius: 14,
-        marginRight: 8,  // 减小间距
     },
     videoTextContent: {
         flex: 1,
@@ -797,9 +741,8 @@ const styles = StyleSheet.create({
         flexGrow: 1,
     },
     videoItem: {
-        width: '32%',
-        aspectRatio: 9 / 16,
-        margin: 4,
+        width: '19%',
+        margin: 5,
         backgroundColor: '#fff',
         borderRadius: 8,
         overflow: 'hidden',
@@ -819,10 +762,10 @@ const styles = StyleSheet.create({
         overflow: 'scroll'
     },
     filterOption: {
-        padding: 6,  // 减少内边距
-        margin: 3,  // 减少外边距
-        borderWidth: 0,
-        borderRadius: 12,  // 减小圆角
+        padding: 3,  // 减少内边距
+        margin: 2,  // 减少外边距
+        borderWidth: 1,
+        borderRadius: 4,  // 减小圆角
         backgroundColor: '#f0f0f0',
     },
     selectedFilterOption: {
@@ -831,6 +774,6 @@ const styles = StyleSheet.create({
     },
     filterText: {
         fontSize: 12,  // 减小字体大小
-        color: '#333',
+        color: '#000',
     },
 });

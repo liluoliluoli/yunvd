@@ -149,9 +149,11 @@ const VideoPlayerScreen = ({route, navigation}) => {
 
                     {/* 添加影片信息 */}
                     <View style={styles.videoInfoContainer}>
-                        <Text style={styles.videoInfoText}>影片描述: {passedVideo.description}</Text>
-                        <Text style={styles.videoInfoText}>演员: {passedVideo.description}</Text>
-
+                        <Text style={styles.videoDirectorText}>导演: {passedVideo.description}</Text>
+                        <Text style={styles.videoActorText}>主演: {passedVideo.description}</Text>
+                        <Text style={styles.videoGenreText}>类型: {passedVideo.description}</Text>
+                        <Text style={styles.videoRegionText}>地区: {passedVideo.description}</Text>
+                        <Text style={styles.videoYearText}>年代: {passedVideo.description}</Text>
                     </View>
                     <View style={styles.episodeHeadContainer}>
                         <Text style={styles.episodeListTitle}>集数列表</Text>
@@ -172,7 +174,6 @@ const VideoPlayerScreen = ({route, navigation}) => {
             )}
             {isTV && (
                 <View style={styles.tvContainer}>
-                    {/* 左上视频播放器 */}
                     <View style={styles.tvTopContainer}>
                         <TouchableOpacity style={styles.tvVideoContainer} activeOpacity={1} onPress={handleTap}>
                             {VideoView ? (
@@ -207,12 +208,15 @@ const VideoPlayerScreen = ({route, navigation}) => {
                         {/* 右上简介 */}
                         <View style={styles.tvInfoContainer}>
                             <Text style={styles.videoTitle}>{passedVideo.title}</Text>
-                            <Text style={styles.videoInfoText}>TV影片描述: {passedVideo.description}</Text>
-                            <Text style={styles.videoInfoText}>TV演员: {passedVideo.description}</Text>
+                            <Text style={styles.videoDirectorText}>导演: {passedVideo.directors?.join(', ')}</Text>
+                            <Text style={styles.videoActorText}>主演: {passedVideo.actors?.join(', ')}</Text>
+                            <Text style={styles.videoGenreText}>类型: {passedVideo.genres?.join(', ')}</Text>
+                            <Text style={styles.videoRegionText}>地区: {passedVideo.region}</Text>
+                            <Text style={styles.videoYearText}>年代: {passedVideo.year}</Text>
+                            <Text style={styles.videoYearText}>简介: {passedVideo.description}</Text>
                         </View>
                     </View>
-                    {/* 下部集数列表 */}
-                    <View style={styles.tvBottomSection}>
+                    <View style={styles.tvBottomContainer}>
                         <ScrollView>
                             {passedVideo.episodes && passedVideo.episodes.map((episode, index) => (
                                 <TouchableOpacity
@@ -234,7 +238,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
     },
     headerContainer: {
         position: 'absolute',
@@ -271,9 +275,36 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     videoTitle: {
-        color: '#fff',
-        fontSize: 16,
+        color: '#000',
+        fontSize: 20,
         fontWeight: 'bold',
+        textAlign: 'left',
+        padding: 10,
+    },
+    videoDirectorText: {
+        color: '#000',
+        fontSize: 12,
+        paddingHorizontal: 10,
+    },
+    videoActorText: {
+        color: '#000',
+        fontSize: 12,
+        paddingHorizontal: 10,
+    },
+    videoGenreText: {
+        color: '#000',
+        fontSize: 12,
+        paddingHorizontal: 10,
+    },
+    videoRegionText: {
+        color: '#000',
+        fontSize: 12,
+        paddingHorizontal: 10,
+    },
+    videoYearText: {
+        color: '#000',
+        fontSize: 12,
+        paddingHorizontal: 10,
     },
     errorContainer: {
         flex: 1,
@@ -310,11 +341,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flex: 0.4,
     },
-    videoInfoText: {
-        color: '#fff',
-        fontSize: 14,
-        marginBottom: 5,
-    },
+
 
     episodeHeadContainer: {
         backgroundColor: '#111',
@@ -336,12 +363,12 @@ const styles = StyleSheet.create({
     },
     episodeItem: {
         padding: 10,
-        backgroundColor: '#222',
+        backgroundColor: '#fff',
         marginBottom: 5,
         borderRadius: 5,
     },
     episodeItemText: {
-        color: '#fff',
+        color: '#000',
         fontSize: 14,
     },
 
@@ -354,20 +381,18 @@ const styles = StyleSheet.create({
     tvTopContainer: {
         flex: 1,
         flexDirection: 'row',
-        height: '70%',  // 明确设置高度比例
     },
     tvVideoContainer: {
-        flex: 2,
-        backgroundColor: '#000',  // 修改背景色
+        flex: 2.3,
+        backgroundColor: '#666',
     },
     tvInfoContainer: {
         flex: 1,
-        backgroundColor: '#111',
-        padding: 20,
+        backgroundColor: '#fff',
     },
-    tvBottomSection: {
+    tvBottomContainer: {
         height: '30%',  // 明确设置高度比例
-        backgroundColor: '#111',
+        backgroundColor: '#fff',
     },
     videoWrapper: {
         width: '100%',

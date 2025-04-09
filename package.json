@@ -33,6 +33,7 @@
     "react-native-screens": "~4.4.0",
     "react-native-scrollable-tab-view": "^1.0.0",
     "react-native-tab-view": "^4.0.9",
+    "react-native-vlc-media-player-view": "^1.1.1",
     "react-native-web": "~0.19.13"
   },
   "devDependencies": {
