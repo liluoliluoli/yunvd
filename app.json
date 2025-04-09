@@ -38,7 +38,9 @@
         "android.permission.CAMERA",
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.MODIFY_AUDIO_SETTINGS"
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE"
       ],
       "package": "com.zyun.yunvd"
     },
@@ -47,12 +49,16 @@
     },
     "plugins": [
       [
-        "expo-av",
+        "expo-video",
         {
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+          "ios": {
+            "includeVLCKit": false
+          },
+          "android": {
+            "legacyJetifier": false
+          }
         }
-      ],
-      "expo-video"
+      ]
     ]
   }
 }

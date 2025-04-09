@@ -6,12 +6,1085 @@
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RNVideo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/debug.keystore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/neeraj_joshi/RNVideo/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/neeraj_joshi/RNVideo/MainApplication.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-hdpi/splashscreen_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-mdpi/splashscreen_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xhdpi/splashscreen_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxhdpi/splashscreen_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxxhdpi/splashscreen_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/rn_edit_text_material.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-night/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values/strings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/.xcode.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.properties.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo.xcodeproj/xcshareddata/xcschemes/RNVideo.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/AppDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/AppDelegate.mm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Images.xcassets/AppIcon.appiconset/App-Icon-1024x1024@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Images.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Images.xcassets/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Images.xcassets/SplashScreenBackground.colorset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Images.xcassets/SplashScreenLogo.imageset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Images.xcassets/SplashScreenLogo.imageset/image.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Images.xcassets/SplashScreenLogo.imageset/image@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Images.xcassets/SplashScreenLogo.imageset/image@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/PrivacyInfo.xcprivacy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/RNVideo-Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/RNVideo.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/SplashScreen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/Supporting/Expo.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/main.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/RNVideo/noop-file.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/react-native" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/generator/lib/generators/modules.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/generator/lib/generators/modules.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/generator/lib/generators/modules.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/generator/lib/generators/modules.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/generator/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/generator/lib/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/generator/lib/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/generator/lib/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/generator/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/generator/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/parser/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/parser/lib/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/parser/lib/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/parser/lib/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/parser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/parser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/parser/typings/babel-parser.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/parser/typings/babel-parser.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/template/lib/options.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/template/lib/options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/template/lib/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/template/lib/parse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/template/lib/parse.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/template/lib/parse.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/template/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/template/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/path/ancestry.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/path/ancestry.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/path/ancestry.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/path/ancestry.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/path/introspection.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/path/introspection.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/path/lib/hoister.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/path/lib/hoister.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/scope/binding.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/scope/binding.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/scope/binding.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/scope/binding.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/scope/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/scope/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/scope/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/scope/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/visitors.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/visitors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/visitors.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/lib/visitors.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/traverse--for-generate-function-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/asserts/generated/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/asserts/generated/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/asserts/generated/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/asserts/generated/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/ast-types/generated/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/ast-types/generated/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/builders/generated/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/builders/generated/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/builders/generated/lowercase.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/builders/generated/lowercase.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/builders/generated/lowercase.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/builders/generated/lowercase.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/builders/generated/uppercase.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/builders/generated/uppercase.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/constants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/constants/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/constants/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/constants/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/converters/valueToNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/converters/valueToNode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/converters/valueToNode.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/converters/valueToNode.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/core.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/core.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/experimental.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/experimental.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/experimental.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/experimental.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/utils.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/definitions/utils.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/index-legacy.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/index-legacy.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/index.js.flow" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/index.js.flow" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/traverse/traverseFast.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/traverse/traverseFast.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/traverse/traverseFast.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/traverse/traverseFast.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/generated/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/generated/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/generated/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/generated/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isLet.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isLet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isLet.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isLet.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isPlaceholderType.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isPlaceholderType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isPlaceholderType.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isPlaceholderType.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isType.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isType.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isType.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isVar.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isVar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isVar.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/isVar.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/validate.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/lib/validators/validate.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@babel/types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@babel/types/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/BaseNavigationContainer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/BaseNavigationContainer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/CurrentRenderContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/CurrentRenderContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/DeprecatedNavigationInChildContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/DeprecatedNavigationInChildContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/EnsureSingleNavigator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/EnsureSingleNavigator.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/Group.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/Group.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationBuilderContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationBuilderContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationContainerRefContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationContainerRefContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationHelpersContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationHelpersContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationIndependentTree.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationIndependentTree.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationIndependentTreeContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationIndependentTreeContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationRouteContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationRouteContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationStateContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/NavigationStateContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/PreventRemoveContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/PreventRemoveContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/PreventRemoveProvider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/PreventRemoveProvider.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/SceneView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/SceneView.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/Screen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/Screen.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/StaticContainer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/StaticContainer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/StaticNavigation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/StaticNavigation.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/UnhandledActionContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/UnhandledActionContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/arrayStartsWith.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/arrayStartsWith.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/checkDuplicateRouteNames.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/checkDuplicateRouteNames.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/checkSerializable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/checkSerializable.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/createNavigationContainerRef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/createNavigationContainerRef.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/createNavigatorFactory.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/createNavigatorFactory.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/deepFreeze.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/deepFreeze.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/findFocusedRoute.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/findFocusedRoute.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getActionFromState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getActionFromState.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getFocusedRouteNameFromRoute.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getFocusedRouteNameFromRoute.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getPathFromState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getPathFromState.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getPatternParts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getPatternParts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getStateFromPath.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/getStateFromPath.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/isArrayEqual.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/isArrayEqual.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/isRecordEqual.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/isRecordEqual.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/theming/ThemeContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/theming/ThemeContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/theming/ThemeProvider.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/theming/ThemeProvider.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/theming/useTheme.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/theming/useTheme.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/types.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/types.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useChildListeners.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useChildListeners.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useComponent.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useCurrentRender.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useCurrentRender.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useDescriptors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useDescriptors.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useEventEmitter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useEventEmitter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useFocusEffect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useFocusEffect.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useFocusEvents.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useFocusEvents.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useFocusedListenersChildrenAdapter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useFocusedListenersChildrenAdapter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useIsFocused.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useIsFocused.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useIsomorphicLayoutEffect.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useIsomorphicLayoutEffect.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useIsomorphicLayoutEffect.native.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useIsomorphicLayoutEffect.native.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useKeyedChildListeners.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useKeyedChildListeners.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useLazyValue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useLazyValue.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigation.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationBuilder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationBuilder.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationCache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationCache.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationContainerRef.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationContainerRef.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationHelpers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationHelpers.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationIndependentTree.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationIndependentTree.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useNavigationState.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOnAction.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOnAction.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOnGetState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOnGetState.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOnPreventRemove.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOnPreventRemove.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOnRouteFocus.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOnRouteFocus.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOptionsGetters.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useOptionsGetters.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/usePreventRemove.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/usePreventRemove.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/usePreventRemoveContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/usePreventRemoveContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useRegisterNavigator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useRegisterNavigator.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useRoute.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useRoute.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useRouteCache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useRouteCache.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useScheduleUpdate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useScheduleUpdate.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useSyncState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/useSyncState.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/validatePathConfig.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/commonjs/validatePathConfig.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/BaseNavigationContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/BaseNavigationContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/BaseNavigationContainer.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/BaseNavigationContainer.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/PreventRemoveProvider.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/PreventRemoveProvider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/PreventRemoveProvider.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/PreventRemoveProvider.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/SceneView.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/SceneView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/SceneView.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/SceneView.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/findFocusedRoute.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/findFocusedRoute.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/getPathFromState.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/getPathFromState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/getPathFromState.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/getPathFromState.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/index.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/useNavigationBuilder.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/useNavigationBuilder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/useNavigationBuilder.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/useNavigationBuilder.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/useNavigationHelpers.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/useNavigationHelpers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/useNavigationHelpers.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/module/useNavigationHelpers.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/BaseNavigationContainer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/BaseNavigationContainer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/CurrentRenderContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/CurrentRenderContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/DeprecatedNavigationInChildContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/DeprecatedNavigationInChildContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/EnsureSingleNavigator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/EnsureSingleNavigator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/Group.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/Group.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationBuilderContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationBuilderContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationContainerRefContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationContainerRefContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationHelpersContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationHelpersContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationIndependentTree.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationIndependentTree.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationIndependentTreeContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationIndependentTreeContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationRouteContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationRouteContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationStateContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/NavigationStateContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/PreventRemoveContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/PreventRemoveContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/PreventRemoveProvider.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/PreventRemoveProvider.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/SceneView.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/SceneView.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/Screen.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/Screen.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/StaticContainer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/StaticContainer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/StaticNavigation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/StaticNavigation.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/UnhandledActionContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/UnhandledActionContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/arrayStartsWith.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/arrayStartsWith.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/checkDuplicateRouteNames.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/checkDuplicateRouteNames.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/checkSerializable.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/checkSerializable.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/createNavigationContainerRef.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/createNavigationContainerRef.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/createNavigatorFactory.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/createNavigatorFactory.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/deepFreeze.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/deepFreeze.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/findFocusedRoute.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/findFocusedRoute.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getActionFromState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getActionFromState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getFocusedRouteNameFromRoute.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getFocusedRouteNameFromRoute.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getPathFromState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getPathFromState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getPatternParts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getPatternParts.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getStateFromPath.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/getStateFromPath.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/isArrayEqual.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/isArrayEqual.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/isRecordEqual.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/isRecordEqual.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/theming/ThemeContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/theming/ThemeContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/theming/ThemeProvider.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/theming/ThemeProvider.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/theming/useTheme.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/theming/useTheme.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/types.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useChildListeners.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useChildListeners.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useComponent.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useComponent.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useCurrentRender.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useCurrentRender.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useDescriptors.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useDescriptors.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useEventEmitter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useEventEmitter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useFocusEffect.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useFocusEffect.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useFocusEvents.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useFocusEvents.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useFocusedListenersChildrenAdapter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useFocusedListenersChildrenAdapter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useIsFocused.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useIsFocused.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useIsomorphicLayoutEffect.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useIsomorphicLayoutEffect.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useIsomorphicLayoutEffect.native.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useIsomorphicLayoutEffect.native.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useKeyedChildListeners.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useKeyedChildListeners.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useLazyValue.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useLazyValue.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigation.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationBuilder.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationBuilder.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationCache.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationCache.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationContainerRef.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationContainerRef.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationHelpers.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationHelpers.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationIndependentTree.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationIndependentTree.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useNavigationState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOnAction.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOnAction.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOnGetState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOnGetState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOnPreventRemove.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOnPreventRemove.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOnRouteFocus.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOnRouteFocus.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOptionsGetters.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useOptionsGetters.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/usePreventRemove.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/usePreventRemove.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/usePreventRemoveContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/usePreventRemoveContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useRegisterNavigator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useRegisterNavigator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useRoute.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useRoute.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useRouteCache.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useRouteCache.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useScheduleUpdate.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useScheduleUpdate.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useSyncState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/useSyncState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/validatePathConfig.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/commonjs/src/validatePathConfig.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/BaseNavigationContainer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/BaseNavigationContainer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/CurrentRenderContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/CurrentRenderContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/DeprecatedNavigationInChildContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/DeprecatedNavigationInChildContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/EnsureSingleNavigator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/EnsureSingleNavigator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/Group.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/Group.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationBuilderContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationBuilderContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationContainerRefContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationContainerRefContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationHelpersContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationHelpersContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationIndependentTree.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationIndependentTree.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationIndependentTreeContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationIndependentTreeContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationRouteContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationRouteContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationStateContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/NavigationStateContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/PreventRemoveContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/PreventRemoveContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/PreventRemoveProvider.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/PreventRemoveProvider.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/SceneView.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/SceneView.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/Screen.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/Screen.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/StaticContainer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/StaticContainer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/StaticNavigation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/StaticNavigation.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/UnhandledActionContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/UnhandledActionContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/arrayStartsWith.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/arrayStartsWith.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/checkDuplicateRouteNames.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/checkDuplicateRouteNames.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/checkSerializable.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/checkSerializable.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/createNavigationContainerRef.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/createNavigationContainerRef.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/createNavigatorFactory.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/createNavigatorFactory.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/deepFreeze.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/deepFreeze.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/findFocusedRoute.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/findFocusedRoute.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getActionFromState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getActionFromState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getFocusedRouteNameFromRoute.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getFocusedRouteNameFromRoute.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getPathFromState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getPathFromState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getPatternParts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getPatternParts.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getStateFromPath.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/getStateFromPath.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/isArrayEqual.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/isArrayEqual.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/isRecordEqual.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/isRecordEqual.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/theming/ThemeContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/theming/ThemeContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/theming/ThemeProvider.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/theming/ThemeProvider.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/theming/useTheme.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/theming/useTheme.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/types.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useChildListeners.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useChildListeners.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useComponent.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useComponent.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useCurrentRender.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useCurrentRender.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useDescriptors.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useDescriptors.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useEventEmitter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useEventEmitter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useFocusEffect.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useFocusEffect.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useFocusEvents.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useFocusEvents.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useFocusedListenersChildrenAdapter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useFocusedListenersChildrenAdapter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useIsFocused.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useIsFocused.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useIsomorphicLayoutEffect.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useIsomorphicLayoutEffect.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useIsomorphicLayoutEffect.native.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useIsomorphicLayoutEffect.native.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useKeyedChildListeners.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useKeyedChildListeners.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useLazyValue.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useLazyValue.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigation.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationBuilder.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationBuilder.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationCache.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationCache.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationContainerRef.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationContainerRef.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationHelpers.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationHelpers.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationIndependentTree.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationIndependentTree.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useNavigationState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOnAction.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOnAction.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOnGetState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOnGetState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOnPreventRemove.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOnPreventRemove.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOnRouteFocus.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOnRouteFocus.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOptionsGetters.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useOptionsGetters.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/usePreventRemove.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/usePreventRemove.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/usePreventRemoveContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/usePreventRemoveContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useRegisterNavigator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useRegisterNavigator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useRoute.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useRoute.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useRouteCache.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useRouteCache.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useScheduleUpdate.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useScheduleUpdate.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useSyncState.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/useSyncState.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/validatePathConfig.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/lib/typescript/module/src/validatePathConfig.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/BaseNavigationContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/BaseNavigationContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/PreventRemoveProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/PreventRemoveProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/SceneView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/SceneView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/findFocusedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/findFocusedRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/getPathFromState.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/getPathFromState.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/types.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/types.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/useNavigationBuilder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/useNavigationBuilder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/useNavigationHelpers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/core/src/useNavigationHelpers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Background.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Background.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Button.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Button.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/Header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/Header.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderBackButton.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderBackButton.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderBackContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderBackContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderBackground.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderBackground.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderButton.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderButton.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderHeightContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderHeightContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderIcon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderIcon.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderSearchBar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderSearchBar.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderShownContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderShownContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderTitle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/HeaderTitle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/getDefaultHeaderHeight.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/getDefaultHeaderHeight.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/getHeaderTitle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/getHeaderTitle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/useHeaderHeight.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Header/useHeaderHeight.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Label/Label.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Label/Label.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Label/getLabel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Label/getLabel.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MaskedView.android.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MaskedView.android.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MaskedView.ios.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MaskedView.ios.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MaskedView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MaskedView.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MaskedViewNative.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MaskedViewNative.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MissingIcon.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/MissingIcon.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/PlatformPressable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/PlatformPressable.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/ResourceSavingView.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/ResourceSavingView.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/SafeAreaProviderCompat.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/SafeAreaProviderCompat.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Screen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Screen.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Text.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/Text.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon-mask.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon@1x.android.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon@1x.ios.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon@2x.android.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon@2x.ios.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon@3x.android.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon@3x.ios.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon@4x.android.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/back-icon@4x.ios.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/clear-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/clear-icon@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/clear-icon@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/clear-icon@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/clear-icon@4x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/close-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/close-icon@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/close-icon@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/close-icon@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/close-icon@4x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon@1x.android.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon@1x.ios.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon@2x.android.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon@2x.ios.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon@3x.android.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon@3x.ios.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon@4x.android.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/assets/search-icon@4x.ios.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/getDefaultSidebarWidth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/getDefaultSidebarWidth.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/getNamedContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/getNamedContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/types.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/commonjs/types.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/Header/Header.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/Header/Header.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/MaskedViewNative.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/MaskedViewNative.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/MaskedViewNative.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/MaskedViewNative.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/PlatformPressable.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/PlatformPressable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/PlatformPressable.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/PlatformPressable.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/Screen.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/Screen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/Screen.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/module/Screen.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Background.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Background.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Button.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Button.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/Header.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/Header.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderBackButton.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderBackButton.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderBackContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderBackContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderBackground.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderBackground.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderButton.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderButton.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderHeightContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderHeightContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderIcon.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderIcon.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderSearchBar.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderSearchBar.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderShownContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderShownContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderTitle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/HeaderTitle.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/getDefaultHeaderHeight.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/getDefaultHeaderHeight.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/getHeaderTitle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/getHeaderTitle.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/useHeaderHeight.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Header/useHeaderHeight.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Label/Label.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Label/Label.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Label/getLabel.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Label/getLabel.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MaskedView.android.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MaskedView.android.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MaskedView.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MaskedView.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MaskedView.ios.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MaskedView.ios.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MaskedViewNative.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MaskedViewNative.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MissingIcon.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/MissingIcon.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/PlatformPressable.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/PlatformPressable.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/ResourceSavingView.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/ResourceSavingView.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/SafeAreaProviderCompat.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/SafeAreaProviderCompat.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Screen.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Screen.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Text.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/Text.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/getDefaultSidebarWidth.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/getDefaultSidebarWidth.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/getNamedContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/getNamedContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/commonjs/src/types.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Background.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Background.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Button.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Button.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/Header.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/Header.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderBackButton.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderBackButton.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderBackContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderBackContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderBackground.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderBackground.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderButton.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderButton.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderHeightContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderHeightContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderIcon.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderIcon.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderSearchBar.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderSearchBar.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderShownContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderShownContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderTitle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/HeaderTitle.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/getDefaultHeaderHeight.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/getDefaultHeaderHeight.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/getHeaderTitle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/getHeaderTitle.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/useHeaderHeight.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Header/useHeaderHeight.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Label/Label.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Label/Label.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Label/getLabel.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Label/getLabel.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MaskedView.android.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MaskedView.android.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MaskedView.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MaskedView.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MaskedView.ios.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MaskedView.ios.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MaskedViewNative.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MaskedViewNative.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MissingIcon.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/MissingIcon.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/PlatformPressable.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/PlatformPressable.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/ResourceSavingView.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/ResourceSavingView.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/SafeAreaProviderCompat.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/SafeAreaProviderCompat.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Screen.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Screen.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Text.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/Text.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/getDefaultSidebarWidth.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/getDefaultSidebarWidth.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/getNamedContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/getNamedContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/lib/typescript/module/src/types.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/src/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/src/Header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/src/MaskedViewNative.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/src/MaskedViewNative.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/src/PlatformPressable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/src/PlatformPressable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/elements/src/Screen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/elements/src/Screen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/Link.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/Link.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/LinkingContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/LinkingContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/LocaleDirContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/LocaleDirContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/NavigationContainer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/NavigationContainer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/ServerContainer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/ServerContainer.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/ServerContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/ServerContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/UnhandledLinkingContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/UnhandledLinkingContext.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/__stubs__/createStackNavigator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/__stubs__/createStackNavigator.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/__stubs__/window.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/__stubs__/window.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/createMemoryHistory.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/createMemoryHistory.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/createStaticNavigation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/createStaticNavigation.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/extractPathFromURL.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/extractPathFromURL.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/theming/DarkTheme.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/theming/DarkTheme.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/theming/DefaultTheme.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/theming/DefaultTheme.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/theming/fonts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/theming/fonts.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/types.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/types.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useBackButton.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useBackButton.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useBackButton.native.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useBackButton.native.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useDocumentTitle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useDocumentTitle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useDocumentTitle.native.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useDocumentTitle.native.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinkBuilder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinkBuilder.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinkProps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinkProps.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinkTo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinkTo.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinking.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinking.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinking.native.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLinking.native.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLocale.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useLocale.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useScrollToTop.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useScrollToTop.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useThenable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/commonjs/useThenable.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useBackButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useBackButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useBackButton.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useBackButton.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useDocumentTitle.native.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useDocumentTitle.native.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useDocumentTitle.native.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useDocumentTitle.native.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkBuilder.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkBuilder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkBuilder.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkBuilder.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkProps.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkProps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkProps.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkProps.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkTo.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkTo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkTo.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/module/useLinkTo.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/Link.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/Link.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/LinkingContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/LinkingContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/LocaleDirContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/LocaleDirContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/NavigationContainer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/NavigationContainer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/ServerContainer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/ServerContainer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/ServerContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/ServerContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/UnhandledLinkingContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/UnhandledLinkingContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/__stubs__/createStackNavigator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/__stubs__/createStackNavigator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/__stubs__/window.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/__stubs__/window.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/createMemoryHistory.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/createMemoryHistory.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/createStaticNavigation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/createStaticNavigation.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/extractPathFromURL.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/extractPathFromURL.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/theming/DarkTheme.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/theming/DarkTheme.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/theming/DefaultTheme.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/theming/DefaultTheme.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/theming/fonts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/theming/fonts.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/types.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useBackButton.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useBackButton.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useBackButton.native.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useBackButton.native.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useDocumentTitle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useDocumentTitle.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useDocumentTitle.native.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useDocumentTitle.native.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinkBuilder.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinkBuilder.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinkProps.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinkProps.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinkTo.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinkTo.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinking.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinking.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinking.native.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLinking.native.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLocale.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useLocale.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useScrollToTop.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useScrollToTop.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useThenable.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/commonjs/src/useThenable.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/Link.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/Link.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/LinkingContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/LinkingContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/LocaleDirContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/LocaleDirContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/NavigationContainer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/NavigationContainer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/ServerContainer.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/ServerContainer.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/ServerContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/ServerContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/UnhandledLinkingContext.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/UnhandledLinkingContext.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/__stubs__/createStackNavigator.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/__stubs__/createStackNavigator.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/__stubs__/window.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/__stubs__/window.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/createMemoryHistory.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/createMemoryHistory.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/createStaticNavigation.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/createStaticNavigation.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/extractPathFromURL.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/extractPathFromURL.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/theming/DarkTheme.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/theming/DarkTheme.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/theming/DefaultTheme.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/theming/DefaultTheme.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/theming/fonts.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/theming/fonts.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/types.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useBackButton.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useBackButton.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useBackButton.native.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useBackButton.native.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useDocumentTitle.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useDocumentTitle.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useDocumentTitle.native.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useDocumentTitle.native.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinkBuilder.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinkBuilder.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinkProps.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinkProps.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinkTo.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinkTo.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinking.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinking.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinking.native.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLinking.native.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLocale.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useLocale.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useScrollToTop.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useScrollToTop.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useThenable.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/lib/typescript/module/src/useThenable.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useBackButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useBackButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useDocumentTitle.native.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useDocumentTitle.native.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useLinkBuilder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useLinkBuilder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useLinkProps.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useLinkProps.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useLinkTo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/native/src/useLinkTo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/BaseRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/BaseRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/CommonActions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/CommonActions.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/DrawerRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/DrawerRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/StackRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/StackRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/TabRouter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/TabRouter.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/index.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/types.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/commonjs/types.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/BaseRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/BaseRouter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/CommonActions.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/CommonActions.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/DrawerRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/DrawerRouter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/StackRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/StackRouter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/TabRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/TabRouter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/commonjs/src/types.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/BaseRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/BaseRouter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/CommonActions.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/CommonActions.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/DrawerRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/DrawerRouter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/StackRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/StackRouter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/TabRouter.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/TabRouter.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/index.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/types.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/lib/typescript/module/src/types.d.ts.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@react-navigation/routers/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@react-navigation/routers/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/babel__generator/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/babel__generator/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/babel__generator/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/babel__generator/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/babel__generator/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/babel__generator/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/babel__traverse/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/babel__traverse/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/babel__traverse/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/babel__traverse/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/babel__traverse/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@types/babel__traverse/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/image-size/dist/types/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/image-size/dist/types/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/image-size/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/image-size/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/react-native/React/Fabric/RCTThirdPartyFabricComponentsProvider.h" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-native/React/Fabric/RCTThirdPartyFabricComponentsProvider.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/react-native/React/Fabric/RCTThirdPartyFabricComponentsProvider.mm" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-native/React/Fabric/RCTThirdPartyFabricComponentsProvider.mm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/use-sync-external-store/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/use-sync-external-store/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/ProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ProfileScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -125,7 +1198,7 @@
       <workItem from="1743585295555" duration="791000" />
       <workItem from="1743651090234" duration="3596000" />
       <workItem from="1743661363146" duration="22522000" />
-      <workItem from="1743758537542" duration="60725000" />
+      <workItem from="1743758537542" duration="87840000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -159,7 +1232,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744094117408</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="init">
+      <option name="closed" value="true" />
+      <created>1744183158914</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744183158914</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

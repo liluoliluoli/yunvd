@@ -139,7 +139,7 @@ export default function HomeScreen({navigation}) {
                     title: 'Big Buck Bunny',
                     description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
                     thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    videoUrl: 'https://vjs.zencdn.net/v/oceans.mp4',
                     duration: '9:56',
                     views: 10482,
                     likes: 849,
