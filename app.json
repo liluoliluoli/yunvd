@@ -48,17 +48,6 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      [
-        "expo-video",
-        {
-          "ios": {
-            "includeVLCKit": false
-          },
-          "android": {
-            "legacyJetifier": false
-          }
-        }
-      ]
     ]
   }
 }

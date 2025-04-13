@@ -80,13 +80,9 @@ export default function App() {
                 <Stack.Screen
                     name="VideoPlayer"
                     component={VideoPlayerScreen}
-                    options={{animationEnabled: true}}
-                    // options={{
-                    //     animationEnabled: true,
-                    //     headerShown: false,
-                    //     orientation: 'default',
-                    //     gestureEnabled: false
-                    // }}
+                    options={{
+                        orientation: 'landscape',
+                    }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

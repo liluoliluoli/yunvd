@@ -14,6 +14,8 @@ import {
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Chapter, useVideoPlayer, VideoPlayer, VideoSource, VideoView} from 'react-native-vlc-media-player-view';
+import {VideoViewRef} from "react-native-vlc-media-player-view/build/VideoView";
+import TVEventHandler from "react-native-tvos"
 
 
 const VideoPlayerScreen = ({route, navigation}) => {
@@ -25,6 +27,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
     });
 
     const handleBack = useCallback(() => {
+        setSource(undefined)
         navigation.goBack();
     }, [navigation]);
 
@@ -54,11 +57,11 @@ const VideoPlayerScreen = ({route, navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.tvContainer}>
-                <View style={styles.tvTopContainer}>
-                    <GestureHandlerRootView style={styles.tvVideoContainer}>
+                <GestureHandlerRootView style={styles.tvTopContainer}>
+                    <TouchableOpacity style={styles.tvVideoContainer}>
                         {source &&
-                            <Player source={source} onBack={() => setSource(undefined)} title={passedVideo.title}/>}
-                    </GestureHandlerRootView>
+                            <Player source={source} onBack={handleBack} title={passedVideo.title}/>}
+                    </TouchableOpacity>
                     {/* 右上简介 */}
                     <View style={styles.tvInfoContainer}>
                         <Text style={styles.videoTitle}>{passedVideo.title}</Text>
@@ -69,7 +72,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
                         <Text style={styles.videoYearText}>年代: {passedVideo.year}</Text>
                         <Text style={styles.videoYearText}>简介: {passedVideo.description}</Text>
                     </View>
-                </View>
+                </GestureHandlerRootView>
                 <View style={styles.tvBottomContainer}>
                     <ScrollView>
                         {passedVideo.episodes && passedVideo.episodes.map((episode, index) => (
@@ -98,51 +101,66 @@ const Player = ({onBack, source, title}: PlayerProps) => {
 
     const player = useVideoPlayer({
         initOptions: [
-            '--http-reconnect',
-            '--codec=all',
-            '--avcodec-hw=any',
+            '--network-caching=150',
         ],
     }, player => {
         player.title = title;
+        player.play(source);
     });
-
-    player.play(source);
 
     const [showSkipIntro, setShowSkipIntro] = useState(false);
     const [intro, setIntro] = useState<Chapter>();
 
     useEffect(() => {
-        // TVEventHandler.addListener(event => {
-        // if (event.eventType === 'bottom' && !videoViewRef.current?.isControlBarVisible) {
-        //     videoViewRef.current?.showControlBar(true);
-        // }
+        videoViewRef.current?.showControlBar(false);
+        // const bottomHandler = TVEventHandler.addListener(event => {
+        //     if (event.eventType === 'bottom' && !videoViewRef.current?.isControlBarVisible) {
+        //         videoViewRef.current?.showControlBar(true);
+        //     }
         // });
+        // return () => {
+        //     bottomHandler.remove();
+        // }
+    }, []);
+
+    const videoViewRef = useRef<VideoViewRef>(null);
+    const handleFullscreen = useCallback(() => {
+        // 优先使用VideoView自带的全屏控制
+        videoViewRef.current?.setFullscreen(true);
+
+        // 备用方案：直接修改StatusBar
+        StatusBar.setHidden(true, 'fade');
     }, []);
     return (
         <VideoView
+            ref={videoViewRef}
             player={player}
             style={{flex: 1}}
             onLoaded={() => {
                 // source.time && (player.time = source.time);
-                setIntro(player.chapters.find(c => c.name.match(/(opening)/i)));
+                // setIntro(player.chapters.find(c => c.name.match(/(opening)/i)));
 
                 // set fullscreen programmatically
                 // videoViewRef.current?.setFullscreen(true);
 
                 // set time manually
-                // player.time = 4 * 60 * 1000 + 49 * 1000;
-
+                player.time = 60 * 1000;
+                // console.log(player.time);
                 // change audio audio/subtitles tracks
                 // player.selectedAudioTrackId = player.audioTracks[player.audioTracks.length - 1].id;
                 // player.selectedTextTrackId = player.textTracks[player.textTracks.length - 1].id;
             }}
-            onNext={() => console.log('next')}
-            onPrevious={() => console.log('previous')}
+            // onNext={() => console.log('next')}
+            // onPrevious={() => console.log('previous')}
             onBack={() => onBack(player)}
             onProgress={e => {
-                const time = e.nativeEvent.time;
-                const isInIntro = !!intro && time >= intro.timeOffset && time < intro.timeOffset + intro.duration - 1;
-                setShowSkipIntro(isInIntro);
+                console.log(player.time);
+                // const time = e.nativeEvent.time;
+                // const isInIntro = !!intro && time >= intro.timeOffset && time < intro.timeOffset + intro.duration - 1;
+                // setShowSkipIntro(isInIntro);
+            }}
+            onFullscreen={(fullscreen) => {
+                console.log(fullscreen);
             }}
         />
     );
