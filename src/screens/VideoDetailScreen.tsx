@@ -15,22 +15,31 @@ import {
     TVEventHandler,
 } from 'react-native';
 import {Ionicons} from "@expo/vector-icons";
-import {DefaultFocus, SpatialNavigationFocusableView, SpatialNavigationRoot} from "react-tv-space-navigation";
+import {
+    DefaultFocus,
+    SpatialNavigationFocusableView, SpatialNavigationNode,
+    SpatialNavigationRoot,
+    SpatialNavigationScrollView, SpatialNavigationView
+} from "react-tv-space-navigation";
 import {useIsFocused} from "@react-navigation/native";
 import FocusablePressable from "../components/FocusablePressable";
 import {scaledPixels} from "../hooks/useScale";
+import {Page} from "../components/Page";
+import {BottomArrow, TopArrow} from "../components/Arrows";
+import styled from "@emotion/native";
+import {Typography} from "../components/Typography";
+import {Button} from "../components/Button";
+import {Spacer} from "../components/Spacer";
+import {theme} from "../theme/theme";
+import {Episode} from "../components/Episode";
 
+const HEADER_SIZE = scaledPixels(400);
 
 const VideoDetailScreen = ({route, navigation}) => {
     const passedVideo = route.params?.video;
     const [isFavorite, setIsFavorite] = useState(false);
-    const [focusedButton, setFocusedButton] = useState<'favorite' | 'continue' | 'next'>('continue');
     const [focusedEpisode, setFocusedEpisode] = useState<number | null>(null);
     const isFocused = useIsFocused();
-
-    const handleBack = useCallback(() => {
-        navigation.goBack();
-    }, [navigation]);
 
     const onSelected = useCallback(() => {
         console.log("on selected");
@@ -53,107 +62,94 @@ const VideoDetailScreen = ({route, navigation}) => {
         setFocusedEpisode(index);
     }, []);
 
-    useEffect(() => {
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-            handleBack();
-            return true;
-        });
-        // 电视遥控器事件处理
-        // TVEventHandler.addListener(evt => {
-        // if (evt.eventType === 'right') {
-        //     if (focusedButton === 'favorite') setFocusedButton('continue');
-        //     else if (focusedButton === 'continue') setFocusedButton('next');
-        // } else if (evt.eventType === 'left') {
-        //     if (focusedButton === 'next') setFocusedButton('continue');
-        //     else if (focusedButton === 'continue') setFocusedButton('favorite');
-        // } else if (evt.eventType === 'select') {
-        //     if (focusedButton === 'favorite') toggleFavorite();
-        //     else if (focusedButton === 'continue') handleContinue();
-        //     else if (focusedButton === 'next') handleNextEpisode();
-        // } else if (evt.eventType === 'up' && focusedEpisode !== null) {
-        //     setFocusedEpisode(null);
-        //     setFocusedButton('continue');
-        // } else if (evt.eventType === 'down' && focusedEpisode === null) {
-        //     setFocusedEpisode(0);
-        // }
-        // });
-
-        return () => {
-            backHandler.remove();
-        };
-    }, [focusedButton, focusedEpisode]);
-
     return (
-        <SpatialNavigationRoot isActive={true}>
+        <Page>
             <View style={styles.container}>
-                <View style={styles.topContainer}>
+                <SpatialNavigationScrollView
+                    offsetFromStart={HEADER_SIZE + 20}
+                    descendingArrow={<TopArrow/>}
+                    ascendingArrow={<BottomArrow/>}
+                    descendingArrowContainerStyle={styles.topArrowContainer}
+                    ascendingArrowContainerStyle={styles.bottomArrowContainer}
+                >
+                    <SpatialNavigationNode orientation={'horizontal'}>
+                        <Container height={scaledPixels(500)}>
+                            <ImageContainer>
+                                <ProgramImage source={{uri: passedVideo?.thumbnail}}/>
+                            </ImageContainer>
+                            <InformationContainer>
+                                <Typography variant="title"
+                                            style={{textAlign: 'center'}}>{passedVideo?.title}</Typography>
+                                <Spacer gap={'$6'}/>
+                                <Tag variant="body"
+                                     style={{textAlign: 'center'}}>{passedVideo?.region} {passedVideo?.year} {passedVideo?.genres?.join('/')}</Tag>
+                                <Actor variant="body"
+                                       style={{textAlign: 'center'}}>{passedVideo?.actors?.join(' / ')}</Actor>
+                                <Descritption variant="body"
+                                              style={{textAlign: 'center'}}>{passedVideo?.description}</Descritption>
+                                <ButtonContainer>
+                                    <Button label={isFavorite ? '已收藏' : '收藏'}
+                                            onSelect={toggleFavorite}/>
+                                    <Button label="续播" onSelect={() => console.log('续播!')}/>
+                                    <Button label="下一集" onSelect={() => console.log('下一集!')}/>
+                                </ButtonContainer>
+                            </InformationContainer>
 
-                    <View style={styles.thumbnail}>
-                        <DefaultFocus>
-                            <SpatialNavigationFocusableView onSelect={onSelected}>
-                                <Image
-                                    source={{uri: passedVideo?.thumbnail}}
-                                    style={styles.thumbnailImage}
-                                    resizeMode="cover"
-                                />
-                            </SpatialNavigationFocusableView>
-                        </DefaultFocus>
-                    </View>
+                        </Container>
+                    </SpatialNavigationNode>
 
-
-                    <View style={styles.info}>
-                        <Text style={styles.title}>{passedVideo?.title}</Text>
-                        <Text style={styles.tag}>
-                            {passedVideo?.region} {passedVideo?.year} {passedVideo?.genres?.join('/')}
-                        </Text>
-                        <Text style={styles.actor}>{passedVideo?.actors?.join(' / ')}</Text>
-
-                        <ScrollView style={styles.description}>
-                            <Text style={styles.descriptionText}>{passedVideo?.description}</Text>
-                        </ScrollView>
-
-                        <View style={styles.opContainer}>
-                            <SpatialNavigationFocusableView onSelect={onSelected}>
-                                <Text style={styles.buttonText}>{isFavorite ? '已收藏' : '收藏'}</Text>
-                            </SpatialNavigationFocusableView>
-                            <SpatialNavigationFocusableView onSelect={onSelected}>
-                                <Text style={styles.buttonText}>续播</Text>
-                            </SpatialNavigationFocusableView>
-                            <SpatialNavigationFocusableView onSelect={onSelected}>
-                                <Text style={styles.buttonText}>下一集</Text>
-                            </SpatialNavigationFocusableView>
-                        </View>
-                    </View>
-                </View>
-
-                <View style={styles.bottomContainer}>
-                    <Text style={styles.episodeTitle}>剧集列表</Text>
-                    <ScrollView>
-                        {passedVideo?.episodes?.map((episode, index) => (
-                            <View key={index}>
-                                <TouchableOpacity
-                                    style={[
-                                        styles.episodeItem,
-                                        focusedEpisode === index && styles.focused
-                                    ]}
-                                    onPress={() => handleEpisodePress(index)}
-                                >
-                                    <View style={styles.episodeContent}>
-                                        <Ionicons name="play" style={styles.playIcon} size={20} color="#fff"/>
-                                        <Text style={styles.episodeText}>第{episode.episode}集</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                {index < passedVideo.episodes.length - 1 && (
-                                    <View style={styles.divider}/>
-                                )}
-                            </View>
-                        ))}
-                    </ScrollView>
-                </View>
+                    {passedVideo?.episodes?.map((episode, index) => (
+                        <Episode key={episode.id} id={episode.id} label={episode.episode}
+                                 onSelect={() => console.log('下一集!')}/>
+                    ))}
+                </SpatialNavigationScrollView>
             </View>
-        </SpatialNavigationRoot>
+        </Page>
     );
 };
+
+const InformationContainer = styled.View({
+    flex: 2,
+});
+
+const ButtonContainer = styled.View(({theme}) => ({
+    flexDirection: 'row',
+    gap: theme.spacings.$6,
+    flex: 1.1,
+    justifyContent: 'space-between',
+    marginLeft: 10,
+    marginRight: 10,
+}));
+
+const ImageContainer = styled.View({
+    flex: 1
+});
+
+const Tag = styled(Typography)({
+    flex: 1,
+});
+
+const Actor = styled(Typography)({
+    flex: 1,
+});
+
+const Descritption = styled(Typography)({
+    flex: 4,
+});
+
+const Container = styled.View<{ height: number }>(({height, theme}) => ({
+    height: height,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: theme.spacings.$6,
+}));
+
+const ProgramImage = styled(Image)({
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: 20,
+});
 
 const styles = StyleSheet.create({
     container: {
@@ -161,15 +157,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         backgroundColor: '#000',
         padding: 10,
-    },
-    topContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        marginBottom: 10,
-    },
-    thumbnail: {
-        flex: 1,
-        marginRight: 10,
     },
     thumbnailImage: {
         width: '100%',
@@ -262,10 +249,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         marginLeft: 3,
     },
-    episodeContent: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
     playIcon: {
         marginLeft: 5,
     },
@@ -279,6 +262,24 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
+    },
+    topArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: -15,
+        left: 0,
+    },
+    bottomArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: -15,
+        left: 0,
     },
 });
 
