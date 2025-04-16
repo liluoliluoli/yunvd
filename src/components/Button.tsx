@@ -5,6 +5,7 @@ import {Typography} from './Typography';
 import styled from '@emotion/native';
 import {useFocusAnimation} from '../hooks/useFocusAnimation';
 import {scaledPixels} from '../hooks/useScale';
+import {theme} from "../theme/theme";
 
 type ButtonProps = {
     label: string;
@@ -33,7 +34,7 @@ export const Button = ({label, onSelect}: ButtonProps) => {
     );
 };
 
-const Container = styled(Animated.View)<{ isFocused: boolean }>(({isFocused, theme}) => ({
+const Container = styled(Animated.View)<{ isFocused: boolean }>(({isFocused}) => ({
     alignSelf: 'baseline',
     backgroundColor: isFocused ? 'white' : 'black',
     padding: theme.spacings.$4,

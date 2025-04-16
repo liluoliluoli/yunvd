@@ -2,6 +2,7 @@ import styled from '@emotion/native';
 import {ReactNode} from 'react';
 import {TextProps} from 'react-native';
 import {type FontWeight, type TypographyVariant} from '../theme/typography';
+import {theme} from "../theme/theme";
 
 export type TypographyProps = TextProps & {
     variant?: TypographyVariant;
@@ -25,7 +26,7 @@ export const Typography = ({
 const StyledText = styled.Text<{
     variant: TypographyVariant;
     fontWeight: FontWeight;
-}>(({variant, fontWeight, theme}) => ({
+}>(({variant, fontWeight}) => ({
     ...theme.typography[variant][fontWeight],
     color: 'white',
     flexWrap: 'wrap',

@@ -43,7 +43,7 @@ export const Episode = ({label, onSelect}: EpisodeProps) => {
     );
 };
 
-const Container = styled(Animated.View)<{ isFocused: boolean }>(({isFocused, theme}) => ({
+const Container = styled(Animated.View)<{ isFocused: boolean }>(({isFocused}) => ({
     alignSelf: 'baseline',
     backgroundColor: isFocused ? 'gray' : 'black',
     padding: theme.spacings.$4,
