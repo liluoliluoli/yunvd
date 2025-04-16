@@ -15,7 +15,6 @@ import {
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Chapter, useVideoPlayer, VideoPlayer, VideoSource, VideoView} from 'react-native-vlc-media-player-view';
 import {VideoViewRef} from "react-native-vlc-media-player-view/build/VideoView";
-import TVEventHandler from "react-native-tvos"
 
 
 const VideoPlayerScreen = ({route, navigation}) => {
@@ -136,6 +135,7 @@ const Player = ({onBack, source, title}: PlayerProps) => {
             ref={videoViewRef}
             player={player}
             style={{flex: 1}}
+            alwaysFullscreen={true}
             onLoaded={() => {
                 // source.time && (player.time = source.time);
                 // setIntro(player.chapters.find(c => c.name.match(/(opening)/i)));
@@ -154,7 +154,6 @@ const Player = ({onBack, source, title}: PlayerProps) => {
             // onPrevious={() => console.log('previous')}
             onBack={() => onBack(player)}
             onProgress={e => {
-                console.log(player.time);
                 // const time = e.nativeEvent.time;
                 // const isInIntro = !!intro && time >= intro.timeOffset && time < intro.timeOffset + intro.duration - 1;
                 // setShowSkipIntro(isInIntro);

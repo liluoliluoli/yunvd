@@ -48,6 +48,18 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-    ]
+      "@bam.tech/react-native-keyevent-expo-config-plugin",
+      [
+        "@react-native-tvos/config-tv",
+        {
+          "showVerboseWarnings": true
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b438e72f-8c15-47da-890f-c23695300a6e"
+      }
+    }
   }
 }

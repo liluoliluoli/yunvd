@@ -11,6 +11,8 @@ import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import VideoPlayerScreen from './src/screens/VideoPlayerScreen';
+import VideoDetailScreen from "./src/screens/VideoDetailScreen";
+import "./src/configureRemoteControl"
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +46,7 @@ export default function App() {
     }
 
     return (
+
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{headerShown: false}}
@@ -76,6 +79,10 @@ export default function App() {
                     name="Profile"
                     component={ProfileScreen}
                     options={{animationEnabled: true}}
+                />
+                <Stack.Screen
+                    name="VideoDetail"
+                    component={VideoDetailScreen}
                 />
                 <Stack.Screen
                     name="VideoPlayer"

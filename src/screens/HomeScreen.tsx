@@ -284,7 +284,7 @@ export default function HomeScreen({navigation}) {
 
     const navigateToVideoDetails = (video) => {
         console.log('Navigating to video player with video:', video.title);
-        navigation.navigate('VideoPlayer', {video});
+        navigation.navigate('VideoDetail', {video});
     };
 
     const handleRefresh = () => {
