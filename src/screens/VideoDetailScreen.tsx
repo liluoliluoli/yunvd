@@ -38,8 +38,6 @@ const HEADER_SIZE = scaledPixels(400);
 const VideoDetailScreen = ({route, navigation}) => {
     const passedVideo = route.params?.video;
     const [isFavorite, setIsFavorite] = useState(false);
-    const [focusedEpisode, setFocusedEpisode] = useState<number | null>(null);
-    const isFocused = useIsFocused();
 
     const onSelected = useCallback(() => {
         console.log("on selected");
@@ -59,8 +57,12 @@ const VideoDetailScreen = ({route, navigation}) => {
 
     const handleEpisodePress = useCallback((index: number) => {
         // 处理剧集点击
-        setFocusedEpisode(index);
     }, []);
+
+    const navigateToVideoPlayer = (episode) => {
+        console.log('Navigating to video player with video:', episode.label);
+        navigation.navigate('VideoPlayer', {episode});
+    };
 
     return (
         <Page>
@@ -79,14 +81,14 @@ const VideoDetailScreen = ({route, navigation}) => {
                             </ImageContainer>
                             <InformationContainer>
                                 <Typography variant="title"
-                                            style={{textAlign: 'center'}}>{passedVideo?.title}</Typography>
+                                            style={{textAlign: 'center'}}>{passedVideo?.title}{passedVideo?.episodeCount && "("}{passedVideo?.episodeCount}{passedVideo?.episodeCount && ")"}</Typography>
                                 <Spacer gap={'$6'}/>
                                 <Tag variant="body"
                                      style={{textAlign: 'center'}}>{passedVideo?.region} {passedVideo?.year} {passedVideo?.genres?.join('/')}</Tag>
                                 <Actor variant="body"
                                        style={{textAlign: 'center'}}>{passedVideo?.actors?.join(' / ')}</Actor>
-                                <Descritption variant="body"
-                                              style={{textAlign: 'center'}}>{passedVideo?.description}</Descritption>
+                                <Description variant="body"
+                                             style={{textAlign: 'center'}}>{passedVideo?.description}</Description>
                                 <ButtonContainer>
                                     <Button label={isFavorite ? '已收藏' : '收藏'}
                                             onSelect={toggleFavorite}/>
@@ -94,13 +96,11 @@ const VideoDetailScreen = ({route, navigation}) => {
                                     <Button label="下一集" onSelect={() => console.log('下一集!')}/>
                                 </ButtonContainer>
                             </InformationContainer>
-
                         </Container>
                     </SpatialNavigationNode>
-
                     {passedVideo?.episodes?.map((episode, index) => (
-                        <Episode key={episode.id} id={episode.id} label={episode.episode}
-                                 onSelect={() => console.log('下一集!')}/>
+                        <Episode key={index} id={episode.id} label={episode.episode}
+                                 onSelect={() => navigateToVideoPlayer(episode)}/>
                     ))}
                 </SpatialNavigationScrollView>
             </View>
@@ -112,7 +112,7 @@ const InformationContainer = styled.View({
     flex: 2,
 });
 
-const ButtonContainer = styled.View(({theme}) => ({
+const ButtonContainer = styled.View(({}) => ({
     flexDirection: 'row',
     gap: theme.spacings.$6,
     flex: 1.1,
@@ -133,11 +133,11 @@ const Actor = styled(Typography)({
     flex: 1,
 });
 
-const Descritption = styled(Typography)({
+const Description = styled(Typography)({
     flex: 4,
 });
 
-const Container = styled.View<{ height: number }>(({height, theme}) => ({
+const Container = styled.View<{ height: number }>(({height}) => ({
     height: height,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -158,50 +158,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         padding: 10,
     },
-    thumbnailImage: {
-        width: '100%',
-        height: '100%',
-        borderRadius: 5,
-    },
-    info: {
-        flex: 2,
-        flexDirection: 'column',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#fff',
-        marginBottom: 8,
-        textAlign: 'center',
-    },
-    tag: {
-        fontSize: 14,
-        color: '#aaa',
-        marginBottom: 8,
-        textAlign: 'center',
-    },
-    actor: {
-        fontSize: 14,
-        color: '#fff',
-        marginBottom: 8,
-        textAlign: 'center',
-    },
-    description: {
-        flex: 1,
-        marginBottom: 10,
-        textAlign: 'center',
-    },
-    descriptionText: {
-        fontSize: 14,
-        color: '#ddd',
-        lineHeight: 20,
-        textAlign: 'center',
-    },
-    opContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        height: 40,
-    },
     favorite: {
         flex: 1,
         backgroundColor: '#333',
@@ -210,9 +166,6 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginRight: 5,
     },
-    favoriteActive: {
-        backgroundColor: '#f44336',
-    },
     continue: {
         flex: 1,
         backgroundColor: '#2196F3',
@@ -220,48 +173,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 5,
         marginLeft: 5,
-    },
-    nextEpisode: {
-        flex: 1,
-        backgroundColor: '#4CAF50', // 绿色按钮
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5,
-        marginLeft: 5,
-    },
-    bottomContainer: {
-        flex: 1,
-    },
-    episodeTitle: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#fff',
-        marginBottom: 10,
-    },
-    episodeItem: {
-        width: '100%',
-        height: 40,
-        justifyContent: 'center',
-        borderRadius: 5,
-        marginBottom: 10,
-    },
-    episodeText: {
-        color: '#fff',
-        marginLeft: 3,
-    },
-    playIcon: {
-        marginLeft: 5,
-    },
-    divider: {
-        height: 1,
-        backgroundColor: '#fff',
-    },
-    focused: {
-        borderWidth: 2,
-        borderColor: '#fff',
-    },
-    buttonText: {
-        color: '#fff',
     },
     topArrowContainer: {
         width: '100%',

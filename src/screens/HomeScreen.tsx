@@ -165,27 +165,51 @@ export default function HomeScreen({navigation}) {
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }, {
                         id: 4,
-                        episode: "第1集",
+                        episode: "第4集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }, {
                         id: 5,
-                        episode: "第2集",
+                        episode: "第5集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }, {
                         id: 6,
-                        episode: "第3集",
+                        episode: "第6集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }, {
                         id: 7,
-                        episode: "第1集",
+                        episode: "第7集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }, {
                         id: 8,
-                        episode: "第2集",
+                        episode: "第8集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }, {
                         id: 9,
-                        episode: "第3集",
+                        episode: "第9集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 10,
+                        episode: "第4集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 11,
+                        episode: "第5集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 12,
+                        episode: "第6集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 13,
+                        episode: "第7集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 14,
+                        episode: "第8集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 15,
+                        episode: "第9集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }],
 
