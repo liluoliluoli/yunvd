@@ -6,7 +6,6 @@ import {
     StyleSheet,
     FlatList,
     Image,
-    TextInput,
     Modal,
     ActivityIndicator,
     SafeAreaView,
@@ -14,13 +13,31 @@ import {
     Dimensions,
     RefreshControl,
     Platform,
-    ScrollView
+    ScrollView,
+    Animated
 } from 'react-native';
 import useAuthViewModel from '../viewModels/AuthViewModel';
 
 // Import logo image directly
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import {Carousel} from 'react-native-auto-carousel';
+import {Button} from "../components/Button";
+import {TextInput} from "../components/TextInput";
+import {BottomArrow, LeftArrow, RightArrow, TopArrow} from "../components/Arrows";
+import {
+    DefaultFocus,
+    SpatialNavigationFocusableView,
+    SpatialNavigationNode,
+    SpatialNavigationScrollView, SpatialNavigationView, SpatialNavigationVirtualizedList
+} from "react-tv-space-navigation";
+import {scaledPixels} from "../hooks/useScale";
+import {Page} from "../components/Page";
+import {Spacer} from "../components/Spacer";
+import styled from "@emotion/native";
+import {theme} from "../theme/theme";
+import {Box} from "../components/Box";
+import chunk from 'lodash/chunk';
+import VideoItem from "../models/VideoItem";
 
 const {width} = Dimensions.get('window');
 const THUMBNAIL_WIDTH = width / 3 - 16; // Full width with padding
@@ -32,24 +49,52 @@ interface CarouselItem {
     id: number;
 }
 
+const HEADER_SIZE = scaledPixels(400)
 export default function HomeScreen({navigation}) {
     const [searchQuery, setSearchQuery] = useState('');
-    const [mockVideosData, setMockVideosData] = useState([]);
-    const [filteredVideos, setFilteredVideos] = useState([]);
+    const [videos, setVideos] = useState<VideoItem[]>([]);
+    const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
+    const [filteredVideos, setFilteredVideos] = useState<VideoItem[]>([]);
     const [isLoadingMockData, setIsLoadingMockData] = useState(true);
     const [mockError, setMockError] = useState(null);
     const [index, setIndex] = useState(0);
     const [routes] = useState([
-        {key: 'home', title: '推荐'},
+        {key: 'history', title: '播放历史'},
         {key: 'movies', title: '电影'},
         {key: 'tvSeries', title: '电视剧'},
         {key: 'tvShows', title: '综艺'},
         {key: 'record', title: '记录'},
     ]);
-    const carouselData: CarouselItem[] = [
-        {image: 'https://picsum.photos/800/400?random=1', id: 1, type: 'movie'},
-        {image: 'https://picsum.photos/800/400?random=2', id: 2, type: 'movie'},
-    ];
+    const renderTabBar = (props) => {
+        return (
+            <SpatialNavigationView style={styles.tabBarContainer} direction="horizontal">
+                {props.navigationState.routes.map((route, i) => (
+                    <SpatialNavigationFocusableView
+                        key={route.key}
+                        style={{flex: 1}}
+                        onSelect={() => {
+                            setIndex(i);
+                            console.log(`Selected tab: ${route.title}`);
+                        }}
+                    >
+                        {({isFocused, isRootActive}) => (
+                            <View style={[
+                                styles.tabItem,
+                                isFocused && isRootActive && styles.activeTabItem
+                            ]}>
+                                <Animated.Text style={[
+                                    styles.tabText,
+                                    isFocused && isRootActive && styles.activeTabText
+                                ]}>
+                                    {route.title}
+                                </Animated.Text>
+                            </View>
+                        )}
+                    </SpatialNavigationFocusableView>
+                ))}
+            </SpatialNavigationView>
+        );
+    };
     const [sortOptions, setSortOptions] = useState([]); // 最新、最热、好评
     const [genreOptions, setGenreOptions] = useState([]); // 爱情、古装、悬疑、都市、喜剧
     const [regionOptions, setRegionOptions] = useState([]); // 大陆、香港、台湾、日本、韩国、美国
@@ -124,21 +169,17 @@ export default function HomeScreen({navigation}) {
 
     const {logout} = useAuthViewModel();
 
-    // Load the mock videos directly from VideoService
-    const loadMockVideos = async () => {
+    const loadVideos = async () => {
         try {
-            console.log("load mock videos")
+            console.log("load videos")
             setIsLoadingMockData(true);
             setMockError(null);
-
-            // Import the mock data directly to avoid network requests
-            const mockVideos = [
+            const mockVideos: VideoItem[] = [
                 {
-                    id: '1',
+                    id: 1,
                     title: 'Big Buck Bunny',
                     description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
                     thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     duration: '9:56',
                     views: 10482,
                     likes: 849,
@@ -159,135 +200,274 @@ export default function HomeScreen({navigation}) {
                         id: 2,
                         episode: "第2集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 3,
-                        episode: "第3集",
+                    }],
+
+                }, {
+                    id: 2,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
+                    isFavorite: false,
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }, {
-                        id: 4,
-                        episode: "第4集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 5,
-                        episode: "第5集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 6,
-                        episode: "第6集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 7,
-                        episode: "第7集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 8,
-                        episode: "第8集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 9,
-                        episode: "第9集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 10,
-                        episode: "第4集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 11,
-                        episode: "第5集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 12,
-                        episode: "第6集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 13,
-                        episode: "第7集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 14,
-                        episode: "第8集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 15,
-                        episode: "第9集",
+                        id: 2,
+                        episode: "第2集",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }],
 
-                },
-                {
-                    id: '2',
-                    title: 'Elephant Dream',
-                    description: 'The first Blender Open Movie from 2006',
+                }, {
+                    id: 3,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
                     thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-                    duration: '10:54',
-                    views: 8362,
-                    likes: 687,
-                    categories: ['Animation', 'Fantasy'],
-                    author: {
-                        name: 'Blender Foundation',
-                        avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Blender_logo_no_text.svg/1200px-Blender_logo_no_text.svg.png'
-                    },
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
                     isFavorite: false,
-                    rating: 4.6,
-                    publishDate: '2006-08-15'
-                },
-                {
-                    id: '3',
-                    title: 'Sintel',
-                    description: 'Sintel is a fantasy computer animated short movie made by the Blender Institute.',
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 2,
+                        episode: "第2集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }],
+
+                }, {
+                    id: 4,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
                     thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-                    duration: '14:48',
-                    views: 12893,
-                    likes: 1093,
-                    categories: ['Animation', 'Fantasy', 'Action'],
-                    author: {
-                        name: 'Blender Foundation',
-                        avatar: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Blender_logo_no_text.svg/1200px-Blender_logo_no_text.svg.png'
-                    },
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
                     isFavorite: false,
-                    rating: 4.9,
-                    publishDate: '2010-09-30'
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 2,
+                        episode: "第2集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }],
+
+                }, {
+                    id: 5,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
+                    isFavorite: false,
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 2,
+                        episode: "第2集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }],
+                }, {
+                    id: 6,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
+                    isFavorite: false,
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 2,
+                        episode: "第2集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }],
+                }, {
+                    id: 7,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
+                    isFavorite: false,
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 2,
+                        episode: "第2集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }],
+                }, {
+                    id: 8,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
+                    isFavorite: false,
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 2,
+                        episode: "第2集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }],
+                }, {
+                    id: 9,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
+                    isFavorite: false,
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 2,
+                        episode: "第2集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }],
+                }, {
+                    id: 10,
+                    title: 'Big Buck Bunny',
+                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
+                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
+                    duration: '9:56',
+                    views: 10482,
+                    likes: 849,
+                    directors: ['Blender Foundation'],
+                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                    genres: ['喜剧', '动作'],
+                    region: 'US',
+                    year: '2025',
+                    isFavorite: false,
+                    rating: 4.8,
+                    publishDate: '2008-05-20',
+                    episodeCount: 20,
+                    episodes: [{
+                        id: 1,
+                        episode: "第1集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }, {
+                        id: 2,
+                        episode: "第2集",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                    }],
                 }
             ];
-
-            // Add some extra variety by creating copies with different IDs
-            const extraVideos = mockVideos.map(video => ({
-                ...video,
-                id: 'extra-' + video.id + Math.random(),
-                isFavorite: Math.random() > 0.5,
-                views: Math.floor(video.views * (0.5 + Math.random()))
-            }));
-
-            // Combine original and extra videos
-            setMockVideosData([...mockVideosData, ...extraVideos]);
-            console.log(`Loaded ${mockVideosData.length} mock videos successfully`);
-
+            setVideos([...videos, ...mockVideos]);
         } catch (error) {
-            console.error('Error loading mock videos:', error);
+            console.error('Error loading videos:', error);
             setMockError('Failed to load videos. Please try again.');
         } finally {
             setIsLoadingMockData(false);
         }
     };
 
-    // Derived state using only local variables
-    const isLoading = isLoadingMockData;
-    const error = mockError;
-    const videos = searchQuery ? filteredVideos : mockVideosData;
-
     useEffect(() => {
-        // Log any issues occurring during initialization
         try {
             console.log('Initializing HomeScreen with mock data...');
-            // Load mock videos directly
-            loadMockVideos();
+            loadVideos();
         } catch (err) {
             console.error('Error in HomeScreen initialization:', err);
             setMockError('Failed to initialize the screen. Please restart the app.');
         }
     }, []);
+
+    useEffect(() => {
+        setVideosByRow(chunk(videos, 5));
+        console.log(`Loaded ${videos.length} videos successfully`);
+    }, [videos]);
+
+    useEffect(() => {
+        console.log(`Loaded ${videosByRow.length} videosByRow successfully`);
+    }, [videosByRow]);
 
     const handleSearch = () => {
         if (searchQuery.trim()) {
@@ -295,10 +475,9 @@ export default function HomeScreen({navigation}) {
                 setIsLoadingMockData(true);
 
                 // Filter the videos locally based on search query
-                const filtered = mockVideosData.filter(video =>
+                const filtered = videos.filter(video =>
                     video.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    video.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    (video.author?.name && video.author.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                    video.description.toLowerCase().includes(searchQuery.toLowerCase())
                 );
 
                 // Set filtered videos
@@ -322,24 +501,9 @@ export default function HomeScreen({navigation}) {
         }
     };
 
-    const handleSearchInputChange = (text) => {
-        setSearchQuery(text);
-        if (!text) {
-            setFilteredVideos([]);
-        }
-    };
-
-    const navigateToProfile = () => {
-        navigation.navigate('Profile');
-    };
-
     const navigateToVideoDetails = (video) => {
-        console.log('Navigating to video player with video:', video.title);
+        console.log('Navigating to video detail with video:', video.title);
         navigation.navigate('VideoDetail', {video});
-    };
-
-    const handleRefresh = () => {
-        loadMockVideos();
     };
 
     const loadMoreVideos = () => {
@@ -347,104 +511,63 @@ export default function HomeScreen({navigation}) {
         console.log('Load More Videos');
     };
 
-    const handleToggleFavorite = (videoId) => {
-        // Update the mock videos data to toggle favorite
-        setMockVideosData(prevVideos =>
-            prevVideos.map(video =>
-                video.id === videoId
-                    ? {...video, isFavorite: !video.isFavorite}
-                    : video
-            )
-        );
-    };
-
-    const renderVideoItem = ({item}) => (
-        <TouchableOpacity
-            style={styles.videoItem}
-            onPress={() => navigateToVideoDetails(item)}
-        >
-            <View style={styles.thumbnailContainer}>
-                <Image
-                    source={{uri: item.thumbnail}}
-                    style={styles.thumbnail}
-                    resizeMode="cover"
-                />
-                <View style={styles.durationContainer}>
-                    <Text style={styles.durationText}>{item.duration}</Text>
+    const renderVideoItem = ({item}: { item: VideoItem }) => (
+        <SpatialNavigationFocusableView onSelect={() => {
+            navigateToVideoDetails(item)
+        }} key={item.id}>
+            {({isFocused, isRootActive}) => (
+                <View style={{
+                    width: scaledPixels(382),
+                    borderWidth: 2,
+                    borderRadius: 4,
+                    backgroundColor: '#fff',
+                    borderColor: isFocused && isRootActive ? 'white' : 'black',
+                    overflow: 'hidden',
+                }}>
+                    <View style={styles.thumbnailContainer}>
+                        <Image
+                            source={{uri: item.thumbnail}}
+                            style={styles.thumbnail}
+                            resizeMode="stretch"
+                        />
+                        <TouchableOpacity style={styles.favoriteButton}>
+                            <Text style={styles.favoriteIcon}>{item.isFavorite ? '★' : '☆'}</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.videoDetails}>
+                        <View style={styles.videoTextContent}>
+                            <Text style={styles.videoTitle} numberOfLines={2}>{item.title}</Text>
+                            <Text style={styles.videoSubtitle} numberOfLines={1}>
+                                {item.actors?.join(',')}
+                            </Text>
+                            <Text style={styles.videoInfo} numberOfLines={1}>
+                                {item.views} views • {item.publishDate || 'Unknown date'}
+                            </Text>
+                        </View>
+                    </View>
                 </View>
-                <TouchableOpacity
-                    style={styles.favoriteButton}
-                    onPress={() => handleToggleFavorite(item.id)}
-                >
-                    <Text style={styles.favoriteIcon}>{item.isFavorite ? '★' : '☆'}</Text>
-                </TouchableOpacity>
-            </View>
+            )}
+        </SpatialNavigationFocusableView>
+    );
 
-            <View style={styles.videoDetails}>
-                <View style={styles.videoTextContent}>
-                    <Text style={styles.videoTitle} numberOfLines={2}>{item.title}</Text>
-                    <Text style={styles.videoSubtitle} numberOfLines={1}>
-                        {item.actors?.join(',')}
-                    </Text>
-                    <Text style={styles.videoInfo} numberOfLines={1}>
-                        {item.views} views • {item.publishDate || 'Unknown date'}
-                    </Text>
-                </View>
-            </View>
-        </TouchableOpacity>
+    const renderVideosByRow = (videos: VideoItem[], index: number) => (
+        <SpatialNavigationView style={{height: scaledPixels(520), width: '100%'}} direction="horizontal">
+            {videos.map((item) => {
+                return renderVideoItem({item})
+            })}
+        </SpatialNavigationView>
     );
 
     const renderScene = SceneMap({
-        home: () => (
+        history: () => (
             <View style={styles.container}>
-                <View style={{flex: 0.3}}>
-                    <Carousel
-                        data={carouselData}
-                        dotStyle={{
-                            width: 10,
-                            height: 10,
-                            borderRadius: 5,
-                            backgroundColor: '#FFFFFF'
-                        }}
-                        autoPlay={true}
-                        autoPlayTime={2000}
-                        renderItem={(item: CarouselItem) => (
-                            <Image
-                                key={item.id}
-                                source={{uri: item.image}}
-                                style={{
-                                    height: 200,
-                                    width: Dimensions.get('window').width
-                                }}
-                            />
-                        )}
-                    />
-                </View>
-                <View style={{flex: 0.7}}>
-                    <FlatList
-                        data={videos}
-                        renderItem={renderVideoItem}
-                        keyExtractor={(item) => item.id.toString()}
-                        numColumns={5}
-                        contentContainerStyle={[styles.videoList, {minHeight: Dimensions.get('window').height}]}
-                        showsVerticalScrollIndicator={true}
-                        refreshControl={
-                            <RefreshControl
-                                refreshing={isLoadingMockData && videos.length > 0}
-                                onRefresh={handleRefresh}
-                                colors={['#f44336']}
-                                tintColor="#f44336"
-                            />
-                        }
-                        ListEmptyComponent={
-                            <Text style={styles.emptyText}>
-                                {searchQuery ? 'No videos match your search' : 'No videos available'}
-                            </Text>
-                        }
-                        onEndReached={loadMoreVideos}
-                        onEndReachedThreshold={0.01}
-                    />
-                </View>
+                <SpatialNavigationScrollView>
+                    <View style={{flexDirection: 'row'}}>
+                        <SpatialNavigationView alignInGrid direction="vertical">
+                            <DefaultFocus>{videosByRow.map(renderVideosByRow)}</DefaultFocus>
+                        </SpatialNavigationView>
+                    </View>
+                </SpatialNavigationScrollView>
             </View>
         ),
         movies: () => (
@@ -510,29 +633,6 @@ export default function HomeScreen({navigation}) {
                         ))}
                     </ScrollView>
                 </View>
-                <FlatList
-                    data={videos}
-                    renderItem={renderVideoItem}
-                    keyExtractor={(item) => item.id.toString()}
-                    numColumns={5}
-                    contentContainerStyle={[styles.videoList, {minHeight: Dimensions.get('window').height}]}
-                    showsVerticalScrollIndicator={true}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={isLoadingMockData && videos.length > 0}
-                            onRefresh={handleRefresh}
-                            colors={['#f44336']}
-                            tintColor="#f44336"
-                        />
-                    }
-                    ListEmptyComponent={
-                        <Text style={styles.emptyText}>
-                            {searchQuery ? 'No videos match your search' : 'No videos available'}
-                        </Text>
-                    }
-                    onEndReached={loadMoreVideos}
-                    onEndReachedThreshold={0.01}
-                />
             </View>
         ),
         tvSeries: () => (
@@ -552,106 +652,94 @@ export default function HomeScreen({navigation}) {
     });
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="dark-content" backgroundColor="#fff"/>
+        <Page>
+            <SafeAreaView style={styles.container}>
+                <SpatialNavigationScrollView
+                    offsetFromStart={HEADER_SIZE + 20}
+                    descendingArrow={<TopArrow/>}
+                    ascendingArrow={<BottomArrow/>}
+                    descendingArrowContainerStyle={styles.topArrowContainer}
+                    ascendingArrowContainerStyle={styles.bottomArrowContainer}
+                >
+                    <SpatialNavigationNode orientation={'horizontal'}>
+                        <Container height={scaledPixels(150)}>
+                            <View style={styles.header}>
+                                <Image
+                                    source={require('../../assets/icon.png')}
+                                    style={styles.logo}
+                                    resizeMode="cover"
+                                />
+                                <View style={styles.searchContainer}>
+                                    <TextInput placeholder='搜索'/>
+                                </View>
+                                <Button label="更新" onSelect={() => console.log('更新!')}/>
+                                <Spacer direction={"horizontal"} gap={'$6'}/>
+                                <Button label="登录" onSelect={() => console.log('登录!')}/>
+                                <Spacer direction={"horizontal"} gap={'$6'}/>
+                                <Button label="赞赏" onSelect={() => console.log('赞赏!')}/>
+                                <Spacer direction={"horizontal"} gap={'$6'}/>
+                                <Button label="收藏" onSelect={() => console.log('收藏!')}/>
+                            </View>
 
-            {/* Header */}
-            <View style={styles.header}>
-                <Image
-                    source={require('../../assets/icon.png')}
-                    style={styles.logo}
-                    resizeMode="contain"
-                />
-
-                <View style={styles.searchContainer}>
-                    <TextInput
-                        style={styles.searchInput}
-                        placeholder="Search videos..."
-                        value={searchQuery}
-                        onChangeText={handleSearchInputChange}
-                        onSubmitEditing={handleSearch}
-                        returnKeyType="search"
-                    />
-                    <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-                        <Text style={styles.searchButtonText}>🔍</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <TouchableOpacity onPress={navigateToProfile} style={styles.menuButton}>
-                    <Text style={styles.menuIcon}>☰</Text>
-                </TouchableOpacity>
-            </View>
-
-            <TabView
-                navigationState={{index, routes}}
-                renderScene={renderScene}
-                onIndexChange={setIndex}
-                initialLayout={{width: Dimensions.get('window').width}}
-            />
-
-        </SafeAreaView>
+                        </Container>
+                    </SpatialNavigationNode>
+                    <SpatialNavigationNode orientation={'vertical'}>
+                        <Container height={scaledPixels(1000)}>
+                            <TabView
+                                navigationState={{index, routes}}
+                                renderScene={renderScene}
+                                renderTabBar={renderTabBar}
+                                onIndexChange={setIndex}
+                                initialLayout={{width: Dimensions.get('window').width}}
+                            />
+                        </Container>
+                    </SpatialNavigationNode>
+                </SpatialNavigationScrollView>
+            </SafeAreaView>
+        </Page>
     );
 }
+
+const Container = styled.View<{ height: number }>(({height}) => ({
+    height: height,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: theme.spacings.$1,
+    width: '100%',
+}));
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f8f8f8',  // 改为浅灰色背景
+        backgroundColor: '#000',
     },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         padding: 12,
-        backgroundColor: '#fff',  // 纯白背景
-        elevation: 0,  // 移除阴影
-        borderBottomWidth: 0,  // 移除底部边框
+        backgroundColor: 'gray',
+        width: '100%',
     },
     logo: {
         width: 40,
         height: 40,
     },
     searchContainer: {
-        flex: 1,
+        width: scaledPixels(500),
         flexDirection: 'row',
         marginHorizontal: 10,
         height: 40,
-        borderRadius: 8,  // 改为小圆角
-        backgroundColor: '#f0f0f0',  // 更浅的背景色
-        borderWidth: 0,  // 移除边框
-    },
-    searchInput: {
-        flex: 1,
-        height: '100%',
-        paddingHorizontal: 12,
-        fontSize: 14,
-        color: '#333',  // 深色文字
-    },
-    searchButton: {
-        width: 40,
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    searchButtonText: {
-        fontSize: 16,
-    },
-    menuButton: {
-        padding: 5,
-    },
-    menuIcon: {
-        fontSize: 24,
+        borderRadius: 8,
+        backgroundColor: '#f0f0f0',
+        borderWidth: 0,
     },
     thumbnailContainer: {
-        position: 'relative',
+        height: scaledPixels(380),
         width: '100%',
-        aspectRatio: 1,
     },
     thumbnail: {
         width: '100%',
-        height: '100%',  // 填满容器
-        borderTopLeftRadius: 8,
-        borderTopRightRadius: 8,
-        backgroundColor: '#e0e0e0',
+        height: '100%',
     },
     durationContainer: {
         position: 'absolute',
@@ -685,7 +773,7 @@ const styles = StyleSheet.create({
     },
     videoDetails: {
         flexDirection: 'row',
-        padding: 8,  // 减小内边距
+        padding: 6,  // 减小内边距
         alignItems: 'flex-start',
     },
     videoTextContent: {
@@ -790,15 +878,6 @@ const styles = StyleSheet.create({
         padding: 8,  // 减小内边距
         flexGrow: 1,
     },
-    videoItem: {
-        width: '19%',
-        margin: 5,
-        backgroundColor: '#fff',
-        borderRadius: 8,
-        overflow: 'hidden',
-        borderWidth: 0.5,
-        borderColor: '#e0e0e0',
-    },
     filterContainer: {
         padding: 6,  // 减少内边距
         backgroundColor: '#fff',
@@ -825,5 +904,66 @@ const styles = StyleSheet.create({
     filterText: {
         fontSize: 12,  // 减小字体大小
         color: '#000',
+    },
+    topArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: -15,
+        left: 0,
+    },
+    bottomArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: -15,
+        left: 0,
+    },
+    leftArrowContainer: {
+        width: 120,
+        height: scaledPixels(260) + 2 * theme.spacings.$8,
+        position: 'absolute',
+        top: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        left: -theme.spacings.$8,
+    },
+    rightArrowContainer: {
+        width: 120,
+        height: scaledPixels(260) + 2 * theme.spacings.$8,
+        position: 'absolute',
+        top: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        right: -theme.spacings.$8,
+    }, tabBarContainer: {
+        flexDirection: 'row',
+        height: scaledPixels(100),
+        backgroundColor: '#1a1a1a',
+        paddingHorizontal: 10,
+    },
+    tabItem: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 10,
+        marginHorizontal: 5,
+        borderBottomWidth: 2,
+        borderBottomColor: 'transparent',
+    },
+    activeTabItem: {
+        borderBottomColor: 'green',
+    },
+    tabText: {
+        color: '#888',
+        fontSize: 16,
+        fontWeight: '500',
+    },
+    activeTabText: {
+        color: '#fff',
     },
 });

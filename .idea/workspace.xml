@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
+      <change afterPath="$PROJECT_DIR$/src/components/Box.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/TextInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useRotateAnimation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/models/Episode.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Episode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Episode.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Spacer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spacer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Typography.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Typography.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Video.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/VideoItem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/VideoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/VideoService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/viewModels/HomeViewModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/viewModels/HomeViewModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/viewModels/VideoPlayerViewModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/viewModels/VideoPlayerViewModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/components",
+    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/hooks",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -63,6 +71,7 @@
     "npm.android.executor": "Run",
     "npm.ios.executor": "Run",
     "npm.start.executor": "Debug",
+    "npm.web.executor": "Run",
     "settings.editor.selected.configurable": "actions.on.save",
     "ts.external.directory.path": "/Users/wing/Documents/react-workspace/yunvd/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
@@ -70,11 +79,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/hooks" />
+      <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/assets" />
-      <recent name="$PROJECT_DIR$/src/hooks" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/screens" />
     </key>
   </component>
   <component name="RunManager" selected="npm.android">
@@ -108,9 +117,20 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="web" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="web" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="npm.android" />
+        <item itemvalue="npm.web" />
         <item itemvalue="npm.ios" />
         <item itemvalue="npm.start" />
       </list>
@@ -136,7 +156,7 @@
       <workItem from="1743661363146" duration="22522000" />
       <workItem from="1743758537542" duration="87840000" />
       <workItem from="1744345304259" duration="39710000" />
-      <workItem from="1744777758422" duration="17306000" />
+      <workItem from="1744777758422" duration="65456000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -242,21 +262,19 @@
       <option name="project" value="LOCAL" />
       <updated>1744798935376</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="init">
+      <option name="closed" value="true" />
+      <created>1744799010553</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1744799010553</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/src/screens/HomeScreen.js" />
-        <option value="$PROJECT_DIR$/src/screens/ForgotPasswordScreen.js" />
-        <option value="$PROJECT_DIR$/src/screens/SignUpScreen.js" />
-        <option value="$PROJECT_DIR$/src/screens/VideoPlayerScreen.js" />
-        <option value="$PROJECT_DIR$/src/screens/ProfileScreen.js" />
-        <option value="$PROJECT_DIR$/src/screens/LoginScreen.js" />
-      </list>
-    </option>
     <option name="includedJSSourcePackages">
       <set>
         <option value="react-native-fullscreen-chz" />
