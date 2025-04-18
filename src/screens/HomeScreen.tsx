@@ -551,7 +551,7 @@ export default function HomeScreen({navigation}) {
     );
 
     const renderVideosByRow = (videos: VideoItem[], index: number) => (
-        <SpatialNavigationView style={{height: scaledPixels(520), width: '100%'}} direction="horizontal">
+        <SpatialNavigationView style={{height: scaledPixels(520), width: '100%'}} direction="horizontal" key={index}>
             {videos.map((item) => {
                 return renderVideoItem({item})
             })}
