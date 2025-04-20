@@ -6,4 +6,7 @@ export enum SupportedKeys {
     Enter = 'Enter',
     LongEnter = 'LongEnter',
     Back = 'Back',
+    LongLeft = 'LongLeft',
+    LongRight = 'LongRight',
+
 }
