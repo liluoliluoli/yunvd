@@ -1,6 +1,8 @@
 /**
  * API constants and configuration
  */
+import React, {useState, useRef} from 'react';
+import {SpatialNavigationNodeRef} from "react-tv-space-navigation";
 
 // Base URLs
 export const API_BASE_URL = 'http://192.168.29.237:5000';
@@ -74,3 +76,16 @@ export const STORAGE_KEYS = {
     USER_DATA: 'user_data',
     WATCH_HISTORY: 'watch_history',
 };
+
+export const SORT_OPTIONS = ["最新", "最热", "好评"]
+export const GENRE_OPTIONS = ["爱情", "古装", "悬疑", "都市", "喜剧"]
+export const REGION_OPTIONS = ["大陆", "香港", "台湾", "日本", "韩国", "美国"]
+const currentYear = new Date().getFullYear();
+export const YEAR_OPTIONS = Array.from({length: 10}, (_, i) => (currentYear - i).toString());
+export const TAB_ROUTES = [
+    {key: 'history', title: '播放历史', screen: 'Home'},
+    {key: 'movies', title: '电影', screen: 'Movie'},
+    {key: 'tvSeries', title: '电视剧', screen: 'TvSeries'},
+    {key: 'tvShows', title: '综艺', screen: 'TvShow'},
+    {key: 'record', title: '记录', screen: 'Record'},
+];

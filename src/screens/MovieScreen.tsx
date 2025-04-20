@@ -43,13 +43,12 @@ import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 
 const HEADER_SIZE = scaledPixels(400)
-export default function HomeScreen({navigation}) {
+export default function MovieScreen({navigation}) {
     const [videos, setVideos] = useState<VideoItem[]>([]);
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
-    const [filteredVideos, setFilteredVideos] = useState<VideoItem[]>([]);
     const [isLoadingMockData, setIsLoadingMockData] = useState(true);
     const [mockError, setMockError] = useState(null);
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(1);
     const loadVideos = async () => {
         try {
             console.log("load videos")
@@ -355,7 +354,6 @@ export default function HomeScreen({navigation}) {
         navigation.navigate('VideoDetail', {video});
     };
 
-
     return (
         <Page>
             <SafeAreaView style={styles.container}>
@@ -380,6 +378,11 @@ export default function HomeScreen({navigation}) {
                             navigation.navigate(TAB_ROUTES[i].screen);
                         }}
                     />
+                    <SpatialNavigationView style={styles.filterRow} direction="horizontal">
+                        {SORT_OPTIONS.map(option => (
+                            <Button label={option} key={option} onSelect={() => console.log("sort onSelect")}/>
+                        ))}
+                    </SpatialNavigationView>
                     <VideoList
                         videosByRow={videosByRow}
                         onVideoPress={navigateToVideoDetails}

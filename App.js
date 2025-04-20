@@ -18,6 +18,7 @@ import {ThemeProvider} from '@emotion/react';
 import {SpatialNavigationDeviceTypeProvider} from "react-tv-space-navigation";
 import styled from "@emotion/native";
 import {theme} from "./src/theme/theme";
+import MovieScreen from "./src/screens/MovieScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -85,6 +86,11 @@ export default function App() {
                         <Stack.Screen
                             name="Home"
                             component={HomeScreen}
+                            options={{animationEnabled: true}}
+                        />
+                        <Stack.Screen
+                            name="Movie"
+                            component={MovieScreen}
                             options={{animationEnabled: true}}
                         />
                         <Stack.Screen
