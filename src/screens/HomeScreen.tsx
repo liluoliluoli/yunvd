@@ -320,7 +320,7 @@ export default function HomeScreen({route, navigation}) {
 
     const navigateToVideoDetails = (video) => {
         console.log('Navigating to video detail with video:', video.title);
-        navigation.navigate('VideoDetail', {video});
+        navigation.push('VideoDetail', {video});
     };
 
 
@@ -334,7 +334,7 @@ export default function HomeScreen({route, navigation}) {
                     descendingArrowContainerStyle={styles.topArrowContainer}
                     ascendingArrowContainerStyle={styles.bottomArrowContainer}
                 >
-                    <Header navigation={navigation}/>
+                    <Header/>
                     <TabBar
                         routes={TAB_ROUTES}
                         currentIndex={index}

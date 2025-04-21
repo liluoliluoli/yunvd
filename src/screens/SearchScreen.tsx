@@ -15,7 +15,7 @@ export default function SearchScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
     const [isLoadingMockData, setIsLoadingMockData] = useState(true);
     const [mockError, setMockError] = useState(null);
-    const [searchText, setSearchText] = useState(route.params.text);
+    const [keywordText, setKeywordText] = useState(route.params.keyword);
 
 
     const loadVideos = async () => {
@@ -121,7 +121,7 @@ export default function SearchScreen({route, navigation}) {
                     ascendingArrowContainerStyle={styles.bottomArrowContainer}
                 >
                     <View style={styles.searchHeader}>
-                        <Text style={styles.searchKeyword}>{searchText}</Text>
+                        <Text style={styles.searchKeyword}>{keywordText}</Text>
                         <View style={styles.divider}/>
                     </View>
                     <VideoList

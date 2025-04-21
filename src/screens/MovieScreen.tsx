@@ -334,7 +334,7 @@ export default function MovieScreen({route, navigation}) {
                     descendingArrowContainerStyle={styles.topArrowContainer}
                     ascendingArrowContainerStyle={styles.bottomArrowContainer}
                 >
-                    <Header navigation={navigation}/>
+                    <Header/>
                     <TabBar
                         routes={TAB_ROUTES}
                         currentIndex={index}

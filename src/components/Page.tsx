@@ -34,7 +34,7 @@ const SpatialNavigationKeyboardLocker = () => {
 export const Page = ({children}: Props) => {
     const isFocused = useIsFocused();
     const isActive = isFocused;
-
+    console.log("Page isActive:" + isActive)
     const onDirectionHandledWithoutMovement = useCallback(
         (movement: Direction) => {
         },

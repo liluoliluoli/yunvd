@@ -5,12 +5,11 @@ import {TextInput} from "./TextInput";
 import {Spacer} from "./Spacer";
 import {scaledPixels} from "../hooks/useScale";
 import {SpatialNavigationNode} from "react-tv-space-navigation";
+import {useNavigation} from "@react-navigation/native";
 
-export const Header = ({navigation}) => {
-    const onSearch = (text: string) => {
-        console.log(text);
-        navigation.navigate("Search", {text});
-    }
+export const Header = ({}) => {
+    const navigation = useNavigation<any>();
+
     const onUpdate = () => {
         console.log('onUpdate');
     }
@@ -36,9 +35,10 @@ export const Header = ({navigation}) => {
                     resizeMode="cover"
                 />
                 <View style={styles.searchContainer}>
-                    <TextInput placeholder='搜索' onEnterPress={onSearch}/>
+                    <TextInput placeholder='搜索'
+                               onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
                 </View>
-                <Button label="更新" onSelect={onUpdate}/>
+                <Button label="更新" onSelect={() => navigation.navigate('Search', {keyword: "sdsd"})}/>
                 <Spacer direction={"horizontal"} gap={'$6'}/>
                 <Button label="登录" onSelect={onLogin}/>
                 <Spacer direction={"horizontal"} gap={'$6'}/>

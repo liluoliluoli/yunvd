@@ -1,10 +1,11 @@
 import styled from '@emotion/native';
 import {SpatialNavigationNode} from 'react-tv-space-navigation';
 import {TextInput as RNTextInput} from 'react-native';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {Typography} from './Typography';
 import {Box} from './Box';
 import {theme} from "../theme/theme";
+import {useIsFocused} from "@react-navigation/native";
 
 /**
  * It works, but it's not perfect.
@@ -19,13 +20,21 @@ export const TextInput = ({placeholder, onEnterPress}: {
 }) => {
     const ref = useRef<RNTextInput>(null);
     const [inputText, setInputText] = useState('');
+    const [text, setText] = useState('');
+    const isFocused = useIsFocused();
 
-    const handleKeyPress = ({nativeEvent: {key}}) => {
-        if (key === 'Enter') {
-            onEnterPress(inputText);
-            ref.current?.blur();
+    useEffect(() => {
+        if (isFocused) {
+            setInputText('');
+            setText('');
         }
-    };
+    }, [isFocused]);
+
+    useEffect(() => {
+        if (text) {
+            onEnterPress(text);
+        }
+    }, [text]);
 
     return (
         <Box direction={"horizontal"}>
@@ -40,11 +49,10 @@ export const TextInput = ({placeholder, onEnterPress}: {
             >
                 {({isFocused}) => <StyledTextInput ref={ref}
                                                    isFocused={isFocused}
-                                                   placeholder={placeholder}
                                                    value={inputText}
+                                                   placeholder={placeholder}
                                                    onChangeText={setInputText}
-                                                   onKeyPress={handleKeyPress}
-                                                   onSubmitEditing={() => onEnterPress(inputText)}
+                                                   onSubmitEditing={() => setText(inputText)}
                                                    placeholderTextColor={'gray'}/>}
             </SpatialNavigationNode>
         </Box>
