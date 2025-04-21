@@ -1,31 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Animated} from 'react-native';
 import {
     SpatialNavigationFocusableView, SpatialNavigationNodeRef,
     SpatialNavigationView
 } from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
+import {useIsFocused} from '@react-navigation/native';
 
 interface TabBarProps {
-    routes: Array<{ key: string, title: string, screen: string, ref?: React.RefObject<SpatialNavigationNodeRef> }>;
-    initialIndex?: number;
+    routes: Array<{ key: string, title: string, screen: string }>;
     onTabPress: (index: number) => void;
     currentIndex: number;
+    randomNum?: number
 }
 
-export const TabBar = ({routes, initialIndex = 0, onTabPress, currentIndex}: TabBarProps) => {
+export const TabBar = ({routes, onTabPress, currentIndex}: TabBarProps) => {
+    const [index, setIndex] = useState(currentIndex)
     const tabRefs = React.useRef<Array<React.RefObject<SpatialNavigationNodeRef>>>([]);
-
-    // 初始化 refs
+    const isFocused = useIsFocused();
     React.useEffect(() => {
         tabRefs.current = routes.map(() => React.createRef());
     }, [routes]);
 
     React.useEffect(() => {
-        if (tabRefs.current[currentIndex]?.current) {
-            tabRefs.current[currentIndex].current?.focus();
+        if (tabRefs.current[index]?.current) {
+            console.log("focus==" + index);
+            tabRefs.current[index].current?.focus();
         }
-    }, [currentIndex]);
+    }, [tabRefs.current[index], isFocused]);
     return (
         <SpatialNavigationView style={styles.tabBarContainer} direction="horizontal">
             {routes.map((route, i) => (
@@ -33,22 +35,24 @@ export const TabBar = ({routes, initialIndex = 0, onTabPress, currentIndex}: Tab
                     key={route.key}
                     style={{flex: 1}}
                     onSelect={() => onTabPress(i)}
-                    ref={route.ref}
+                    ref={tabRefs.current[i]}
                 >
-                    {({isFocused, isRootActive}) => (
-                        <View style={[
-                            styles.tabItem,
-                            currentIndex === i && styles.activeTabItem,
-                            isFocused && isRootActive && styles.focusedTabItem
-                        ]}>
-                            <Animated.Text style={[
-                                styles.tabText,
-                                currentIndex === i && styles.activeTabText
+                    {({isFocused, isRootActive}) => {
+                        return (
+                            <View style={[
+                                styles.tabItem,
+                                index === i && styles.activeTabItem,
+                                isFocused && isRootActive && styles.focusedTabItem
                             ]}>
-                                {route.title}
-                            </Animated.Text>
-                        </View>
-                    )}
+                                <Animated.Text style={[
+                                    styles.tabText,
+                                    index === i && styles.activeTabText
+                                ]}>
+                                    {route.title}
+                                </Animated.Text>
+                            </View>
+                        )
+                    }}
                 </SpatialNavigationFocusableView>
             ))}
         </SpatialNavigationView>

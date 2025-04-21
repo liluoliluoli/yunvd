@@ -60,7 +60,7 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
     return (
         <View style={{flexDirection: 'row'}}>
             <SpatialNavigationView alignInGrid direction="vertical">
-                <DefaultFocus>{videosByRow.map(renderVideosByRow)}</DefaultFocus>
+                {videosByRow.map(renderVideosByRow)}
             </SpatialNavigationView>
         </View>
     );

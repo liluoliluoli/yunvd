@@ -14,12 +14,13 @@ import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 
 const HEADER_SIZE = scaledPixels(400)
-export default function MovieScreen({navigation}) {
+export default function MovieScreen({route, navigation}) {
     const [videos, setVideos] = useState<VideoItem[]>([]);
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
     const [isLoadingMockData, setIsLoadingMockData] = useState(true);
     const [mockError, setMockError] = useState(null);
     const [index, setIndex] = useState(1);
+
     const loadVideos = async () => {
         try {
             console.log("load videos")
@@ -343,8 +344,8 @@ export default function MovieScreen({navigation}) {
                     <TabBar
                         routes={TAB_ROUTES}
                         currentIndex={index}
-                        onTabPress={(i) => {
-                            navigation.navigate(TAB_ROUTES[i].screen);
+                        onTabPress={(index: number) => {
+                            navigation.navigate(TAB_ROUTES[index].screen);
                         }}
                     />
                     <SpatialNavigationView style={styles.filterRow} direction="horizontal">

@@ -13,13 +13,12 @@ import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 
 const HEADER_SIZE = scaledPixels(400)
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({route, navigation}) {
     const [videos, setVideos] = useState<VideoItem[]>([]);
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
     const [filteredVideos, setFilteredVideos] = useState<VideoItem[]>([]);
     const [isLoadingMockData, setIsLoadingMockData] = useState(true);
     const [mockError, setMockError] = useState(null);
-    const [index, setIndex] = useState(0);
     const loadVideos = async () => {
         try {
             console.log("load videos")
@@ -300,18 +299,18 @@ export default function HomeScreen({navigation}) {
             setIsLoadingMockData(false);
         }
     };
+    const [index, setIndex] = useState(0);
 
     useEffect(() => {
         try {
-            console.log('Initializing HomeScreen with mock data...');
             loadVideos();
         } catch (err) {
-            console.error('Error in HomeScreen initialization:', err);
             setMockError('Failed to initialize the screen. Please restart the app.');
         }
     }, []);
 
     useEffect(() => {
+
         setVideosByRow(chunk(videos, 5));
         console.log(`Loaded ${videos.length} videos successfully`);
     }, [videos]);
@@ -346,8 +345,8 @@ export default function HomeScreen({navigation}) {
                     <TabBar
                         routes={TAB_ROUTES}
                         currentIndex={index}
-                        onTabPress={(i) => {
-                            navigation.navigate(TAB_ROUTES[i].screen);
+                        onTabPress={(index: number) => {
+                            navigation.navigate(TAB_ROUTES[index].screen);
                         }}
                     />
                     <VideoList
