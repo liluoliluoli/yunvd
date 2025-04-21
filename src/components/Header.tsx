@@ -6,7 +6,27 @@ import {Spacer} from "./Spacer";
 import {scaledPixels} from "../hooks/useScale";
 import {SpatialNavigationNode} from "react-tv-space-navigation";
 
-export const Header = ({onSearch, onUpdate, onLogin, onDonate, onFavorite}) => {
+export const Header = ({navigation}) => {
+    const onSearch = (text: string) => {
+        console.log(text);
+        navigation.navigate("Search", {text});
+    }
+    const onUpdate = () => {
+        console.log('onUpdate');
+    }
+    const onLogin = () => {
+        console.log('onUpdate');
+    }
+    const onDonate = () => {
+        console.log('onUpdate');
+    }
+    const onFavorite = () => {
+        console.log('onUpdate');
+    }
+    const onSetting = () => {
+        console.log('onSetting');
+    }
+
     return (
         <SpatialNavigationNode orientation={'horizontal'}>
             <View style={styles.header}>
@@ -16,7 +36,7 @@ export const Header = ({onSearch, onUpdate, onLogin, onDonate, onFavorite}) => {
                     resizeMode="cover"
                 />
                 <View style={styles.searchContainer}>
-                    <TextInput placeholder='搜索'/>
+                    <TextInput placeholder='搜索' onEnterPress={onSearch}/>
                 </View>
                 <Button label="更新" onSelect={onUpdate}/>
                 <Spacer direction={"horizontal"} gap={'$6'}/>
@@ -25,6 +45,8 @@ export const Header = ({onSearch, onUpdate, onLogin, onDonate, onFavorite}) => {
                 <Button label="赞赏" onSelect={onDonate}/>
                 <Spacer direction={"horizontal"} gap={'$6'}/>
                 <Button label="收藏" onSelect={onFavorite}/>
+                <Spacer direction={"horizontal"} gap={'$6'}/>
+                <Button label="设置" onSelect={onSetting}/>
             </View>
         </SpatialNavigationNode>
     );

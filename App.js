@@ -19,6 +19,7 @@ import {SpatialNavigationDeviceTypeProvider} from "react-tv-space-navigation";
 import styled from "@emotion/native";
 import {theme} from "./src/theme/theme";
 import MovieScreen from "./src/screens/MovieScreen";
+import SearchScreen from "./src/screens/SearchScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -91,6 +92,11 @@ export default function App() {
                         <Stack.Screen
                             name="Movie"
                             component={MovieScreen}
+                            options={{animationEnabled: true}}
+                        />
+                        <Stack.Screen
+                            name="Search"
+                            component={SearchScreen}
                             options={{animationEnabled: true}}
                         />
                         <Stack.Screen

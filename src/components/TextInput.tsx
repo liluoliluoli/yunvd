@@ -1,7 +1,7 @@
 import styled from '@emotion/native';
 import {SpatialNavigationNode} from 'react-tv-space-navigation';
 import {TextInput as RNTextInput} from 'react-native';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import {Typography} from './Typography';
 import {Box} from './Box';
 import {theme} from "../theme/theme";
@@ -12,8 +12,20 @@ import {theme} from "../theme/theme";
  * focus is in a weird state where we keep listening to remote control arrow movements.
  * Ideally, we'd like to always remove the native focus when the keyboard is dismissed.
  */
-export const TextInput = ({placeholder}: { placeholder: string }) => {
+
+export const TextInput = ({placeholder, onEnterPress}: {
+    placeholder: string,
+    onEnterPress: (text: string) => void
+}) => {
     const ref = useRef<RNTextInput>(null);
+    const [inputText, setInputText] = useState('');
+
+    const handleKeyPress = ({nativeEvent: {key}}) => {
+        if (key === 'Enter') {
+            onEnterPress(inputText);
+            ref.current?.blur();
+        }
+    };
 
     return (
         <Box direction={"horizontal"}>
@@ -26,7 +38,13 @@ export const TextInput = ({placeholder}: { placeholder: string }) => {
                     ref?.current?.blur();
                 }}
             >
-                {({isFocused}) => <StyledTextInput ref={ref} isFocused={isFocused} placeholder={placeholder}
+                {({isFocused}) => <StyledTextInput ref={ref}
+                                                   isFocused={isFocused}
+                                                   placeholder={placeholder}
+                                                   value={inputText}
+                                                   onChangeText={setInputText}
+                                                   onKeyPress={handleKeyPress}
+                                                   onSubmitEditing={() => onEnterPress(inputText)}
                                                    placeholderTextColor={'gray'}/>}
             </SpatialNavigationNode>
         </Box>
@@ -40,4 +58,5 @@ const StyledTextInput = styled(RNTextInput)<{ isFocused: boolean }>(({isFocused}
     backgroundColor: theme.colors.background.mainHover,
     width: '100%',
     paddingLeft: theme.spacings.$4,
+    color: 'white',
 }));

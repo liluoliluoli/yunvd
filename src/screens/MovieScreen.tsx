@@ -334,13 +334,7 @@ export default function MovieScreen({route, navigation}) {
                     descendingArrowContainerStyle={styles.topArrowContainer}
                     ascendingArrowContainerStyle={styles.bottomArrowContainer}
                 >
-                    <Header
-                        onSearch={() => console.log("search")}
-                        onUpdate={() => console.log('更新!')}
-                        onLogin={() => console.log('登录!')}
-                        onDonate={() => console.log('赞赏!')}
-                        onFavorite={() => console.log('收藏!')}
-                    />
+                    <Header navigation={navigation}/>
                     <TabBar
                         routes={TAB_ROUTES}
                         currentIndex={index}
