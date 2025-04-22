@@ -8,16 +8,18 @@ export type TypographyProps = TextProps & {
     variant?: TypographyVariant;
     fontWeight?: FontWeight;
     children?: ReactNode;
+    hidden?: boolean;
 };
 
 export const Typography = ({
                                variant = 'body',
                                fontWeight = 'regular',
                                children,
+                               hidden = false,
                                ...textProps
                            }: TypographyProps) => {
     return (
-        <StyledText variant={variant} fontWeight={fontWeight} {...textProps}>
+        <StyledText variant={variant} fontWeight={fontWeight} hidden={hidden} {...textProps}>
             {children}
         </StyledText>
     );
@@ -26,8 +28,10 @@ export const Typography = ({
 const StyledText = styled.Text<{
     variant: TypographyVariant;
     fontWeight: FontWeight;
-}>(({variant, fontWeight}) => ({
+    hidden: boolean;
+}>(({variant, fontWeight, hidden}) => ({
     ...theme.typography[variant][fontWeight],
     color: 'white',
     flexWrap: 'wrap',
+    display: hidden ? 'none' : 'flex',
 }));

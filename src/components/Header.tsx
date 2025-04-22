@@ -1,18 +1,95 @@
-import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {View, Image, StyleSheet, Alert} from 'react-native';
 import {Button} from "./Button";
 import {TextInput} from "./TextInput";
 import {Spacer} from "./Spacer";
 import {scaledPixels} from "../hooks/useScale";
 import {SpatialNavigationNode} from "react-tv-space-navigation";
 import {useNavigation} from "@react-navigation/native";
+import * as UpdateAPK from "rn-update-apk";
+import {version} from '../../package.json'
+import {UpdateContext} from "./UpdateContext";
+import Toast from 'react-native-toast-message';
+import {Typography} from "./Typography";
+
 
 export const Header = ({}) => {
     const navigation = useNavigation<any>();
+    const [hasUpdate, setHasUpdate] = useState<boolean>(false);
+    const [currentVersion, setCurrentVersion] = useState<string>(version);
+    const {downloadProgress, setDownloadProgress} = useContext(UpdateContext);
+
+    useEffect(() => {
+        const updater = new UpdateAPK.UpdateAPK({
+            iosAppId: "1104809018",
+            apkVersionUrl: "https://raw.githubusercontent.com/mikehardy/react-native-update-apk/master/example/test-version.json",
+            apkVersionOptions: {
+                method: 'GET',
+                headers: {}
+            },
+            apkOptions: {
+                headers: {}
+            },
+            needUpdateApp: performUpdate => {
+                setHasUpdate(true);
+            },
+            onError: (err) => {
+                console.log("onError callback called", err);
+            }
+        });
+        const checkUpdate = () => {
+            console.log("checking for update");
+            updater.checkUpdate();
+
+        };
+        checkUpdate();
+    }, []);
 
     const onUpdate = () => {
-        console.log('onUpdate');
-    }
+        if (!hasUpdate) {
+            console.log("当前已是最新版本");
+            return;
+        }
+        const updater = new UpdateAPK.UpdateAPK({
+            iosAppId: "1104809018",
+            apkVersionUrl: "https://raw.githubusercontent.com/mikehardy/react-native-update-apk/master/example/test-version.json",
+            apkVersionOptions: {
+                method: 'GET',
+                headers: {}
+            },
+            apkOptions: {
+                headers: {}
+            },
+            fileProviderAuthority: "com.example",
+            needUpdateApp: performUpdate => {
+                Alert.alert(
+                    "Update Available",
+                    "New version released, do you want to update? ",
+                    [
+                        {
+                            text: "Cancel", onPress: () => {
+                            }
+                        },
+                        {text: "Update", onPress: () => performUpdate(true)}
+                    ]
+                );
+            },
+            downloadApkProgress: progress => {
+                console.log(`downloadApkProgress callback called - ${progress}%...`);
+                setDownloadProgress(Math.round(progress));
+            },
+            onError: (err) => {
+                console.log("onError callback called", err);
+            }
+        });
+        const checkUpdate = () => {
+            console.log("checking for update");
+            updater.checkUpdate();
+
+        };
+        checkUpdate();
+    };
+
     const onLogin = () => {
         console.log('onUpdate');
     }
@@ -38,7 +115,13 @@ export const Header = ({}) => {
                     <TextInput placeholder='搜索'
                                onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
                 </View>
-                <Button label="更新" onSelect={() => navigation.navigate('Search', {keyword: "sdsd"})}/>
+                <Button
+                    label={downloadProgress === 0 ? `更新` : `${downloadProgress}%`}
+                    onSelect={onUpdate}
+                    hidden={!hasUpdate}
+                />
+                <Typography variant="title"
+                            style={{textAlign: 'center'}} hidden={hasUpdate}>v{currentVersion}</Typography>
                 <Spacer direction={"horizontal"} gap={'$6'}/>
                 <Button label="登录" onSelect={onLogin}/>
                 <Spacer direction={"horizontal"} gap={'$6'}/>

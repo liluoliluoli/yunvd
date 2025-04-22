@@ -9,14 +9,15 @@ import {theme} from "../theme/theme";
 
 type ButtonProps = {
     label: string;
+    hidden?: boolean;
     onSelect?: () => void;
 };
 
-const ButtonContent = forwardRef<View, { label: string; isFocused: boolean }>((props, ref) => {
-    const {isFocused, label} = props;
+const ButtonContent = forwardRef<View, { label: string; isFocused: boolean; hidden: boolean }>((props, ref) => {
+    const {isFocused, label, hidden} = props;
     const anim = useFocusAnimation(isFocused);
     return (
-        <Container style={anim} isFocused={isFocused} ref={ref}>
+        <Container style={anim} isFocused={isFocused} hidden={hidden} ref={ref}>
             <ColoredTypography isFocused={isFocused}>{label}</ColoredTypography>
         </Container>
     );
@@ -24,22 +25,23 @@ const ButtonContent = forwardRef<View, { label: string; isFocused: boolean }>((p
 
 ButtonContent.displayName = 'ButtonContent';
 
-export const Button = ({label, onSelect}: ButtonProps) => {
+export const Button = ({label, onSelect, hidden}: ButtonProps) => {
     return (
         <SpatialNavigationFocusableView onSelect={onSelect}>
             {({isFocused, isRootActive}) => (
-                <ButtonContent label={label} isFocused={isFocused && isRootActive}/>
+                <ButtonContent label={label} isFocused={isFocused && isRootActive} hidden={hidden}/>
             )}
         </SpatialNavigationFocusableView>
     );
 };
 
-const Container = styled(Animated.View)<{ isFocused: boolean }>(({isFocused}) => ({
+const Container = styled(Animated.View)<{ isFocused: boolean; hidden: boolean }>(({isFocused, hidden}) => ({
     alignSelf: 'baseline',
     backgroundColor: isFocused ? 'white' : 'black',
     padding: theme.spacings.$4,
     borderRadius: scaledPixels(12),
     cursor: 'pointer',
+    display: hidden ? 'none' : 'flex',
 }));
 
 const ColoredTypography = styled(Typography)<{ isFocused: boolean }>(({isFocused}) => ({

@@ -11,6 +11,7 @@ import {TAB_ROUTES} from "../utils/ApiConstants";
 import {Header} from "../components/Header";
 import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
+import {UpdateProvider} from "../components/UpdateContext";
 
 const HEADER_SIZE = scaledPixels(400)
 export default function HomeScreen({route, navigation}) {
@@ -325,32 +326,33 @@ export default function HomeScreen({route, navigation}) {
 
 
     return (
-        <Page>
-            <SafeAreaView style={styles.container}>
-                <SpatialNavigationScrollView
-                    offsetFromStart={HEADER_SIZE + 20}
-                    descendingArrow={<TopArrow/>}
-                    ascendingArrow={<BottomArrow/>}
-                    descendingArrowContainerStyle={styles.topArrowContainer}
-                    ascendingArrowContainerStyle={styles.bottomArrowContainer}
-                >
-                    <Header/>
-                    <TabBar
-                        routes={TAB_ROUTES}
-                        currentIndex={index}
-                        onTabPress={(index: number) => {
-                            navigation.navigate(TAB_ROUTES[index].screen);
-                        }}
-                    />
-                    <VideoList
-                        videosByRow={videosByRow}
-                        onVideoPress={navigateToVideoDetails}
-                    />
+        <UpdateProvider>
+            <Page>
+                <SafeAreaView style={styles.container}>
+                    <SpatialNavigationScrollView
+                        offsetFromStart={HEADER_SIZE + 20}
+                        descendingArrow={<TopArrow/>}
+                        ascendingArrow={<BottomArrow/>}
+                        descendingArrowContainerStyle={styles.topArrowContainer}
+                        ascendingArrowContainerStyle={styles.bottomArrowContainer}
+                    >
+                        <Header/>
+                        <TabBar
+                            routes={TAB_ROUTES}
+                            currentIndex={index}
+                            onTabPress={(index: number) => {
+                                navigation.navigate(TAB_ROUTES[index].screen);
+                            }}
+                        />
+                        <VideoList
+                            videosByRow={videosByRow}
+                            onVideoPress={navigateToVideoDetails}
+                        />
 
-                </SpatialNavigationScrollView>
-            </SafeAreaView>
-        </Page>
-
+                    </SpatialNavigationScrollView>
+                </SafeAreaView>
+            </Page>
+        </UpdateProvider>
     );
 }
 
