@@ -7,7 +7,10 @@ import {GoBackConfiguration} from '../remote-control/GoBackConfiguration';
 import Toast from 'react-native-toast-message';
 
 
-type Props = { children: ReactNode };
+type Props = {
+    children: ReactNode;
+    loadMore?: () => void;
+};
 
 /**
  * Locks/unlocks the navigator when the native keyboard is shown/hidden.
@@ -33,12 +36,14 @@ const SpatialNavigationKeyboardLocker = () => {
     return null;
 };
 
-export const Page = ({children}: Props) => {
+export const Page = ({children, loadMore}: Props) => {
     const isFocused = useIsFocused();
     const isActive = isFocused;
-    console.log("Page isActive:" + isActive)
     const onDirectionHandledWithoutMovement = useCallback(
         (movement: Direction) => {
+            if (movement === 'down' && loadMore) {
+                loadMore();
+            }
         },
         [],
     );

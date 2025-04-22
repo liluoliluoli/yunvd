@@ -13,7 +13,17 @@ import {
     Platform
 } from 'react-native';
 import useAuthViewModel from '../viewModels/AuthViewModel';
+import {Page} from "../components/Page";
+import {BottomArrow, TopArrow} from "../components/Arrows";
+import {
+    SpatialNavigationFocusableView,
+    SpatialNavigationNode,
+    SpatialNavigationScrollView
+} from "react-tv-space-navigation";
+import {scaledPixels} from "../hooks/useScale";
+import {Episode} from "../components/Episode";
 
+const HEADER_SIZE = scaledPixels(400);
 const ProfileScreen = ({navigation}) => {
     const {user, isLoading, logout} = useAuthViewModel();
     const [stats, setStats] = useState({
@@ -51,60 +61,51 @@ const ProfileScreen = ({navigation}) => {
     }
 
     return (
-        <SafeAreaView style={styles.safeAreaContainer}>
-            <StatusBar barStyle="dark-content" backgroundColor="#fff"/>
-            <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                <View style={styles.header}>
-                    <TouchableOpacity
-                        style={styles.backButton}
-                        onPress={() => navigation.goBack()}
-                    >
-                        <Text style={styles.backButtonText}>←</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.profileSection}>
-                    <Image
-                        source={require('../../assets/icon.png')}
-                        style={styles.profileImage}
-                    />
-                    <Text style={styles.userName}>{user?.name || 'User'}</Text>
-                    <Text style={styles.userEmail}>{user?.email || 'user@example.com'}</Text>
-                </View>
-
-                <View style={styles.statsSection}>
-                    <View style={styles.statItem}>
-                        <Text style={styles.statNumber}>{stats.videosWatched}</Text>
-                        <Text style={styles.statLabel}>今天已观看</Text>
+        <Page>
+            <View style={styles.safeAreaContainer}>
+                <SpatialNavigationScrollView
+                    offsetFromStart={HEADER_SIZE + 20}
+                    descendingArrow={<TopArrow/>}
+                    ascendingArrow={<BottomArrow/>}
+                    descendingArrowContainerStyle={styles.topArrowContainer}
+                    ascendingArrowContainerStyle={styles.bottomArrowContainer}
+                >
+                    <View style={styles.profileSection}>
+                        <Image
+                            source={require('../../assets/icon.png')}
+                            style={styles.profileImage}
+                        />
+                        <Text style={styles.userName}>{user?.name || 'User'}</Text>
+                        <Text style={styles.userEmail}>{user?.email || 'user@example.com'}</Text>
                     </View>
-                    <View style={styles.statDivider}/>
-                    <View style={styles.statItem}>
-                        <Text style={styles.statNumber}>{stats.favoritesCount}</Text>
-                        <Text style={styles.statLabel}>收藏</Text>
+
+                    <View style={styles.statsSection}>
+                        <View style={styles.statItem}>
+                            <Text style={styles.statNumber}>{stats.videosWatched}</Text>
+                            <Text style={styles.statLabel}>今天已观看</Text>
+                        </View>
+                        <View style={styles.statDivider}/>
+                        <View style={styles.statItem}>
+                            <Text style={styles.statNumber}>{stats.favoritesCount}</Text>
+                            <Text style={styles.statLabel}>收藏</Text>
+                        </View>
                     </View>
-                </View>
-
-                <View style={styles.optionsSection}>
-                    <TouchableOpacity style={styles.optionItem}>
-                        <Text style={styles.optionText}>设置</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={[styles.optionItem, styles.logoutOption]}
-                        onPress={handleLogout}
-                    >
-                        <Text style={styles.logoutText}>登出</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+                    <View style={styles.optionsSection}>
+                        <Episode key={1} id={1} label='设置'
+                                 onSelect={() => console.log("")}/>
+                        <Episode key={2} id={2} label='登出'
+                                 onSelect={handleLogout}/>
+                    </View>
+                </SpatialNavigationScrollView>
+            </View>
+        </Page>
     );
 };
 
 const styles = StyleSheet.create({
     safeAreaContainer: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#111111',
     },
     container: {
         flex: 1,
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     },
     loadingText: {
         marginTop: 10,
-        color: '#666',
+        color: '#fff',
     },
     header: {
         flexDirection: 'row',
@@ -156,11 +157,11 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         marginBottom: 5,
-        color: '#333',
+        color: '#fff',
     },
     userEmail: {
         fontSize: 16,
-        color: '#666',
+        color: '#fff',
     },
     statsSection: {
         flexDirection: 'row',
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
     },
     optionText: {
         fontSize: 16,
-        color: '#333',
+        color: '#fff',
     },
     logoutOption: {
         marginTop: 15,
@@ -207,8 +208,26 @@ const styles = StyleSheet.create({
     },
     logoutText: {
         fontSize: 16,
-        color: '#f44336',
+        color: '#fff',
         fontWeight: '500',
+    },
+    topArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: -15,
+        left: 0,
+    },
+    bottomArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: -15,
+        left: 0,
     },
 });
 

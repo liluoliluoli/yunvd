@@ -24,7 +24,6 @@ export const TabBar = ({routes, onTabPress, currentIndex}: TabBarProps) => {
 
     React.useEffect(() => {
         if (tabRefs.current[index]?.current && isFocused) {
-            console.log("focus==" + index);
             tabRefs.current[index].current?.focus();
         }
     }, [tabRefs.current[index], isFocused]);

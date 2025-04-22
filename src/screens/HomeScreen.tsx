@@ -20,9 +20,9 @@ export default function HomeScreen({route, navigation}) {
     const [filteredVideos, setFilteredVideos] = useState<VideoItem[]>([]);
     const [isLoadingMockData, setIsLoadingMockData] = useState(true);
     const [mockError, setMockError] = useState(null);
+    const [down, setDown] = useState(false);
     const loadVideos = async () => {
         try {
-            console.log("load videos")
             setIsLoadingMockData(true);
             setMockError(null);
             const mockVideos: VideoItem[] = [
@@ -311,23 +311,59 @@ export default function HomeScreen({route, navigation}) {
     }, []);
 
     useEffect(() => {
+        console.log(`videos total ${videos.length}`);
         setVideosByRow(chunk(videos, 5));
-        console.log(`Loaded ${videos.length} videos successfully`);
     }, [videos]);
 
     useEffect(() => {
-        console.log(`Loaded ${videosByRow.length} videosByRow successfully`);
-    }, [videosByRow]);
+        const moreData: VideoItem[] = [
+            {
+                id: 11,
+                title: 'Big Buck Bunny',
+                description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
+                thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
+                duration: '9:56',
+                views: 10482,
+                likes: 849,
+                directors: ['Blender Foundation'],
+                actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
+                genres: ['喜剧', '动作'],
+                region: 'US',
+                year: '2025',
+                isFavorite: false,
+                rating: 4.8,
+                publishDate: '2008-05-20',
+                episodeCount: 20,
+                episodes: [{
+                    id: 1,
+                    episode: "第1集",
+                    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                }, {
+                    id: 2,
+                    episode: "第2集",
+                    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                }],
+            }
+        ]
+        if (down) {
+            setVideos([...videos, ...moreData]);
+            setDown(false)
+        }
+    }, [down]);
 
     const navigateToVideoDetails = (video) => {
         console.log('Navigating to video detail with video:', video.title);
         navigation.push('VideoDetail', {video});
     };
 
+    const loadMore = () => {
+        setDown(true)
+    }
+
 
     return (
         <UpdateProvider>
-            <Page>
+            <Page loadMore={loadMore}>
                 <SafeAreaView style={styles.container}>
                     <SpatialNavigationScrollView
                         offsetFromStart={HEADER_SIZE + 20}

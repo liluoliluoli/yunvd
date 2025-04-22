@@ -20,7 +20,6 @@ export default function SearchScreen({route, navigation}) {
 
     const loadVideos = async () => {
         try {
-            console.log("load videos")
             setIsLoadingMockData(true);
             setMockError(null);
             const mockVideos: VideoItem[] = [

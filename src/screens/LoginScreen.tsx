@@ -6,7 +6,6 @@ import {
     StyleSheet,
     Image,
     Alert,
-    TextInput,
     KeyboardAvoidingView,
     Platform,
     ScrollView,
@@ -14,7 +13,14 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useAuthViewModel from '../viewModels/AuthViewModel';
+import {Page} from "../components/Page";
+import {SpatialNavigationNode, SpatialNavigationScrollView} from "react-tv-space-navigation";
+import {BottomArrow, TopArrow} from "../components/Arrows";
+import {scaledPixels} from "../hooks/useScale";
+import {TextInput} from "../components/TextInput";
+import {Button} from "../components/Button";
 
+const HEADER_SIZE = scaledPixels(400);
 export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -58,132 +64,80 @@ export default function LoginScreen({navigation}) {
     };
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={styles.container}
-        >
-            <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
-                <Image source={require('../../assets/icon.png')} style={styles.logo} resizeMode="contain"/>
-                <Text style={styles.title}>Welcome to yunvd</Text>
+        <Page>
+            <View style={styles.container}>
+                <SpatialNavigationScrollView
+                    offsetFromStart={HEADER_SIZE + 20}
+                    descendingArrow={<TopArrow/>}
+                    ascendingArrow={<BottomArrow/>}
+                    descendingArrowContainerStyle={styles.topArrowContainer}
+                    ascendingArrowContainerStyle={styles.bottomArrowContainer}
+                    contentContainerStyle={{flex: 1, justifyContent: 'center'}}
+                >
+                    <SpatialNavigationNode orientation={'vertical'}>
+                        <View style={styles.formContainer}>
+                            <Image source={require('../../assets/icon.png')} style={styles.logo} resizeMode="contain"/>
+                            <Text style={styles.text}>Welcome to yunvd</Text>
+                            <View style={styles.inputContainer}>
+                                <TextInput placeholder='Email' onEnterPress={setEmail}/>
+                                <TextInput placeholder='Password' onEnterPress={setPassword}/>
+                            </View>
 
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Email"
-                        placeholderTextColor="#999"
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                    />
+                            <Button label="登录" onSelect={handleLogin}/>
 
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Password"
-                        placeholderTextColor="#999"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                        onKeyPress={handleKeyPress}
-                        returnKeyType="go"
-                        onSubmitEditing={isFormValid ? handleLogin : null}
-                    />
-
-                    <TouchableOpacity style={styles.forgotPasswordContainer}
-                                      onPress={() => navigation.navigate('ForgotPassword')}>
-                        <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={[styles.loginButton, {opacity: isFormValid ? 1 : 0.5}]}
-                        onPress={handleLogin}
-                        disabled={!isFormValid || isLoading}
-                    >
-                        {isLoading ? <ActivityIndicator color="#fff"/> : <Text style={styles.buttonText}>Log In</Text>}
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.signupContainer}>
-                    <Text style={styles.signupText}>Don't have an account?</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                        <Text style={styles.signupLink}>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-        </KeyboardAvoidingView>
+                            <Text style={styles.text}>Don't have an account?</Text>
+                            <Button label="注册" onSelect={() => navigation.navigate('SignUp')}/>
+                        </View>
+                    </SpatialNavigationNode>
+                </SpatialNavigationScrollView>
+            </View>
+        </Page>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-    },
-    scrollContainer: {
-        flexGrow: 1,
+        backgroundColor: '#111111',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
-    },
-    logo: {
-        width: 120,
-        height: 120,
-        marginBottom: 20,
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 30,
-        color: '#333',
     },
     inputContainer: {
-        width: '100%',
+        width: scaledPixels(800),
+        borderRadius: 8,
+        backgroundColor: '#f0f0f0',
+        borderWidth: 0,
+    },
+    logo: {
+        width: 80,
+        height: 80,
         marginBottom: 20,
     },
-    input: {
-        width: '100%',
-        height: 50,
-        backgroundColor: '#f5f5f5',
-        borderRadius: 5,
-        paddingHorizontal: 15,
-        marginBottom: 15,
-        fontSize: 16,
-        borderWidth: 1,
-        borderColor: '#e0e0e0',
+    text: {
+        color: 'white',
+        marginBottom: 30,
+        fontSize: 20,
     },
-    forgotPasswordContainer: {
-        alignSelf: 'flex-end',
-        marginBottom: 20,
-    },
-    forgotPasswordText: {
-        color: '#f44336',
-        fontSize: 14,
-    },
-    loginButton: {
-        backgroundColor: '#f44336',
-        padding: 15,
-        borderRadius: 5,
+    formContainer: {
         width: '100%',
         alignItems: 'center',
+    },
+    topArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
         justifyContent: 'center',
+        top: -15,
+        left: 0,
     },
-    buttonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: '600',
-    },
-    signupContainer: {
-        flexDirection: 'row',
-        marginTop: 20,
-    },
-    signupText: {
-        color: '#666',
-        fontSize: 14,
-        marginRight: 5,
-    },
-    signupLink: {
-        color: '#f44336',
-        fontSize: 14,
-        fontWeight: '600',
+    bottomArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: -15,
+        left: 0,
     },
 });

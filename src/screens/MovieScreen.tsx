@@ -24,7 +24,6 @@ export default function MovieScreen({route, navigation}) {
 
     const loadVideos = async () => {
         try {
-            console.log("load videos")
             setIsLoadingMockData(true);
             setMockError(null);
             const mockVideos: VideoItem[] = [

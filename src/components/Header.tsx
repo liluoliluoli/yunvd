@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {View, Image, StyleSheet, Alert} from 'react-native';
+import {View, Image, StyleSheet, Alert, Modal, TouchableOpacity} from 'react-native';
 import {Button} from "./Button";
 import {TextInput} from "./TextInput";
 import {Spacer} from "./Spacer";
@@ -11,6 +11,7 @@ import {version} from '../../package.json'
 import {UpdateContext} from "./UpdateContext";
 import Toast from 'react-native-toast-message';
 import {Typography} from "./Typography";
+import useAuthViewModel from "../viewModels/AuthViewModel";
 
 
 export const Header = ({}) => {
@@ -18,6 +19,9 @@ export const Header = ({}) => {
     const [hasUpdate, setHasUpdate] = useState<boolean>(false);
     const [currentVersion, setCurrentVersion] = useState<string>(version);
     const {downloadProgress, setDownloadProgress} = useContext(UpdateContext);
+    const {user, isLoading, logout} = useAuthViewModel();
+    const [showDonateModal, setShowDonateModal] = useState(false);
+
 
     useEffect(() => {
         const updater = new UpdateAPK.UpdateAPK({
@@ -90,11 +94,11 @@ export const Header = ({}) => {
         checkUpdate();
     };
 
-    const onLogin = () => {
-        console.log('onUpdate');
+    const onProfile = () => {
+        navigation.navigate('Profile');
     }
     const onDonate = () => {
-        console.log('onUpdate');
+        setShowDonateModal(true);
     }
     const onFavorite = () => {
         console.log('onUpdate');
@@ -123,9 +127,28 @@ export const Header = ({}) => {
                 <Typography variant="title"
                             style={{textAlign: 'center'}} hidden={hasUpdate}>v{currentVersion}</Typography>
                 <Spacer direction={"horizontal"} gap={'$6'}/>
-                <Button label="登录" onSelect={onLogin}/>
+                <Button label={user?.name + '(' + 180 + ')'} onSelect={onProfile}/>
                 <Spacer direction={"horizontal"} gap={'$6'}/>
                 <Button label="赞赏" onSelect={onDonate}/>
+                <Modal
+                    visible={showDonateModal}
+                    transparent={true}
+                    animationType="fade"
+                    onRequestClose={() => setShowDonateModal(false)}
+                >
+                    <TouchableOpacity
+                        style={styles.modalOverlay}
+                        activeOpacity={1}
+                        onPress={() => setShowDonateModal(false)}
+                    >
+                        <Image
+                            source={require('../../assets/icon.png')} // 替换为你的赞赏图片路径
+                            style={styles.donateImage}
+                            resizeMode="contain"
+                        />
+                    </TouchableOpacity>
+                </Modal>
+
                 <Spacer direction={"horizontal"} gap={'$6'}/>
                 <Button label="收藏" onSelect={onFavorite}/>
                 <Spacer direction={"horizontal"} gap={'$6'}/>
@@ -155,5 +178,15 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         backgroundColor: '#f0f0f0',
         borderWidth: 0,
+    },
+    modalOverlay: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.7)',
+    },
+    donateImage: {
+        width: '80%',
+        height: '60%',
     },
 });
