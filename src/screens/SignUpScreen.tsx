@@ -1,225 +1,163 @@
-import React, { useState } from 'react';
-import { 
-  View, 
-  Text, 
-  TouchableOpacity, 
-  StyleSheet, 
-  Image, 
-  Alert,
-  TextInput,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  ActivityIndicator
+import React, {useState} from 'react';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    Image,
+    Alert,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    ActivityIndicator
 } from 'react-native';
 import useAuthViewModel from '../viewModels/AuthViewModel';
+import {SpatialNavigationNode, SpatialNavigationScrollView} from "react-tv-space-navigation";
+import {BottomArrow, TopArrow} from "../components/Arrows";
+import {Typography} from "../components/Typography";
+import {Spacer} from "../components/Spacer";
+import {scaledPixels} from "../hooks/useScale";
+import {Button} from "../components/Button";
+import {Page} from "../components/Page";
+import {TextInput} from "../components/TextInput";
 
-export default function SignUpScreen({ navigation }) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  
-  // Use auth view model
-  const { 
-    register, 
-    isLoading, 
-    error, 
-    clearError 
-  } = useAuthViewModel();
+const HEADER_SIZE = scaledPixels(400);
+export default function SignUpScreen({navigation}) {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignUp = async () => {
-    // Clear any previous errors
-    clearError();
-    
-    // Basic validation
-    if (!name.trim()) {
-      Alert.alert('Error', 'Name is required');
-      return;
-    }
-    if (!email.trim()) {
-      Alert.alert('Error', 'Email is required');
-      return;
-    }
-    if (!password.trim()) {
-      Alert.alert('Error', 'Password is required');
-      return;
-    }
-    if (password !== confirmPassword) {
-      Alert.alert('Error', 'Passwords do not match');
-      return;
-    }
+    // Use auth view model
+    const {
+        register,
+        isLoading,
+        error,
+        clearError
+    } = useAuthViewModel();
 
-    // Call register from view model
-    const success = await register({
-      name,
-      email,
-      password
-    });
-    
-    if (success) {
-      Alert.alert(
-        'Success',
-        'Your account has been created successfully!',
-        [
-          {
-            text: 'OK',
-            onPress: () => navigation.navigate('Home')
-          }
-        ]
-      );
-    } else if (error) {
-      Alert.alert('Registration Failed', error);
-    }
-  };
+    const handleSignUp = async () => {
+        // Clear any previous errors
+        clearError();
 
-  return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <TouchableOpacity 
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={styles.backButtonText}>← Back</Text>
-        </TouchableOpacity>
+        // Basic validation
+        if (!name.trim()) {
+            Alert.alert('Error', 'Name is required');
+            return;
+        }
+        if (!email.trim()) {
+            Alert.alert('Error', 'Email is required');
+            return;
+        }
+        if (!password.trim()) {
+            Alert.alert('Error', 'Password is required');
+            return;
+        }
+        if (password !== confirmPassword) {
+            Alert.alert('Error', 'Passwords do not match');
+            return;
+        }
 
-        <Text style={styles.title}>Create Account</Text>
-        
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Full Name"
-            placeholderTextColor="#999"
-            value={name}
-            onChangeText={setName}
-            editable={!isLoading}
-          />
-          
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#999"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            editable={!isLoading}
-          />
-          
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#999"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            editable={!isLoading}
-          />
-          
-          <TextInput
-            style={styles.input}
-            placeholder="Confirm Password"
-            placeholderTextColor="#999"
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            secureTextEntry
-            editable={!isLoading}
-          />
-          
-          <TouchableOpacity
-            style={styles.signUpButton}
-            onPress={handleSignUp}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <ActivityIndicator color="white" size="small" />
-            ) : (
-              <Text style={styles.buttonText}>Sign Up</Text>
-            )}
-          </TouchableOpacity>
-        </View>
-        
-        <View style={styles.loginContainer}>
-          <Text style={styles.loginText}>Already have an account?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Text style={styles.loginLink}>Log In</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
-  );
+        // Call register from view model
+        const success = await register({
+            name,
+            email,
+            password
+        });
+
+        if (success) {
+            Alert.alert(
+                'Success',
+                'Your account has been created successfully!',
+                [
+                    {
+                        text: 'OK',
+                        onPress: () => navigation.navigate('Home')
+                    }
+                ]
+            );
+        } else if (error) {
+            Alert.alert('Registration Failed', error);
+        }
+    };
+
+    return (
+        <Page>
+            <View style={styles.container}>
+                <SpatialNavigationScrollView
+                    offsetFromStart={HEADER_SIZE + 20}
+                    descendingArrow={<TopArrow/>}
+                    ascendingArrow={<BottomArrow/>}
+                    descendingArrowContainerStyle={styles.topArrowContainer}
+                    ascendingArrowContainerStyle={styles.bottomArrowContainer}
+                    contentContainerStyle={{flex: 1, justifyContent: 'center'}}
+                >
+                    <SpatialNavigationNode orientation={'vertical'}>
+                        <View style={styles.formContainer}>
+                            <Typography variant="title">Create Account</Typography>
+                            <Spacer direction={"vertical"} gap={'$6'}/>
+                            <View style={styles.inputContainer}>
+                                <TextInput placeholder='Username' onEnterPress={setName} height={scaledPixels(100)}/>
+                                <Spacer direction={"vertical"} gap={'$6'}/>
+                                <TextInput placeholder='Email' onEnterPress={setEmail} height={scaledPixels(100)}/>
+                                <Spacer direction={"vertical"} gap={'$6'}/>
+                                <TextInput placeholder='Password' onEnterPress={setPassword}
+                                           height={scaledPixels(100)} isPassword={true}/>
+                                <Spacer direction={"vertical"} gap={'$6'}/>
+                                <TextInput placeholder='ConfirmPassword' onEnterPress={setConfirmPassword}
+                                           height={scaledPixels(100)} isPassword={true}/>
+                            </View>
+                            <Spacer direction={"vertical"} gap={'$6'}/>
+                            <Button label="注册" onSelect={handleSignUp}/>
+                            <Spacer direction={"vertical"} gap={'$6'}/>
+                            <View style={{flexDirection: 'row'}}>
+                                <Text style={styles.text}>Already have an account?</Text>
+                                <Spacer direction={"horizontal"} gap={'$6'}/>
+                                <Button label="登录" onSelect={() => navigation.navigate('Login')}/>
+                            </View>
+                        </View>
+                    </SpatialNavigationNode>
+                </SpatialNavigationScrollView>
+            </View>
+        </Page>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  backButton: {
-    position: 'absolute',
-    top: 40,
-    left: 20,
-    zIndex: 1,
-  },
-  backButtonText: {
-    fontSize: 16,
-    color: '#f44336',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 30,
-    color: '#333',
-  },
-  inputContainer: {
-    width: '100%',
-    marginBottom: 20,
-  },
-  input: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#f5f5f5',
-    borderRadius: 5,
-    paddingHorizontal: 15,
-    marginBottom: 15,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
-  },
-  signUpButton: {
-    backgroundColor: '#f44336',
-    padding: 15,
-    borderRadius: 5,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  loginContainer: {
-    flexDirection: 'row',
-    marginTop: 20,
-  },
-  loginText: {
-    color: '#666',
-    fontSize: 14,
-    marginRight: 5,
-  },
-  loginLink: {
-    color: '#f44336',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-}); 
+    container: {
+        flex: 1,
+        backgroundColor: '#1a1a1a',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    formContainer: {
+        width: '100%',
+        alignItems: 'center',
+    },
+    inputContainer: {
+        width: scaledPixels(800),
+    },
+    text: {
+        color: 'white',
+        marginBottom: 30,
+        fontSize: 20,
+    },
+    topArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: -15,
+        left: 0,
+    },
+    bottomArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: -15,
+        left: 0,
+    },
+});

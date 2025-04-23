@@ -19,6 +19,8 @@ import {BottomArrow, TopArrow} from "../components/Arrows";
 import {scaledPixels} from "../hooks/useScale";
 import {TextInput} from "../components/TextInput";
 import {Button} from "../components/Button";
+import {Typography} from "../components/Typography";
+import {Spacer} from "../components/Spacer";
 
 const HEADER_SIZE = scaledPixels(400);
 export default function LoginScreen({navigation}) {
@@ -77,16 +79,22 @@ export default function LoginScreen({navigation}) {
                     <SpatialNavigationNode orientation={'vertical'}>
                         <View style={styles.formContainer}>
                             <Image source={require('../../assets/icon.png')} style={styles.logo} resizeMode="contain"/>
-                            <Text style={styles.text}>Welcome to yunvd</Text>
+                            <Typography variant="title">Welcome to yunvd</Typography>
+                            <Spacer direction={"vertical"} gap={'$6'}/>
                             <View style={styles.inputContainer}>
-                                <TextInput placeholder='Email' onEnterPress={setEmail}/>
-                                <TextInput placeholder='Password' onEnterPress={setPassword}/>
+                                <TextInput placeholder='Email' onEnterPress={setEmail} height={scaledPixels(100)}/>
+                                <Spacer direction={"vertical"} gap={'$6'}/>
+                                <TextInput placeholder='Password' onEnterPress={setPassword}
+                                           height={scaledPixels(100)} isPassword={true}/>
                             </View>
-
+                            <Spacer direction={"vertical"} gap={'$6'}/>
                             <Button label="登录" onSelect={handleLogin}/>
-
-                            <Text style={styles.text}>Don't have an account?</Text>
-                            <Button label="注册" onSelect={() => navigation.navigate('SignUp')}/>
+                            <Spacer direction={"vertical"} gap={'$6'}/>
+                            <View style={{flexDirection: 'row'}}>
+                                <Text style={styles.text}>Don't have an account?</Text>
+                                <Spacer direction={"horizontal"} gap={'$6'}/>
+                                <Button label="注册" onSelect={() => navigation.navigate('SignUp')}/>
+                            </View>
                         </View>
                     </SpatialNavigationNode>
                 </SpatialNavigationScrollView>
@@ -98,20 +106,16 @@ export default function LoginScreen({navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#111111',
+        backgroundColor: '#1a1a1a',
         justifyContent: 'center',
         alignItems: 'center',
     },
     inputContainer: {
         width: scaledPixels(800),
-        borderRadius: 8,
-        backgroundColor: '#f0f0f0',
-        borderWidth: 0,
     },
     logo: {
         width: 80,
         height: 80,
-        marginBottom: 20,
     },
     text: {
         color: 'white',

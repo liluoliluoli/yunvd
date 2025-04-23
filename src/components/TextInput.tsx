@@ -6,6 +6,7 @@ import {Typography} from './Typography';
 import {Box} from './Box';
 import {theme} from "../theme/theme";
 import {useIsFocused} from "@react-navigation/native";
+import {scaledPixels} from "../hooks/useScale";
 
 /**
  * It works, but it's not perfect.
@@ -14,9 +15,11 @@ import {useIsFocused} from "@react-navigation/native";
  * Ideally, we'd like to always remove the native focus when the keyboard is dismissed.
  */
 
-export const TextInput = ({placeholder, onEnterPress}: {
+export const TextInput = ({placeholder, onEnterPress, height, isPassword = false}: {
     placeholder: string,
-    onEnterPress: (text: string) => void
+    onEnterPress: (text: string) => void,
+    height: number,
+    isPassword?: boolean
 }) => {
     const ref = useRef<RNTextInput>(null);
     const [inputText, setInputText] = useState('');
@@ -53,13 +56,15 @@ export const TextInput = ({placeholder, onEnterPress}: {
                                                    placeholder={placeholder}
                                                    onChangeText={setInputText}
                                                    onSubmitEditing={() => setText(inputText)}
-                                                   placeholderTextColor={'gray'}/>}
+                                                   placeholderTextColor={'gray'}
+                                                   height={height}
+                                                   secureTextEntry={isPassword}/>}
             </SpatialNavigationNode>
         </Box>
     );
 };
 
-const StyledTextInput = styled(RNTextInput)<{ isFocused: boolean }>(({isFocused}) => ({
+const StyledTextInput = styled(RNTextInput)<{ isFocused: boolean, height: number }>(({isFocused, height}) => ({
     borderColor: isFocused ? 'white' : 'black',
     borderWidth: 2,
     borderRadius: 8,
@@ -67,4 +72,5 @@ const StyledTextInput = styled(RNTextInput)<{ isFocused: boolean }>(({isFocused}
     width: '100%',
     paddingLeft: theme.spacings.$4,
     color: 'white',
+    height: height,
 }));
