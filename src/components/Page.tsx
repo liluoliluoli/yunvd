@@ -4,7 +4,6 @@ import React, {ReactNode, useCallback, useEffect} from 'react';
 import {SpatialNavigationRoot, useLockSpatialNavigation} from 'react-tv-space-navigation';
 import {Keyboard} from 'react-native';
 import {GoBackConfiguration} from '../remote-control/GoBackConfiguration';
-import Toast from 'react-native-toast-message';
 
 
 type Props = {
@@ -53,7 +52,6 @@ export const Page = ({children, loadMore}: Props) => {
             isActive={isActive}
             onDirectionHandledWithoutMovement={onDirectionHandledWithoutMovement}
         >
-            <Toast/>
             <GoBackConfiguration/>
             <SpatialNavigationKeyboardLocker/>
             {children}

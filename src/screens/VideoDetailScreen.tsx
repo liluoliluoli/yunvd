@@ -61,7 +61,7 @@ const VideoDetailScreen = ({route, navigation}) => {
 
     const navigateToVideoPlayer = (episode) => {
         console.log('Navigating to video player with video:', episode.label);
-        navigation.navigate('VideoPlayer', {episode});
+        navigation.push('VideoPlayer', {episode});
     };
 
     return (

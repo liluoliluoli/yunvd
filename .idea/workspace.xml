@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Tabbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tabbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/VideoList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/SettingScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SettingScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -353,7 +349,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745373602114</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="init">
+      <option name="closed" value="true" />
+      <created>1745378769369</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1745378769369</updated>
+    </task>
+    <task id="LOCAL-00026" summary="init">
+      <option name="closed" value="true" />
+      <created>1745378913699</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1745378913699</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
