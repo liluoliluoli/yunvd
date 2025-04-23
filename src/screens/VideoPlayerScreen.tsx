@@ -187,32 +187,9 @@ const VideoPlayerScreen = ({route, navigation}) => {
     // useEffect(() => {
     //     const handleKeyDown = (key: SupportedKeys) => {
     //         switch (key) {
-    //             case SupportedKeys.Enter:
-    //                 togglePausePlay();
-    //                 break;
-    //             case SupportedKeys.Right:
-    //                 console.log("Right")
-    //                 seekForward();
-    //                 break;
-    //             case SupportedKeys.LongRight:
-    //                 console.log("LongRight")
-    //                 handleLongPress('right');
-    //                 break;
-    //             case SupportedKeys.Left:
-    //                 console.log("Left")
-    //                 seekBackward();
-    //                 break;
-    //             case SupportedKeys.LongLeft:
-    //                 console.log("LongLeft")
-    //                 handleLongPress('left');
-    //                 break;
-    //             case SupportedKeys.Down:
-    //                 console.log("LongRight")
-    //                 break;
     //             case SupportedKeys.Back:
     //                 console.log("Back")
-    //                 handleBack();
-    //                 break;
+    //                 navigation.goBack();
     //         }
     //     };
     //
