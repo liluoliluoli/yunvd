@@ -28,33 +28,36 @@ export const TabBar = ({routes, onTabPress, currentIndex}: TabBarProps) => {
         }
     }, [tabRefs.current[index], isFocused]);
     return (
-        <SpatialNavigationView style={styles.tabBarContainer} direction="horizontal">
-            {routes.map((route, i) => (
-                <SpatialNavigationFocusableView
-                    key={route.key}
-                    style={{flex: 1}}
-                    onSelect={() => onTabPress(i)}
-                    ref={tabRefs.current[i]}
-                >
-                    {({isFocused, isRootActive}) => {
-                        return (
-                            <View style={[
-                                styles.tabItem,
-                                index === i && styles.activeTabItem,
-                                isFocused && isRootActive && styles.focusedTabItem
-                            ]}>
-                                <Animated.Text style={[
-                                    styles.tabText,
-                                    index === i && styles.activeTabText
+        <View>
+            <SpatialNavigationView style={styles.tabBarContainer} direction="horizontal">
+                {routes.map((route, i) => (
+                    <SpatialNavigationFocusableView
+                        key={route.key}
+                        style={{flex: 1}}
+                        onSelect={() => onTabPress(i)}
+                        ref={tabRefs.current[i]}
+                    >
+                        {({isFocused, isRootActive}) => {
+                            return (
+                                <View style={[
+                                    styles.tabItem,
+                                    index === i && styles.activeTabItem,
+                                    isFocused && isRootActive && styles.focusedTabItem
                                 ]}>
-                                    {route.title}
-                                </Animated.Text>
-                            </View>
-                        )
-                    }}
-                </SpatialNavigationFocusableView>
-            ))}
-        </SpatialNavigationView>
+                                    <Animated.Text style={[
+                                        styles.tabText,
+                                        index === i && styles.activeTabText
+                                    ]}>
+                                        {route.title}
+                                    </Animated.Text>
+                                </View>
+                            )
+                        }}
+                    </SpatialNavigationFocusableView>
+                ))}
+            </SpatialNavigationView>
+            <View style={{height: 3}}></View>
+        </View>
     );
 };
 
@@ -72,10 +75,19 @@ const styles = StyleSheet.create({
         borderBottomColor: 'transparent',
     },
     activeTabItem: {
-        backgroundColor: 'green',
+        backgroundColor: 'black',
+        borderTopWidth: 1,
+        borderRightWidth: 1,
+        borderLeftWidth: 1,
+        borderBottomWidth: 1,
+        borderTopColor: 'gray',
+        borderRightColor: 'gray',
+        borderLeftColor: 'gray',
+        borderBottomColor: 'gray',
     },
     focusedTabItem: {
-        borderColor: 'white',
+        borderBottomColor: 'white',
+        borderBottomWidth: 2,
     },
     tabText: {
         color: 'white',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View, Text, Dimensions} from 'react-native';
 import {
     DefaultFocus,
     SpatialNavigationFocusableView,
@@ -13,12 +13,12 @@ interface VideoListProps {
     onVideoPress: (video: VideoItem) => void;
 }
 
+const {width} = Dimensions.get('window');
 export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
     const renderVideoItem = ({item, index}: { item: VideoItem, index: number }) => (
-        <SpatialNavigationFocusableView onSelect={() => onVideoPress(item)} key={index}>
+        <SpatialNavigationFocusableView onSelect={() => onVideoPress(item)} key={index} style={{width: width / 5}}>
             {({isFocused, isRootActive}) => (
                 <View style={{
-                    width: scaledPixels(382),
                     borderWidth: 2,
                     borderRadius: 4,
                     backgroundColor: '#fff',
@@ -52,7 +52,9 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
     );
 
     const renderVideosByRow = (videos: VideoItem[], index: number) => (
-        <SpatialNavigationView style={{height: scaledPixels(520), width: '100%'}} direction="horizontal" key={index}>
+        <SpatialNavigationView
+            style={{height: scaledPixels(520), width: '100%', justifyContent: 'space-between', alignItems: 'center'}}
+            direction="horizontal" key={index}>
             {videos.map((item, index) => renderVideoItem({item, index}))}
         </SpatialNavigationView>
     );

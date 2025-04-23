@@ -15,8 +15,6 @@ export default function FavoriteScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
     const [isLoadingMockData, setIsLoadingMockData] = useState(true);
     const [mockError, setMockError] = useState(null);
-    const [keywordText, setKeywordText] = useState(route.params.keyword);
-
 
     const loadVideos = async () => {
         try {

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Button} from "../components/Button";
 import {BottomArrow, TopArrow} from "../components/Arrows";
 import {SpatialNavigationScrollView, SpatialNavigationView} from "react-tv-space-navigation";
@@ -8,11 +8,12 @@ import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
 import VideoItem from "../models/VideoItem";
-import {SORT_OPTIONS, TAB_ROUTES} from "../utils/ApiConstants";
+import {GENRE_OPTIONS, REGION_OPTIONS, SORT_OPTIONS, TAB_ROUTES, YEAR_OPTIONS} from "../utils/ApiConstants";
 import {Header} from "../components/Header";
 import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 import {UpdateProvider} from "../components/UpdateContext";
+import {Spacer} from "../components/Spacer";
 
 const HEADER_SIZE = scaledPixels(400)
 export default function MovieScreen({route, navigation}) {
@@ -344,10 +345,38 @@ export default function MovieScreen({route, navigation}) {
                             }}
                         />
                         <SpatialNavigationView style={styles.filterRow} direction="horizontal">
-                            {SORT_OPTIONS.map(option => (
-                                <Button label={option} key={option} onSelect={() => console.log("sort onSelect")}/>
+                            {SORT_OPTIONS.map((option, key) => (
+                                <React.Fragment key={key}>
+                                    <Spacer direction="horizontal" gap={'$4'}/>
+                                    <Button label={option} onSelect={() => console.log("sort onSelect")}/>
+                                </React.Fragment>
                             ))}
                         </SpatialNavigationView>
+                        <SpatialNavigationView style={styles.filterRow} direction="horizontal">
+                            {GENRE_OPTIONS.map((option, key) => (
+                                <React.Fragment key={key}>
+                                    <Spacer direction="horizontal" gap={'$4'}/>
+                                    <Button label={option} onSelect={() => console.log("sort onSelect")}/>
+                                </React.Fragment>
+                            ))}
+                        </SpatialNavigationView>
+                        <SpatialNavigationView style={styles.filterRow} direction="horizontal">
+                            {REGION_OPTIONS.map((option, key) => (
+                                <React.Fragment key={key}>
+                                    <Spacer direction="horizontal" gap={'$4'}/>
+                                    <Button label={option} onSelect={() => console.log("sort onSelect")}/>
+                                </React.Fragment>
+                            ))}
+                        </SpatialNavigationView>
+                        <SpatialNavigationView style={styles.filterRow} direction="horizontal">
+                            {YEAR_OPTIONS.map((option, key) => (
+                                <React.Fragment key={key}>
+                                    <Spacer direction="horizontal" gap={'$4'}/>
+                                    <Button label={option} onSelect={() => console.log("sort onSelect")}/>
+                                </React.Fragment>
+                            ))}
+                        </SpatialNavigationView>
+
                         <VideoList
                             videosByRow={videosByRow}
                             onVideoPress={navigateToVideoDetails}
@@ -368,7 +397,7 @@ const styles = StyleSheet.create({
     filterRow: {
         flexDirection: 'row',
         flexWrap: 'nowrap',
-        marginBottom: 4,
+        marginBottom: 1,
         overflow: 'scroll'
     },
     topArrowContainer: {

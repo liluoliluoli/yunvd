@@ -109,50 +109,53 @@ export const Header = ({}) => {
 
     return (
         <SpatialNavigationNode orientation={'horizontal'}>
-            <View style={styles.header}>
-                <Image
-                    source={require('../../assets/icon.png')}
-                    style={styles.logo}
-                    resizeMode="cover"
-                />
-                <View style={styles.searchContainer}>
-                    <TextInput placeholder='搜索'
-                               onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
-                </View>
-                <Button
-                    label={downloadProgress === 0 ? `更新` : `${downloadProgress}%`}
-                    onSelect={onUpdate}
-                    hidden={!hasUpdate}
-                />
-                <Typography variant="title"
-                            style={{textAlign: 'center'}} hidden={hasUpdate}>v{currentVersion}</Typography>
-                <Spacer direction={"horizontal"} gap={'$6'}/>
-                <Button label={user?.name + '(' + 180 + ')'} onSelect={onProfile}/>
-                <Spacer direction={"horizontal"} gap={'$6'}/>
-                <Button label="赞赏" onSelect={onDonate}/>
-                <Modal
-                    visible={showDonateModal}
-                    transparent={true}
-                    animationType="fade"
-                    onRequestClose={() => setShowDonateModal(false)}
-                >
-                    <TouchableOpacity
-                        style={styles.modalOverlay}
-                        activeOpacity={1}
-                        onPress={() => setShowDonateModal(false)}
+            <View>
+                <View style={styles.header}>
+                    <Image
+                        source={require('../../assets/icon.png')}
+                        style={styles.logo}
+                        resizeMode="cover"
+                    />
+                    <View style={styles.searchContainer}>
+                        <TextInput placeholder='搜索'
+                                   onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
+                    </View>
+                    <Button
+                        label={downloadProgress === 0 ? `更新` : `${downloadProgress}%`}
+                        onSelect={onUpdate}
+                        hidden={!hasUpdate}
+                    />
+                    <Typography variant="title"
+                                style={{textAlign: 'center'}} hidden={hasUpdate}>v{currentVersion}</Typography>
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
+                    <Button label={user?.name + '(' + 180 + ')'} onSelect={onProfile}/>
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
+                    <Button label="赞赏" onSelect={onDonate}/>
+                    <Modal
+                        visible={showDonateModal}
+                        transparent={true}
+                        animationType="fade"
+                        onRequestClose={() => setShowDonateModal(false)}
                     >
-                        <Image
-                            source={require('../../assets/icon.png')} // 替换为你的赞赏图片路径
-                            style={styles.donateImage}
-                            resizeMode="contain"
-                        />
-                    </TouchableOpacity>
-                </Modal>
+                        <TouchableOpacity
+                            style={styles.modalOverlay}
+                            activeOpacity={1}
+                            onPress={() => setShowDonateModal(false)}
+                        >
+                            <Image
+                                source={require('../../assets/icon.png')} // 替换为你的赞赏图片路径
+                                style={styles.donateImage}
+                                resizeMode="contain"
+                            />
+                        </TouchableOpacity>
+                    </Modal>
 
-                <Spacer direction={"horizontal"} gap={'$6'}/>
-                <Button label="收藏" onSelect={onFavorite}/>
-                <Spacer direction={"horizontal"} gap={'$6'}/>
-                <Button label="设置" onSelect={onSetting}/>
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
+                    <Button label="收藏" onSelect={onFavorite}/>
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
+                    <Button label="设置" onSelect={onSetting}/>
+                </View>
+                <View style={styles.divider}/>
             </View>
         </SpatialNavigationNode>
     );
@@ -162,13 +165,13 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 12,
-        backgroundColor: 'gray',
+        padding: 3,
+        backgroundColor: 'black',
         width: '100%',
     },
     logo: {
-        width: 40,
-        height: 40,
+        width: 30,
+        height: 30,
     },
     searchContainer: {
         width: scaledPixels(500),
@@ -188,5 +191,10 @@ const styles = StyleSheet.create({
     donateImage: {
         width: '80%',
         height: '60%',
+    },
+    divider: {
+        height: 0.5,
+        backgroundColor: 'white',
+        width: '100%',
     },
 });
