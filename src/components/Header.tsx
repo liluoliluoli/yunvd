@@ -110,11 +110,12 @@ export const Header = ({}) => {
         <SpatialNavigationNode orientation={'horizontal'}>
             <View>
                 <View style={styles.header}>
-                    <Image
-                        source={require('../../assets/icon.png')}
-                        style={styles.logo}
-                        resizeMode="cover"
-                    />
+                    <Spacer direction={"horizontal"} gap={'$2'}/>
+                    <Typography variant="title"
+                                style={{textAlign: 'center'}}>YunVd</Typography>
+                    <Spacer direction={"horizontal"} gap={'$2'}/>
+                    <Typography variant="body"
+                                style={{textAlign: 'center'}}>(v{currentVersion})</Typography>
                     <View style={styles.searchContainer}>
                         <TextInput placeholder='搜索'
                                    onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
         height: '60%',
     },
     divider: {
-        height: 0.5,
+        height: 0.3,
         backgroundColor: 'white',
         width: '100%',
     },
