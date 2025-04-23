@@ -1,49 +1,86 @@
-import mitt from 'mitt';
+import { SupportedKeys } from './SupportedKeys';
 import KeyEvent from 'react-native-keyevent';
-import {SupportedKeys} from './SupportedKeys';
-import {RemoteControlManagerInterface} from './RemoteControlManager.interface';
+import { RemoteControlManagerInterface } from './RemoteControlManager.interface';
+import CustomEventEmitter from './CustomEventEmitter';
 
-const KEY_CODE_MAPPING: Record<number, SupportedKeys> = {
-    21: SupportedKeys.Left,
-    22: SupportedKeys.Right,
-    20: SupportedKeys.Down,
-    19: SupportedKeys.Up,
-    66: SupportedKeys.Enter,
-    23: SupportedKeys.Enter,
-    67: SupportedKeys.Back,
-};
+const LONG_PRESS_DURATION = 500;
 
 class RemoteControlManager implements RemoteControlManagerInterface {
-    private eventEmitter = mitt<{ keyDown: SupportedKeys }>();
+  constructor() {
+    KeyEvent.onKeyDownListener(this.handleKeyDown);
+    KeyEvent.onKeyUpListener(this.handleKeyUp);
+  }
 
-    constructor() {
-        KeyEvent.onKeyDownListener(this.handleKeyDown);
+  private eventEmitter = new CustomEventEmitter<{ keyDown: SupportedKeys }>();
+
+  private isEnterKeyDownPressed = false;
+  private longEnterTimeout: NodeJS.Timeout | null = null;
+
+  private handleLongEnter = () => {
+    this.longEnterTimeout = setTimeout(() => {
+      this.eventEmitter.emit('keyDown', SupportedKeys.LongEnter);
+      this.longEnterTimeout = null;
+    }, LONG_PRESS_DURATION);
+  };
+
+  private handleKeyDown = (keyEvent: { keyCode: number }) => {
+    const mappedKey = {
+      21: SupportedKeys.Left,
+      22: SupportedKeys.Right,
+      20: SupportedKeys.Down,
+      19: SupportedKeys.Up,
+      66: SupportedKeys.Enter,
+      23: SupportedKeys.Enter,
+      67: SupportedKeys.Back,
+      4: SupportedKeys.Back,
+    }[keyEvent.keyCode];
+
+    if (!mappedKey) {
+      return;
     }
 
-    private handleKeyDown = (keyEvent: { keyCode: number }): void => {
-        const mappedKey = KEY_CODE_MAPPING[keyEvent.keyCode];
-        if (mappedKey) {
-            this.eventEmitter.emit('keyDown', mappedKey);
-        }
-    };
+    if (mappedKey === SupportedKeys.Enter) {
+      if (!this.isEnterKeyDownPressed) {
+        this.isEnterKeyDownPressed = true;
+        this.handleLongEnter();
+      }
+      return;
+    }
 
-    addKeydownListener = (listener: (event: SupportedKeys) => void): ((event: SupportedKeys) => void) => {
-        this.eventEmitter.on('keyDown', listener);
-        return listener;
-    };
+    this.eventEmitter.emit('keyDown', mappedKey);
+  };
 
-    removeKeydownListener = (listener: (event: SupportedKeys) => void): void => {
-        this.eventEmitter.off('keyDown', listener);
-    };
+  private handleKeyUp = (keyEvent: { keyCode: number }) => {
+    const mappedKey = {
+      66: SupportedKeys.Enter,
+      23: SupportedKeys.Enter,
+    }[keyEvent.keyCode];
 
-    emitKeyDown = (key: SupportedKeys): void => {
-        this.eventEmitter.emit('keyDown', key);
-    };
+    if (!mappedKey) {
+      return;
+    }
 
-    cleanup = (): void => {
-        KeyEvent.removeKeyDownListener();
-    };
+    if (mappedKey === SupportedKeys.Enter) {
+      this.isEnterKeyDownPressed = false;
+      if (this.longEnterTimeout) {
+        clearTimeout(this.longEnterTimeout);
+        this.eventEmitter.emit('keyDown', mappedKey);
+      }
+    }
+  };
+
+  addKeydownListener = (listener: (event: SupportedKeys) => boolean) => {
+    this.eventEmitter.on('keyDown', listener);
+    return listener;
+  };
+
+  removeKeydownListener = (listener: (event: SupportedKeys) => boolean) => {
+    this.eventEmitter.off('keyDown', listener);
+  };
+
+  emitKeyDown = (key: SupportedKeys) => {
+    this.eventEmitter.emit('keyDown', key);
+  };
 }
 
-console.log("prepare export instance")
 export default new RemoteControlManager();

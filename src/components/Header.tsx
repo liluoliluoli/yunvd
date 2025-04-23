@@ -9,7 +9,6 @@ import {useNavigation} from "@react-navigation/native";
 import * as UpdateAPK from "rn-update-apk";
 import {version} from '../../package.json'
 import {UpdateContext} from "./UpdateContext";
-import Toast from 'react-native-toast-message';
 import {Typography} from "./Typography";
 import useAuthViewModel from "../viewModels/AuthViewModel";
 
