@@ -44,12 +44,13 @@ export default function ProfileScreen({route, navigation}) {
     };
 
     const handleLogout = async () => {
-        const success = await logout();
-        if (success) {
-            navigation.navigate('Login');
-        } else {
-            Alert.alert('Error', 'Failed to logout. Please try again.');
-        }
+        // const success = await logout();
+        // if (success) {
+        //     navigation.navigate('Login');
+        // } else {
+        //     Alert.alert('Error', 'Failed to logout. Please try again.');
+        // }
+        navigation.navigate('Login');
     };
 
     if (isLoading) {

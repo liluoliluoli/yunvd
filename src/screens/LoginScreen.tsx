@@ -78,7 +78,8 @@ export default function LoginScreen({navigation}) {
                 >
                     <SpatialNavigationNode orientation={'vertical'}>
                         <View style={styles.formContainer}>
-                            <Image source={require('../../assets/icon.png')} style={styles.logo} resizeMode="contain"/>
+                            <Image source={require('../../assets/icon.png')} style={styles.logo}
+                                   resizeMode="contain"/>
                             <Typography variant="title">Welcome to yunvd</Typography>
                             <Spacer direction={"vertical"} gap={'$6'}/>
                             <View style={styles.inputContainer}>

@@ -5,10 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
+      <change afterPath="$PROJECT_DIR$/ios/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/.xcode.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Podfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Podfile.properties.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd.xcodeproj/xcshareddata/xcschemes/yunvd.xcscheme" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/AppDelegate.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/AppDelegate.mm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Images.xcassets/AppIcon.appiconset/App-Icon-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Images.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Images.xcassets/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Images.xcassets/SplashScreenBackground.colorset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Images.xcassets/SplashScreenLogo.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Images.xcassets/SplashScreenLogo.imageset/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Images.xcassets/SplashScreenLogo.imageset/image@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Images.xcassets/SplashScreenLogo.imageset/image@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/PrivacyInfo.xcprivacy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/SplashScreen.storyboard" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/Supporting/Expo.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/main.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/noop-file.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/yunvd-Bridging-Header.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/yunvd/yunvd.entitlements" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TextInput.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/SignUpScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SignUpScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/ProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ProfileScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,8 +155,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.android" />
-        <item itemvalue="npm.web" />
         <item itemvalue="npm.ios" />
+        <item itemvalue="npm.web" />
         <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
@@ -430,7 +455,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745395648172</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="init">
+      <option name="closed" value="true" />
+      <created>1745397669623</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1745397669623</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
