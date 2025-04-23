@@ -24,7 +24,7 @@ import {scaledPixels} from "../hooks/useScale";
 import {Episode} from "../components/Episode";
 
 const HEADER_SIZE = scaledPixels(400);
-export default function ProfileScreen({route, navigation}) {
+export default function SettingScreen({route, navigation}) {
     const {user, isLoading, logout} = useAuthViewModel();
     const [stats, setStats] = useState({
         videosWatched: 0,
@@ -230,3 +230,4 @@ const styles = StyleSheet.create({
         left: 0,
     },
 });
+

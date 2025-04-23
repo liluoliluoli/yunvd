@@ -101,10 +101,10 @@ export const Header = ({}) => {
         setShowDonateModal(true);
     }
     const onFavorite = () => {
-        console.log('onUpdate');
+        navigation.navigate('Favorite');
     }
     const onSetting = () => {
-        console.log('onSetting');
+        navigation.navigate('Setting');
     }
 
     return (

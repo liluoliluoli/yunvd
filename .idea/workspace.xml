@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/components/Option.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/SettingScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Tabbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tabbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/ProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ProfileScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/SearchScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SearchScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +65,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "jsx.switch.disabled": "true",
-    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/components",
+    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/screens",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,8 +82,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/screens" />
+      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/hooks" />
       <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/assets" />
@@ -340,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745308491622</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="init">
+      <option name="closed" value="true" />
+      <created>1745318227533</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1745318227533</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

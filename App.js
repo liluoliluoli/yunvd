@@ -20,6 +20,8 @@ import styled from "@emotion/native";
 import {theme} from "./src/theme/theme";
 import MovieScreen from "./src/screens/MovieScreen";
 import SearchScreen from "./src/screens/SearchScreen";
+import FavoriteScreen from "./src/screens/FavoriteScreen";
+import SettingScreen from "./src/screens/SettingScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -66,7 +68,6 @@ export default function App() {
                         screenOptions={{headerShown: false}}
                         initialRouteName={isAuthenticated ? 'Home' : 'Login'}
                     >
-                        {/* Auth Screens */}
                         <Stack.Screen
                             name="Login"
                             component={LoginScreen}
@@ -77,13 +78,6 @@ export default function App() {
                             component={SignUpScreen}
                             options={{animationEnabled: true}}
                         />
-                        <Stack.Screen
-                            name="ForgotPassword"
-                            component={ForgotPasswordScreen}
-                            options={{animationEnabled: true}}
-                        />
-
-                        {/* App Screens */}
                         <Stack.Screen
                             name="Home"
                             component={HomeScreen}
@@ -100,8 +94,18 @@ export default function App() {
                             options={{animationEnabled: true}}
                         />
                         <Stack.Screen
+                            name="Favorite"
+                            component={FavoriteScreen}
+                            options={{animationEnabled: true}}
+                        />
+                        <Stack.Screen
                             name="Profile"
                             component={ProfileScreen}
+                            options={{animationEnabled: true}}
+                        />
+                        <Stack.Screen
+                            name="Setting"
+                            component={SettingScreen}
                             options={{animationEnabled: true}}
                         />
                         <Stack.Screen
