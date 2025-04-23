@@ -41,11 +41,7 @@
     "react-native": "npm:react-native-tvos@0.76.3-0",
     "react-native-auto-carousel": "^1.1.0",
     "react-native-fs": "^2.20.0",
-    "react-native-fullscreen-chz": "^4.0.13",
-    "react-native-gesture-handler": "~2.20.2",
     "react-native-keyevent": "^0.3.2",
-    "react-native-linear-gradient": "^2.8.3",
-    "react-native-pager-view": "6.5.1",
     "react-native-pixel-perfect": "^1.0.2",
     "react-native-reanimated": "~3.16.1",
     "react-native-responsive-fontsize": "^0.5.1",
@@ -54,19 +50,17 @@
     "react-native-svg": "^15.11.2",
     "react-native-vector-icons": "^10.2.0",
     "react-native-video": "^6.13.0",
-    "react-native-vlc-media-player-view": "1.1.1",
-    "react-native-volume-manager": "1.10.0",
     "react-native-web": "^0.20.0",
     "react-test-renderer": "^18.3.1",
     "react-tv-space-navigation": "^5.1.1",
-    "rn-update-apk": "^5.0.0",
-    "typescript": "^5.6.2"
+    "rn-update-apk": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@react-native-tvos/config-tv": "^0.0.4",
     "babel-plugin-module-resolver": "^5.0.0",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "typescript": "^5.6.2"
   },
   "private": true,
   "expo": {
