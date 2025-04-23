@@ -392,7 +392,7 @@ export default function MovieScreen({route, navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#111111',
+        backgroundColor: '#1a1a1a',
     },
     filterRow: {
         flexDirection: 'row',

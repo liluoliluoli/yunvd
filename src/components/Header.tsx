@@ -63,7 +63,7 @@ export const Header = ({}) => {
             apkOptions: {
                 headers: {}
             },
-            fileProviderAuthority: "com.example",
+            fileProviderAuthority: "com.yun.yunvd",
             needUpdateApp: performUpdate => {
                 Alert.alert(
                     "Update Available",
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 3,
-        backgroundColor: 'black',
+        backgroundColor: '#1a1a1a',
         width: '100%',
     },
     logo: {
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         height: 40,
         borderRadius: 8,
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#1a1a1a',
         borderWidth: 0,
     },
     modalOverlay: {

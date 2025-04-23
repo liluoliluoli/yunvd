@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     tabBarContainer: {
         flexDirection: 'row',
         height: scaledPixels(100),
-        backgroundColor: 'black',
+        backgroundColor: '#1a1a1a',
     },
     tabItem: {
         flex: 1,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'transparent',
     },
     activeTabItem: {
-        backgroundColor: 'black',
+        backgroundColor: '#1a1a1a',
         borderTopWidth: 1,
         borderRightWidth: 1,
         borderLeftWidth: 1,

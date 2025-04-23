@@ -8,6 +8,7 @@ import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
 import VideoItem from "../models/VideoItem";
 import {VideoList} from "../components/VideoList";
+import {Spacer} from "../components/Spacer";
 
 const HEADER_SIZE = scaledPixels(400)
 export default function FavoriteScreen({route, navigation}) {
@@ -119,6 +120,7 @@ export default function FavoriteScreen({route, navigation}) {
                 >
                     <View style={styles.header}>
                         <Text style={styles.favoriteCount}>收藏数：10</Text>
+                        <Spacer direction={"vertical"} gap={'$2'}/>
                         <View style={styles.divider}/>
                     </View>
                     <VideoList
@@ -135,7 +137,7 @@ export default function FavoriteScreen({route, navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#111111',
+        backgroundColor: '#1a1a1a',
     },
     filterRow: {
         flexDirection: 'row',
@@ -180,8 +182,7 @@ const styles = StyleSheet.create({
         right: -theme.spacings.$8,
     },
     header: {
-        paddingHorizontal: theme.spacings.$4,
-        marginBottom: theme.spacings.$4,
+        marginBottom: theme.spacings.$2,
     },
     favoriteCount: {
         color: 'white',
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
         marginBottom: theme.spacings.$2,
     },
     divider: {
-        height: 1,
+        height: 0.5,
         backgroundColor: 'white',
         width: '100%',
     },

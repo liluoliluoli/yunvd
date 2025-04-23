@@ -4,17 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="remove vlc dependency">
-      <change afterPath="$PROJECT_DIR$/src/remote-control/CustomEventEmitter.ts" afterDir="false" />
+    <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Episode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Episode.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configureRemoteControl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configureRemoteControl.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/remote-control/RemoteControlManager.android.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/remote-control/RemoteControlManager.android.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/remote-control/RemoteControlManager.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/remote-control/RemoteControlManager.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/remote-control/RemoteControlManager.ios.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/remote-control/RemoteControlManager.ios.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/remote-control/RemoteControlManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/remote-control/RemoteControlManager.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/remote-control/SupportedKeys.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/remote-control/SupportedKeys.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Tabbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tabbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/ProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ProfileScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/SettingScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SettingScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -412,7 +412,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745392647146</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="init">
+      <option name="closed" value="true" />
+      <created>1745393154747</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1745393154747</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,9 +445,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="init" />
     <MESSAGE value="remove vlc dependency" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove vlc dependency" />
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

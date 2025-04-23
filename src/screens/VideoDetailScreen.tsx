@@ -155,12 +155,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#000',
+        backgroundColor: '#1a1a1a',
         padding: 10,
     },
     favorite: {
         flex: 1,
-        backgroundColor: '#333',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,
@@ -168,7 +167,6 @@ const styles = StyleSheet.create({
     },
     continue: {
         flex: 1,
-        backgroundColor: '#2196F3',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,

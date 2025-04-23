@@ -395,7 +395,7 @@ export default function HomeScreen({route, navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#111111',
+        backgroundColor: '#1a1a1a',
     },
     topArrowContainer: {
         width: '100%',

@@ -29,7 +29,6 @@ export default function ProfileScreen({route, navigation}) {
     const [stats, setStats] = useState({
         videosWatched: 0,
         favoritesCount: 0,
-        commentsCount: 0
     });
 
     useEffect(() => {
@@ -37,9 +36,12 @@ export default function ProfileScreen({route, navigation}) {
         setStats({
             videosWatched: 42,
             favoritesCount: 15,
-            commentsCount: 8
         });
     }, []);
+
+    const handleSetting = async () => {
+        navigation.navigate('Setting');
+    };
 
     const handleLogout = async () => {
         const success = await logout();
@@ -62,7 +64,7 @@ export default function ProfileScreen({route, navigation}) {
 
     return (
         <Page>
-            <View style={styles.safeAreaContainer}>
+            <View style={styles.container}>
                 <SpatialNavigationScrollView
                     offsetFromStart={HEADER_SIZE + 20}
                     descendingArrow={<TopArrow/>}
@@ -75,7 +77,6 @@ export default function ProfileScreen({route, navigation}) {
                             source={require('../../assets/icon.png')}
                             style={styles.profileImage}
                         />
-                        <Text style={styles.userName}>{user?.name || 'User'}</Text>
                         <Text style={styles.userEmail}>{user?.email || 'user@example.com'}</Text>
                     </View>
 
@@ -84,7 +85,6 @@ export default function ProfileScreen({route, navigation}) {
                             <Text style={styles.statNumber}>{stats.videosWatched}</Text>
                             <Text style={styles.statLabel}>今天已观看</Text>
                         </View>
-                        <View style={styles.statDivider}/>
                         <View style={styles.statItem}>
                             <Text style={styles.statNumber}>{stats.favoritesCount}</Text>
                             <Text style={styles.statLabel}>收藏</Text>
@@ -92,7 +92,7 @@ export default function ProfileScreen({route, navigation}) {
                     </View>
                     <View style={styles.optionsSection}>
                         <Episode key={1} id={1} label='设置'
-                                 onSelect={() => console.log("")}/>
+                                 onSelect={handleSetting}/>
                         <Episode key={2} id={2} label='登出'
                                  onSelect={handleLogout}/>
                     </View>
@@ -103,15 +103,9 @@ export default function ProfileScreen({route, navigation}) {
 };
 
 const styles = StyleSheet.create({
-    safeAreaContainer: {
-        flex: 1,
-        backgroundColor: '#111111',
-    },
     container: {
         flex: 1,
-    },
-    contentContainer: {
-        paddingBottom: 30,
+        backgroundColor: '#1a1a1a',
     },
     loadingContainer: {
         flex: 1,
@@ -129,18 +123,6 @@ const styles = StyleSheet.create({
         padding: 15,
         borderBottomWidth: 1,
         borderBottomColor: '#e0e0e0',
-    },
-    backButton: {
-        marginRight: 15,
-    },
-    backButtonText: {
-        fontSize: 16,
-        color: '#f44336',
-    },
-    headerTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#333',
     },
     profileSection: {
         alignItems: 'center',
@@ -184,10 +166,6 @@ const styles = StyleSheet.create({
     statLabel: {
         fontSize: 14,
         color: '#666',
-    },
-    statDivider: {
-        width: 1,
-        backgroundColor: '#e0e0e0',
     },
     optionsSection: {
         marginHorizontal: 15,

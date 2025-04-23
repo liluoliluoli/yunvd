@@ -44,7 +44,7 @@ export default function SettingScreen({route, navigation}) {
 
     return (
         <Page>
-            <View style={styles.safeAreaContainer}>
+            <View style={styles.container}>
                 <SpatialNavigationScrollView
                     offsetFromStart={HEADER_SIZE + 20}
                     descendingArrow={<TopArrow/>}
@@ -66,12 +66,9 @@ export default function SettingScreen({route, navigation}) {
 };
 
 const styles = StyleSheet.create({
-    safeAreaContainer: {
-        flex: 1,
-        backgroundColor: '#111111',
-    },
     container: {
         flex: 1,
+        backgroundColor: '#1a1a1a',
     },
     loadingContainer: {
         flex: 1,
