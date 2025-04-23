@@ -9,7 +9,8 @@
     "web": "EXPO_NO_CLIENT_ENV_VARS=1 expo start --web",
     "build:web": "expo export -p web",
     "test:types": "tsc",
-    "prebuild": "EXPO_TV=1 expo prebuild --clean"
+    "prebuild": "EXPO_TV=1 expo prebuild --clean",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "dependencies": {
     "@bam.tech/react-native-keyevent-expo-config-plugin": "^1.0.52",
