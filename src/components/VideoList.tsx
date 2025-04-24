@@ -37,7 +37,7 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
                     </View>
                     <View style={styles.videoDetails}>
                         <View style={styles.videoTextContent}>
-                            <Text style={styles.videoTitle} numberOfLines={2}>{item.title}</Text>
+                            <Text style={styles.videoTitle} numberOfLines={1}>{item.title}</Text>
                             <Text style={styles.videoSubtitle} numberOfLines={1}>
                                 {item.actors?.join(',')}
                             </Text>

@@ -55,7 +55,7 @@ export default function HomeScreen({route, navigation}) {
 
                 }, {
                     id: 2,
-                    title: 'Big Buck Bunny',
+                    title: 'BigBuckBunny and ElephantsDream',
                     description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
                     thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
                     duration: '9:56',
@@ -72,12 +72,12 @@ export default function HomeScreen({route, navigation}) {
                     episodeCount: 20,
                     episodes: [{
                         id: 1,
-                        episode: "第1集",
+                        episode: "BigBuckBunny.mp4",
                         videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                     }, {
                         id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                        episode: "ElephantsDream.mp4",
+                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
                     }],
 
                 }, {

@@ -1,28 +1,6 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    ActivityIndicator,
-    Dimensions,
-    SafeAreaView,
-    StatusBar,
-    Platform,
-    BackHandler,
-    ScrollView,
-    Image,
-    TVEventHandler,
-} from 'react-native';
-import {Ionicons} from "@expo/vector-icons";
-import {
-    DefaultFocus,
-    SpatialNavigationFocusableView, SpatialNavigationNode,
-    SpatialNavigationRoot,
-    SpatialNavigationScrollView, SpatialNavigationView
-} from "react-tv-space-navigation";
-import {useIsFocused} from "@react-navigation/native";
-import FocusablePressable from "../components/FocusablePressable";
+import React, {useCallback, useState} from 'react';
+import {Image, StyleSheet, View,} from 'react-native';
+import {SpatialNavigationNode, SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
 import {BottomArrow, TopArrow} from "../components/Arrows";
@@ -59,9 +37,9 @@ const VideoDetailScreen = ({route, navigation}) => {
         // 处理剧集点击
     }, []);
 
-    const navigateToVideoPlayer = (episode) => {
+    const navigateToVideoPlayer = (episode, video) => {
         console.log('Navigating to video player with video:', episode.label);
-        navigation.push('VideoPlayer', {episode});
+        navigation.push('VideoPlayer', {episode, video});
     };
 
     return (
@@ -100,7 +78,7 @@ const VideoDetailScreen = ({route, navigation}) => {
                     </SpatialNavigationNode>
                     {passedVideo?.episodes?.map((episode, index) => (
                         <Episode key={index} id={episode.id} label={episode.episode}
-                                 onSelect={() => navigateToVideoPlayer(episode)}/>
+                                 onSelect={() => navigateToVideoPlayer(episode, passedVideo)}/>
                     ))}
                 </SpatialNavigationScrollView>
             </View>

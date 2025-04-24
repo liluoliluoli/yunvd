@@ -18,7 +18,7 @@ import {scaledPixels} from "../hooks/useScale";
 export const TextInput = ({placeholder, onEnterPress, height, isPassword = false}: {
     placeholder: string,
     onEnterPress: (text: string) => void,
-    height: number,
+    height?: number,
     isPassword?: boolean
 }) => {
     const ref = useRef<RNTextInput>(null);

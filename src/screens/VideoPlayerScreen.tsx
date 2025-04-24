@@ -1,27 +1,27 @@
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    ActivityIndicator,
-    Dimensions,
-    SafeAreaView,
-    StatusBar,
-    Platform,
     BackHandler,
-    ScrollView, HWEvent, useTVEventHandler, TVFocusGuideView, Pressable,
+    Dimensions,
+    HWEvent, Modal,
+    Platform,
+    Pressable,
+    SafeAreaView, ScrollView,
+    StyleSheet,
+    Text, TVEventHandler,
+    TVFocusGuideView,
+    useTVEventHandler,
+    View,
 } from 'react-native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {Page} from "../components/Page";
-import {SupportedKeys} from "../remote-control/SupportedKeys";
-import RemoteControlManager from "../remote-control/RemoteControlManager";
 import Video, {VideoRef} from 'react-native-video';
 import {CustomPressable} from "../components/CustomPressable";
 import {GoPreviousSvg} from "../../assets/GoPreviousSvg";
 import {RFPercentage} from "react-native-responsive-fontsize";
 import {PlaySvg} from "../../assets/PlaySvg";
 import {PauseSvg} from "../../assets/PauseSvg";
+import {CustomControlPressable} from "../components/CustomControlPressable";
+import {SupportedKeys} from "../remote-control/SupportedKeys";
+import RemoteControlManager from "../remote-control/RemoteControlManager";
+import Episode from "../models/Episode";
 
 
 const {width} = Dimensions.get('window');
@@ -47,12 +47,22 @@ const VideoPlayerScreen = ({route, navigation}) => {
     const [keyPressed, setKeyPressed] = useState(false);
     const longPressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [previewTime, setPreviewTime] = useState(0);
+    const [focusedControl, setFocusedControl] = useState<'slider' | 'episodes' | 'subtitle'>('slider');
+    const [showEpisodesModal, setShowEpisodesModal] = useState(false);
+    const passedVideo = route.params?.video;
+    const passedEpisodes = route.params?.video?.episodes || [];
+    const passedEpisode = route.params?.episode;
+    const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(passedEpisode);
+    const [playingEpisode, setPlayingEpisode] = useState<Episode | null>(passedEpisode);
 
-    const passedVideo = route.params?.episode;
-
-    const handleBack = useCallback(() => {
-        navigation.goBack();
-    }, []);
+    const renderEpisodeItem = (episode, index) => (
+        <CustomControlPressable
+            key={index}
+            hasTVPreferredFocus={episode.id === selectedEpisode.id}
+        >
+            <Text style={styles.episodeText}>{episode.episode}</Text>
+        </CustomControlPressable>
+    );
 
     const controlsOpenTimer = useCallback(() => {
         setControlsVisible(true);
@@ -60,26 +70,22 @@ const VideoPlayerScreen = ({route, navigation}) => {
         if (hideControlsTimeoutRef.current) {
             clearTimeout(hideControlsTimeoutRef.current);
         }
-
-        hideControlsTimeoutRef.current = setTimeout(() => {
-            setControlsVisible(false);
-        }, 3000);
-    }, []);
+        if (!showEpisodesModal) {
+            hideControlsTimeoutRef.current = setTimeout(() => {
+                setFocusedControl('slider');
+                setControlsVisible(false);
+                setShowEpisodesModal(false);
+            }, 3000);
+        }
+    }, [showEpisodesModal]);
 
     useEffect(() => {
         controlsOpenTimer();
     }, [controlsOpenTimer]);
 
-    useEffect(() => {
-        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-            console.log('backHandler');
-            handleBack();
-            return true;
-        });
-        return () => {
-            backHandler.remove();
-        };
-    }, []);
+    const handleShowEpisodesModal = () => {
+        setShowEpisodesModal(true);
+    }
 
     const seekForward = (type: 'press' | 'longPress' = 'press') => {
         seek(currentTime + (type === 'press' ? seekTime : longSeekTime));
@@ -162,19 +168,63 @@ const VideoPlayerScreen = ({route, navigation}) => {
 
         switch (eventType) {
             case 'select':
-                togglePausePlay();
+                if (!showEpisodesModal && controlsVisible && focusedControl === 'slider') {
+                    togglePausePlay();
+                }
+                if (showEpisodesModal) {
+                    console.log('episodes selected:' + selectedEpisode.id + " to play");
+                    setPlayingEpisode(selectedEpisode);
+                    setShowEpisodesModal(false);
+                    setFocusedControl('slider');
+                }
+                break;
+            case 'down':
+                if (!showEpisodesModal && controlsVisible && focusedControl === 'slider') {
+                    setFocusedControl('episodes');
+                }
+                if (showEpisodesModal) {
+                    var index = passedEpisodes.findIndex(item => item.id === selectedEpisode.id);
+                    console.log('down episodes selected index:' + index);
+                    if (index != -1 && index < passedEpisodes.length - 1) {
+                        setSelectedEpisode(passedEpisodes[index + 1]);
+                    }
+                }
+                break;
+            case 'up':
+                if (!showEpisodesModal && controlsVisible && (focusedControl === 'episodes' || focusedControl === 'subtitle')) {
+                    setFocusedControl('slider');
+                }
+                if (showEpisodesModal) {
+                    var index = passedEpisodes.findIndex(item => item.id === selectedEpisode.id);
+                    console.log('up episodes selected index:' + index);
+                    if (index > 0) {
+                        setSelectedEpisode(passedEpisodes[index - 1]);
+                    }
+                }
                 break;
             case 'left':
-                seekBackward();
+                if (!showEpisodesModal && controlsVisible && focusedControl === 'slider') {
+                    seekBackward();
+                } else if (!showEpisodesModal && controlsVisible && focusedControl === 'subtitle') {
+                    setFocusedControl('episodes');
+                }
                 break;
             case 'right':
-                seekForward();
+                if (!showEpisodesModal && controlsVisible && focusedControl === 'slider') {
+                    seekForward();
+                } else if (!showEpisodesModal && controlsVisible && focusedControl === 'episodes') {
+                    setFocusedControl('subtitle');
+                }
                 break;
             case 'longLeft':
-                handleLongPress('left');
+                if (!showEpisodesModal && focusedControl === 'slider') {
+                    handleLongPress('left');
+                }
                 break;
             case 'longRight':
-                handleLongPress('right');
+                if (!showEpisodesModal && focusedControl === 'slider') {
+                    handleLongPress('right');
+                }
                 break;
             default:
                 break;
@@ -183,23 +233,29 @@ const VideoPlayerScreen = ({route, navigation}) => {
 
     useTVEventHandler(myTVEventHandler);
 
+    useEffect(() => {
+        const handleKeyDown = (key: SupportedKeys) => {
+            switch (key) {
+                case SupportedKeys.Back:
+                    if (showEpisodesModal) {
+                        setShowEpisodesModal(false);
+                        return true;
+                    } else {
+                        navigation.goBack();
+                        return true;
+                    }
+            }
+            return false;
+        };
 
-    // useEffect(() => {
-    //     const handleKeyDown = (key: SupportedKeys) => {
-    //         switch (key) {
-    //             case SupportedKeys.Back:
-    //                 console.log("Back")
-    //                 navigation.goBack();
-    //         }
-    //     };
-    //
-    //     const listener = RemoteControlManager.addKeydownListener(handleKeyDown);
-    //     return () => {
-    //         RemoteControlManager.removeKeydownListener(listener);
-    //     };
-    // }, []);
+        const listener = RemoteControlManager.addKeydownListener(handleKeyDown);
+        return () => {
+            RemoteControlManager.removeKeydownListener(listener);
+        };
+    }, [showEpisodesModal]);
 
-    if (!passedVideo || !passedVideo.videoUrl) {
+
+    if (!passedEpisode || !passedEpisode.videoUrl) {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.errorContainer}>
@@ -212,13 +268,9 @@ const VideoPlayerScreen = ({route, navigation}) => {
     return (
         <View style={styles.container}>
             <Video
-                // Can be a URL or a local file.
-                source={{uri: passedVideo.videoUrl}}
-                // Store reference
+                source={{uri: playingEpisode.videoUrl}}
                 ref={videoRef}
-                // Callback when remote video is buffering
                 onBuffer={() => console.log("onBuffer")}
-                // Callback when the video cannot be loaded
                 onError={() => console.log("onError")}
                 style={styles.video}
                 paused={paused}
@@ -232,9 +284,8 @@ const VideoPlayerScreen = ({route, navigation}) => {
                 <View style={styles.controlsContainer}>
                     <TVFocusGuideView autoFocus>
                         <CustomPressable
-                            style={styles.goBackBtn}
-                            onPress={() => navigation.goBack()}>
-                            <GoPreviousSvg width={RFPercentage(2)} height={RFPercentage(2)}/>
+                            style={styles.title}>
+                            <Text style={styles.titleButtonText}>{passedVideo.title} {playingEpisode.episode}</Text>
                         </CustomPressable>
                     </TVFocusGuideView>
 
@@ -271,15 +322,50 @@ const VideoPlayerScreen = ({route, navigation}) => {
                                         backgroundColor: focused ? '#b0b0b090' : '#fff',
                                     },
                                 ]}
+                                hasTVPreferredFocus={focusedControl === 'slider'}
                             />
                         </TVFocusGuideView>
+                        <View style={styles.timeContainer}>
+                            <Text style={styles.timeText}>
+                                {formatTime(previewTime)} / {formatTime(duration)}
+                            </Text>
+                        </View>
+                        <TVFocusGuideView style={styles.buttonsRow} autoFocus={false}>
+                            <CustomControlPressable
+                                style={styles.episodesButton}
+                                onPress={handleShowEpisodesModal}
+                                hasTVPreferredFocus={focusedControl === 'episodes'}
+                            >
+                                <Text style={styles.episodesButtonText}>选集</Text>
+                            </CustomControlPressable>
+
+                            <CustomControlPressable
+                                style={styles.subtitleButton}
+                                onPress={() => console.log('字幕点击')}
+                                hasTVPreferredFocus={focusedControl === 'subtitle'}
+                            >
+                                <Text style={styles.subtitleButtonText}>字幕</Text>
+                            </CustomControlPressable>
+                        </TVFocusGuideView>
+
+                        <Modal
+                            visible={showEpisodesModal}
+                            transparent={true}
+                            animationType="slide"
+                            onRequestClose={() => setShowEpisodesModal(false)}
+                        >
+                            <View style={styles.modalContainer}>
+                                <View style={styles.modalContent}>
+                                    <ScrollView>
+                                        {passedEpisodes.map(renderEpisodeItem)}
+                                    </ScrollView>
+                                </View>
+                            </View>
+                        </Modal>
+
                     </View>
 
-                    <View style={styles.timeContainer}>
-                        <Text style={styles.timeText}>
-                            {formatTime(previewTime)} / {formatTime(duration)}
-                        </Text>
-                    </View>
+
                 </View>
             )}
         </View>
@@ -310,7 +396,7 @@ const styles = StyleSheet.create({
         zIndex: -10,
     },
     icon: {},
-    goBackBtn: {
+    title: {
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
@@ -366,6 +452,51 @@ const styles = StyleSheet.create({
     timeText: {
         color: '#fff',
         fontSize: RFPercentage(1),
+    },
+    buttonsRow: {
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: -30,
+        left: 0,
+        right: 0,
+        justifyContent: 'center',
+    },
+    episodesButton: {
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        borderRadius: 1,
+    },
+    episodesButtonText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    subtitleButton: {
+        padding: 10,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+        borderRadius: 5,
+    },
+    subtitleButtonText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    titleButtonText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+    },
+    modalContent: {
+        position: 'absolute',
+        width: 300,
+        height: 320,
+        top: 100,
+        left: 50,
+    },
+    episodeText: {
+        color: 'white',
+        fontSize: 16,
     },
 });
 
