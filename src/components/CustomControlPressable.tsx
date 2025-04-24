@@ -19,11 +19,10 @@ export const CustomControlPressable = forwardRef<View, PressableProps>(
             ({focused}) => [
                 style as ViewStyle,
                 {
-                    backgroundColor: focused ? '#1a1a1a' : 'transparent',
-                    padding: RFPercentage(1.2),
+                    backgroundColor: 'transparent',
+                    padding: RFPercentage(0.8),
                     borderRadius: 10,
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    opacity: focused ? 1 : 0.5,
                 },
             ],
             [style],

@@ -22,6 +22,8 @@ import {CustomControlPressable} from "../components/CustomControlPressable";
 import {SupportedKeys} from "../remote-control/SupportedKeys";
 import RemoteControlManager from "../remote-control/RemoteControlManager";
 import Episode from "../models/Episode";
+import Subtitle from "../models/Subtitle";
+import subtitle from "../models/Subtitle";
 
 
 const {width} = Dimensions.get('window');
@@ -54,6 +56,9 @@ const VideoPlayerScreen = ({route, navigation}) => {
     const passedEpisode = route.params?.episode;
     const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(passedEpisode);
     const [playingEpisode, setPlayingEpisode] = useState<Episode | null>(passedEpisode);
+    const [showSubtitlesModal, setShowSubtitlesModal] = useState(false);
+    const [selectedSubtitle, setSelectedSubtitle] = useState<Subtitle | null>(playingEpisode.subtitles[0]);
+    const [playingSubtitle, setPlayingSubtitle] = useState<Subtitle | null>(playingEpisode.subtitles[0]);
 
     const renderEpisodeItem = (episode, index) => (
         <CustomControlPressable
@@ -64,20 +69,30 @@ const VideoPlayerScreen = ({route, navigation}) => {
         </CustomControlPressable>
     );
 
+    const renderSubtitleItem = (subtitle, index) => (
+        <CustomControlPressable
+            key={index}
+            hasTVPreferredFocus={subtitle.id === selectedSubtitle.id}
+        >
+            <Text style={styles.subtitleText}>{subtitle.subtitle}</Text>
+        </CustomControlPressable>
+    );
+
     const controlsOpenTimer = useCallback(() => {
         setControlsVisible(true);
 
         if (hideControlsTimeoutRef.current) {
             clearTimeout(hideControlsTimeoutRef.current);
         }
-        if (!showEpisodesModal) {
+        if (!showEpisodesModal && !showSubtitlesModal) {
             hideControlsTimeoutRef.current = setTimeout(() => {
                 setFocusedControl('slider');
                 setControlsVisible(false);
                 setShowEpisodesModal(false);
+                setShowSubtitlesModal(false);
             }, 3000);
         }
-    }, [showEpisodesModal]);
+    }, [showEpisodesModal, showSubtitlesModal]);
 
     useEffect(() => {
         controlsOpenTimer();
@@ -85,6 +100,10 @@ const VideoPlayerScreen = ({route, navigation}) => {
 
     const handleShowEpisodesModal = () => {
         setShowEpisodesModal(true);
+    }
+
+    const handleShowSubtitlesModal = () => {
+        setShowSubtitlesModal(true);
     }
 
     const seekForward = (type: 'press' | 'longPress' = 'press') => {
@@ -168,7 +187,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
 
         switch (eventType) {
             case 'select':
-                if (!showEpisodesModal && controlsVisible && focusedControl === 'slider') {
+                if (!showSubtitlesModal && !showEpisodesModal && controlsVisible && focusedControl === 'slider') {
                     togglePausePlay();
                 }
                 if (showEpisodesModal) {
@@ -177,52 +196,72 @@ const VideoPlayerScreen = ({route, navigation}) => {
                     setShowEpisodesModal(false);
                     setFocusedControl('slider');
                 }
+                if (showSubtitlesModal) {
+                    console.log('subtitle selected:' + selectedSubtitle.id + " to play");
+                    setPlayingSubtitle(selectedSubtitle);
+                    setShowSubtitlesModal(false);
+                    setFocusedControl('slider');
+                }
                 break;
             case 'down':
-                if (!showEpisodesModal && controlsVisible && focusedControl === 'slider') {
+                if (!showSubtitlesModal && !showEpisodesModal && controlsVisible && focusedControl === 'slider') {
                     setFocusedControl('episodes');
                 }
                 if (showEpisodesModal) {
-                    var index = passedEpisodes.findIndex(item => item.id === selectedEpisode.id);
-                    console.log('down episodes selected index:' + index);
-                    if (index != -1 && index < passedEpisodes.length - 1) {
-                        setSelectedEpisode(passedEpisodes[index + 1]);
+                    var eIndex = passedEpisodes.findIndex(item => item.id === selectedEpisode.id);
+                    console.log('down episodes selected index:' + eIndex);
+                    if (eIndex != -1 && eIndex < passedEpisodes.length - 1) {
+                        setSelectedEpisode(passedEpisodes[eIndex + 1]);
+                    }
+                }
+                if (showSubtitlesModal) {
+                    var sIndex = playingEpisode.subtitles.findIndex(item => item.id === selectedSubtitle.id);
+                    console.log('down subtitle selected index:' + sIndex);
+                    if (sIndex != -1 && sIndex < playingEpisode.subtitles.length - 1) {
+                        setSelectedSubtitle(playingEpisode.subtitles[sIndex + 1]);
                     }
                 }
                 break;
             case 'up':
-                if (!showEpisodesModal && controlsVisible && (focusedControl === 'episodes' || focusedControl === 'subtitle')) {
+                if (!showSubtitlesModal && !showEpisodesModal && controlsVisible && (focusedControl === 'episodes' || focusedControl === 'subtitle')) {
                     setFocusedControl('slider');
                 }
                 if (showEpisodesModal) {
-                    var index = passedEpisodes.findIndex(item => item.id === selectedEpisode.id);
-                    console.log('up episodes selected index:' + index);
-                    if (index > 0) {
-                        setSelectedEpisode(passedEpisodes[index - 1]);
+                    var eIndex = passedEpisodes.findIndex(item => item.id === selectedEpisode.id);
+                    console.log('up episodes selected index:' + eIndex);
+                    if (eIndex > 0) {
+                        setSelectedEpisode(passedEpisodes[eIndex - 1]);
+                    }
+                }
+                if (showSubtitlesModal) {
+                    var sIndex = playingEpisode.subtitles.findIndex(item => item.id === selectedSubtitle.id);
+                    console.log('up subtitle selected index:' + sIndex);
+                    if (sIndex > 0) {
+                        setSelectedSubtitle(playingEpisode.subtitles[sIndex - 1]);
                     }
                 }
                 break;
             case 'left':
-                if (!showEpisodesModal && controlsVisible && focusedControl === 'slider') {
+                if (!showSubtitlesModal && !showEpisodesModal && controlsVisible && focusedControl === 'slider') {
                     seekBackward();
-                } else if (!showEpisodesModal && controlsVisible && focusedControl === 'subtitle') {
+                } else if (!showSubtitlesModal && !showEpisodesModal && controlsVisible && focusedControl === 'subtitle') {
                     setFocusedControl('episodes');
                 }
                 break;
             case 'right':
-                if (!showEpisodesModal && controlsVisible && focusedControl === 'slider') {
+                if (!showSubtitlesModal && !showEpisodesModal && controlsVisible && focusedControl === 'slider') {
                     seekForward();
-                } else if (!showEpisodesModal && controlsVisible && focusedControl === 'episodes') {
+                } else if (!showSubtitlesModal && !showEpisodesModal && controlsVisible && focusedControl === 'episodes') {
                     setFocusedControl('subtitle');
                 }
                 break;
             case 'longLeft':
-                if (!showEpisodesModal && focusedControl === 'slider') {
+                if (!showSubtitlesModal && !showEpisodesModal && focusedControl === 'slider') {
                     handleLongPress('left');
                 }
                 break;
             case 'longRight':
-                if (!showEpisodesModal && focusedControl === 'slider') {
+                if (!showSubtitlesModal && !showEpisodesModal && focusedControl === 'slider') {
                     handleLongPress('right');
                 }
                 break;
@@ -341,7 +380,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
 
                             <CustomControlPressable
                                 style={styles.subtitleButton}
-                                onPress={() => console.log('字幕点击')}
+                                onPress={handleShowSubtitlesModal}
                                 hasTVPreferredFocus={focusedControl === 'subtitle'}
                             >
                                 <Text style={styles.subtitleButtonText}>字幕</Text>
@@ -355,7 +394,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
                             onRequestClose={() => setShowEpisodesModal(false)}
                         >
                             <View style={styles.modalContainer}>
-                                <View style={styles.modalContent}>
+                                <View style={styles.modalEpisodeContent}>
                                     <ScrollView>
                                         {passedEpisodes.map(renderEpisodeItem)}
                                     </ScrollView>
@@ -363,6 +402,20 @@ const VideoPlayerScreen = ({route, navigation}) => {
                             </View>
                         </Modal>
 
+                        <Modal
+                            visible={showSubtitlesModal}
+                            transparent={true}
+                            animationType="slide"
+                            onRequestClose={() => setShowSubtitlesModal(false)}
+                        >
+                            <View style={styles.modalContainer}>
+                                <View style={styles.modalSubtitleContent}>
+                                    <ScrollView>
+                                        {playingEpisode.subtitles.map(renderSubtitleItem)}
+                                    </ScrollView>
+                                </View>
+                            </View>
+                        </Modal>
                     </View>
 
 
@@ -484,17 +537,26 @@ const styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
     },
-    modalContent: {
+    modalEpisodeContent: {
         position: 'absolute',
-        width: 300,
-        height: 320,
-        top: 100,
+        width: 250,
+        height: 300,
+        top: 150,
         left: 50,
     },
     episodeText: {
+        color: 'white',
+        fontSize: 16,
+    },
+    modalSubtitleContent: {
+        position: 'absolute',
+        width: 250,
+        height: 300,
+        top: 150,
+        right: 50,
+    },
+    subtitleText: {
         color: 'white',
         fontSize: 16,
     },

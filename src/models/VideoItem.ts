@@ -1,4 +1,5 @@
 import Episode from "./Episode";
+import Subtitle from "./Subtitle";
 
 export type VideoItem = {
     id: number,
