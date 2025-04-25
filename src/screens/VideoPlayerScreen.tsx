@@ -24,6 +24,7 @@ import RemoteControlManager from "../remote-control/RemoteControlManager";
 import Episode from "../models/Episode";
 import Subtitle from "../models/Subtitle";
 import subtitle from "../models/Subtitle";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 
 const {width} = Dimensions.get('window');
@@ -59,6 +60,8 @@ const VideoPlayerScreen = ({route, navigation}) => {
     const [showSubtitlesModal, setShowSubtitlesModal] = useState(false);
     const [selectedSubtitle, setSelectedSubtitle] = useState<Subtitle | null>(playingEpisode.subtitles[0]);
     const [playingSubtitle, setPlayingSubtitle] = useState<Subtitle | null>(playingEpisode.subtitles[0]);
+    const [isVideoBuffering, setIsVideoBuffering] = useState<boolean>(false);
+
 
     const renderEpisodeItem = (episode, index) => (
         <CustomControlPressable
@@ -309,7 +312,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
             <Video
                 source={{uri: playingEpisode.videoUrl}}
                 ref={videoRef}
-                onBuffer={() => console.log("onBuffer")}
+                onBuffer={(e) => setIsVideoBuffering(e.isBuffering)}
                 onError={() => console.log("onError")}
                 style={styles.video}
                 paused={paused}
@@ -417,10 +420,9 @@ const VideoPlayerScreen = ({route, navigation}) => {
                             </View>
                         </Modal>
                     </View>
-
-
                 </View>
             )}
+            {isVideoBuffering && <LoadingIndicator/>}
         </View>
     );
 };

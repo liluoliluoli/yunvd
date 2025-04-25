@@ -11,6 +11,7 @@ import {version} from '../../package.json'
 import {UpdateContext} from "./UpdateContext";
 import {Typography} from "./Typography";
 import useAuthViewModel from "../viewModels/AuthViewModel";
+import {Toast} from "./Toast";
 
 
 export const Header = ({}) => {
@@ -20,7 +21,6 @@ export const Header = ({}) => {
     const {downloadProgress, setDownloadProgress} = useContext(UpdateContext);
     const {user, isLoading, logout} = useAuthViewModel();
     const [showDonateModal, setShowDonateModal] = useState(false);
-
 
     useEffect(() => {
         const updater = new UpdateAPK.UpdateAPK({
@@ -111,11 +111,10 @@ export const Header = ({}) => {
             <View>
                 <View style={styles.header}>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
-                    <Typography variant="title"
-                                style={{textAlign: 'center'}}>YunVd</Typography>
+                    <Typography variant="title">YunVD</Typography>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
-                    <Typography variant="body"
-                                style={{textAlign: 'center'}}>(v{currentVersion})</Typography>
+                    <Typography variant="body">v{currentVersion}</Typography>
+                    <Spacer direction={"horizontal"} gap={'$2'}/>
                     <View style={styles.searchContainer}>
                         <TextInput placeholder='搜索'
                                    onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
@@ -174,13 +173,10 @@ const styles = StyleSheet.create({
         height: 30,
     },
     searchContainer: {
-        width: scaledPixels(500),
+        width: scaledPixels(400),
         flexDirection: 'row',
         marginHorizontal: 10,
         height: 40,
-        borderRadius: 8,
-        backgroundColor: '#1a1a1a',
-        borderWidth: 0,
     },
     modalOverlay: {
         flex: 1,

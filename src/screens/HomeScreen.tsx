@@ -12,18 +12,17 @@ import {Header} from "../components/Header";
 import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 import {UpdateProvider} from "../components/UpdateContext";
+import Toast from 'react-native-simple-toast';
 
 const HEADER_SIZE = scaledPixels(400)
 export default function HomeScreen({route, navigation}) {
     const [videos, setVideos] = useState<VideoItem[]>([]);
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
-    const [filteredVideos, setFilteredVideos] = useState<VideoItem[]>([]);
-    const [isLoadingMockData, setIsLoadingMockData] = useState(true);
     const [mockError, setMockError] = useState(null);
     const [down, setDown] = useState(false);
+
     const loadVideos = async () => {
         try {
-            setIsLoadingMockData(true);
             setMockError(null);
             const mockVideos: VideoItem[] = [
                 {
@@ -340,7 +339,6 @@ export default function HomeScreen({route, navigation}) {
             console.error('Error loading videos:', error);
             setMockError('Failed to load videos. Please try again.');
         } finally {
-            setIsLoadingMockData(false);
         }
     };
     const [index, setIndex] = useState(0);
@@ -396,8 +394,10 @@ export default function HomeScreen({route, navigation}) {
 
     const navigateToVideoDetails = (video) => {
         console.log('Navigating to video detail with video:', video.title);
-        navigation.push('VideoDetail', {video});
+        // navigation.push('VideoDetail', {video});
+        Toast.show('This is a long toast.', Toast.LONG);
     };
+
 
     const loadMore = () => {
         setDown(true)

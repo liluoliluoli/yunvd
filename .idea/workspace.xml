@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/models/Subtitle.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/LoadingIndicator.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CustomControlPressable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CustomControlPressable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Episode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Episode.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/VideoItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/VideoItem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -65,7 +65,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "jsx.switch.disabled": "true",
-    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/models",
+    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/assets",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -82,11 +82,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/models" />
+      <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/src/remote-control" />
       <recent name="$PROJECT_DIR$/src/screens" />
-      <recent name="$PROJECT_DIR$/src/hooks" />
     </key>
   </component>
   <component name="RunManager" selected="npm.android">
@@ -457,7 +457,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745500932216</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="init">
+      <option name="closed" value="true" />
+      <created>1745506108328</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1745506108329</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,7 +499,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx</url>
-          <line>424</line>
+          <line>426</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -502,7 +510,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx</url>
-          <line>545</line>
+          <line>547</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
