@@ -12,7 +12,7 @@ import {
     StatusBar,
     Platform
 } from 'react-native';
-import useAuthViewModel from '../viewModels/AuthViewModel';
+import {useAuthViewModel} from '../viewModels/AuthViewModel';
 import {Page} from "../components/Page";
 import {BottomArrow, TopArrow} from "../components/Arrows";
 import {
@@ -44,13 +44,12 @@ export default function ProfileScreen({route, navigation}) {
     };
 
     const handleLogout = async () => {
-        // const success = await logout();
-        // if (success) {
-        //     navigation.navigate('Login');
-        // } else {
-        //     Alert.alert('Error', 'Failed to logout. Please try again.');
-        // }
-        navigation.navigate('Login');
+        const success = await logout();
+        if (success) {
+            navigation.navigate('Login');
+        } else {
+            Alert.alert('Error', 'Failed to logout. Please try again.');
+        }
     };
 
     if (isLoading) {

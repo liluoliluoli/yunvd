@@ -10,9 +10,7 @@ import * as UpdateAPK from "rn-update-apk";
 import {version} from '../../package.json'
 import {UpdateContext} from "./UpdateContext";
 import {Typography} from "./Typography";
-import useAuthViewModel from "../viewModels/AuthViewModel";
-import {Toast} from "./Toast";
-
+import {useAuthViewModel} from "../viewModels/AuthViewModel";
 
 export const Header = ({}) => {
     const navigation = useNavigation<any>();

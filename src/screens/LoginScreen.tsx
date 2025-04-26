@@ -12,7 +12,7 @@ import {
     ActivityIndicator
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import useAuthViewModel from '../viewModels/AuthViewModel';
+import {useAuthViewModel} from '../viewModels/AuthViewModel';
 import {Page} from "../components/Page";
 import {SpatialNavigationNode, SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {BottomArrow, TopArrow} from "../components/Arrows";
@@ -21,10 +21,10 @@ import {TextInput} from "../components/TextInput";
 import {Button} from "../components/Button";
 import {Typography} from "../components/Typography";
 import {Spacer} from "../components/Spacer";
+import {HEADER_SIZE} from "../utils/ApiConstants";
 
-const HEADER_SIZE = scaledPixels(400);
 export default function LoginScreen({navigation}) {
-    const [email, setEmail] = useState('');
+    const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const {
@@ -32,12 +32,10 @@ export default function LoginScreen({navigation}) {
         error,
         clearError
     } = useAuthViewModel();
-    const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
-    const isFormValid = email.trim() !== '' && password.trim() !== '';
 
     const handleLogin = async () => {
-        if (!isValidEmail(email)) {
-            Alert.alert('Error', 'Enter a valid email address');
+        if (!userName.trim()) {
+            Alert.alert('Error', 'userName is required');
             return;
         }
         if (!password.trim()) {
@@ -47,8 +45,7 @@ export default function LoginScreen({navigation}) {
 
         try {
             setIsLoading(true);
-            if (await login(email, password)) {
-                await AsyncStorage.setItem('userToken', 'demo-token-' + Date.now());
+            if (await login(userName, password)) {
                 navigation.navigate('Home');
             }
         } catch (error) {
@@ -56,12 +53,6 @@ export default function LoginScreen({navigation}) {
             Alert.alert('Login Failed', 'An error occurred during login.');
         } finally {
             setIsLoading(false);
-        }
-    };
-
-    const handleKeyPress = ({nativeEvent: {key}}) => {
-        if (key === 'Enter' && isFormValid) {
-            handleLogin();
         }
     };
 
@@ -83,7 +74,8 @@ export default function LoginScreen({navigation}) {
                             <Typography variant="title">Welcome to yunvd</Typography>
                             <Spacer direction={"vertical"} gap={'$6'}/>
                             <View style={styles.inputContainer}>
-                                <TextInput placeholder='Email' onEnterPress={setEmail} height={scaledPixels(100)}/>
+                                <TextInput placeholder='UserName' onEnterPress={setUserName}
+                                           height={scaledPixels(100)}/>
                                 <Spacer direction={"vertical"} gap={'$6'}/>
                                 <TextInput placeholder='Password' onEnterPress={setPassword}
                                            height={scaledPixels(100)} isPassword={true}/>

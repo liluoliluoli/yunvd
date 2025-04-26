@@ -1,54 +1,22 @@
-/**
- * API constants and configuration
- */
-import React, {useState, useRef} from 'react';
-import {SpatialNavigationNodeRef} from "react-tv-space-navigation";
+import {scaledPixels} from "../hooks/useScale";
 
-// Base URLs
-export const API_BASE_URL = 'http://192.168.29.237:5000';
+export const API_BASE_URL = 'http://59565ef5.cpolar.io';
 
-// Authentication endpoints
-export const AUTH_ENDPOINTS = {
-    LOGIN: API_BASE_URL + '/api/auth/login',
-    REGISTER: API_BASE_URL + '/api/auth/signup',
-    REFRESH_TOKEN: '/auth/refresh',
-    FORGOT_PASSWORD: '/auth/forgot-password',
-    RESET_PASSWORD: '/auth/reset-password',
-    VERIFY_EMAIL: '/auth/verify-email',
-    PROFILE: '/auth/profile',
-    UPDATE_PROFILE: '/auth/profile',
-    CHANGE_PASSWORD: '/auth/change-password',
+export const ENDPOINTS = {
+    GET_LAST_APP_VERSION: API_BASE_URL + '/api/version/getLastVersion',
+    REGISTER: API_BASE_URL + '/api/user/create',
+    LOGIN: API_BASE_URL + '/api/user/login',
+    LOGOUT: API_BASE_URL + '/api/user/logout',
+    PROFILE: '/api/user/get',
+    WATCH_COUNT: API_BASE_URL + '/api/user/getCurrentWatchCount',
+    UPDATE_FAVORITE: API_BASE_URL + '/api/user/updateFavorite',
+    UPDATE_PALAYED_STATUS: API_BASE_URL + '/api/user/updatePlayedStatus',
+    QUERY_FAVORITES: API_BASE_URL + '/api/user/queryFavorites',
+    SEARCH_VIDEOS: API_BASE_URL + '/api/video/search',
+    GET_VIDEO: API_BASE_URL + '/api/video/get',
+    GET_EPISODE: API_BASE_URL + '/api/episode/get',
 };
 
-// VideoItem endpoints
-export const VIDEO_ENDPOINTS = {
-    FEATURED: '/videos/featured',
-    TRENDING: '/videos/trending',
-    RECOMMENDED: '/videos/recommended',
-    CATEGORIES: '/videos/categories',
-    SEARCH: '/videos/search',
-    VIDEOS_BY_CATEGORY: (categoryId) => `/videos/category/${categoryId}`,
-    VIDEO_DETAILS: (videoId) => `/videos/${videoId}`,
-    VIDEO_COMMENTS: (videoId) => `/videos/${videoId}/comments`,
-    ADD_COMMENT: (videoId) => `/videos/${videoId}/comments`,
-    LIKE_VIDEO: (videoId) => `/videos/${videoId}/like`,
-    UNLIKE_VIDEO: (videoId) => `/videos/${videoId}/unlike`,
-    ADD_TO_WATCHLIST: (videoId) => `/videos/${videoId}/watchlist`,
-    REMOVE_FROM_WATCHLIST: (videoId) => `/videos/${videoId}/watchlist`,
-    RATE_VIDEO: (videoId) => `/videos/${videoId}/rate`,
-};
-
-// User endpoints
-export const USER_ENDPOINTS = {
-    WATCHLIST: '/user/watchlist',
-    HISTORY: '/user/history',
-    LIKED_VIDEOS: '/user/liked',
-    SUBSCRIPTIONS: '/user/subscriptions',
-    SUBSCRIBE: (channelId) => `/user/subscribe/${channelId}`,
-    UNSUBSCRIBE: (channelId) => `/user/unsubscribe/${channelId}`,
-};
-
-// API response status codes
 export const STATUS_CODES = {
     SUCCESS: 200,
     CREATED: 201,
@@ -60,8 +28,11 @@ export const STATUS_CODES = {
     SERVER_ERROR: 500,
 };
 
-// API request timeout in milliseconds
 export const REQUEST_TIMEOUT = 30000;
+
+export const PAGE_SIZE = 10;
+
+export const HEADER_SIZE = scaledPixels(400);
 
 // API headers
 export const DEFAULT_HEADERS = {
@@ -71,10 +42,9 @@ export const DEFAULT_HEADERS = {
 
 // Local storage keys
 export const STORAGE_KEYS = {
-    AUTH_TOKEN: 'auth_token',
-    REFRESH_TOKEN: 'refresh_token',
-    USER_DATA: 'user_data',
-    WATCH_HISTORY: 'watch_history',
+    AUTH_TOKEN: 'Authorization',
+    USER_NAME: 'UserName',
+    WATCH_HISTORY: 'WatchHistory',
 };
 
 export const SORT_OPTIONS = ["最新", "最热", "好评"]

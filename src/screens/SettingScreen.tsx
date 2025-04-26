@@ -1,27 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    TouchableOpacity,
-    ScrollView,
-    ActivityIndicator,
-    Alert,
-    SafeAreaView,
-    StatusBar,
-    Platform
-} from 'react-native';
-import useAuthViewModel from '../viewModels/AuthViewModel';
+import React from 'react';
+import {ActivityIndicator, Image, SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {useAuthViewModel} from '../viewModels/AuthViewModel';
 import {Page} from "../components/Page";
 import {BottomArrow, TopArrow} from "../components/Arrows";
-import {
-    SpatialNavigationFocusableView,
-    SpatialNavigationNode,
-    SpatialNavigationScrollView
-} from "react-tv-space-navigation";
+import {SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
-import {Episode} from "../components/Episode";
 import {Button} from "../components/Button";
 
 const HEADER_SIZE = scaledPixels(400);
