@@ -1,43 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    TouchableOpacity,
-    ScrollView,
-    ActivityIndicator,
-    Alert,
-    SafeAreaView,
-    StatusBar,
-    Platform
-} from 'react-native';
+import React from 'react';
+import {ActivityIndicator, Alert, Image, SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {useAuthViewModel} from '../viewModels/AuthViewModel';
 import {Page} from "../components/Page";
 import {BottomArrow, TopArrow} from "../components/Arrows";
-import {
-    SpatialNavigationFocusableView,
-    SpatialNavigationNode,
-    SpatialNavigationScrollView
-} from "react-tv-space-navigation";
-import {scaledPixels} from "../hooks/useScale";
+import {SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {Episode} from "../components/Episode";
+import {HEADER_SIZE} from "../utils/ApiConstants";
 
-const HEADER_SIZE = scaledPixels(400);
 export default function ProfileScreen({route, navigation}) {
-    const {user, isLoading, logout} = useAuthViewModel();
-    const [stats, setStats] = useState({
-        videosWatched: 0,
-        favoritesCount: 0,
-    });
-
-    useEffect(() => {
-        // Load user stats (in a real app, you would fetch this from an API)
-        setStats({
-            videosWatched: 42,
-            favoritesCount: 15,
-        });
-    }, []);
+    const {userName, watchCount, favoriteCount, isLoading, logout} = useAuthViewModel();
 
     const handleSetting = async () => {
         navigation.navigate('Setting');
@@ -77,16 +48,16 @@ export default function ProfileScreen({route, navigation}) {
                             source={require('../../assets/icon.png')}
                             style={styles.profileImage}
                         />
-                        <Text style={styles.userEmail}>{user?.email || 'user@example.com'}</Text>
+                        <Text style={styles.userName}>{userName}</Text>
                     </View>
 
                     <View style={styles.statsSection}>
                         <View style={styles.statItem}>
-                            <Text style={styles.statNumber}>{stats.videosWatched}</Text>
+                            <Text style={styles.statNumber}>{watchCount}</Text>
                             <Text style={styles.statLabel}>今天已观看</Text>
                         </View>
                         <View style={styles.statItem}>
-                            <Text style={styles.statNumber}>{stats.favoritesCount}</Text>
+                            <Text style={styles.statNumber}>{favoriteCount}</Text>
                             <Text style={styles.statLabel}>收藏</Text>
                         </View>
                     </View>
@@ -139,10 +110,6 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         marginBottom: 5,
-        color: '#fff',
-    },
-    userEmail: {
-        fontSize: 16,
         color: '#fff',
     },
     statsSection: {

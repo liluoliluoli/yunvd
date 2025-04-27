@@ -7,6 +7,7 @@ import {
 } from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
 import VideoItem from "../models/VideoItem";
+import {Ionicons} from "@expo/vector-icons";
 
 interface VideoListProps {
     videosByRow: VideoItem[][];
@@ -31,20 +32,18 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
                             style={styles.thumbnail}
                             resizeMode="stretch"
                         />
-                        <TouchableOpacity style={styles.favoriteButton}>
-                            <Text style={styles.favoriteIcon}>{item.isFavorite ? '★' : '☆'}</Text>
+                        <TouchableOpacity style={styles.rateButton}>
+                            <Text style={styles.rateIcon}>{item.voteRate.toFixed(1)}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.ratioButton}>
+                            <Text style={styles.ratioIcon}>{item.ratio}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.videoDetails}>
-                        <View style={styles.videoTextContent}>
-                            <Text style={styles.videoTitle} numberOfLines={1}>{item.title}</Text>
-                            <Text style={styles.videoSubtitle} numberOfLines={1}>
-                                {item.actors?.join(',')}
-                            </Text>
-                            <Text style={styles.videoInfo} numberOfLines={1}>
-                                {item.views} views • {item.publishDate || 'Unknown date'}
-                            </Text>
-                        </View>
+                        <Text style={styles.videoTitle} numberOfLines={1}>{item.title}</Text>
+                        <Text style={styles.videoInfo} numberOfLines={1}>
+                            {item.publishMonth}
+                        </Text>
                     </View>
                 </View>
             )}
@@ -77,26 +76,38 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
-    favoriteButton: {
+    rateButton: {
         position: 'absolute',
-        top: 8,
-        right: 8,
+        top: 5,
+        right: 5,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        width: 32,
-        height: 32,
+        width: 30,
+        height: 30,
         borderRadius: 16,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    favoriteIcon: {
+    rateIcon: {
         color: 'gold',
-        fontSize: 18,
-        marginBottom: 4,
+        fontSize: 14,
+        marginBottom: 2,
+    },
+    ratioButton: {
+        position: 'absolute',
+        top: 8,
+        left: 5,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    ratioIcon: {
+        color: 'pink',
+        fontSize: 14,
+        marginBottom: 2,
     },
     videoDetails: {
-        flexDirection: 'row',
-        padding: 6,
-        alignItems: 'flex-start',
+        padding: 5,
+        alignItems: 'center',
     },
     videoTextContent: {
         flex: 1,
@@ -104,18 +115,13 @@ const styles = StyleSheet.create({
     },
     videoTitle: {
         fontSize: 14,
-        fontWeight: '500',
-        color: '#333',
-        marginBottom: 2,
+        color: 'black',
         lineHeight: 16,
     },
-    videoSubtitle: {
-        fontSize: 12,
-        color: '#666',
-        marginBottom: 2,
-    },
     videoInfo: {
-        fontSize: 10,
-        color: '#888',
+        flexDirection: 'row',
+        fontSize: 12,
+        color: 'gray',
+        alignItems: 'center',
     },
 });

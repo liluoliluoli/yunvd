@@ -11,19 +11,21 @@ import {version} from '../../package.json'
 import {UpdateContext} from "./UpdateContext";
 import {Typography} from "./Typography";
 import {useAuthViewModel} from "../viewModels/AuthViewModel";
+import {useVideoViewModel} from "../viewModels/VideoViewModel";
+import {ENDPOINTS} from "../utils/ApiConstants";
 
 export const Header = ({}) => {
     const navigation = useNavigation<any>();
     const [hasUpdate, setHasUpdate] = useState<boolean>(false);
     const [currentVersion, setCurrentVersion] = useState<string>(version);
     const {downloadProgress, setDownloadProgress} = useContext(UpdateContext);
-    const {user, isLoading, logout} = useAuthViewModel();
+    const {userName, watchCount, favoriteCount, isLoading, logout} = useAuthViewModel();
     const [showDonateModal, setShowDonateModal] = useState(false);
 
     useEffect(() => {
         const updater = new UpdateAPK.UpdateAPK({
             iosAppId: "1104809018",
-            apkVersionUrl: "https://raw.githubusercontent.com/mikehardy/react-native-update-apk/master/example/test-version.json",
+            apkVersionUrl: ENDPOINTS.GET_LAST_APP_VERSION,
             apkVersionOptions: {
                 method: 'GET',
                 headers: {}
@@ -109,9 +111,9 @@ export const Header = ({}) => {
             <View>
                 <View style={styles.header}>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
-                    <Typography variant="title">YunVD</Typography>
+                    <Typography variant="title">YunVD </Typography>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
-                    <Typography variant="body">v{currentVersion}</Typography>
+                    <Typography variant="body">v{currentVersion} </Typography>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
                     <View style={styles.searchContainer}>
                         <TextInput placeholder='搜索'
@@ -125,7 +127,7 @@ export const Header = ({}) => {
                     <Typography variant="title"
                                 style={{textAlign: 'center'}} hidden={hasUpdate}>v{currentVersion}</Typography>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
-                    <Button label={user?.name + '(' + 180 + ')'} onSelect={onProfile}/>
+                    <Button label={userName + '(' + watchCount + ')'} onSelect={onProfile}/>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button label="赞赏" onSelect={onDonate}/>
                     <Modal

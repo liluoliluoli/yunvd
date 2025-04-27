@@ -39,9 +39,7 @@ export const useVideoViewModel = () => {
             if (response.list && response.list.length > 0) {
                 setVideos(prev => [...prev, ...response.list]);
                 setCurrentPage(prev => prev + 1);
-                console.log("2")
             } else {
-                console.log("1")
                 setHasMore(false);
             }
         } catch (error) {

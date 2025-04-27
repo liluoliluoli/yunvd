@@ -12,7 +12,6 @@ import {Header} from "../components/Header";
 import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 import {UpdateProvider} from "../components/UpdateContext";
-import Toast from 'react-native-simple-toast';
 import {useVideoViewModel} from '../viewModels/VideoViewModel';
 
 
@@ -56,7 +55,6 @@ export default function HomeScreen({route, navigation}) {
     const navigateToVideoDetails = (video) => {
         console.log('Navigating to video detail with video:', video.title);
         navigation.push('VideoDetail', {video});
-        // Toast.show('This is a long toast.', Toast.LONG);
     };
 
 

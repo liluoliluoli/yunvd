@@ -29,6 +29,8 @@ export const useAuthViewModel = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [userName, setUserName] = useState(null);
+    const [watchCount, setWatchCount] = useState(0);
+    const [favoriteCount, setFavoriteCount] = useState(0);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
@@ -36,13 +38,14 @@ export const useAuthViewModel = () => {
         checkAuthStatus().catch(err => {
             console.error('Auth check failed:', err);
         });
+        fetchUserProfile();
     }, []);
 
     const checkAuthStatus = useCallback(async () => {
         try {
             setIsLoading(true);
             const authorization = await storage.getItem(STORAGE_KEYS.AUTH_TOKEN);
-            console.log('User authorization:', authorization ? 'Found' : 'Not found');
+            console.log('User authorization:', authorization ? authorization : 'Not found');
             if (authorization) {
                 const userName = await storage.getItem(STORAGE_KEYS.USER_NAME);
                 console.log('User userName:', userName ? 'Found' : 'Not found');
@@ -68,6 +71,8 @@ export const useAuthViewModel = () => {
             const profileData = await apiService.profile();
             if (profileData && profileData.userName) {
                 setUserName(profileData.userName);
+                setWatchCount(profileData.watchCount);
+                setFavoriteCount(profileData.favoriteCount);
                 await storage.setItem(STORAGE_KEYS.USER_NAME, profileData.userName);
             }
         } catch (error) {
@@ -147,6 +152,9 @@ export const useAuthViewModel = () => {
     }, []);
 
     return {
+        userName,
+        watchCount,
+        favoriteCount,
         isLoading,
         isAuthenticated,
         error,
