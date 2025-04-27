@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/components/Filterbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/RecordScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/TvSeriesScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/TvShowScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +63,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "jsx.switch.disabled": "true",
-    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/components",
+    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/screens",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -79,11 +80,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/screens" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/viewModels" />
       <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/assets" />
-      <recent name="$PROJECT_DIR$/src/remote-control" />
     </key>
   </component>
   <component name="RunManager" selected="npm.android">
@@ -157,7 +158,7 @@
       <workItem from="1743758537542" duration="87840000" />
       <workItem from="1744345304259" duration="39710000" />
       <workItem from="1744777758422" duration="128292000" />
-      <workItem from="1745578311694" duration="51557000" />
+      <workItem from="1745578311694" duration="51874000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -495,7 +496,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745744810173</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="init">
+      <option name="closed" value="true" />
+      <created>1745749640548</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1745749640548</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

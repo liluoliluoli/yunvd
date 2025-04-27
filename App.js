@@ -21,6 +21,9 @@ import SearchScreen from "./src/screens/SearchScreen";
 import FavoriteScreen from "./src/screens/FavoriteScreen";
 import SettingScreen from "./src/screens/SettingScreen";
 import {STORAGE_KEYS} from "./src/utils/ApiConstants";
+import TvSeriesScreen from "./src/screens/TvSeriesScreen";
+import TvShowScreen from "./src/screens/TvShowScreen";
+import RecordScreen from "./src/screens/RecordScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -82,6 +85,21 @@ export default function App() {
                         <Stack.Screen
                             name="Movie"
                             component={MovieScreen}
+                            options={{animationEnabled: true}}
+                        />
+                        <Stack.Screen
+                            name="TvSeries"
+                            component={TvSeriesScreen}
+                            options={{animationEnabled: true}}
+                        />
+                        <Stack.Screen
+                            name="TvShow"
+                            component={TvShowScreen}
+                            options={{animationEnabled: true}}
+                        />
+                        <Stack.Screen
+                            name="Record"
+                            component={RecordScreen}
                             options={{animationEnabled: true}}
                         />
                         <Stack.Screen

@@ -1,0 +1,187 @@
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {Button} from "../components/Button";
+import {BottomArrow, TopArrow} from "../components/Arrows";
+import {SpatialNavigationScrollView, SpatialNavigationView} from "react-tv-space-navigation";
+import {scaledPixels} from "../hooks/useScale";
+import {Page} from "../components/Page";
+import {theme} from "../theme/theme";
+import chunk from 'lodash/chunk';
+import VideoItem from "../models/VideoItem";
+import {
+    GENRE_OPTIONS,
+    HEADER_SIZE,
+    REGION_OPTIONS,
+    SORT_OPTIONS,
+    TAB_ROUTES, VT_MOVIE, VT_RECORD, VT_TV_SERIES, VT_TV_SHOWS,
+    YEAR_OPTIONS
+} from "../utils/ApiConstants";
+import {Header} from "../components/Header";
+import {TabBar} from "../components/Tabbar";
+import {VideoList} from "../components/VideoList";
+import {UpdateProvider} from "../components/UpdateContext";
+import {Spacer} from "../components/Spacer";
+import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
+import {FilterBar} from "../components/Filterbar";
+
+export default function RecordScreen({route, navigation}) {
+    const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
+    const [down, setDown] = useState(false);
+    const [index, setIndex] = useState(3);
+    const {
+        videos,
+        setVideos,
+        isLoading,
+        error,
+        currentPage,
+        search,
+        sort,
+        setSort,
+        genre,
+        setGenre,
+        region,
+        setRegion,
+        year,
+        setYear,
+        videoType,
+        setVideoType,
+        setIsHistory,
+        fetchSearchVideos,
+        setCurrentPage,
+        setHasMore,
+        hasMore,
+        setIsRefresh,
+        isRefresh,
+    } = useVideoListViewModel();
+
+    useEffect(() => {
+        console.log(`videos total ${videos.length}`);
+        setVideosByRow(chunk(videos, 5));
+    }, [videos]);
+
+    useEffect(() => {
+        if (down) {
+            setDown(false)
+            setCurrentPage(prev => prev + 1);
+        }
+    }, [down]);
+
+    useEffect(() => {
+        setIsRefresh(true);
+        setCurrentPage(0);
+    }, [sort, genre, region, year]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [isRefresh]);
+
+    useEffect(() => {
+        if (videoType && currentPage !== 0) {
+            fetchSearchVideos()
+        }
+    }, [currentPage]);
+
+    useEffect(() => {
+        setVideoType(VT_RECORD)
+        if (videoType) {
+            setIsHistory(false);
+            setCurrentPage(1);
+        }
+    }, [videoType]);
+
+    const navigateToVideoDetails = (video) => {
+        console.log('Navigating to video detail with video:', video.title);
+        navigation.push('VideoDetail', {video});
+    };
+
+    return (
+        <UpdateProvider>
+            <Page loadMore={() => setDown(true)}>
+                <SafeAreaView style={styles.container}>
+                    <SpatialNavigationScrollView
+                        offsetFromStart={HEADER_SIZE + 20}
+                        descendingArrow={<TopArrow/>}
+                        ascendingArrow={<BottomArrow/>}
+                        descendingArrowContainerStyle={styles.topArrowContainer}
+                        ascendingArrowContainerStyle={styles.bottomArrowContainer}
+                    >
+                        <Header/>
+                        <TabBar
+                            routes={TAB_ROUTES}
+                            currentIndex={index}
+                            onTabPress={(index: number) => {
+                                navigation.navigate(TAB_ROUTES[index].screen);
+                            }}
+                        />
+                        <FilterBar routes={SORT_OPTIONS}
+                                   onTabPress={(index: number) => setSort(SORT_OPTIONS[index].key)}
+                                   currentIndex={0}></FilterBar>
+                        <FilterBar routes={GENRE_OPTIONS}
+                                   onTabPress={(index: number) => setSort(GENRE_OPTIONS[index].key)}
+                                   currentIndex={0}></FilterBar>
+                        <FilterBar routes={REGION_OPTIONS}
+                                   onTabPress={(index: number) => setSort(REGION_OPTIONS[index].key)}
+                                   currentIndex={0}></FilterBar>
+                        <FilterBar routes={YEAR_OPTIONS}
+                                   onTabPress={(index: number) => setSort(YEAR_OPTIONS[index].key)}
+                                   currentIndex={0}></FilterBar>
+                        <VideoList
+                            videosByRow={videosByRow}
+                            onVideoPress={navigateToVideoDetails}
+                        />
+
+                    </SpatialNavigationScrollView>
+                </SafeAreaView>
+            </Page>
+        </UpdateProvider>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#1a1a1a',
+    },
+    filterRow: {
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+        marginBottom: 1,
+        overflow: 'scroll'
+    },
+    topArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: -15,
+        left: 0,
+    },
+    bottomArrowContainer: {
+        width: '100%',
+        height: 100,
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom: -15,
+        left: 0,
+    },
+    leftArrowContainer: {
+        width: 120,
+        height: scaledPixels(260) + 2 * theme.spacings.$8,
+        position: 'absolute',
+        top: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        left: -theme.spacings.$8,
+    },
+    rightArrowContainer: {
+        width: 120,
+        height: scaledPixels(260) + 2 * theme.spacings.$8,
+        position: 'absolute',
+        top: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        right: -theme.spacings.$8,
+    },
+});
