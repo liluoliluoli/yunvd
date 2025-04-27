@@ -96,12 +96,11 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 8,
         left: 5,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'center',
         alignItems: 'center',
     },
     ratioIcon: {
-        color: 'pink',
+        color: 'white',
         fontSize: 14,
         marginBottom: 2,
     },

@@ -4,11 +4,11 @@
     "slug": "yunvd",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/tv_icons/icon-400x240.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/tv_icons/icon-1920x720.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -30,7 +30,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/tv_icons/icon-1920x720.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
@@ -53,7 +53,16 @@
       [
         "@react-native-tvos/config-tv",
         {
-          "showVerboseWarnings": true
+          "androidTVBanner": "./assets/tv_icons/icon-400x240.png",
+          "appleTVImages": {
+            "icon": "./assets/tv_icons/icon-1280x768.png",
+            "iconSmall": "./assets/tv_icons/icon-400x240.png",
+            "iconSmall2x": "./assets/tv_icons/icon-800x480.png",
+            "topShelf": "./assets/tv_icons/icon-1920x720.png",
+            "topShelf2x": "./assets/tv_icons/icon-1920x720.png",
+            "topShelfWide": "./assets/tv_icons/icon-1920x720.png",
+            "topShelfWide2x": "./assets/tv_icons/icon-1920x720.png"
+          }
         }
       ]
     ],

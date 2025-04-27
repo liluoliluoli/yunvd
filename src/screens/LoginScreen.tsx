@@ -71,21 +71,21 @@ export default function LoginScreen({navigation}) {
                         <View style={styles.formContainer}>
                             <Image source={require('../../assets/icon.png')} style={styles.logo}
                                    resizeMode="contain"/>
-                            <Typography variant="title">Welcome to yunvd</Typography>
+                            <Typography variant="title">Welcome to YunVD</Typography>
                             <Spacer direction={"vertical"} gap={'$6'}/>
                             <View style={styles.inputContainer}>
-                                <TextInput placeholder='UserName' onEnterPress={setUserName}
+                                <TextInput placeholder='用户名' onEnterPress={setUserName}
                                            height={scaledPixels(100)}/>
                                 <Spacer direction={"vertical"} gap={'$6'}/>
-                                <TextInput placeholder='Password' onEnterPress={setPassword}
+                                <TextInput placeholder='密码' onEnterPress={setPassword}
                                            height={scaledPixels(100)} isPassword={true}/>
                             </View>
                             <Spacer direction={"vertical"} gap={'$6'}/>
                             <Button label="登录" onSelect={handleLogin}/>
                             <Spacer direction={"vertical"} gap={'$6'}/>
                             <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.text}>Don't have an account?</Text>
-                                <Spacer direction={"horizontal"} gap={'$6'}/>
+                                <Text style={styles.text}>还没有账号?</Text>
+                                <Spacer direction={"horizontal"} gap={'$3'}/>
                                 <Button label="注册" onSelect={() => navigation.navigate('SignUp')}/>
                             </View>
                         </View>
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
-        marginBottom: 30,
-        fontSize: 20,
+        fontSize: 12,
+        marginTop: 5,
     },
     formContainer: {
         width: '100%',

@@ -19,5 +19,7 @@ export type VideoItem = {
     ratio: string
     lastPlayedTime: Date
     isFavorite: boolean
+    lastPlayedEpisodeId: number
+    lastPlayedPosition: number
 };
 export default VideoItem;

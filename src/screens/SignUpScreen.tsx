@@ -21,6 +21,7 @@ import {Button} from "../components/Button";
 import {Page} from "../components/Page";
 import {TextInput} from "../components/TextInput";
 import {HEADER_SIZE} from "../utils/ApiConstants";
+import Toast from "react-native-simple-toast";
 
 export default function SignUpScreen({navigation}) {
     const [userName, setUserName] = useState('');
@@ -38,15 +39,15 @@ export default function SignUpScreen({navigation}) {
         clearError();
 
         if (!userName.trim()) {
-            Alert.alert('Error', 'userName is required');
+            Alert.alert('Error', '用户名必填');
             return;
         }
         if (!password.trim()) {
-            Alert.alert('Error', 'Password is required');
+            Alert.alert('Error', '密码必填');
             return;
         }
         if (password !== confirmPassword) {
-            Alert.alert('Error', 'Passwords do not match');
+            Alert.alert('Error', '密码不匹配');
             return;
         }
 
@@ -57,18 +58,10 @@ export default function SignUpScreen({navigation}) {
         });
 
         if (success) {
-            Alert.alert(
-                'Success',
-                'Your account has been created successfully!',
-                [
-                    {
-                        text: 'OK',
-                        onPress: () => navigation.navigate('Home')
-                    }
-                ]
-            );
+            Toast.show("账号创建成功", Toast.SHORT);
+            navigation.navigate('Login');
         } else if (error) {
-            Alert.alert('Registration Failed', error);
+            Toast.show("账号创建失败", Toast.SHORT);
         }
     };
 
@@ -85,24 +78,26 @@ export default function SignUpScreen({navigation}) {
                 >
                     <SpatialNavigationNode orientation={'vertical'}>
                         <View style={styles.formContainer}>
-                            <Typography variant="title">Create Account</Typography>
+                            <Image source={require('../../assets/icon.png')} style={styles.logo}
+                                   resizeMode="contain"/>
+                            <Typography variant="title">创建账号</Typography>
                             <Spacer direction={"vertical"} gap={'$6'}/>
                             <View style={styles.inputContainer}>
-                                <TextInput placeholder='Username' onEnterPress={setUserName}
+                                <TextInput placeholder='用户名' onEnterPress={setUserName}
                                            height={scaledPixels(100)}/>
                                 <Spacer direction={"vertical"} gap={'$6'}/>
-                                <TextInput placeholder='Password' onEnterPress={setPassword}
+                                <TextInput placeholder='密码' onEnterPress={setPassword}
                                            height={scaledPixels(100)} isPassword={true}/>
                                 <Spacer direction={"vertical"} gap={'$6'}/>
-                                <TextInput placeholder='ConfirmPassword' onEnterPress={setConfirmPassword}
+                                <TextInput placeholder='确认密码' onEnterPress={setConfirmPassword}
                                            height={scaledPixels(100)} isPassword={true}/>
                             </View>
                             <Spacer direction={"vertical"} gap={'$6'}/>
                             <Button label="注册" onSelect={handleSignUp}/>
                             <Spacer direction={"vertical"} gap={'$6'}/>
                             <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.text}>Already have an account?</Text>
-                                <Spacer direction={"horizontal"} gap={'$6'}/>
+                                <Text style={styles.text}>已经有账号?</Text>
+                                <Spacer direction={"horizontal"} gap={'$3'}/>
                                 <Button label="登录" onSelect={() => navigation.navigate('Login')}/>
                             </View>
                         </View>
@@ -129,8 +124,8 @@ const styles = StyleSheet.create({
     },
     text: {
         color: 'white',
-        marginBottom: 30,
-        fontSize: 20,
+        marginTop: 5,
+        fontSize: 12,
     },
     topArrowContainer: {
         width: '100%',
@@ -149,5 +144,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         bottom: -15,
         left: 0,
+    },
+    logo: {
+        width: 80,
+        height: 80,
     },
 });

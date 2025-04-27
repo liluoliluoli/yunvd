@@ -22,12 +22,6 @@ export const FilterBar = ({routes, onTabPress, currentIndex}: FilterBarProps) =>
         tabRefs.current = routes.map(() => React.createRef());
     }, [routes]);
 
-    React.useEffect(() => {
-        if (tabRefs.current[index]?.current && isFocused) {
-            tabRefs.current[index].current?.focus();
-        }
-    }, [tabRefs.current[index], isFocused]);
-
     const handlePress = (i) => {
         setIndex(i);
         onTabPress(i)
@@ -83,14 +77,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     activeTabText: {
-        color: '#fff',
+        color: 'pink',
         fontWeight: 'bold',
     },
     activeTabItem: {
         backgroundColor: 'black',
         borderColor: 'white',
-        borderWidth: 1,
-        borderRadius: scaledPixels(6),
         justifyContent: 'center',
         alignItems: 'center',
     },

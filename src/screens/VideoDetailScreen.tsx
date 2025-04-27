@@ -10,7 +10,7 @@ import {Button} from "../components/Button";
 import {Spacer} from "../components/Spacer";
 import {theme} from "../theme/theme";
 import {Episode} from "../components/Episode";
-import {HEADER_SIZE} from "../utils/ApiConstants";
+import {formatTime, HEADER_SIZE} from "../utils/ApiConstants";
 import {useVideoItemViewModel} from "../viewModels/VideoItemViewModel";
 
 const VideoDetailScreen = ({route, navigation}) => {
@@ -51,7 +51,7 @@ const VideoDetailScreen = ({route, navigation}) => {
     }, []);
 
     const navigateToVideoPlayer = (episode, video) => {
-        console.log('Navigating to video player with video:', episode.url);
+        console.log('Navigating to video player with video:', video.lastPlayedPosition);
         navigation.push('VideoPlayer', {episode, video});
     };
 
@@ -72,7 +72,7 @@ const VideoDetailScreen = ({route, navigation}) => {
                             </ImageContainer>
                             <InformationContainer>
                                 <Typography variant="title"
-                                            style={{textAlign: 'center'}}>{passedVideo?.title}{passedVideo?.totalEpisode && "("}{passedVideo?.totalEpisode}{passedVideo?.totalEpisode && ")"}</Typography>
+                                            style={{textAlign: 'center'}}>{passedVideo?.title}{video?.episodes.length && "("}{video?.episodes.length}{video?.episodes.length && ")"}</Typography>
                                 <Spacer gap={'$6'}/>
                                 <Tag variant="body"
                                      style={{textAlign: 'center'}}>{passedVideo?.region} {passedVideo?.publishMonth} {passedVideo?.genres?.join('/')}</Tag>
@@ -85,7 +85,9 @@ const VideoDetailScreen = ({route, navigation}) => {
                                 <ButtonContainer>
                                     <Button label={isFavorite ? '已收藏' : '收藏'}
                                             onSelect={handelFavorite}/>
-                                    <Button label="续播" onSelect={() => console.log('续播!')}/>
+                                    <Button
+                                        label={video?.lastPlayedEpisodeId ? video?.episodes.find(item => item.id === video?.lastPlayedEpisodeId).episodeTitle + " [" + formatTime(video?.lastPlayedPosition) + "]" : "播放"}
+                                        onSelect={() => console.log('续播!')}/>
                                     <Button label="下一集" onSelect={() => console.log('下一集!')}/>
                                 </ButtonContainer>
                             </InformationContainer>

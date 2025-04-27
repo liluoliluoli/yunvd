@@ -5,11 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/screens/RecordScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/TvSeriesScreen.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/TvShowScreen.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icon-1280x768.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icon-1920x720.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icon-400x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icon-800x480.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/google.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/splash-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Filterbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Filterbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Tabbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tabbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/VideoList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/VideoItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/VideoItem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/SignUpScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SignUpScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/viewModels/AuthViewModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/viewModels/AuthViewModel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +78,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "jsx.switch.disabled": "true",
-    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/screens",
+    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/assets",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,10 +95,13 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
+      <recent name="$PROJECT_DIR$/assets/fonts" />
       <recent name="$PROJECT_DIR$/src/screens" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/viewModels" />
-      <recent name="$PROJECT_DIR$/src/models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets" />
     </key>
   </component>
@@ -158,7 +176,7 @@
       <workItem from="1743758537542" duration="87840000" />
       <workItem from="1744345304259" duration="39710000" />
       <workItem from="1744777758422" duration="128292000" />
-      <workItem from="1745578311694" duration="51874000" />
+      <workItem from="1745578311694" duration="58885000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -504,7 +522,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745749640548</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="init">
+      <option name="closed" value="true" />
+      <created>1745749967881</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1745749967881</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +564,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx</url>
-          <line>426</line>
+          <line>428</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -548,7 +574,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx</url>
-          <line>547</line>
+          <line>549</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>

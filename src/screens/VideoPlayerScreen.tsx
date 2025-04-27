@@ -24,6 +24,7 @@ import RemoteControlManager from "../remote-control/RemoteControlManager";
 import Episode from "../models/Episode";
 import Subtitle from "../models/Subtitle";
 import LoadingIndicator from "../components/LoadingIndicator";
+import {formatTime} from "../utils/ApiConstants";
 
 
 const {width} = Dimensions.get('window');
@@ -31,13 +32,6 @@ const sliderWidth = width * 0.9;
 const thumbWidth = 20;
 const seekTime = 5;
 const longSeekTime = 15;
-
-const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${minutes}:${secs.toString().padStart(2, '0')}`;
-};
-
 
 const VideoPlayerScreen = ({route, navigation}) => {
     const videoRef = useRef<VideoRef>(null);
@@ -60,6 +54,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
     const [selectedSubtitle, setSelectedSubtitle] = useState<Subtitle | null>(playingEpisode.subtitles[0]);
     const [playingSubtitle, setPlayingSubtitle] = useState<Subtitle | null>(playingEpisode.subtitles[0]);
     const [isVideoBuffering, setIsVideoBuffering] = useState<boolean>(false);
+    const [lastPlayedPosition, setLastPlayedPosition] = useState(passedVideo.lastPlayedPosition);
 
 
     const renderEpisodeItem = (episode, index) => (
@@ -99,6 +94,13 @@ const VideoPlayerScreen = ({route, navigation}) => {
     useEffect(() => {
         controlsOpenTimer();
     }, [controlsOpenTimer]);
+
+    useEffect(() => {
+        console.log("lastPlayedPosition:" + lastPlayedPosition)
+        if (lastPlayedPosition && lastPlayedPosition > 0) {
+            seek(lastPlayedPosition);
+        }
+    }, []);
 
     const handleShowEpisodesModal = () => {
         setShowEpisodesModal(true);

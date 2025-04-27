@@ -35,10 +35,12 @@ export const useAuthViewModel = () => {
 
     useEffect(() => {
         console.log('AuthViewModel initialized');
-        checkAuthStatus().catch(err => {
-            console.error('Auth check failed:', err);
-        });
-        fetchUserProfile();
+        checkAuthStatus().then((authorization) => {
+            if (authorization) {
+                fetchUserProfile();
+            }
+        })
+
     }, []);
 
     const checkAuthStatus = useCallback(async () => {

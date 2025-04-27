@@ -1,6 +1,6 @@
 import {scaledPixels} from "../hooks/useScale";
 
-export const API_BASE_URL = 'http://59565ef5.cpolar.io';
+export const API_BASE_URL = 'http://4462cf23.cpolar.io';
 
 export const ENDPOINTS = {
     GET_LAST_APP_VERSION: API_BASE_URL + '/api/version/getLastVersion',
@@ -69,20 +69,17 @@ export const REGION_OPTIONS = [
     {key: "日本", label: "日本"},
     {key: "美国", label: "美国"}
 ]
-export const YEAR_OPTIONS = [
-    {key: "", label: "全部"},
-    {key: "2015", label: "2015"},
-    {key: "2016", label: "2016"},
-    {key: "2017", label: "2017"},
-    {key: "2018", label: "2018"},
-    {key: "2019", label: "2019"},
-    {key: "2020", label: "2020"},
-    {key: "2021", label: "2021"},
-    {key: "2022", label: "2022"},
-    {key: "2023", label: "2023"},
-    {key: "2024", label: "2024"},
-    {key: "2025", label: "2025"}
-]
+
+function generateRecentYears(n) {
+    const currentYear = new Date().getFullYear();
+    return Array.from({length: n}, (_, index) => ({
+        key: String(currentYear - index),
+        label: String(currentYear - index)
+    }));
+}
+
+export const YEAR_OPTIONS = generateRecentYears(10)
+YEAR_OPTIONS.unshift({key: "", label: "全部"})
 export const TAB_ROUTES = [
     {key: 'history', title: '播放历史', screen: 'Home'},
     {key: 'movies', title: '电影', screen: 'Movie'},
@@ -97,3 +94,8 @@ export const VT_TV_SHOWS = 'tvShows';
 export const VT_RECORD = 'record';
 
 
+export const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs.toString().padStart(2, '0')}`;
+};
