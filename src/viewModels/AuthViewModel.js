@@ -48,11 +48,10 @@ export const useAuthViewModel = () => {
             console.log('User authorization:', authorization ? authorization : 'Not found');
             if (authorization) {
                 const userName = await storage.getItem(STORAGE_KEYS.USER_NAME);
-                console.log('User userName:', userName ? 'Found' : 'Not found');
+                console.log('User userName:', userName ? userName : 'Not found');
 
                 if (userName) {
                     setUserName(userName);
-                    console.log('User loaded:', userName);
                 }
                 setIsAuthenticated(true);
                 return true;

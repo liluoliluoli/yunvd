@@ -9,107 +9,70 @@ import chunk from 'lodash/chunk';
 import VideoItem from "../models/VideoItem";
 import {VideoList} from "../components/VideoList";
 import {Spacer} from "../components/Spacer";
+import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
+import {VT_MOVIE} from "../utils/ApiConstants";
 
 const HEADER_SIZE = scaledPixels(400)
 export default function FavoriteScreen({route, navigation}) {
-    const [videos, setVideos] = useState<VideoItem[]>([]);
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
-    const [isLoadingMockData, setIsLoadingMockData] = useState(true);
-    const [mockError, setMockError] = useState(null);
-
-    const loadVideos = async () => {
-        try {
-            setIsLoadingMockData(true);
-            setMockError(null);
-            const mockVideos: VideoItem[] = [
-                {
-                    id: 1,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-
-                }, {
-                    id: 2,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-                }
-            ];
-            setVideos([...videos, ...mockVideos]);
-        } catch (error) {
-            console.error('Error loading videos:', error);
-            setMockError('Failed to load videos. Please try again.');
-        } finally {
-            setIsLoadingMockData(false);
-        }
-    };
+    const [down, setDown] = useState(false);
+    const {
+        videos,
+        setVideos,
+        isLoading,
+        error,
+        currentPage,
+        search,
+        sort,
+        setSort,
+        genre,
+        setGenre,
+        region,
+        setRegion,
+        year,
+        setYear,
+        videoType,
+        setVideoType,
+        setIsHistory,
+        fetchSearchVideos,
+        setCurrentPage,
+        setHasMore,
+        hasMore,
+        setIsRefresh,
+        isRefresh,
+        fetchFavoriteVideos,
+        favoriteCount
+    } = useVideoListViewModel();
 
     useEffect(() => {
-        try {
-            loadVideos();
-        } catch (err) {
-            setMockError('Failed to initialize the screen. Please restart the app.');
-        }
-    }, []);
-
-    useEffect(() => {
+        console.log(`videos total ${videos.length}`);
         setVideosByRow(chunk(videos, 5));
-        console.log(`Loaded ${videos.length} videos successfully`);
     }, [videos]);
 
     useEffect(() => {
-        console.log(`Loaded ${videosByRow.length} videosByRow successfully`);
-    }, [videosByRow]);
+        if (currentPage !== 0) {
+            fetchFavoriteVideos()
+        }
+    }, [currentPage]);
+
+    useEffect(() => {
+        if (down) {
+            setDown(false)
+            setCurrentPage(prev => prev + 1);
+        }
+    }, [down]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, []);
 
     const navigateToVideoDetails = (video) => {
         console.log('Navigating to video detail with video:', video.title);
-        navigation.navigate('VideoDetail', {video});
+        navigation.push('VideoDetail', {video});
     };
 
     return (
-        <Page>
+        <Page loadMore={() => setDown(true)}>
             <SafeAreaView style={styles.container}>
                 <SpatialNavigationScrollView
                     offsetFromStart={HEADER_SIZE + 20}
@@ -119,7 +82,7 @@ export default function FavoriteScreen({route, navigation}) {
                     ascendingArrowContainerStyle={styles.bottomArrowContainer}
                 >
                     <View style={styles.header}>
-                        <Text style={styles.favoriteCount}>收藏数：10</Text>
+                        <Text style={styles.favoriteCount}>收藏数：{favoriteCount}</Text>
                         <Spacer direction={"vertical"} gap={'$2'}/>
                         <View style={styles.divider}/>
                     </View>

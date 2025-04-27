@@ -1,20 +1,20 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
-    BackHandler,
     Dimensions,
-    HWEvent, Modal,
+    HWEvent,
+    Modal,
     Platform,
     Pressable,
-    SafeAreaView, ScrollView,
+    SafeAreaView,
+    ScrollView,
     StyleSheet,
-    Text, TVEventHandler,
+    Text,
     TVFocusGuideView,
     useTVEventHandler,
     View,
 } from 'react-native';
 import Video, {VideoRef} from 'react-native-video';
 import {CustomPressable} from "../components/CustomPressable";
-import {GoPreviousSvg} from "../../assets/GoPreviousSvg";
 import {RFPercentage} from "react-native-responsive-fontsize";
 import {PlaySvg} from "../../assets/PlaySvg";
 import {PauseSvg} from "../../assets/PauseSvg";
@@ -23,7 +23,6 @@ import {SupportedKeys} from "../remote-control/SupportedKeys";
 import RemoteControlManager from "../remote-control/RemoteControlManager";
 import Episode from "../models/Episode";
 import Subtitle from "../models/Subtitle";
-import subtitle from "../models/Subtitle";
 import LoadingIndicator from "../components/LoadingIndicator";
 
 
@@ -68,7 +67,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
             key={index}
             hasTVPreferredFocus={episode.id === selectedEpisode.id}
         >
-            <Text style={styles.episodeText}>{episode.episode}</Text>
+            <Text style={styles.episodeText}>{episode.episodeTitle}</Text>
         </CustomControlPressable>
     );
 
@@ -297,7 +296,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
     }, [showEpisodesModal]);
 
 
-    if (!passedEpisode || !passedEpisode.videoUrl) {
+    if (!passedEpisode || !passedEpisode.url) {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.errorContainer}>
@@ -310,7 +309,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
     return (
         <View style={styles.container}>
             <Video
-                source={{uri: playingEpisode.videoUrl}}
+                source={{uri: playingEpisode.url}}
                 ref={videoRef}
                 onBuffer={(e) => setIsVideoBuffering(e.isBuffering)}
                 onError={() => console.log("onError")}
@@ -327,7 +326,8 @@ const VideoPlayerScreen = ({route, navigation}) => {
                     <TVFocusGuideView autoFocus>
                         <CustomPressable
                             style={styles.title}>
-                            <Text style={styles.titleButtonText}>{passedVideo.title} {playingEpisode.episode}</Text>
+                            <Text
+                                style={styles.titleButtonText}>{passedVideo.title} {playingEpisode.episodeTitle}</Text>
                         </CustomPressable>
                     </TVFocusGuideView>
 

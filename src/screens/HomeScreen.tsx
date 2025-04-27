@@ -12,7 +12,7 @@ import {Header} from "../components/Header";
 import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 import {UpdateProvider} from "../components/UpdateContext";
-import {useVideoViewModel} from '../viewModels/VideoViewModel';
+import {useVideoListViewModel} from '../viewModels/VideoListViewModel';
 
 
 export default function HomeScreen({route, navigation}) {
@@ -27,13 +27,25 @@ export default function HomeScreen({route, navigation}) {
         currentPage,
         search,
         sort,
+        setSort,
         genre,
+        setGenre,
         region,
+        setRegion,
         year,
+        setYear,
         videoType,
+        setVideoType,
         setIsHistory,
         fetchSearchVideos,
-    } = useVideoViewModel();
+        setCurrentPage,
+        setHasMore,
+        hasMore,
+        setIsRefresh,
+        isRefresh,
+        fetchFavoriteVideos,
+        favoriteCount
+    } = useVideoListViewModel();
 
     useEffect(() => {
         console.log(`videos total ${videos.length}`);
@@ -41,15 +53,21 @@ export default function HomeScreen({route, navigation}) {
     }, [videos]);
 
     useEffect(() => {
+        if (currentPage !== 0) {
+            fetchSearchVideos()
+        }
+    }, [currentPage]);
+
+    useEffect(() => {
         if (down) {
             setDown(false)
-            fetchSearchVideos()
+            setCurrentPage(prev => prev + 1);
         }
     }, [down]);
 
     useEffect(() => {
         setIsHistory(true);
-        fetchSearchVideos()
+        setCurrentPage(1);
     }, []);
 
     const navigateToVideoDetails = (video) => {

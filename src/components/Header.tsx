@@ -11,7 +11,7 @@ import {version} from '../../package.json'
 import {UpdateContext} from "./UpdateContext";
 import {Typography} from "./Typography";
 import {useAuthViewModel} from "../viewModels/AuthViewModel";
-import {useVideoViewModel} from "../viewModels/VideoViewModel";
+import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 import {ENDPOINTS} from "../utils/ApiConstants";
 
 export const Header = ({}) => {
@@ -55,7 +55,7 @@ export const Header = ({}) => {
         }
         const updater = new UpdateAPK.UpdateAPK({
             iosAppId: "1104809018",
-            apkVersionUrl: "https://raw.githubusercontent.com/mikehardy/react-native-update-apk/master/example/test-version.json",
+            apkVersionUrl: ENDPOINTS.GET_LAST_APP_VERSION,
             apkVersionOptions: {
                 method: 'GET',
                 headers: {}
@@ -124,8 +124,6 @@ export const Header = ({}) => {
                         onSelect={onUpdate}
                         hidden={!hasUpdate}
                     />
-                    <Typography variant="title"
-                                style={{textAlign: 'center'}} hidden={hasUpdate}>v{currentVersion}</Typography>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button label={userName + '(' + watchCount + ')'} onSelect={onProfile}/>
                     <Spacer direction={"horizontal"} gap={'$6'}/>

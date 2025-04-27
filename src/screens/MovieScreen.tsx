@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {Button} from "../components/Button";
 import {BottomArrow, TopArrow} from "../components/Arrows";
 import {SpatialNavigationScrollView, SpatialNavigationView} from "react-tv-space-navigation";
@@ -8,326 +8,94 @@ import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
 import VideoItem from "../models/VideoItem";
-import {GENRE_OPTIONS, REGION_OPTIONS, SORT_OPTIONS, TAB_ROUTES, YEAR_OPTIONS} from "../utils/ApiConstants";
+import {
+    GENRE_OPTIONS,
+    HEADER_SIZE,
+    REGION_OPTIONS,
+    SORT_OPTIONS,
+    TAB_ROUTES, VT_MOVIE,
+    YEAR_OPTIONS
+} from "../utils/ApiConstants";
 import {Header} from "../components/Header";
 import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 import {UpdateProvider} from "../components/UpdateContext";
 import {Spacer} from "../components/Spacer";
+import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 
-const HEADER_SIZE = scaledPixels(400)
 export default function MovieScreen({route, navigation}) {
-    const [videos, setVideos] = useState<VideoItem[]>([]);
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
-    const [isLoadingMockData, setIsLoadingMockData] = useState(true);
-    const [mockError, setMockError] = useState(null);
+    const [down, setDown] = useState(false);
     const [index, setIndex] = useState(1);
-
-    const loadVideos = async () => {
-        try {
-            setIsLoadingMockData(true);
-            setMockError(null);
-            const mockVideos: VideoItem[] = [
-                {
-                    id: 1,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-
-                }, {
-                    id: 2,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-
-                }, {
-                    id: 3,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-
-                }, {
-                    id: 4,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-
-                }, {
-                    id: 5,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-                }, {
-                    id: 6,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-                }, {
-                    id: 7,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-                }, {
-                    id: 8,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-                }, {
-                    id: 9,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-                }, {
-                    id: 10,
-                    title: 'Big Buck Bunny',
-                    description: 'Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself.',
-                    thumbnail: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
-                    duration: '9:56',
-                    views: 10482,
-                    likes: 849,
-                    directors: ['Blender Foundation'],
-                    actors: ['Blender', 'Foundation', 'ket', 'Blender', 'Foundation', 'ket'],
-                    genres: ['喜剧', '动作'],
-                    region: 'US',
-                    year: '2025',
-                    isFavorite: false,
-                    rating: 4.8,
-                    publishDate: '2008-05-20',
-                    episodeCount: 20,
-                    episodes: [{
-                        id: 1,
-                        episode: "第1集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }, {
-                        id: 2,
-                        episode: "第2集",
-                        videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    }],
-                }
-            ];
-            setVideos([...videos, ...mockVideos]);
-        } catch (error) {
-            console.error('Error loading videos:', error);
-            setMockError('Failed to load videos. Please try again.');
-        } finally {
-            setIsLoadingMockData(false);
-        }
-    };
+    const {
+        videos,
+        setVideos,
+        isLoading,
+        error,
+        currentPage,
+        search,
+        sort,
+        setSort,
+        genre,
+        setGenre,
+        region,
+        setRegion,
+        year,
+        setYear,
+        videoType,
+        setVideoType,
+        setIsHistory,
+        fetchSearchVideos,
+        setCurrentPage,
+        setHasMore,
+        hasMore,
+        setIsRefresh,
+        isRefresh,
+    } = useVideoListViewModel();
 
     useEffect(() => {
-        try {
-            loadVideos();
-        } catch (err) {
-            setMockError('Failed to initialize the screen. Please restart the app.');
-        }
-    }, []);
-
-    useEffect(() => {
+        console.log(`videos total ${videos.length}`);
         setVideosByRow(chunk(videos, 5));
-        console.log(`Loaded ${videos.length} videos successfully`);
     }, [videos]);
 
     useEffect(() => {
-        console.log(`Loaded ${videosByRow.length} videosByRow successfully`);
-    }, [videosByRow]);
+        if (down) {
+            setDown(false)
+            setCurrentPage(prev => prev + 1);
+        }
+    }, [down]);
+
+    useEffect(() => {
+        setIsRefresh(true);
+        setCurrentPage(0);
+    }, [sort, genre, region, year]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [isRefresh]);
+
+    useEffect(() => {
+        if (videoType && currentPage !== 0) {
+            fetchSearchVideos()
+        }
+    }, [currentPage]);
+
+    useEffect(() => {
+        setVideoType(VT_MOVIE)
+        if (videoType) {
+            setIsHistory(false);
+            setCurrentPage(1);
+        }
+    }, [videoType]);
 
     const navigateToVideoDetails = (video) => {
         console.log('Navigating to video detail with video:', video.title);
-        navigation.navigate('VideoDetail', {video});
+        navigation.push('VideoDetail', {video});
     };
 
     return (
         <UpdateProvider>
-            <Page>
+            <Page loadMore={() => setDown(true)}>
                 <SafeAreaView style={styles.container}>
                     <SpatialNavigationScrollView
                         offsetFromStart={HEADER_SIZE + 20}
@@ -348,7 +116,8 @@ export default function MovieScreen({route, navigation}) {
                             {SORT_OPTIONS.map((option, key) => (
                                 <React.Fragment key={key}>
                                     <Spacer direction="horizontal" gap={'$4'}/>
-                                    <Button label={option} onSelect={() => console.log("sort onSelect")}/>
+                                    <Button label={option.label}
+                                            onSelect={() => setSort(option.key)}/>
                                 </React.Fragment>
                             ))}
                         </SpatialNavigationView>
@@ -356,7 +125,7 @@ export default function MovieScreen({route, navigation}) {
                             {GENRE_OPTIONS.map((option, key) => (
                                 <React.Fragment key={key}>
                                     <Spacer direction="horizontal" gap={'$4'}/>
-                                    <Button label={option} onSelect={() => console.log("sort onSelect")}/>
+                                    <Button label={option === "" ? "全部" : option} onSelect={() => setGenre(option)}/>
                                 </React.Fragment>
                             ))}
                         </SpatialNavigationView>
@@ -364,7 +133,8 @@ export default function MovieScreen({route, navigation}) {
                             {REGION_OPTIONS.map((option, key) => (
                                 <React.Fragment key={key}>
                                     <Spacer direction="horizontal" gap={'$4'}/>
-                                    <Button label={option} onSelect={() => console.log("sort onSelect")}/>
+                                    <Button label={option === "" ? "全部" : option}
+                                            onSelect={() => setRegion(option)}/>
                                 </React.Fragment>
                             ))}
                         </SpatialNavigationView>
@@ -372,7 +142,7 @@ export default function MovieScreen({route, navigation}) {
                             {YEAR_OPTIONS.map((option, key) => (
                                 <React.Fragment key={key}>
                                     <Spacer direction="horizontal" gap={'$4'}/>
-                                    <Button label={option} onSelect={() => console.log("sort onSelect")}/>
+                                    <Button label={option === "" ? "全部" : option} onSelect={() => setYear(option)}/>
                                 </React.Fragment>
                             ))}
                         </SpatialNavigationView>

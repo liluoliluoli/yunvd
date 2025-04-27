@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Image, StyleSheet, View,} from 'react-native';
 import {SpatialNavigationNode, SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
@@ -10,19 +10,36 @@ import {Button} from "../components/Button";
 import {Spacer} from "../components/Spacer";
 import {theme} from "../theme/theme";
 import {Episode} from "../components/Episode";
-
-const HEADER_SIZE = scaledPixels(400);
+import {HEADER_SIZE} from "../utils/ApiConstants";
+import {useVideoItemViewModel} from "../viewModels/VideoItemViewModel";
 
 const VideoDetailScreen = ({route, navigation}) => {
     const passedVideo = route.params?.video;
-    const [isFavorite, setIsFavorite] = useState(false);
+    const {
+        video,
+        videoId,
+        setVideoId,
+        isLoading,
+        error,
+        fetchVideo,
+        isFavorite,
+        setIsFavorite,
+        updateFavorite,
+    } = useVideoItemViewModel();
 
-    const onSelected = useCallback(() => {
-        console.log("on selected");
-    }, []);
+    useEffect(() => {
+        setVideoId(passedVideo.id);
+        fetchVideo().then(() => setIsFavorite(video.isFavorite))
+    }, [videoId]);
 
-    const toggleFavorite = useCallback(() => {
-        setIsFavorite(!isFavorite);
+    useEffect(() => {
+        if (video) {
+            setIsFavorite(video.isFavorite);
+        }
+    }, [video]);
+
+    const handelFavorite = useCallback(() => {
+        updateFavorite().then(() => setIsFavorite(!isFavorite));
     }, [isFavorite]);
 
     const handleContinue = useCallback(() => {
@@ -33,12 +50,8 @@ const VideoDetailScreen = ({route, navigation}) => {
         // 处理下一集逻辑
     }, []);
 
-    const handleEpisodePress = useCallback((index: number) => {
-        // 处理剧集点击
-    }, []);
-
     const navigateToVideoPlayer = (episode, video) => {
-        console.log('Navigating to video player with video:', episode.label);
+        console.log('Navigating to video player with video:', episode.url);
         navigation.push('VideoPlayer', {episode, video});
     };
 
@@ -59,26 +72,28 @@ const VideoDetailScreen = ({route, navigation}) => {
                             </ImageContainer>
                             <InformationContainer>
                                 <Typography variant="title"
-                                            style={{textAlign: 'center'}}>{passedVideo?.title}{passedVideo?.episodeCount && "("}{passedVideo?.episodeCount}{passedVideo?.episodeCount && ")"}</Typography>
+                                            style={{textAlign: 'center'}}>{passedVideo?.title}{passedVideo?.totalEpisode && "("}{passedVideo?.totalEpisode}{passedVideo?.totalEpisode && ")"}</Typography>
                                 <Spacer gap={'$6'}/>
                                 <Tag variant="body"
-                                     style={{textAlign: 'center'}}>{passedVideo?.region} {passedVideo?.year} {passedVideo?.genres?.join('/')}</Tag>
+                                     style={{textAlign: 'center'}}>{passedVideo?.region} {passedVideo?.publishMonth} {passedVideo?.genres?.join('/')}</Tag>
                                 <Actor variant="body"
-                                       style={{textAlign: 'center'}}>{passedVideo?.actors?.join(' / ')}</Actor>
+                                       style={{textAlign: 'center'}}>{passedVideo?.directors?.map(actor => actor.name).join(' / ')}</Actor>
+                                <Actor variant="body"
+                                       style={{textAlign: 'center'}}>{passedVideo?.actors?.map(actor => actor.name).join(' / ')}</Actor>
                                 <Description variant="body"
                                              style={{textAlign: 'center'}}>{passedVideo?.description}</Description>
                                 <ButtonContainer>
                                     <Button label={isFavorite ? '已收藏' : '收藏'}
-                                            onSelect={toggleFavorite}/>
+                                            onSelect={handelFavorite}/>
                                     <Button label="续播" onSelect={() => console.log('续播!')}/>
                                     <Button label="下一集" onSelect={() => console.log('下一集!')}/>
                                 </ButtonContainer>
                             </InformationContainer>
                         </Container>
                     </SpatialNavigationNode>
-                    {passedVideo?.episodes?.map((episode, index) => (
-                        <Episode key={index} id={episode.id} label={episode.episode}
-                                 onSelect={() => navigateToVideoPlayer(episode, passedVideo)}/>
+                    {video?.episodes?.map((episode, index) => (
+                        <Episode key={index} id={episode.id} label={episode.episodeTitle}
+                                 onSelect={() => navigateToVideoPlayer(episode, video)}/>
                     ))}
                 </SpatialNavigationScrollView>
             </View>
@@ -112,7 +127,7 @@ const Actor = styled(Typography)({
 });
 
 const Description = styled(Typography)({
-    flex: 4,
+    flex: 3,
 });
 
 const Container = styled.View<{ height: number }>(({height}) => ({

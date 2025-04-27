@@ -1,4 +1,5 @@
 import Episode from "./Episode";
+import Actor from "./Actor";
 
 export type VideoItem = {
     id: number,
@@ -12,9 +13,11 @@ export type VideoItem = {
     publishMonth: string,
     thumbnail: string,
     directors: string[]
-    actors: string[]
+    actors: Actor[]
     genres: string[]
     episodes: Episode[]
     ratio: string
+    lastPlayedTime: Date
+    isFavorite: boolean
 };
 export default VideoItem;
