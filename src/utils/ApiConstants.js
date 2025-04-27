@@ -53,11 +53,36 @@ export const SORT_OPTIONS = [
     {key: "hot", label: "最热"},
     {key: "rate", label: "好评"}
 ]
-export const GENRE_OPTIONS = ["", "爱情", "古装", "悬疑", "都市", "喜剧"]
-export const REGION_OPTIONS = ["", "大陆", "香港", "台湾", "日本", "韩国", "美国"]
-const currentYear = new Date().getFullYear();
-export const YEAR_OPTIONS = Array.from({length: 10}, (_, i) => (currentYear - i).toString());
-YEAR_OPTIONS.unshift("")
+export const GENRE_OPTIONS = [
+    {key: "", label: "全部"},
+    {key: "爱情", label: "爱情"},
+    {key: "古装", label: "古装"},
+    {key: "悬疑", label: "悬疑"},
+    {key: "都市", label: "都市"},
+    {key: "喜剧", label: "喜剧"}
+]
+export const REGION_OPTIONS = [
+    {key: "", label: "全部"},
+    {key: "大陆", label: "大陆"},
+    {key: "香港", label: "香港"},
+    {key: "台湾", label: "台湾"},
+    {key: "日本", label: "日本"},
+    {key: "美国", label: "美国"}
+]
+export const YEAR_OPTIONS = [
+    {key: "", label: "全部"},
+    {key: "2015", label: "2015"},
+    {key: "2016", label: "2016"},
+    {key: "2017", label: "2017"},
+    {key: "2018", label: "2018"},
+    {key: "2019", label: "2019"},
+    {key: "2020", label: "2020"},
+    {key: "2021", label: "2021"},
+    {key: "2022", label: "2022"},
+    {key: "2023", label: "2023"},
+    {key: "2024", label: "2024"},
+    {key: "2025", label: "2025"}
+]
 export const TAB_ROUTES = [
     {key: 'history', title: '播放历史', screen: 'Home'},
     {key: 'movies', title: '电影', screen: 'Movie'},

@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/models/Actor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/viewModels/VideoListViewModel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Filterbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Episode.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Episode.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/VideoItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/VideoItem.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/SearchScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SearchScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/viewModels/AuthViewModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/viewModels/AuthViewModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/viewModels/VideoViewModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/viewModels/VideoItemViewModel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +62,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "jsx.switch.disabled": "true",
-    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/viewModels",
+    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/src/components",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -90,10 +79,10 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/viewModels" />
       <recent name="$PROJECT_DIR$/src/models" />
       <recent name="$PROJECT_DIR$/assets" />
-      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/remote-control" />
     </key>
   </component>
@@ -168,7 +157,7 @@
       <workItem from="1743758537542" duration="87840000" />
       <workItem from="1744345304259" duration="39710000" />
       <workItem from="1744777758422" duration="128292000" />
-      <workItem from="1745578311694" duration="46691000" />
+      <workItem from="1745578311694" duration="51557000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -498,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745725552277</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="init">
+      <option name="closed" value="true" />
+      <created>1745744810173</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1745744810173</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -544,12 +541,6 @@
           <url>file://$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx</url>
           <line>547</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/utils/ApiConstants.js</url>
-          <line>55</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

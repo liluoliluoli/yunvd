@@ -22,6 +22,7 @@ import {VideoList} from "../components/VideoList";
 import {UpdateProvider} from "../components/UpdateContext";
 import {Spacer} from "../components/Spacer";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
+import {FilterBar} from "../components/Filterbar";
 
 export default function MovieScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
@@ -112,41 +113,18 @@ export default function MovieScreen({route, navigation}) {
                                 navigation.navigate(TAB_ROUTES[index].screen);
                             }}
                         />
-                        <SpatialNavigationView style={styles.filterRow} direction="horizontal">
-                            {SORT_OPTIONS.map((option, key) => (
-                                <React.Fragment key={key}>
-                                    <Spacer direction="horizontal" gap={'$4'}/>
-                                    <Button label={option.label}
-                                            onSelect={() => setSort(option.key)}/>
-                                </React.Fragment>
-                            ))}
-                        </SpatialNavigationView>
-                        <SpatialNavigationView style={styles.filterRow} direction="horizontal">
-                            {GENRE_OPTIONS.map((option, key) => (
-                                <React.Fragment key={key}>
-                                    <Spacer direction="horizontal" gap={'$4'}/>
-                                    <Button label={option === "" ? "全部" : option} onSelect={() => setGenre(option)}/>
-                                </React.Fragment>
-                            ))}
-                        </SpatialNavigationView>
-                        <SpatialNavigationView style={styles.filterRow} direction="horizontal">
-                            {REGION_OPTIONS.map((option, key) => (
-                                <React.Fragment key={key}>
-                                    <Spacer direction="horizontal" gap={'$4'}/>
-                                    <Button label={option === "" ? "全部" : option}
-                                            onSelect={() => setRegion(option)}/>
-                                </React.Fragment>
-                            ))}
-                        </SpatialNavigationView>
-                        <SpatialNavigationView style={styles.filterRow} direction="horizontal">
-                            {YEAR_OPTIONS.map((option, key) => (
-                                <React.Fragment key={key}>
-                                    <Spacer direction="horizontal" gap={'$4'}/>
-                                    <Button label={option === "" ? "全部" : option} onSelect={() => setYear(option)}/>
-                                </React.Fragment>
-                            ))}
-                        </SpatialNavigationView>
-
+                        <FilterBar routes={SORT_OPTIONS}
+                                   onTabPress={(index: number) => setSort(SORT_OPTIONS[index].key)}
+                                   currentIndex={0}></FilterBar>
+                        <FilterBar routes={GENRE_OPTIONS}
+                                   onTabPress={(index: number) => setSort(GENRE_OPTIONS[index].key)}
+                                   currentIndex={0}></FilterBar>
+                        <FilterBar routes={REGION_OPTIONS}
+                                   onTabPress={(index: number) => setSort(REGION_OPTIONS[index].key)}
+                                   currentIndex={0}></FilterBar>
+                        <FilterBar routes={YEAR_OPTIONS}
+                                   onTabPress={(index: number) => setSort(YEAR_OPTIONS[index].key)}
+                                   currentIndex={0}></FilterBar>
                         <VideoList
                             videosByRow={videosByRow}
                             onVideoPress={navigateToVideoDetails}
