@@ -25,6 +25,7 @@ import Episode from "../models/Episode";
 import Subtitle from "../models/Subtitle";
 import LoadingIndicator from "../components/LoadingIndicator";
 import {formatTime} from "../utils/ApiConstants";
+import {useEpisodeViewModel} from "../viewModels/EpisodeViewModel";
 
 
 const {width} = Dimensions.get('window');
@@ -51,25 +52,45 @@ const VideoPlayerScreen = ({route, navigation}) => {
     const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(passedEpisode);
     const [playingEpisode, setPlayingEpisode] = useState<Episode | null>(passedEpisode);
     const [showSubtitlesModal, setShowSubtitlesModal] = useState(false);
-    const [selectedSubtitle, setSelectedSubtitle] = useState<Subtitle | null>(playingEpisode.subtitles[0]);
-    const [playingSubtitle, setPlayingSubtitle] = useState<Subtitle | null>(playingEpisode.subtitles[0]);
+    const [selectedSubtitle, setSelectedSubtitle] = useState<Subtitle | null>(playingEpisode?.subtitles[0]);
+    const [playingSubtitle, setPlayingSubtitle] = useState<Subtitle | null>(playingEpisode?.subtitles[0]);
     const [isVideoBuffering, setIsVideoBuffering] = useState<boolean>(false);
     const [lastPlayedPosition, setLastPlayedPosition] = useState(passedVideo.lastPlayedPosition);
+    const {
+        episode,
+        setEpisode,
+        episodeId,
+        setEpisodeId,
+        fetchEpisode
+    } = useEpisodeViewModel();
+
+    useEffect(() => {
+        setEpisodeId(selectedEpisode.id);
+        fetchEpisode();
+    }, [episodeId]);
+
+    useEffect(() => {
+        setEpisodeId(selectedEpisode.id);
+    }, [selectedEpisode]);
+
+    useEffect(() => {
+        setPlayingEpisode(episode)
+    }, [episode]);
 
 
     const renderEpisodeItem = (episode, index) => (
         <CustomControlPressable
             key={index}
-            hasTVPreferredFocus={episode.id === selectedEpisode.id}
+            hasTVPreferredFocus={episode.id === selectedEpisode?.id}
         >
-            <Text style={styles.episodeText}>{episode.episodeTitle}</Text>
+            <Text style={styles.episodeText}>{episode?.episodeTitle}</Text>
         </CustomControlPressable>
     );
 
     const renderSubtitleItem = (subtitle, index) => (
         <CustomControlPressable
             key={index}
-            hasTVPreferredFocus={subtitle.id === selectedSubtitle.id}
+            hasTVPreferredFocus={subtitle.id === selectedSubtitle?.id}
         >
             <Text style={styles.subtitleText}>{subtitle.subtitle}</Text>
         </CustomControlPressable>
@@ -311,7 +332,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
     return (
         <View style={styles.container}>
             <Video
-                source={{uri: playingEpisode.url}}
+                source={{uri: playingEpisode?.url}}
                 ref={videoRef}
                 onBuffer={(e) => setIsVideoBuffering(e.isBuffering)}
                 onError={() => console.log("onError")}
@@ -329,7 +350,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
                         <CustomPressable
                             style={styles.title}>
                             <Text
-                                style={styles.titleButtonText}>{passedVideo.title} {playingEpisode.episodeTitle}</Text>
+                                style={styles.titleButtonText}>{passedVideo.title} {playingEpisode?.episodeTitle}</Text>
                         </CustomPressable>
                     </TVFocusGuideView>
 
@@ -416,7 +437,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
                             <View style={styles.modalContainer}>
                                 <View style={styles.modalSubtitleContent}>
                                     <ScrollView>
-                                        {playingEpisode.subtitles.map(renderSubtitleItem)}
+                                        {playingEpisode?.subtitles?.map(renderSubtitleItem)}
                                     </ScrollView>
                                 </View>
                             </View>
