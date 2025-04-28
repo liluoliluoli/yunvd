@@ -83,9 +83,11 @@ class ApiService {
         }
     }
 
-    async updatePlayedStatus(videoId, episodeId, position) {
+    async updatePlayedStatus(updatePlayedStatusList) {
         try {
-            return await this.apiClient.post(ENDPOINTS.UPDATE_PALAYED_STATUS, {videoId, episodeId, position});
+            return await this.apiClient.post(ENDPOINTS.UPDATE_PALAYED_STATUS, {
+                updatePlayedStatusList
+            });
         } catch (error) {
             console.error('Error updatePlayedStatus:', error);
             throw error;

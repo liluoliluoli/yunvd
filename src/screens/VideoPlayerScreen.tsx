@@ -24,8 +24,9 @@ import RemoteControlManager from "../remote-control/RemoteControlManager";
 import Episode from "../models/Episode";
 import Subtitle from "../models/Subtitle";
 import LoadingIndicator from "../components/LoadingIndicator";
-import {formatTime} from "../utils/ApiConstants";
+import {formatTime, STORAGE_KEYS} from "../utils/ApiConstants";
 import {useEpisodeViewModel} from "../viewModels/EpisodeViewModel";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const {width} = Dimensions.get('window');
@@ -44,6 +45,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
     const [keyPressed, setKeyPressed] = useState(false);
     const longPressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [previewTime, setPreviewTime] = useState(0);
+    const previewTimeRef = useRef(previewTime);
     const [focusedControl, setFocusedControl] = useState<'slider' | 'episodes' | 'subtitle'>('slider');
     const [showEpisodesModal, setShowEpisodesModal] = useState(false);
     const passedVideo = route.params?.video;
@@ -56,6 +58,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
     const [playingSubtitle, setPlayingSubtitle] = useState<Subtitle | null>(playingEpisode?.subtitles[0]);
     const [isVideoBuffering, setIsVideoBuffering] = useState<boolean>(false);
     const [lastPlayedPosition, setLastPlayedPosition] = useState(passedVideo.lastPlayedPosition);
+    const saveIntervalRef = useRef<NodeJS.Timeout | null>(null);
     const {
         episode,
         setEpisode,
@@ -65,17 +68,71 @@ const VideoPlayerScreen = ({route, navigation}) => {
     } = useEpisodeViewModel();
 
     useEffect(() => {
-        setEpisodeId(selectedEpisode.id);
+        if (playingEpisode) {
+            setEpisodeId(playingEpisode.id);
+        }
+    }, [playingEpisode]);
+
+    useEffect(() => {
         fetchEpisode();
     }, [episodeId]);
 
     useEffect(() => {
-        setEpisodeId(selectedEpisode.id);
-    }, [selectedEpisode]);
-
-    useEffect(() => {
         setPlayingEpisode(episode)
     }, [episode]);
+
+    useEffect(() => {
+        previewTimeRef.current = previewTime
+    }, [previewTime]);
+
+    const savePlayInfo = useCallback(async () => {
+        if (passedVideo && playingEpisode) {
+            try {
+                const existingHistoryJson = await AsyncStorage.getItem(STORAGE_KEYS.WATCH_HISTORY);
+                let existingHistory = existingHistoryJson ? JSON.parse(existingHistoryJson) : [];
+                if (!Array.isArray(existingHistory)) {
+                    // 如果 existingHistory 不是数组，将其转换为数组
+                    existingHistory = [existingHistory];
+                }
+                const newPlayInfo = {
+                    videoId: passedVideo?.id,
+                    episodeId: playingEpisode?.id,
+                    position: Math.floor(previewTimeRef.current),
+                    timestamp: Math.floor(Date.now() / 1000),
+                };
+                const index = existingHistory.findIndex((item) => item.videoId === newPlayInfo.videoId);
+                if (index !== -1) {
+                    // 如果存在相同的 videoId，则覆盖该记录
+                    existingHistory[index] = newPlayInfo;
+                } else {
+                    // 否则，添加新记录
+                    existingHistory.push(newPlayInfo);
+                }
+                console.log("playInfo", JSON.stringify(existingHistory));
+                await AsyncStorage.setItem(STORAGE_KEYS.WATCH_HISTORY, JSON.stringify(existingHistory));
+            } catch (error) {
+                console.error('Failed to save play info:', error);
+            }
+        }
+    }, [passedVideo, playingEpisode, previewTime]);
+
+    useEffect(() => {
+        if (playingEpisode && playingEpisode.url) {
+            // 清除之前的定时器
+            if (saveIntervalRef.current) {
+                clearInterval(saveIntervalRef.current);
+            }
+            // 启动新的定时器
+            console.log("saveIntervalRef:" + playingEpisode.url)
+            saveIntervalRef.current = setInterval(savePlayInfo, 3000);
+        }
+        return () => {
+            // 组件卸载时清除定时器
+            if (saveIntervalRef.current) {
+                clearInterval(saveIntervalRef.current);
+            }
+        };
+    }, [playingEpisode]);
 
 
     const renderEpisodeItem = (episode, index) => (
@@ -117,11 +174,10 @@ const VideoPlayerScreen = ({route, navigation}) => {
     }, [controlsOpenTimer]);
 
     useEffect(() => {
-        console.log("lastPlayedPosition:" + lastPlayedPosition)
-        if (lastPlayedPosition && lastPlayedPosition > 0) {
+        if (playingEpisode && lastPlayedPosition && lastPlayedPosition > 0) {
             seek(lastPlayedPosition);
         }
-    }, []);
+    }, [playingEpisode, duration]);
 
     const handleShowEpisodesModal = () => {
         setShowEpisodesModal(true);

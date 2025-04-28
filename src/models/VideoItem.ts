@@ -17,7 +17,7 @@ export type VideoItem = {
     genres: string[]
     episodes: Episode[]
     ratio: string
-    lastPlayedTime: Date
+    lastPlayedTime: number
     isFavorite: boolean
     lastPlayedEpisodeId: number
     lastPlayedPosition: number
