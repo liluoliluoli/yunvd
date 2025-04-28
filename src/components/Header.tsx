@@ -21,6 +21,7 @@ export const Header = ({}) => {
     const {downloadProgress, setDownloadProgress} = useContext(UpdateContext);
     const {userName, watchCount, favoriteCount, isLoading, logout} = useAuthViewModel();
     const [showDonateModal, setShowDonateModal] = useState(false);
+    const [showDownloadModal, setShowDownloadModal] = useState(false);
 
     useEffect(() => {
         const updater = new UpdateAPK.UpdateAPK({
@@ -65,17 +66,8 @@ export const Header = ({}) => {
             },
             fileProviderAuthority: "com.yun.yunvd",
             needUpdateApp: performUpdate => {
-                Alert.alert(
-                    "Update Available",
-                    "New version released, do you want to update? ",
-                    [
-                        {
-                            text: "Cancel", onPress: () => {
-                            }
-                        },
-                        {text: "Update", onPress: () => performUpdate(true)}
-                    ]
-                );
+                setShowDownloadModal(true);
+                performUpdate(true);
             },
             downloadApkProgress: progress => {
                 console.log(`downloadApkProgress callback called - ${progress}%...`);
@@ -83,6 +75,7 @@ export const Header = ({}) => {
             },
             onError: (err) => {
                 console.log("onError callback called", err);
+                setShowDownloadModal(false);
             }
         });
         const checkUpdate = () => {
@@ -109,6 +102,18 @@ export const Header = ({}) => {
     return (
         <SpatialNavigationNode orientation={'horizontal'}>
             <View>
+                <Modal
+                    visible={showDownloadModal}
+                    transparent={true}
+                    animationType="fade"
+                    onRequestClose={() => setShowDownloadModal(false)}
+                >
+                    <View style={styles.modalOverlay}>
+                        <View style={styles.downloadProgressContainer}>
+                            <Typography variant="body">下载进度: {downloadProgress}%</Typography>
+                        </View>
+                    </View>
+                </Modal>
                 <View style={styles.header}>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
                     <Typography variant="title">YunVD </Typography>
@@ -190,5 +195,11 @@ const styles = StyleSheet.create({
         height: 0.3,
         backgroundColor: 'white',
         width: '100%',
+    },
+    downloadProgressContainer: {
+        backgroundColor: 'gray',
+        padding: 20,
+        borderRadius: 10,
+        alignItems: 'center',
     },
 });

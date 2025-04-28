@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import NetworkUtils from '../utils/NetworkUtils';
 import ApiClient from "./ApiClient";
 
+
 class ApiService {
     constructor() {
         this.apiClient = new ApiClient();
@@ -15,7 +16,6 @@ class ApiService {
         try {
             return await this.apiClient.post(ENDPOINTS.GET_LAST_APP_VERSION);
         } catch (error) {
-            console.error('Error getLastAppVersion:', error);
             throw error;
         }
     }
@@ -24,7 +24,6 @@ class ApiService {
         try {
             return await this.apiClient.post(ENDPOINTS.REGISTER, {userName, password, confirmPassword});
         } catch (error) {
-            console.error('Error register:', error);
             throw error;
         }
     }
@@ -32,14 +31,12 @@ class ApiService {
     async login(userName, password) {
         try {
             const response = await this.apiClient.post(ENDPOINTS.LOGIN, {userName, password});
-            console.log(`[ApiClient] POST request with response: ${JSON.stringify(response)}`);
             if (response && response.authorization) {
                 await this.storeAuthData(response.authorization, userName);
                 return true;
             }
             return false;
         } catch (error) {
-            console.error('Error login:', error);
             throw error;
         }
     }
@@ -69,7 +66,6 @@ class ApiService {
         try {
             return await this.apiClient.post(ENDPOINTS.WATCH_COUNT);
         } catch (error) {
-            console.error('Error watchCount:', error);
             throw error;
         }
     }
@@ -78,7 +74,6 @@ class ApiService {
         try {
             return await this.apiClient.post(ENDPOINTS.UPDATE_FAVORITE, {videoId, favorite});
         } catch (error) {
-            console.error('Error updateFavorite:', error);
             throw error;
         }
     }
@@ -89,7 +84,6 @@ class ApiService {
                 updatePlayedStatusList
             });
         } catch (error) {
-            console.error('Error updatePlayedStatus:', error);
             throw error;
         }
     }
@@ -98,7 +92,6 @@ class ApiService {
         try {
             return await this.apiClient.post(ENDPOINTS.QUERY_FAVORITES, {page: page});
         } catch (error) {
-            console.error('Error queryFavorites:', error);
             throw error;
         }
     }
@@ -115,7 +108,6 @@ class ApiService {
                 videoType
             });
         } catch (error) {
-            console.error('Error searchVideos:', error);
             throw error;
         }
     }
@@ -124,7 +116,6 @@ class ApiService {
         try {
             return await this.apiClient.post(ENDPOINTS.GET_VIDEO, {id});
         } catch (error) {
-            console.error('Error getVideo:', error);
             throw error;
         }
     }
@@ -133,7 +124,6 @@ class ApiService {
         try {
             return await this.apiClient.post(ENDPOINTS.GET_EPISODE, {id});
         } catch (error) {
-            console.error('Error getEpisode:', error);
             throw error;
         }
     }
@@ -162,62 +152,6 @@ class ApiService {
         ];
         await AsyncStorage.multiSet(storageItems);
     }
-
-    async addComment(videoId, content) {
-        try {
-            console.log(`[VideoService] Adding comment to video ${videoId}: ${content}`);
-            if (this.isWeb) {
-                console.log('[ApiService] Using mock data for web');
-                return {
-                    data: {
-                        id: Date.now().toString(),
-                        username: 'You',
-                        text: content,
-                        timestamp: new Date().toISOString()
-                    }
-                };
-            }
-
-            const response = await this.apiClient.post(`/videos/${videoId}/comments`, {text: content});
-            return response;
-        } catch (error) {
-            console.error(`[VideoService] Error adding comment to video ${videoId}:`, error);
-            if (this.isWeb) {
-                return {
-                    data: {
-                        id: Date.now().toString(),
-                        username: 'You',
-                        text: content,
-                        timestamp: new Date().toISOString()
-                    }
-                };
-            }
-            throw NetworkUtils.handleApiError(error);
-        }
-    }
-
-    async addToLocalWatchHistory(videoId) {
-        try {
-            const historyJson = await AsyncStorage.getItem('watchHistory');
-            let history = historyJson ? JSON.parse(historyJson) : [];
-
-            // Remove if already exists (to move to top)
-            history = history.filter(id => id !== videoId);
-
-            // Add to beginning of array
-            history.unshift(videoId);
-
-            // Limit history size
-            if (history.length > 100) {
-                history = history.slice(0, 100);
-            }
-
-            await AsyncStorage.setItem('watchHistory', JSON.stringify(history));
-        } catch (error) {
-            console.log('Error updating local watch history:', error);
-        }
-    }
-
 
 }
 

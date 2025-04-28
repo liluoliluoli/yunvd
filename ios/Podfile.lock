@@ -1276,6 +1276,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-background-timer (2.4.1):
+    - React-Core
   - react-native-keyevent (0.3.2):
     - React
   - react-native-netinfo (7.1.12):
@@ -1945,6 +1947,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-background-timer (from `../node_modules/react-native-background-timer`)
   - react-native-keyevent (from `../node_modules/react-native-keyevent`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -2074,6 +2077,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-background-timer:
+    :path: "../node_modules/react-native-background-timer"
   react-native-keyevent:
     :path: "../node_modules/react-native-keyevent"
   react-native-netinfo:
@@ -2194,6 +2199,7 @@ SPEC CHECKSUMS:
   React-logger: 5eaa84adf55565fb0c495ac383cf51f8c491afde
   React-Mapbuffer: 2ec704748f367e66c392ff3bd8ed20b8ef83dbd6
   React-microtasksnativemodule: 80a17540bd96bed5cf74bf4c732385609633c1e7
+  react-native-background-timer: 4638ae3bee00320753647900b21260b10587b6f7
   react-native-keyevent: b546896a528d3f4afe4fa3c89b82748dfdfcc2c1
   react-native-netinfo: 1a48ed379080b7c873c0ba9416be7a673ae53f33
   react-native-safe-area-context: 1297d8f30a13a2248961f0f9275dc1513dbc16ef

@@ -3,3 +3,74 @@
 ### yarn install
 
 ### EXPO_NO_CLIENT_ENV_VARS=1 EXPO_TV=1 expo run:android
+
+替换androidMainifest.xml:
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+<uses-permission android:name="android.permission.CAMERA"/>
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+<uses-permission android:name="android.permission.VIBRATE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+<queries>
+<intent>
+<action android:name="android.intent.action.VIEW"/>
+<category android:name="android.intent.category.BROWSABLE"/>
+<data android:scheme="https"/>
+</intent>
+</queries>
+<application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher"
+android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="true">
+<meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
+<meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
+<meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
+<activity android:name=".MainActivity"
+android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
+android:launchMode="singleTask" android:windowSoftInputMode="adjustResize"
+android:theme="@style/Theme.App.SplashScreen" android:exported="true">
+<intent-filter>
+<action android:name="android.intent.action.MAIN"/>
+<category android:name="android.intent.category.LAUNCHER"/>
+<category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+</intent-filter>
+<intent-filter>
+<action android:name="android.intent.action.VIEW"/>
+<category android:name="android.intent.category.DEFAULT"/>
+<category android:name="android.intent.category.BROWSABLE"/>
+<data android:scheme="com.zyun.yunvd"/>
+</intent-filter>
+</activity>
+<provider
+android:name="androidx.core.content.FileProvider"
+android:authorities="${applicationId}.provider"
+android:exported="false"
+android:grantUriPermissions="true">
+<!-- you might need the tools:replace thing to workaround rn-fetch-blob or other definitions of provider -->
+<!-- just make sure if you "replace" here that you include all the paths you are replacing *plus* the cache path we use -->
+<meta-data tools:replace="android:resource"
+android:name="android.support.FILE_PROVIDER_PATHS"
+android:resource="@xml/filepaths"/>
+</provider>
+</application>
+</manifest>
+
+在res目录下创建xml/filepaths.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <files-path
+            name="Pictures"
+            path="/"></files-path>
+    <external-path
+            name="files_root"
+            path="Android/data/${applicationId}/" />
+    <root-path
+            name="root"
+            path="/" />
+
+</paths>

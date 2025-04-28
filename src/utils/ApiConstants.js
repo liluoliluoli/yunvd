@@ -1,6 +1,6 @@
 import {scaledPixels} from "../hooks/useScale";
 
-export const API_BASE_URL = 'http://267596e2.cpolar.io';
+export const API_BASE_URL = 'http://714ff445.cpolar.io';
 
 export const ENDPOINTS = {
     GET_LAST_APP_VERSION: API_BASE_URL + '/api/version/getLastVersion',

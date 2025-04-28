@@ -77,8 +77,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     activeTabText: {
-        color: 'pink',
-        fontWeight: 'bold',
+        color: 'white',
     },
     activeTabItem: {
         backgroundColor: 'black',
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     tabText: {
-        color: 'white',
+        color: 'gray',
         fontSize: 12,
         height: scaledPixels(35),
     },

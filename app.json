@@ -4,14 +4,9 @@
     "slug": "yunvd",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/tv_icons/icon-400x240.png",
     "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/tv_icons/icon-1920x720.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -29,9 +24,8 @@
       "bundleIdentifier": "com.zyun.yunvd"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/tv_icons/icon-1920x720.png",
-        "backgroundColor": "#ffffff"
+      "splash": {
+        "image": "./assets/icon-1920x720.png"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO",
@@ -45,23 +39,20 @@
       ],
       "package": "com.zyun.yunvd"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
     "plugins": [
       "@bam.tech/react-native-keyevent-expo-config-plugin",
       [
         "@react-native-tvos/config-tv",
         {
-          "androidTVBanner": "./assets/tv_icons/icon-400x240.png",
+          "androidTVBanner": "./assets/icon-400x240.png",
           "appleTVImages": {
-            "icon": "./assets/tv_icons/icon-1280x768.png",
-            "iconSmall": "./assets/tv_icons/icon-400x240.png",
-            "iconSmall2x": "./assets/tv_icons/icon-800x480.png",
-            "topShelf": "./assets/tv_icons/icon-1920x720.png",
-            "topShelf2x": "./assets/tv_icons/icon-1920x720.png",
-            "topShelfWide": "./assets/tv_icons/icon-1920x720.png",
-            "topShelfWide2x": "./assets/tv_icons/icon-1920x720.png"
+            "icon": "./assets/icon-1280x768.png",
+            "iconSmall": "./assets/icon-400x240.png",
+            "iconSmall2x": "./assets/icon-800x480.png",
+            "topShelf": "./assets/icon-1920x720.png",
+            "topShelf2x": "./assets/icon-1920x720.png",
+            "topShelfWide": "./assets/icon-1920x720.png",
+            "topShelfWide2x": "./assets/icon-1920x720.png"
           }
         }
       ]

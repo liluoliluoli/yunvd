@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Platform} from 'react-native';
 import {API_BASE_URL, REQUEST_TIMEOUT, STORAGE_KEYS} from '../utils/ApiConstants';
 import NetworkUtils from '../utils/NetworkUtils';
+import Toast from "react-native-simple-toast";
 
 class ApiClient {
     constructor() {
@@ -141,8 +142,8 @@ class ApiClient {
             console.log(`[ApiClient] POST request: ${JSON.stringify(data)}`);
             return await this.axiosInstance.post(url, data);
         } catch (error) {
-            console.error(`[ApiClient] POST request failed for ${url}:`, error);
-            throw NetworkUtils.handleApiError(error);
+            Toast.show(error.status + ":" + error.message, Toast.SHORT);
+            throw error;
         }
     }
 
