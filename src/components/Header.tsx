@@ -12,14 +12,14 @@ import {UpdateContext} from "./UpdateContext";
 import {Typography} from "./Typography";
 import {useAuthViewModel} from "../viewModels/AuthViewModel";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
-import {ENDPOINTS} from "../utils/ApiConstants";
+import {ENDPOINTS, formatToYMD} from "../utils/ApiConstants";
 
 export const Header = ({}) => {
     const navigation = useNavigation<any>();
     const [hasUpdate, setHasUpdate] = useState<boolean>(false);
     const [currentVersion, setCurrentVersion] = useState<string>(version);
     const {downloadProgress, setDownloadProgress} = useContext(UpdateContext);
-    const {userName, watchCount, favoriteCount, isLoading, logout} = useAuthViewModel();
+    const {userName, watchCount, restWatchCount, packageExpiredTime} = useAuthViewModel();
     const [showDonateModal, setShowDonateModal] = useState(false);
     const [showDownloadModal, setShowDownloadModal] = useState(false);
 
@@ -130,8 +130,10 @@ export const Header = ({}) => {
                         hidden={!hasUpdate}
                     />
                     <Spacer direction={"horizontal"} gap={'$6'}/>
-                    <Button label={userName + '(' + watchCount + ')'} onSelect={onProfile}/>
-                    <Spacer direction={"horizontal"} gap={'$6'}/>
+                    <Button
+                        label={userName + '(剩余：' + restWatchCount + '，到期时间：' + formatToYMD(packageExpiredTime) + ')'}
+                        onSelect={onProfile}/>
+                    <Spacer direction={"horizontal"} gap={'$12'}/>
                     <Button label="赞赏" onSelect={onDonate}/>
                     <Modal
                         visible={showDonateModal}

@@ -30,6 +30,8 @@ export const useAuthViewModel = () => {
     const [error, setError] = useState(null);
     const [userName, setUserName] = useState(null);
     const [watchCount, setWatchCount] = useState(0);
+    const [restWatchCount, setRestWatchCount] = useState(0);
+    const [packageExpiredTime, setPackageExpiredTime] = useState(0);
     const [favoriteCount, setFavoriteCount] = useState(0);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -74,6 +76,8 @@ export const useAuthViewModel = () => {
                 setUserName(profileData.userName);
                 setWatchCount(profileData.watchCount);
                 setFavoriteCount(profileData.favoriteCount);
+                setRestWatchCount(profileData.restWatchCount);
+                setPackageExpiredTime(profileData.packageExpiredTime);
                 await storage.setItem(STORAGE_KEYS.USER_NAME, profileData.userName);
             }
         } catch (error) {
@@ -163,7 +167,9 @@ export const useAuthViewModel = () => {
         register,
         logout,
         clearError,
-        checkAuthStatus
+        checkAuthStatus,
+        restWatchCount,
+        packageExpiredTime
     };
 };
 

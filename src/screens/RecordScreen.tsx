@@ -27,7 +27,7 @@ import {FilterBar} from "../components/Filterbar";
 export default function RecordScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
     const [down, setDown] = useState(false);
-    const [index, setIndex] = useState(3);
+    const [index, setIndex] = useState(4);
     const {
         videos,
         setVideos,
@@ -116,14 +116,11 @@ export default function RecordScreen({route, navigation}) {
                         <FilterBar routes={SORT_OPTIONS}
                                    onTabPress={(index: number) => setSort(SORT_OPTIONS[index].key)}
                                    currentIndex={0}></FilterBar>
-                        <FilterBar routes={GENRE_OPTIONS}
-                                   onTabPress={(index: number) => setSort(GENRE_OPTIONS[index].key)}
-                                   currentIndex={0}></FilterBar>
                         <FilterBar routes={REGION_OPTIONS}
-                                   onTabPress={(index: number) => setSort(REGION_OPTIONS[index].key)}
+                                   onTabPress={(index: number) => setRegion(REGION_OPTIONS[index].key)}
                                    currentIndex={0}></FilterBar>
                         <FilterBar routes={YEAR_OPTIONS}
-                                   onTabPress={(index: number) => setSort(YEAR_OPTIONS[index].key)}
+                                   onTabPress={(index: number) => setYear(YEAR_OPTIONS[index].key)}
                                    currentIndex={0}></FilterBar>
                         <VideoList
                             videosByRow={videosByRow}

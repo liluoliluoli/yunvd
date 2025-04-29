@@ -87,7 +87,7 @@ const VideoDetailScreen = ({route, navigation}) => {
 
     const handelFavorite = useCallback(() => {
         updateFavorite().then(() => setIsFavorite(!isFavorite));
-    }, [isFavorite]);
+    }, [isFavorite, videoId]);
 
     const handleContinue = useCallback(() => {
         if (!video) {

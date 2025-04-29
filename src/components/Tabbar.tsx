@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
     },
     tabText: {
-        color: 'gray',
+        color: 'white',
         fontSize: 16,
         fontWeight: 'normal',
     },
     activeTabText: {
-        color: 'white',
+        color: 'gold',
         fontWeight: 'normal',
     },
 });

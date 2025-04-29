@@ -42,7 +42,7 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
                     <View style={styles.videoDetails}>
                         <Text style={styles.videoTitle} numberOfLines={1}>{item.title}</Text>
                         <Text style={styles.videoInfo} numberOfLines={1}>
-                            {item.publishMonth}
+                            {item.publishMonth.substring(0, 4)}
                         </Text>
                     </View>
                 </View>
@@ -52,7 +52,7 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
 
     const renderVideosByRow = (videos: VideoItem[], index: number) => (
         <SpatialNavigationView
-            style={{height: scaledPixels(520), width: '100%', justifyContent: 'space-between', alignItems: 'center'}}
+            style={{height: scaledPixels(520), width: '100%', justifyContent: 'flex-start', alignItems: 'center'}}
             direction="horizontal" key={index}>
             {videos.map((item, index) => renderVideoItem({item, index}))}
         </SpatialNavigationView>
