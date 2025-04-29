@@ -90,9 +90,6 @@ export default function HomeScreen({route, navigation}) {
                     <TabBar
                         routes={TAB_ROUTES}
                         currentIndex={index}
-                        onTabPress={(index: number) => {
-                            navigation.navigate(TAB_ROUTES[index].screen);
-                        }}
                     />
                     <VideoList
                         videosByRow={videosByRow}

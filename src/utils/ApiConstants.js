@@ -1,6 +1,6 @@
 import {scaledPixels} from "../hooks/useScale";
 
-export const API_BASE_URL = 'http://4d5d347e.cpolar.io';
+export const API_BASE_URL = 'https://4e8d-117-147-108-196.ngrok-free.app';
 export const API_PWD = "SDDSIOPOPPP";
 
 export const ENDPOINTS = {
@@ -82,7 +82,6 @@ function generateRecentYears(n) {
 export const YEAR_OPTIONS = generateRecentYears(10)
 YEAR_OPTIONS.unshift({key: "", label: "全部"})
 export const TAB_ROUTES = [
-    {key: 'history', title: '播放历史', screen: 'Home'},
     {key: 'movies', title: '电影', screen: 'Movie'},
     {key: 'tvSeries', title: '电视剧', screen: 'TvSeries'},
     {key: 'cartoon', title: '动画', screen: 'Cartoon'},

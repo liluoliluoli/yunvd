@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {View, StyleSheet, Animated} from 'react-native';
 import {
     SpatialNavigationFocusableView, SpatialNavigationNodeRef,
     SpatialNavigationView
 } from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
-import {useIsFocused} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 interface TabBarProps {
     routes: Array<{ key: string, title: string, screen: string }>;
-    onTabPress: (index: number) => void;
     currentIndex: number;
     randomNum?: number
 }
 
-export const TabBar = ({routes, onTabPress, currentIndex}: TabBarProps) => {
+export const TabBar = ({routes, currentIndex}: TabBarProps) => {
+    const navigation = useNavigation<any>();
     const [index, setIndex] = useState(currentIndex)
     const tabRefs = React.useRef<Array<React.RefObject<SpatialNavigationNodeRef>>>([]);
     const isFocused = useIsFocused();
@@ -27,6 +27,12 @@ export const TabBar = ({routes, onTabPress, currentIndex}: TabBarProps) => {
             tabRefs.current[index].current?.focus();
         }
     }, [tabRefs.current[index], isFocused]);
+
+    const onTabPress = useCallback((index) => {
+        setIndex(index);
+        navigation.navigate(routes[index].screen);
+    }, [index]);
+
     return (
         <View>
             <SpatialNavigationView style={styles.tabBarContainer} direction="horizontal">

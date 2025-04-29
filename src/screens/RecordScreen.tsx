@@ -7,9 +7,7 @@ import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
 import VideoItem from "../models/VideoItem";
-import {HEADER_SIZE, REGION_OPTIONS, SORT_OPTIONS, TAB_ROUTES, VT_RECORD, YEAR_OPTIONS} from "../utils/ApiConstants";
-import {Header} from "../components/Header";
-import {TabBar} from "../components/Tabbar";
+import {HEADER_SIZE, REGION_OPTIONS, SORT_OPTIONS, VT_RECORD, YEAR_OPTIONS} from "../utils/ApiConstants";
 import {VideoList} from "../components/VideoList";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 import {FilterBar} from "../components/Filterbar";
@@ -18,7 +16,6 @@ import LoadingIndicator from "../components/LoadingIndicator";
 export default function RecordScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
     const [down, setDown] = useState(false);
-    const [index, setIndex] = useState(5);
     const {
         videos,
         setVideos,
@@ -95,14 +92,6 @@ export default function RecordScreen({route, navigation}) {
                     descendingArrowContainerStyle={styles.topArrowContainer}
                     ascendingArrowContainerStyle={styles.bottomArrowContainer}
                 >
-                    <Header/>
-                    <TabBar
-                        routes={TAB_ROUTES}
-                        currentIndex={index}
-                        onTabPress={(index: number) => {
-                            navigation.navigate(TAB_ROUTES[index].screen);
-                        }}
-                    />
                     <FilterBar routes={SORT_OPTIONS}
                                onTabPress={(index: number) => setSort(SORT_OPTIONS[index].key)}
                                currentIndex={0}></FilterBar>
