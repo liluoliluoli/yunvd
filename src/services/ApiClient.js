@@ -1,9 +1,10 @@
 import axios, {AxiosInstance} from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Platform} from 'react-native';
-import {API_BASE_URL, REQUEST_TIMEOUT, STORAGE_KEYS} from '../utils/ApiConstants';
+import {API_BASE_URL, API_PWD, REQUEST_TIMEOUT, STORAGE_KEYS} from '../utils/ApiConstants';
 import NetworkUtils from '../utils/NetworkUtils';
 import Toast from "react-native-simple-toast";
+import CryptoJS from 'crypto-js';
 
 class ApiClient {
     constructor() {
@@ -26,6 +27,10 @@ class ApiClient {
                         if (token) {
                             config.headers.Authorization = `${token}`;
                         }
+                        const timestamp = Date.now();
+                        config.headers.Timestamp = timestamp;
+                        const signature = CryptoJS.HmacSHA256(config.url.replace(API_BASE_URL, '') + timestamp, API_PWD).toString(CryptoJS.enc.Hex);
+                        config.headers.Signature = signature;
                     } catch (error) {
                         console.error('Failed to get auth token:', error);
                     }

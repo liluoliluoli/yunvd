@@ -64,9 +64,9 @@ const VideoDetailScreen = ({route, navigation}) => {
                             const latestRecord = currentVideoHistory.reduce((prev, current) =>
                                 new Date(prev.timestamp) > new Date(current.timestamp) ? prev : current
                             );
-                            console.log("video.lastPlayedTime.getTime():" + video.lastPlayedTime);
+                            console.log("video.lastPlayedTime.getTime():" + video?.lastPlayedTime);
                             console.log("latestRecord.timestamp:" + latestRecord.timestamp);
-                            if (video && latestRecord.timestamp > video.lastPlayedTime) {
+                            if (video && latestRecord.timestamp > video?.lastPlayedTime) {
                                 video.lastPlayedEpisodeId = latestRecord.episodeId;
                                 video.lastPlayedPosition = latestRecord.position;
                                 video.lastPlayedTime = latestRecord.timestamp;
