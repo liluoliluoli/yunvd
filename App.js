@@ -27,6 +27,7 @@ import RecordScreen from "./src/screens/RecordScreen";
 import apiService from "./src/services/ApiService";
 import ApiService from "./src/services/ApiService";
 import BackgroundTimer from 'react-native-background-timer';
+import CartoonScreen from "./src/screens/CartoonScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -125,6 +126,11 @@ export default function App() {
                         <Stack.Screen
                             name="Movie"
                             component={MovieScreen}
+                            options={{animationEnabled: true}}
+                        />
+                        <Stack.Screen
+                            name="Cartoon"
+                            component={CartoonScreen}
                             options={{animationEnabled: true}}
                         />
                         <Stack.Screen

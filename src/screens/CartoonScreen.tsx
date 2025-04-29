@@ -7,7 +7,15 @@ import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
 import VideoItem from "../models/VideoItem";
-import {HEADER_SIZE, REGION_OPTIONS, SORT_OPTIONS, TAB_ROUTES, VT_TV_SHOWS, YEAR_OPTIONS} from "../utils/ApiConstants";
+import {
+    GENRE_OPTIONS,
+    HEADER_SIZE,
+    REGION_OPTIONS,
+    SORT_OPTIONS,
+    TAB_ROUTES, VT_CARTOON,
+    VT_TV_SERIES,
+    YEAR_OPTIONS
+} from "../utils/ApiConstants";
 import {Header} from "../components/Header";
 import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
@@ -15,10 +23,10 @@ import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 import {FilterBar} from "../components/Filterbar";
 import LoadingIndicator from "../components/LoadingIndicator";
 
-export default function TvShowScreen({route, navigation}) {
+export default function CartoonScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
     const [down, setDown] = useState(false);
-    const [index, setIndex] = useState(4);
+    const [index, setIndex] = useState(3);
     const {
         videos,
         setVideos,
@@ -73,7 +81,7 @@ export default function TvShowScreen({route, navigation}) {
     }, [currentPage]);
 
     useEffect(() => {
-        setVideoType(VT_TV_SHOWS)
+        setVideoType(VT_CARTOON)
         if (videoType) {
             setIsHistory(false);
             setCurrentPage(1);

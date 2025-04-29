@@ -18,7 +18,7 @@ import LoadingIndicator from "../components/LoadingIndicator";
 export default function RecordScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
     const [down, setDown] = useState(false);
-    const [index, setIndex] = useState(4);
+    const [index, setIndex] = useState(5);
     const {
         videos,
         setVideos,

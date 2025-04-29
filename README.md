@@ -31,7 +31,7 @@ android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="
 <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
 <activity android:name=".MainActivity"
 android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
-android:launchMode="singleTask" android:windowSoftInputMode="adjustResize"
+android:launchMode="singleTask" android:windowSoftInputMode="adjustPan|stateHidden"
 android:theme="@style/Theme.App.SplashScreen" android:exported="true">
 <intent-filter>
 <action android:name="android.intent.action.MAIN"/>

@@ -387,8 +387,17 @@ const VideoPlayerScreen = ({route, navigation}) => {
 
     return (
         <View style={styles.container}>
-            <Video
-                source={{uri: playingEpisode?.url}}
+            {playingEpisode?.url && <Video
+                source={{
+                    uri: playingEpisode?.url, bufferConfig: {
+                        minBufferMs: 3000,
+                        maxBufferMs: 5000,
+                        bufferForPlaybackMs: 2000,
+                        bufferForPlaybackAfterRebufferMs: 2000,
+                        backBufferDurationMs: 120000,
+                        cacheSizeMB: 1000,
+                    }
+                }}
                 ref={videoRef}
                 onBuffer={(e) => setIsVideoBuffering(e.isBuffering)}
                 onError={() => console.log("onError")}
@@ -399,7 +408,11 @@ const VideoPlayerScreen = ({route, navigation}) => {
                     setPreviewTime(currentTime);
                 }}
                 onLoad={({duration}) => setDuration(duration)}
-            />
+                poster={{
+                    source: {uri: passedVideo.thumbnail},
+                    resizeMode: "cover",
+                }}
+            />}
             {controlsVisible && (
                 <View style={styles.controlsContainer}>
                     <TVFocusGuideView autoFocus>

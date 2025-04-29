@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import {BottomArrow, TopArrow} from "../components/Arrows";
-import {SpatialNavigationScrollView} from "react-tv-space-navigation";
+import {SpatialNavigationNodeRef, SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
@@ -22,6 +22,7 @@ import {VideoList} from "../components/VideoList";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 import {FilterBar} from "../components/Filterbar";
 import LoadingIndicator from "../components/LoadingIndicator";
+import {useIsFocused} from "@react-navigation/native";
 
 export default function MovieScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
@@ -52,6 +53,18 @@ export default function MovieScreen({route, navigation}) {
         setIsRefresh,
         isRefresh,
     } = useVideoListViewModel();
+
+    const videoCardRefs = React.useRef<Array<React.RefObject<SpatialNavigationNodeRef>>>([]);
+    const isFocused = useIsFocused();
+    React.useEffect(() => {
+        videoCardRefs.current = videos.map(() => React.createRef());
+    }, [videos]);
+
+    React.useEffect(() => {
+        if (videoCardRefs.current[index]?.current && isFocused) {
+            videoCardRefs.current[index].current?.focus();
+        }
+    }, [videoCardRefs.current[index], isFocused]);
 
     useEffect(() => {
         console.log(`videos total ${videos.length}`);

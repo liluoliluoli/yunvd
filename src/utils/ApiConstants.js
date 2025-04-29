@@ -85,12 +85,14 @@ export const TAB_ROUTES = [
     {key: 'history', title: '播放历史', screen: 'Home'},
     {key: 'movies', title: '电影', screen: 'Movie'},
     {key: 'tvSeries', title: '电视剧', screen: 'TvSeries'},
+    {key: 'cartoon', title: '动画', screen: 'Cartoon'},
     {key: 'tvShows', title: '综艺', screen: 'TvShow'},
     {key: 'record', title: '记录', screen: 'Record'},
 ];
 
 export const VT_MOVIE = 'movie';
 export const VT_TV_SERIES = 'tvSeries';
+export const VT_CARTOON = 'cartoon';
 export const VT_TV_SHOWS = 'tvShows';
 export const VT_RECORD = 'record';
 
