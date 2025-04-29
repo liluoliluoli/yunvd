@@ -69,7 +69,7 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
 
 const styles = StyleSheet.create({
     thumbnailContainer: {
-        height: scaledPixels(380),
+        height: scaledPixels(400),
         width: '100%',
     },
     thumbnail: {

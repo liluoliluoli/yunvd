@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {BottomArrow, TopArrow} from "../components/Arrows";
 import {SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
