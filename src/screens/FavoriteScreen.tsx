@@ -11,6 +11,7 @@ import {VideoList} from "../components/VideoList";
 import {Spacer} from "../components/Spacer";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 import {VT_MOVIE} from "../utils/ApiConstants";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 const HEADER_SIZE = scaledPixels(400)
 export default function FavoriteScreen({route, navigation}) {
@@ -92,6 +93,7 @@ export default function FavoriteScreen({route, navigation}) {
                     />
 
                 </SpatialNavigationScrollView>
+                {isLoading && <LoadingIndicator/>}
             </SafeAreaView>
         </Page>
     );

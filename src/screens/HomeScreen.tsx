@@ -11,8 +11,8 @@ import {HEADER_SIZE, TAB_ROUTES} from "../utils/ApiConstants";
 import {Header} from "../components/Header";
 import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
-import {UpdateProvider} from "../components/UpdateContext";
 import {useVideoListViewModel} from '../viewModels/VideoListViewModel';
+import LoadingIndicator from "../components/LoadingIndicator";
 
 
 export default function HomeScreen({route, navigation}) {
@@ -77,33 +77,32 @@ export default function HomeScreen({route, navigation}) {
 
 
     return (
-        <UpdateProvider>
-            <Page loadMore={() => setDown(true)}>
-                <SafeAreaView style={styles.container}>
-                    <SpatialNavigationScrollView
-                        offsetFromStart={HEADER_SIZE + 20}
-                        descendingArrow={<TopArrow/>}
-                        ascendingArrow={<BottomArrow/>}
-                        descendingArrowContainerStyle={styles.topArrowContainer}
-                        ascendingArrowContainerStyle={styles.bottomArrowContainer}
-                    >
-                        <Header/>
-                        <TabBar
-                            routes={TAB_ROUTES}
-                            currentIndex={index}
-                            onTabPress={(index: number) => {
-                                navigation.navigate(TAB_ROUTES[index].screen);
-                            }}
-                        />
-                        <VideoList
-                            videosByRow={videosByRow}
-                            onVideoPress={navigateToVideoDetails}
-                        />
+        <Page loadMore={() => setDown(true)}>
+            <SafeAreaView style={styles.container}>
+                <SpatialNavigationScrollView
+                    offsetFromStart={HEADER_SIZE + 20}
+                    descendingArrow={<TopArrow/>}
+                    ascendingArrow={<BottomArrow/>}
+                    descendingArrowContainerStyle={styles.topArrowContainer}
+                    ascendingArrowContainerStyle={styles.bottomArrowContainer}
+                >
+                    <Header/>
+                    <TabBar
+                        routes={TAB_ROUTES}
+                        currentIndex={index}
+                        onTabPress={(index: number) => {
+                            navigation.navigate(TAB_ROUTES[index].screen);
+                        }}
+                    />
+                    <VideoList
+                        videosByRow={videosByRow}
+                        onVideoPress={navigateToVideoDetails}
+                    />
 
-                    </SpatialNavigationScrollView>
-                </SafeAreaView>
-            </Page>
-        </UpdateProvider>
+                </SpatialNavigationScrollView>
+                {isLoading && <LoadingIndicator/>}
+            </SafeAreaView>
+        </Page>
     );
 }
 

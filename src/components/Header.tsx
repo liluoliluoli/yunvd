@@ -8,7 +8,6 @@ import {SpatialNavigationNode} from "react-tv-space-navigation";
 import {useNavigation} from "@react-navigation/native";
 import * as UpdateAPK from "rn-update-apk";
 import {version} from '../../package.json'
-import {UpdateContext} from "./UpdateContext";
 import {Typography} from "./Typography";
 import {useAuthViewModel} from "../viewModels/AuthViewModel";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
@@ -18,7 +17,7 @@ export const Header = ({}) => {
     const navigation = useNavigation<any>();
     const [hasUpdate, setHasUpdate] = useState<boolean>(false);
     const [currentVersion, setCurrentVersion] = useState<string>(version);
-    const {downloadProgress, setDownloadProgress} = useContext(UpdateContext);
+    const [downloadProgress, setDownloadProgress] = useState<number>(0);
     const {userName, watchCount, restWatchCount, packageExpiredTime} = useAuthViewModel();
     const [showDonateModal, setShowDonateModal] = useState(false);
     const [showDownloadModal, setShowDownloadModal] = useState(false);

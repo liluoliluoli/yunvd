@@ -6,18 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="xuanji">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Filterbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Filterbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Tabbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tabbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/VideoList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UpdateContext.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/FavoriteScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/RecordScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/RecordScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/TvSeriesScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/TvSeriesScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/TvShowScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/TvShowScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/viewModels/AuthViewModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/viewModels/AuthViewModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/viewModels/VideoItemViewModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/viewModels/VideoItemViewModel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,15 +177,7 @@
       <workItem from="1743758537542" duration="87840000" />
       <workItem from="1744345304259" duration="39710000" />
       <workItem from="1744777758422" duration="128292000" />
-      <workItem from="1745578311694" duration="103247000" />
-    </task>
-    <task id="LOCAL-00001" summary="init">
-      <option name="closed" value="true" />
-      <created>1743741608104</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1743741608104</updated>
+      <workItem from="1745578311694" duration="104382000" />
     </task>
     <task id="LOCAL-00002" summary="init">
       <option name="closed" value="true" />
@@ -575,7 +563,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745899092330</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="xuanji">
+      <option name="closed" value="true" />
+      <created>1745903491681</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1745903491682</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
