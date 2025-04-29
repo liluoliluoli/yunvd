@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="xuanji">
-      <change afterPath="$PROJECT_DIR$/src/screens/CartoonScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MovieScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/RecordScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/RecordScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/TvShowScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/TvShowScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoPlayerScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,15 +173,7 @@
       <workItem from="1744777758422" duration="128292000" />
       <workItem from="1745578311694" duration="109541000" />
       <workItem from="1745910443932" duration="1391000" />
-      <workItem from="1745912734710" duration="1961000" />
-    </task>
-    <task id="LOCAL-00003" summary="init">
-      <option name="closed" value="true" />
-      <created>1744017748598</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1744017748598</updated>
+      <workItem from="1745912734710" duration="2733000" />
     </task>
     <task id="LOCAL-00004" summary="init">
       <option name="closed" value="true" />
@@ -573,7 +559,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745904613288</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="xuanji">
+      <option name="closed" value="true" />
+      <created>1745918729018</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1745918729018</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

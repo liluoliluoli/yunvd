@@ -1,5 +1,5 @@
-import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {View, Image, StyleSheet, Alert, Modal, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, Modal, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Button} from "./Button";
 import {TextInput} from "./TextInput";
 import {Spacer} from "./Spacer";
@@ -10,7 +10,6 @@ import * as UpdateAPK from "rn-update-apk";
 import {version} from '../../package.json'
 import {Typography} from "./Typography";
 import {useAuthViewModel} from "../viewModels/AuthViewModel";
-import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 import {ENDPOINTS, formatToYMD} from "../utils/ApiConstants";
 
 export const Header = ({}) => {
@@ -118,11 +117,7 @@ export const Header = ({}) => {
                     <Typography variant="title">YunVD </Typography>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
                     <Typography variant="body">v{currentVersion} </Typography>
-                    <Spacer direction={"horizontal"} gap={'$2'}/>
-                    <View style={styles.searchContainer}>
-                        <TextInput placeholder='搜索'
-                                   onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
-                    </View>
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button
                         label={downloadProgress === 0 ? `更新` : `${downloadProgress}%`}
                         onSelect={onUpdate}
@@ -132,7 +127,7 @@ export const Header = ({}) => {
                     <Button
                         label={userName + '(剩余：' + restWatchCount + '，到期时间：' + formatToYMD(packageExpiredTime) + ')'}
                         onSelect={onProfile}/>
-                    <Spacer direction={"horizontal"} gap={'$12'}/>
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button label="赞赏" onSelect={onDonate}/>
                     <Modal
                         visible={showDonateModal}
@@ -157,6 +152,13 @@ export const Header = ({}) => {
                     <Button label="收藏" onSelect={onFavorite}/>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button label="设置" onSelect={onSetting}/>
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
+                    <View style={styles.searchContainer}>
+                        <TextInput placeholder='搜索'
+                                   onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
+                    </View>
+
+
                 </View>
                 <View style={styles.divider}/>
             </View>
