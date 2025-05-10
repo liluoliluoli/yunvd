@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Image, StyleSheet, View,} from 'react-native';
+import {Image, NativeModules, StyleSheet, View,} from 'react-native';
 import {SpatialNavigationNode, SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
@@ -122,8 +122,9 @@ const VideoDetailScreen = ({route, navigation}) => {
     }, [video]);
 
     const navigateToVideoPlayer = (episode, video) => {
-        console.log('Navigating to video player with video:', episode.episodeTitle);
-        navigation.push('VideoPlayer', {episode, video});
+        console.log('Navigating to video player with video:', NativeModules.YvdIntent);
+        // navigation.push('VideoPlayer', {episode, video});
+        NativeModules.YvdIntent.startActivityFromRN("com.zyun.yvdintent.MainActivity", "sdsdsd");
     };
 
     return (

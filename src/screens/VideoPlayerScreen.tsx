@@ -27,6 +27,8 @@ import LoadingIndicator from "../components/LoadingIndicator";
 import {formatTime, STORAGE_KEYS} from "../utils/ApiConstants";
 import {useEpisodeViewModel} from "../viewModels/EpisodeViewModel";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-simple-toast";
+import {useFocusEffect} from "@react-navigation/native";
 
 
 const {width} = Dimensions.get('window');
@@ -59,6 +61,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
     const [isVideoBuffering, setIsVideoBuffering] = useState<boolean>(false);
     const [lastPlayedPosition, setLastPlayedPosition] = useState(passedVideo.lastPlayedPosition);
     const saveIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const [downloadSpeedRate, setDownloadSpeedRate] = useState(0);
     const {
         episode,
         setEpisode,
@@ -84,6 +87,15 @@ const VideoPlayerScreen = ({route, navigation}) => {
     useEffect(() => {
         previewTimeRef.current = previewTime
     }, [previewTime]);
+
+    useFocusEffect(
+        React.useCallback(() => {
+            return () => {
+                setPaused(true);
+                setPlayingEpisode(undefined);
+            };
+        }, [])
+    );
 
     const savePlayInfo = useCallback(async () => {
         if (passedVideo && playingEpisode) {
@@ -390,27 +402,38 @@ const VideoPlayerScreen = ({route, navigation}) => {
             {playingEpisode?.url && <Video
                 source={{
                     uri: playingEpisode?.url, bufferConfig: {
-                        minBufferMs: 3000,
-                        maxBufferMs: 5000,
-                        bufferForPlaybackMs: 2000,
-                        bufferForPlaybackAfterRebufferMs: 2000,
-                        backBufferDurationMs: 120000,
+                        minBufferMs: 10000,
+                        maxBufferMs: 30000,
+                        bufferForPlaybackMs: 2500,
+                        bufferForPlaybackAfterRebufferMs: 5000,
+                        backBufferDurationMs: 0,
                         cacheSizeMB: 1000,
+                        live: {
+                            targetOffsetMs: 500,
+                        },
                     }
                 }}
                 ref={videoRef}
                 onBuffer={(e) => setIsVideoBuffering(e.isBuffering)}
-                onError={() => console.log("onError")}
+                onError={(e) => Toast.show(JSON.stringify(e), Toast.SHORT)}
                 style={styles.video}
                 paused={paused}
-                onProgress={({currentTime}) => {
-                    setCurrentTime(currentTime);
-                    setPreviewTime(currentTime);
+                onProgress={(e) => {
+                    setCurrentTime(e.currentTime);
+                    setPreviewTime(e.currentTime);
+                    // console.log(JSON.stringify(e));
                 }}
                 onLoad={({duration}) => setDuration(duration)}
                 poster={{
                     source: {uri: passedVideo.thumbnail},
                     resizeMode: "cover",
+                }}
+                reportBandwidth={true}
+                onBandwidthUpdate={(e) => {
+                    console.log(JSON.stringify(e));
+                }}
+                onVideoTracks={(e) => {
+                    console.log(JSON.stringify(e));
                 }}
             />}
             {controlsVisible && (
@@ -461,7 +484,7 @@ const VideoPlayerScreen = ({route, navigation}) => {
                         </TVFocusGuideView>
                         <View style={styles.timeContainer}>
                             <Text style={styles.timeText}>
-                                {formatTime(previewTime)} / {formatTime(duration)}
+                                {formatTime(previewTime)} / {formatTime(duration)} {downloadSpeedRate.toFixed(1)}M
                             </Text>
                         </View>
                         <TVFocusGuideView style={styles.buttonsRow} autoFocus={false}>
