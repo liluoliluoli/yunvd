@@ -34,13 +34,10 @@ class ExoPlayerViewModel(
     }
     private var p2pml: P2PMediaLoader? = null
 
-    private val _loadingState = MutableStateFlow(true)
-    val loadingState: StateFlow<Boolean> get() = _loadingState
-
-    fun setupP2PML() {
+    fun setupP2PML(url:String) {
         p2pml =
             P2PMediaLoader(
-                onP2PReadyCallback = { initializePlayback() },
+                onP2PReadyCallback = { initializePlayback(url) },
                 onP2PReadyErrorCallback = { onReadyError(it) },
                 coreConfigJson = "{\"swarmId\":\"TEST_KOTLIN\"}",
                 serverPort = 8082,
@@ -49,9 +46,9 @@ class ExoPlayerViewModel(
         p2pml!!.start(context, player)
     }
 
-    private fun initializePlayback() {
+    private fun initializePlayback(url:String) {
         val manifest =
-            p2pml?.getManifestUrl(Streams.HLS_BIG_BUCK_BUNNY)
+            p2pml?.getManifestUrl(url)
                 ?: throw IllegalStateException("P2PML is not started")
         val loggingDataSourceFactory = LoggingDataSourceFactory(context)
 
@@ -64,17 +61,6 @@ class ExoPlayerViewModel(
             playWhenReady = true
             setMediaSource(mediaSource)
             prepare()
-            addListener(
-                object : Player.Listener {
-                    override fun onPlaybackStateChanged(playbackState: Int) {
-                        if (playbackState == Player.STATE_READY) {
-                            viewModelScope.launch {
-                                _loadingState.value = false
-                            }
-                        }
-                    }
-                },
-            )
         }
     }
 

@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.media3.common.util.UnstableApi
 import com.zyun.yvdintent.ui.ExoPlayerScreen
 import com.zyun.yvdintent.viewmodel.ExoPlayerViewModel
+import org.json.JSONObject
 
 @UnstableApi
 class MainActivity : ComponentActivity() {
@@ -23,12 +24,24 @@ class MainActivity : ComponentActivity() {
 
         // Enable debugging of WebViews
         WebView.setWebContentsDebuggingEnabled(true)
+        val paramsJson = intent?.getStringExtra("params")
+        val (url, title) = try {
+            if (!paramsJson.isNullOrEmpty()) {
+                val json = JSONObject(paramsJson)
+                Pair(
+                    json.getString("url") ?: "",
+                    json.optString("title", "")
+                )
+            } else {
+                Pair("", "")
+            }
+        } catch (e: Exception) {
+            Pair("", "")
+        }
 
-        viewModel.setupP2PML()
-
+        viewModel.setupP2PML(url)
         setContent {
-            val isLoading by viewModel.loadingState.collectAsState()
-            ExoPlayerScreen(player = viewModel.player, videoTitle = "Test Stream", isLoading)
+            ExoPlayerScreen(player = viewModel.player, title = title)
         }
     }
 

@@ -53,6 +53,9 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)
 
+    implementation("androidx.tv:tv-foundation:1.0.0-alpha11")
+    implementation("androidx.tv:tv-material:1.0.0-rc01")
+
     implementation("com.facebook.react:react-native:+")
     implementation("com.github.Novage:p2p-media-loader-mobile:main-SNAPSHOT")
     implementation("androidx.compose.runtime:runtime:1.5.4")

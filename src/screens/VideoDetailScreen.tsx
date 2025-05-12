@@ -122,9 +122,10 @@ const VideoDetailScreen = ({route, navigation}) => {
     }, [video]);
 
     const navigateToVideoPlayer = (episode, video) => {
-        console.log('Navigating to video player with video:', NativeModules.YvdIntent);
+        console.log('Navigating to video player with video:', episode.episodeTitle);
         // navigation.push('VideoPlayer', {episode, video});
-        NativeModules.YvdIntent.startActivityFromRN("com.zyun.yvdintent.MainActivity", "sdsdsd");
+        const params = "{\"url\":\"" + episode.url + "\", \"title\":\"" + episode.episodeTitle + "\"}"
+        NativeModules.YvdIntent.startActivityFromRN("com.zyun.yvdintent.MainActivity", params);
     };
 
     return (
