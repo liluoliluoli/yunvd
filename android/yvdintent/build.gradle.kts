@@ -13,7 +13,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -60,4 +60,10 @@ dependencies {
     implementation("com.github.Novage:p2p-media-loader-mobile:main-SNAPSHOT")
     implementation("androidx.compose.runtime:runtime:1.5.4")
     implementation("androidx.compose.ui:ui:1.5.4")
+
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.test.ext:junit:1.2.1")
+
 }

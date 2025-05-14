@@ -5,10 +5,9 @@ import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.OptIn
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.media3.common.util.UnstableApi
 import com.zyun.yvdintent.ui.ExoPlayerScreen
+import com.zyun.yvdintent.viewmodel.EpisodeReq
 import com.zyun.yvdintent.viewmodel.ExoPlayerViewModel
 import org.json.JSONObject
 
@@ -25,23 +24,29 @@ class MainActivity : ComponentActivity() {
         // Enable debugging of WebViews
         WebView.setWebContentsDebuggingEnabled(true)
         val paramsJson = intent?.getStringExtra("params")
-        val (url, title) = try {
+        val episodeReq = try {
             if (!paramsJson.isNullOrEmpty()) {
                 val json = JSONObject(paramsJson)
-                Pair(
-                    json.getString("url") ?: "",
-                    json.optString("title", "")
+                EpisodeReq(
+                    domain = json.optString("domain"),
+                    episodeId = json.optLong("episodeId"),
+                    secretKey = json.optString("secretKey"),
+                    token = json.optString("token")
                 )
             } else {
-                Pair("", "")
+                EpisodeReq("", 0, "", "")
             }
         } catch (e: Exception) {
-            Pair("", "")
+            EpisodeReq("", 0, "", "")
         }
-
-        viewModel.setupP2PML(url)
         setContent {
-            ExoPlayerScreen(player = viewModel.player, title = title)
+            ExoPlayerScreen(
+                viewModel = viewModel,
+                domain = episodeReq.domain,
+                episodeId = episodeReq.episodeId,
+                secretKey = episodeReq.secretKey,
+                token = episodeReq.token,
+            )
         }
     }
 

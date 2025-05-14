@@ -5,21 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="android">
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_comment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_forward.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_lock.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_pause.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_replay.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_sound.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_speed.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_zoom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/Streams.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/Constant.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/test/java/com/zyun/yvdintent/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/test/java/com/zyun/yvdintent/ExampleUnitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,15 +180,7 @@
       <workItem from="1745910443932" duration="1391000" />
       <workItem from="1745912734710" duration="16870000" />
       <workItem from="1746103429732" duration="64041000" />
-      <workItem from="1747020089353" duration="4085000" />
-    </task>
-    <task id="LOCAL-00009" summary="init">
-      <option name="closed" value="true" />
-      <created>1744778243927</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1744778243927</updated>
+      <workItem from="1747020089353" duration="13712000" />
     </task>
     <task id="LOCAL-00010" summary="init">
       <option name="closed" value="true" />
@@ -581,7 +566,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746889969061</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="android">
+      <option name="closed" value="true" />
+      <created>1747039011590</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1747039011590</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

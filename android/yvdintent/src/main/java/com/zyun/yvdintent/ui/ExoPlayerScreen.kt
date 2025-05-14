@@ -1,11 +1,18 @@
 package com.zyun.yvdintent.ui
 
+import android.content.Context
+import android.util.Log
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.OptIn
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,12 +20,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -42,20 +52,32 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
+import androidx.tv.material3.Button
 import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.Icon
 import androidx.tv.material3.IconButton
 import androidx.tv.material3.Text
 import com.zyun.yvdintent.R
+import com.zyun.yvdintent.viewmodel.Episode
+import com.zyun.yvdintent.viewmodel.ExoPlayerViewModel
+import com.zyun.yvdintent.viewmodel.Subtitle
+import com.zyun.yvdintent.viewmodel.SubtitleApi
 import kotlinx.coroutines.delay
 
+@UnstableApi
 @Composable
 fun ExoPlayerScreen(
-    player: ExoPlayer,
-    title: String,
+    viewModel: ExoPlayerViewModel,
+    domain: String,
+    episodeId: Long,
+    secretKey: String,
+    token: String,
 ) {
     val context = LocalContext.current
     var progress by remember { mutableStateOf(0F) }
@@ -65,15 +87,17 @@ fun ExoPlayerScreen(
     var showController by remember { mutableStateOf(false) }
     val focusRequester = remember { FocusRequester() }
     var lastInteractionTime by remember { mutableStateOf(System.currentTimeMillis()) }
+    var episode by remember { mutableStateOf<Episode?>(null) }
+    var isLoading by remember { mutableStateOf(false) }
 
     DisposableEffect(Unit) {
         val listener = object : Player.Listener {
             override fun onPlaybackStateChanged(playbackState: Int) {
                 if (playbackState == Player.STATE_READY) {
                     isPlayerReady = true
-                    maxProgress = player.duration.toFloat()
+                    maxProgress = viewModel.player.duration.toFloat()
                     formattedRemainingTime =
-                        formatRemainingTime(player.currentPosition, player.duration)
+                        formatRemainingTime(viewModel.player.currentPosition, viewModel.player.duration)
                 }
                 if (playbackState == Player.STATE_BUFFERING) {
                     isPlayerReady = false
@@ -85,27 +109,27 @@ fun ExoPlayerScreen(
                 newPosition: Player.PositionInfo,
                 reason: Int
             ) {
-                progress = player.currentPosition.toFloat()
+                progress = viewModel.player.currentPosition.toFloat()
                 if (isPlayerReady) {
                     formattedRemainingTime =
-                        formatRemainingTime(player.currentPosition, player.duration)
+                        formatRemainingTime(viewModel.player.currentPosition, viewModel.player.duration)
                 }
             }
         }
-        player.addListener(listener)
+        viewModel.player.addListener(listener)
 
         onDispose {
-            player.removeListener(listener)
-            player.release()
+            viewModel.player.removeListener(listener)
+            viewModel.player.release()
         }
     }
 
     LaunchedEffect(Unit) {
         while (true) {
-            if (player.isPlaying && player.duration > 0) {
-                progress = player.currentPosition.toFloat()
+            if (viewModel.player.isPlaying && viewModel.player.duration > 0) {
+                progress = viewModel.player.currentPosition.toFloat()
                 formattedRemainingTime =
-                    formatRemainingTime(player.currentPosition, player.duration)
+                    formatRemainingTime(viewModel.player.currentPosition, viewModel.player.duration)
             }
             delay(1000L)
         }
@@ -119,6 +143,42 @@ fun ExoPlayerScreen(
                 delay(5000L)
             }
             showController = false
+        }
+    }
+
+    LaunchedEffect(episodeId) {
+        try {
+            isLoading = true
+            episode = SubtitleApi.getEpisode(
+                domain = domain,
+                token = token,
+                secretKey = secretKey,
+                episodeId = episodeId,
+            )
+            viewModel.releaseP2P()
+            viewModel.setupP2PML(episode!!.url, null)
+        } catch (e: Exception) {
+            Toast.makeText(context, "请求播放地址失败：$e", Toast.LENGTH_SHORT).show()
+        } finally {
+            isLoading = false
+        }
+    }
+
+    suspend fun loadEpisode(domain: String, token:String, secretKey:String, episodeId:Long){
+        try {
+            isLoading = true
+            episode = SubtitleApi.getEpisode(
+                domain = domain,
+                token = token,
+                secretKey = secretKey,
+                episodeId = episodeId,
+            )
+            viewModel.releaseP2P()
+            viewModel.setupP2PML(episode!!.url, null)
+        } catch (e: Exception) {
+            Toast.makeText(context, "请求播放地址失败：$e", Toast.LENGTH_SHORT).show()
+        } finally {
+            isLoading = false
         }
     }
 
@@ -147,7 +207,7 @@ fun ExoPlayerScreen(
         AndroidView(
             factory = { context ->
                 PlayerView(context).apply {
-                    this.player = player
+                    this.player = viewModel.player
                     useController = false
                     descendantFocusability = ViewGroup.FOCUS_BLOCK_DESCENDANTS
                     //this.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
@@ -162,16 +222,18 @@ fun ExoPlayerScreen(
                 exit = fadeOut()
             ) {
                 CustomPlayerController(
-                    player = player,
+                    player = viewModel.player,
                     progress = progress,
                     maxProgress = maxProgress,
                     formattedRemainingTime = formattedRemainingTime,
-                    title = title,
-                    focusRequester = focusRequester
+                    episode = episode,
+                    focusRequester = focusRequester,
+                    context = context,
+                    viewModel = viewModel
                 )
             }
 
-            if (!isPlayerReady) {
+            if (!isPlayerReady || isLoading) {
                 Box(
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -179,7 +241,7 @@ fun ExoPlayerScreen(
                 ) {
                     CircularProgressIndicator(
                         color = Color.Blue,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(20.dp),
                     )
                 }
             }
@@ -188,20 +250,94 @@ fun ExoPlayerScreen(
 }
 
 
+@OptIn(UnstableApi::class)
 @Composable
 fun CustomPlayerController(
     player: ExoPlayer,
     progress: Float,
     maxProgress: Float,
     formattedRemainingTime: String,
-    title: String,
-    focusRequester: FocusRequester
+    episode: Episode?,
+    focusRequester: FocusRequester,
+    context: Context = LocalContext.current,
+    viewModel: ExoPlayerViewModel
 ) {
-
     var isPlaying by remember { mutableStateOf(player.isPlaying) }
     var isFocusedSubtitle by remember { mutableStateOf(false) }
     var isFocusedAudio by remember { mutableStateOf(false) }
     var isFocusedSpeed by remember { mutableStateOf(false) }
+    var showSubtitleDialog by remember { mutableStateOf(false) }
+    val dialogFocusRequester = remember { FocusRequester() }
+    var selectedSubtitle by remember { mutableStateOf<Subtitle?>(null) }
+
+    fun setSubtitle(episodeUrl: String, subtitle: Subtitle) {
+        selectedSubtitle = subtitle
+        setSubtitleForPlayer(player, episodeUrl, subtitle.url, context, viewModel)
+        showSubtitleDialog = false
+    }
+
+    if (showSubtitleDialog) {
+        Dialog(
+            onDismissRequest = { showSubtitleDialog = false },
+            properties = DialogProperties(usePlatformDefaultWidth = false)
+        ) {
+            Surface(
+                modifier = Modifier
+                    .width(400.dp)
+                    .padding(16.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        "选择字幕",
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+
+                    LazyColumn {
+                        items(episode?.subtitles?.size ?: 0) { index ->
+                            val isSelected = episode?.subtitles?.getOrNull(index) == selectedSubtitle
+                            val backgroundColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
+
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(backgroundColor)
+                                    .clickable { setSubtitle(episode?.url!!, episode?.subtitles?.getOrNull(index)!!) }
+                                    .padding(16.dp)
+                                    .focusRequester(dialogFocusRequester)
+                                    .focusable()
+                            ) {
+                                episode?.subtitles?.getOrNull(index)?.let {
+                                    Text(
+                                        it.title,
+                                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(
+                        onClick = { showSubtitleDialog = false },
+                        modifier = Modifier.align(Alignment.End)
+                    ) {
+                        Text("关闭")
+                    }
+                }
+            }
+        }
+
+        // 自动请求焦点
+        LaunchedEffect(showSubtitleDialog) {
+            if (showSubtitleDialog) {
+                dialogFocusRequester.requestFocus()
+            }
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -215,7 +351,7 @@ fun CustomPlayerController(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = title,
+                text = episode?.episodeTitle ?: "Untitled",
                 color = Color.White,
                 fontSize = 24.sp,
                 style = MaterialTheme.typography.bodyLarge
@@ -318,7 +454,9 @@ fun CustomPlayerController(
 
                 IconButton(
                     onClick = {
-
+                        if (episode?.subtitles?.isNotEmpty() == true) {
+                            showSubtitleDialog = true
+                        }
                     },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
@@ -425,6 +563,18 @@ fun CustomPlayerController(
     }
 }
 
+@OptIn(UnstableApi::class)
+fun setSubtitleForPlayer(player: ExoPlayer, episodeUrl:String, subtitleUrl: String, context: Context, viewModel: ExoPlayerViewModel) {
+    try {
+        val currentPosition = player.currentPosition
+        viewModel.releaseP2P()
+        viewModel.setupP2PML(episodeUrl, subtitleUrl)
+        player.seekTo(currentPosition)
+    } catch (e: Exception) {
+        Log.e("Subtitle", "Error setting subtitle", e)
+        Toast.makeText(context, "加载字幕失败", Toast.LENGTH_SHORT).show()
+    }
+}
 
 fun formatRemainingTime(currentPosition: Long, duration: Long): String {
     val remainingMillis = duration - currentPosition

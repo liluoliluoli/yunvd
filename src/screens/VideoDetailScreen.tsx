@@ -10,7 +10,7 @@ import {Button} from "../components/Button";
 import {Spacer} from "../components/Spacer";
 import {theme} from "../theme/theme";
 import {Episode} from "../components/Episode";
-import {formatTime, HEADER_SIZE, STORAGE_KEYS} from "../utils/ApiConstants";
+import {API_BASE_URL, API_PWD, formatTime, HEADER_SIZE, STORAGE_KEYS} from "../utils/ApiConstants";
 import {useVideoItemViewModel} from "../viewModels/VideoItemViewModel";
 import Toast from "react-native-simple-toast";
 import {useFocusEffect} from "@react-navigation/native";
@@ -124,8 +124,20 @@ const VideoDetailScreen = ({route, navigation}) => {
     const navigateToVideoPlayer = (episode, video) => {
         console.log('Navigating to video player with video:', episode.episodeTitle);
         // navigation.push('VideoPlayer', {episode, video});
-        const params = "{\"url\":\"" + episode.url + "\", \"title\":\"" + episode.episodeTitle + "\"}"
-        NativeModules.YvdIntent.startActivityFromRN("com.zyun.yvdintent.MainActivity", params);
+        AsyncStorage.getItem(STORAGE_KEYS.AUTH_TOKEN)
+            .then(token => {
+                if (token) {
+                    const params = "{\"domain\":\"" + API_BASE_URL + "\", \"episodeId\":\"" + episode.id + "\", \"secretKey\":\"" + API_PWD + "\", \"token\":\"" + token + "\"}"
+                    NativeModules.YvdIntent.startActivityFromRN("com.zyun.yvdintent.MainActivity", params);
+                } else {
+                    Toast.show("Token not found", Toast.SHORT);
+                }
+            })
+            .catch(error => {
+                Toast.show(error, Toast.SHORT);
+                console.error('Failed to fetch token:', error);
+            });
+
     };
 
     return (

@@ -5,9 +5,8 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
+import androidx.media3.common.MimeTypes
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DataSpec
@@ -16,11 +15,19 @@ import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.TransferListener
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.hls.HlsMediaSource
-import com.zyun.yvdintent.Streams
+import com.google.gson.Gson
 import com.novage.p2pml.P2PMediaLoader
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
+import java.security.InvalidKeyException
+import java.security.NoSuchAlgorithmException
+import java.time.Duration
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
 
 @UnstableApi
 class ExoPlayerViewModel(
@@ -34,10 +41,10 @@ class ExoPlayerViewModel(
     }
     private var p2pml: P2PMediaLoader? = null
 
-    fun setupP2PML(url:String) {
+    fun setupP2PML(url:String, subtitleUrl: String?) {
         p2pml =
             P2PMediaLoader(
-                onP2PReadyCallback = { initializePlayback(url) },
+                onP2PReadyCallback = { initializePlayback(url, subtitleUrl) },
                 onP2PReadyErrorCallback = { onReadyError(it) },
                 coreConfigJson = "{\"swarmId\":\"TEST_KOTLIN\"}",
                 serverPort = 8082,
@@ -46,17 +53,28 @@ class ExoPlayerViewModel(
         p2pml!!.start(context, player)
     }
 
-    private fun initializePlayback(url:String) {
+    private fun initializePlayback(url:String, subtitleUrl: String?) {
         val manifest =
             p2pml?.getManifestUrl(url)
                 ?: throw IllegalStateException("P2PML is not started")
         val loggingDataSourceFactory = LoggingDataSourceFactory(context)
-
-        val mediaSource =
-            HlsMediaSource
-                .Factory(loggingDataSourceFactory)
-                .createMediaSource(MediaItem.fromUri(manifest))
-
+        var mediaSource: HlsMediaSource? = null
+        if (subtitleUrl != null){
+            val subtitleUri = Uri.parse(subtitleUrl)
+            val subtitleSource = MediaItem.SubtitleConfiguration.Builder(subtitleUri)
+                .setMimeType(MimeTypes.APPLICATION_SUBRIP)
+                .setLanguage("und")
+                .build()
+            mediaSource =
+                HlsMediaSource
+                    .Factory(loggingDataSourceFactory)
+                    .createMediaSource(MediaItem.fromUri(manifest).buildUpon().setSubtitleConfigurations(listOf(subtitleSource)).build())
+        }else{
+            mediaSource =
+                HlsMediaSource
+                    .Factory(loggingDataSourceFactory)
+                    .createMediaSource(MediaItem.fromUri(manifest))
+        }
         player.apply {
             playWhenReady = true
             setMediaSource(mediaSource)
@@ -71,6 +89,10 @@ class ExoPlayerViewModel(
 
     fun releasePlayer() {
         player.release()
+        p2pml?.stop()
+    }
+
+    fun releaseP2P() {
         p2pml?.stop()
     }
 
@@ -137,3 +159,98 @@ class LoggingDataSource(
         }
     }
 }
+
+
+val okHttpClient = OkHttpClient.Builder()
+    .connectTimeout(Duration.ofSeconds(10))
+    .readTimeout(Duration.ofSeconds(10))
+    .writeTimeout(Duration.ofSeconds(10))
+    .retryOnConnectionFailure(true)
+    .build()
+
+data class Episode(
+    val id: Long,
+    val videoId: Long,
+    val episode: Long,
+    var episodeTitle: String,
+    var url: String,
+    var platform:String,
+    var subtitles:List<Subtitle>
+)
+
+data class Subtitle(
+    val id: Long,
+    val title: String,
+    val url: String,
+    val language: String,
+    val mimeType: String,
+)
+
+data class EpisodeReq(
+    val domain: String,
+    val episodeId: Long,
+    val secretKey: String,
+    val token: String,
+)
+
+object SubtitleApi {
+    suspend fun getEpisode(
+        domain:String,
+        token: String,
+        secretKey: String,
+        episodeId: Long,
+    ): Episode = withContext(Dispatchers.IO) {
+        val requestBody = """
+            {
+                "id": $episodeId
+            }
+        """.trimIndent()
+        var now = System.currentTimeMillis()
+        val request = okhttp3.Request.Builder()
+            .url("${domain}/api/episode/get")
+            .addHeader("Authorization", token)
+            .addHeader("Signature", signature("/api/episode/get", now, secretKey))
+            .addHeader("Timestamp", now.toString())
+            .addHeader("Content-Type", "application/json")
+            .post(
+                requestBody
+                    .toRequestBody("application/json".toMediaTypeOrNull())
+            )
+            .build()
+        val response = okHttpClient.newCall(request).execute()
+        if (!response.isSuccessful) {
+            throw IOException("Unexpected code $response")
+        }
+        val json = response.body?.use { it.string() }
+            ?: throw IOException("Response body is null")
+        Log.i("test", "===================json:$json")
+        return@withContext parseJsonToEpisode(json)
+    }
+
+    fun signature(path: String, timestamp: Long, secretKey: String):String{
+        try {
+            val algorithm = "HmacSHA256"
+            val secretKeySpec = SecretKeySpec(secretKey.toByteArray(), algorithm)
+            val mac = Mac.getInstance(algorithm)
+            mac.init(secretKeySpec)
+            var source = "$path$timestamp"
+            val hashBytes = mac.doFinal(source.toByteArray())
+            return hashBytes.joinToString("") { "%02x".format(it) }
+        } catch (e: NoSuchAlgorithmException) {
+            throw RuntimeException("HmacSHA256 not supported", e)
+        } catch (e: InvalidKeyException) {
+            throw RuntimeException("Invalid key", e)
+        }
+    }
+}
+
+fun parseJsonToEpisode(json: String): Episode {
+    val gson = Gson()
+    return gson.fromJson(json, Episode::class.java)
+}
+
+fun parseJsonToEpisodeReq(json: String): EpisodeReq {
+    val gson = Gson()
+    return gson.fromJson(json, EpisodeReq::class.java)
+}
+
