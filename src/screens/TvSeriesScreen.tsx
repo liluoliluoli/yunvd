@@ -6,7 +6,7 @@ import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
-import VideoItem from "../models/VideoItem";
+import Video from "../models/Video";
 import {
     GENRE_OPTIONS,
     HEADER_SIZE,
@@ -21,7 +21,7 @@ import {FilterBar} from "../components/Filterbar";
 import LoadingIndicator from "../components/LoadingIndicator";
 
 export default function TvSeriesScreen({route, navigation}) {
-    const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
+    const [videosByRow, setVideosByRow] = useState<Video[][]>([]);
     const [down, setDown] = useState(false);
     const {
         videos,

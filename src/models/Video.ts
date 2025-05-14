@@ -1,7 +1,7 @@
 import Episode from "./Episode";
 import Actor from "./Actor";
 
-export type VideoItem = {
+export type Video = {
     id: number,
     title: string,
     videoType: string,
@@ -22,4 +22,12 @@ export type VideoItem = {
     lastPlayedEpisodeId: number
     lastPlayedPosition: number
 };
-export default VideoItem;
+export default Video;
+
+export type VideoReq = {
+    video: Video,
+    episodeId: number,
+    domain: string,
+    secretKey: string,
+    token: string,
+};

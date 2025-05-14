@@ -15,6 +15,7 @@ import {useVideoItemViewModel} from "../viewModels/VideoItemViewModel";
 import Toast from "react-native-simple-toast";
 import {useFocusEffect} from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {VideoReq} from "../models/Video";
 
 const VideoDetailScreen = ({route, navigation}) => {
     const passedVideo = route.params?.video;
@@ -127,8 +128,14 @@ const VideoDetailScreen = ({route, navigation}) => {
         AsyncStorage.getItem(STORAGE_KEYS.AUTH_TOKEN)
             .then(token => {
                 if (token) {
-                    const params = "{\"domain\":\"" + API_BASE_URL + "\", \"episodeId\":\"" + episode.id + "\", \"secretKey\":\"" + API_PWD + "\", \"token\":\"" + token + "\"}"
-                    NativeModules.YvdIntent.startActivityFromRN("com.zyun.yvdintent.MainActivity", params);
+                    const params: VideoReq = {
+                        video: video,
+                        episodeId: episode.id,
+                        domain: API_BASE_URL,
+                        secretKey: API_PWD,
+                        token: token,
+                    }
+                    NativeModules.YvdIntent.startActivityFromRN("com.zyun.yvdintent.MainActivity", JSON.stringify(params));
                 } else {
                     Toast.show("Token not found", Toast.SHORT);
                 }

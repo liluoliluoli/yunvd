@@ -6,13 +6,13 @@ import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
-import VideoItem from "../models/VideoItem";
+import Video from "../models/Video";
 import {VideoList} from "../components/VideoList";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 import {HEADER_SIZE} from "../utils/ApiConstants";
 
 export default function SearchScreen({route, navigation}) {
-    const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
+    const [videosByRow, setVideosByRow] = useState<Video[][]>([]);
     const [down, setDown] = useState(false);
     const {
         videos,

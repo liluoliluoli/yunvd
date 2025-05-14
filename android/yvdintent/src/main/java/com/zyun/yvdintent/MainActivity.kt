@@ -6,10 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi
+import com.google.gson.Gson
 import com.zyun.yvdintent.ui.ExoPlayerScreen
 import com.zyun.yvdintent.viewmodel.EpisodeReq
 import com.zyun.yvdintent.viewmodel.ExoPlayerViewModel
-import org.json.JSONObject
 
 @UnstableApi
 class MainActivity : ComponentActivity() {
@@ -20,32 +20,25 @@ class MainActivity : ComponentActivity() {
     @OptIn(UnstableApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Enable debugging of WebViews
         WebView.setWebContentsDebuggingEnabled(true)
         val paramsJson = intent?.getStringExtra("params")
         val episodeReq = try {
             if (!paramsJson.isNullOrEmpty()) {
-                val json = JSONObject(paramsJson)
-                EpisodeReq(
-                    domain = json.optString("domain"),
-                    episodeId = json.optLong("episodeId"),
-                    secretKey = json.optString("secretKey"),
-                    token = json.optString("token")
-                )
+                Gson().fromJson(paramsJson, EpisodeReq::class.java)
             } else {
-                EpisodeReq("", 0, "", "")
+                EpisodeReq("", 0, "", "", null)
             }
         } catch (e: Exception) {
-            EpisodeReq("", 0, "", "")
+            EpisodeReq("", 0, "", "", null)
         }
         setContent {
             ExoPlayerScreen(
                 viewModel = viewModel,
                 domain = episodeReq.domain,
-                episodeId = episodeReq.episodeId,
+                initialEpisodeId = episodeReq.episodeId,
                 secretKey = episodeReq.secretKey,
                 token = episodeReq.token,
+                episodes = episodeReq.video?.episodes
             )
         }
     }

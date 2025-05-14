@@ -6,7 +6,7 @@ import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
-import VideoItem from "../models/VideoItem";
+import Video from "../models/Video";
 import {GENRE_OPTIONS, HEADER_SIZE, REGION_OPTIONS, SORT_OPTIONS, VT_MOVIE, YEAR_OPTIONS} from "../utils/ApiConstants";
 import {VideoList} from "../components/VideoList";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
@@ -15,7 +15,7 @@ import LoadingIndicator from "../components/LoadingIndicator";
 import {useIsFocused} from "@react-navigation/native";
 
 export default function MovieScreen({route, navigation}) {
-    const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
+    const [videosByRow, setVideosByRow] = useState<Video[][]>([]);
     const [down, setDown] = useState(false);
     const {
         videos,

@@ -6,17 +6,17 @@ import {
     SpatialNavigationView
 } from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
-import VideoItem from "../models/VideoItem";
+import Video from "../models/Video";
 import {Ionicons} from "@expo/vector-icons";
 
 interface VideoListProps {
-    videosByRow: VideoItem[][];
-    onVideoPress: (video: VideoItem) => void;
+    videosByRow: Video[][];
+    onVideoPress: (video: Video) => void;
 }
 
 const {width} = Dimensions.get('window');
 export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
-    const renderVideoItem = ({item, index}: { item: VideoItem, index: number }) => (
+    const renderVideoItem = ({item, index}: { item: Video, index: number }) => (
         <SpatialNavigationFocusableView onSelect={() => onVideoPress(item)} key={index} style={{width: width / 5}}>
             {({isFocused, isRootActive}) => (
                 <View style={{
@@ -50,7 +50,7 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
         </SpatialNavigationFocusableView>
     );
 
-    const renderVideosByRow = (videos: VideoItem[], index: number) => (
+    const renderVideosByRow = (videos: Video[], index: number) => (
         <SpatialNavigationView
             style={{height: scaledPixels(520), width: '100%', justifyContent: 'flex-start', alignItems: 'center'}}
             direction="horizontal" key={index}>

@@ -6,7 +6,7 @@ import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
-import VideoItem from "../models/VideoItem";
+import Video from "../models/Video";
 import {HEADER_SIZE, REGION_OPTIONS, SORT_OPTIONS, VT_TV_SHOWS, YEAR_OPTIONS} from "../utils/ApiConstants";
 import {VideoList} from "../components/VideoList";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
@@ -14,7 +14,7 @@ import {FilterBar} from "../components/Filterbar";
 import LoadingIndicator from "../components/LoadingIndicator";
 
 export default function TvShowScreen({route, navigation}) {
-    const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
+    const [videosByRow, setVideosByRow] = useState<Video[][]>([]);
     const [down, setDown] = useState(false);
     const {
         videos,

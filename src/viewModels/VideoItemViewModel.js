@@ -1,6 +1,6 @@
 import {useCallback, useState} from 'react';
 import ApiService from '../services/ApiService';
-import VideoItem from '../models/VideoItem';
+import Video from '../models/Video';
 import {PAGE_SIZE} from "../utils/ApiConstants";
 import Toast from 'react-native-simple-toast';
 

@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -58,7 +59,6 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
-import androidx.tv.material3.Button
 import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.Icon
 import androidx.tv.material3.IconButton
@@ -75,9 +75,10 @@ import kotlinx.coroutines.delay
 fun ExoPlayerScreen(
     viewModel: ExoPlayerViewModel,
     domain: String,
-    episodeId: Long,
+    initialEpisodeId: Long,
     secretKey: String,
     token: String,
+    episodes: List<Episode>?,
 ) {
     val context = LocalContext.current
     var progress by remember { mutableStateOf(0F) }
@@ -85,10 +86,11 @@ fun ExoPlayerScreen(
     var formattedRemainingTime by remember { mutableStateOf("00:00") }
     var isPlayerReady by remember { mutableStateOf(false) }
     var showController by remember { mutableStateOf(false) }
-    val focusRequester = remember { FocusRequester() }
-    var lastInteractionTime by remember { mutableStateOf(System.currentTimeMillis()) }
+    val sliderFocusRequester = remember { FocusRequester() }
+    var lastInteractionTime by remember { mutableLongStateOf(System.currentTimeMillis()) }
     var episode by remember { mutableStateOf<Episode?>(null) }
     var isLoading by remember { mutableStateOf(false) }
+    var episodeId by remember { mutableLongStateOf(initialEpisodeId) }
 
     DisposableEffect(Unit) {
         val listener = object : Player.Listener {
@@ -97,7 +99,10 @@ fun ExoPlayerScreen(
                     isPlayerReady = true
                     maxProgress = viewModel.player.duration.toFloat()
                     formattedRemainingTime =
-                        formatRemainingTime(viewModel.player.currentPosition, viewModel.player.duration)
+                        formatRemainingTime(
+                            viewModel.player.currentPosition,
+                            viewModel.player.duration
+                        )
                 }
                 if (playbackState == Player.STATE_BUFFERING) {
                     isPlayerReady = false
@@ -112,7 +117,10 @@ fun ExoPlayerScreen(
                 progress = viewModel.player.currentPosition.toFloat()
                 if (isPlayerReady) {
                     formattedRemainingTime =
-                        formatRemainingTime(viewModel.player.currentPosition, viewModel.player.duration)
+                        formatRemainingTime(
+                            viewModel.player.currentPosition,
+                            viewModel.player.duration
+                        )
                 }
             }
         }
@@ -137,8 +145,9 @@ fun ExoPlayerScreen(
 
     LaunchedEffect(showController) {
         if (showController) {
+            Log.i("test", "==========screenFocusRequester.unFocus()")
             delay(100)
-            focusRequester.requestFocus()
+            sliderFocusRequester.requestFocus()
             while (showController && System.currentTimeMillis() - lastInteractionTime < 5000) {
                 delay(5000L)
             }
@@ -164,24 +173,6 @@ fun ExoPlayerScreen(
         }
     }
 
-    suspend fun loadEpisode(domain: String, token:String, secretKey:String, episodeId:Long){
-        try {
-            isLoading = true
-            episode = SubtitleApi.getEpisode(
-                domain = domain,
-                token = token,
-                secretKey = secretKey,
-                episodeId = episodeId,
-            )
-            viewModel.releaseP2P()
-            viewModel.setupP2PML(episode!!.url, null)
-        } catch (e: Exception) {
-            Toast.makeText(context, "请求播放地址失败：$e", Toast.LENGTH_SHORT).show()
-        } finally {
-            isLoading = false
-        }
-    }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -189,11 +180,23 @@ fun ExoPlayerScreen(
             .onKeyEvent { event ->
                 if (event.type == KeyEventType.KeyDown) {
                     when (event.key) {
-                        Key.DirectionDown -> {
+                        Key.DirectionDown, Key.DirectionCenter -> {
                             showController = true
                             lastInteractionTime = System.currentTimeMillis()
                             true
                         }
+
+                        Key.DirectionLeft, Key.DirectionRight -> {
+                            lastInteractionTime = System.currentTimeMillis()
+                            if (showController) {
+                                showController = true
+                                false //传给CustomPlayerController处理
+                            } else {
+                                showController = true
+                                true
+                            }
+                        }
+
                         else -> {
                             lastInteractionTime = System.currentTimeMillis()
                             false
@@ -227,9 +230,16 @@ fun ExoPlayerScreen(
                     maxProgress = maxProgress,
                     formattedRemainingTime = formattedRemainingTime,
                     episode = episode,
-                    focusRequester = focusRequester,
+                    episodes = episodes,
+                    sliderFocusRequester = sliderFocusRequester,
                     context = context,
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    onEpisodeChanged = { newEpisodeId ->
+                        episodeId = newEpisodeId
+                    },
+                    onShowController = { newShowController ->
+                        showController = newShowController
+                    }
                 )
             }
 
@@ -258,22 +268,34 @@ fun CustomPlayerController(
     maxProgress: Float,
     formattedRemainingTime: String,
     episode: Episode?,
-    focusRequester: FocusRequester,
+    episodes: List<Episode>?,
+    sliderFocusRequester: FocusRequester,
     context: Context = LocalContext.current,
-    viewModel: ExoPlayerViewModel
+    viewModel: ExoPlayerViewModel,
+    onEpisodeChanged: (Long) -> Unit,
+    onShowController: (Boolean) -> Unit
 ) {
     var isPlaying by remember { mutableStateOf(player.isPlaying) }
     var isFocusedSubtitle by remember { mutableStateOf(false) }
     var isFocusedAudio by remember { mutableStateOf(false) }
     var isFocusedSpeed by remember { mutableStateOf(false) }
     var showSubtitleDialog by remember { mutableStateOf(false) }
-    val dialogFocusRequester = remember { FocusRequester() }
+    val subtitleDialogFocusRequester = remember { FocusRequester() }
     var selectedSubtitle by remember { mutableStateOf<Subtitle?>(null) }
+    var showEpisodeDialog by remember { mutableStateOf(false) }
+    val episodeDialogFocusRequester = remember { FocusRequester() }
+    var selectedEpisodeId by remember { mutableLongStateOf(0) }
 
     fun setSubtitle(episodeUrl: String, subtitle: Subtitle) {
         selectedSubtitle = subtitle
         setSubtitleForPlayer(player, episodeUrl, subtitle.url, context, viewModel)
         showSubtitleDialog = false
+    }
+
+    fun setEpisode(episodeId: Long) {
+        selectedEpisodeId = episodeId
+        onEpisodeChanged(episodeId)
+        showEpisodeDialog = false
     }
 
     if (showSubtitleDialog) {
@@ -297,16 +319,23 @@ fun CustomPlayerController(
 
                     LazyColumn {
                         items(episode?.subtitles?.size ?: 0) { index ->
-                            val isSelected = episode?.subtitles?.getOrNull(index) == selectedSubtitle
-                            val backgroundColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
+                            val isSelected =
+                                episode?.subtitles?.getOrNull(index) == selectedSubtitle
+                            val backgroundColor =
+                                if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
 
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .background(backgroundColor)
-                                    .clickable { setSubtitle(episode?.url!!, episode?.subtitles?.getOrNull(index)!!) }
+                                    .clickable {
+                                        setSubtitle(
+                                            episode?.url!!,
+                                            episode?.subtitles?.getOrNull(index)!!
+                                        )
+                                    }
                                     .padding(16.dp)
-                                    .focusRequester(dialogFocusRequester)
+                                    .focusRequester(subtitleDialogFocusRequester)
                                     .focusable()
                             ) {
                                 episode?.subtitles?.getOrNull(index)?.let {
@@ -318,14 +347,63 @@ fun CustomPlayerController(
                             }
                         }
                     }
+                }
+            }
+        }
 
-                    Spacer(modifier = Modifier.height(16.dp))
+        // 自动请求焦点
+        LaunchedEffect(showSubtitleDialog) {
+            if (showSubtitleDialog) {
+                subtitleDialogFocusRequester.requestFocus()
+            }
+        }
+    }
 
-                    Button(
-                        onClick = { showSubtitleDialog = false },
-                        modifier = Modifier.align(Alignment.End)
-                    ) {
-                        Text("关闭")
+    if (showEpisodeDialog) {
+        Dialog(
+            onDismissRequest = { showEpisodeDialog = false },
+            properties = DialogProperties(usePlatformDefaultWidth = false)
+        ) {
+            Surface(
+                modifier = Modifier
+                    .width(400.dp)
+                    .padding(16.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        "选择集数",
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+
+                    LazyColumn {
+                        items(episodes?.size ?: 0) { index ->
+                            val isSelected =
+                                episodes?.getOrNull(index)?.id == selectedEpisodeId
+                            val backgroundColor =
+                                if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
+
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(backgroundColor)
+                                    .clickable {
+                                        setEpisode(episodes?.getOrNull(index)?.id!!)
+                                    }
+                                    .padding(16.dp)
+                                    .focusRequester(episodeDialogFocusRequester)
+                                    .focusable()
+                            ) {
+                                episodes?.getOrNull(index)?.let {
+                                    Text(
+                                        it.episodeTitle,
+                                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -334,7 +412,7 @@ fun CustomPlayerController(
         // 自动请求焦点
         LaunchedEffect(showSubtitleDialog) {
             if (showSubtitleDialog) {
-                dialogFocusRequester.requestFocus()
+                subtitleDialogFocusRequester.requestFocus()
             }
         }
     }
@@ -380,7 +458,7 @@ fun CustomPlayerController(
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 16.sp,
                         color = Color.White,
-                        text = "Speed",
+                        text = "倍速",
                         modifier = Modifier
                             .align(Alignment.TopCenter)
                     )
@@ -393,10 +471,11 @@ fun CustomPlayerController(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .size(40.dp)
+                        .focusable()
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_speed),
-                        contentDescription = "Speed"
+                        contentDescription = "倍速"
                     )
                 }
             }
@@ -413,7 +492,7 @@ fun CustomPlayerController(
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 16.sp,
                         color = Color.White,
-                        text = "Audio",
+                        text = "选集",
                         modifier = Modifier
                             .align(Alignment.TopCenter)
                     )
@@ -421,7 +500,9 @@ fun CustomPlayerController(
 
                 IconButton(
                     onClick = {
-
+                        if (episodes != null) {
+                            showEpisodeDialog = true
+                        }
                     },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
@@ -429,7 +510,7 @@ fun CustomPlayerController(
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_sound),
-                        contentDescription = "Audio"
+                        contentDescription = "选集"
                     )
                 }
             }
@@ -446,7 +527,7 @@ fun CustomPlayerController(
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 16.sp,
                         color = Color.White,
-                        text = "Subtitles",
+                        text = "字幕",
                         modifier = Modifier
                             .align(Alignment.TopCenter)
                     )
@@ -464,7 +545,7 @@ fun CustomPlayerController(
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_comment),
-                        contentDescription = "Comment"
+                        contentDescription = "字幕"
                     )
                 }
             }
@@ -481,18 +562,20 @@ fun CustomPlayerController(
             IconButton(
                 modifier = Modifier
                     .size(40.dp)
-                    .focusRequester(focusRequester)
+                    .focusRequester(sliderFocusRequester)
                     .focusable()
                     .onKeyEvent { event ->
                         if (event.type == KeyEventType.KeyDown) {
                             when (event.key) {
                                 Key.DirectionLeft -> {
                                     player.seekTo(player.currentPosition - 15000)
+                                    onShowController(true)
                                     true
                                 }
 
                                 Key.DirectionRight -> {
                                     player.seekTo(player.currentPosition + 15000)
+                                    onShowController(true)
                                     true
                                 }
 
@@ -564,12 +647,34 @@ fun CustomPlayerController(
 }
 
 @OptIn(UnstableApi::class)
-fun setSubtitleForPlayer(player: ExoPlayer, episodeUrl:String, subtitleUrl: String, context: Context, viewModel: ExoPlayerViewModel) {
+fun setSubtitleForPlayer(
+    player: ExoPlayer,
+    episodeUrl: String,
+    subtitleUrl: String,
+    context: Context,
+    viewModel: ExoPlayerViewModel
+) {
     try {
         val currentPosition = player.currentPosition
         viewModel.releaseP2P()
         viewModel.setupP2PML(episodeUrl, subtitleUrl)
         player.seekTo(currentPosition)
+    } catch (e: Exception) {
+        Log.e("Subtitle", "Error setting subtitle", e)
+        Toast.makeText(context, "加载字幕失败", Toast.LENGTH_SHORT).show()
+    }
+}
+
+@OptIn(UnstableApi::class)
+fun setEpisodeForPlayer(
+    episode: Episode,
+    context: Context,
+    viewModel: ExoPlayerViewModel
+) {
+    try {
+
+        viewModel.releaseP2P()
+        viewModel.setupP2PML(episode.url, null)
     } catch (e: Exception) {
         Log.e("Subtitle", "Error setting subtitle", e)
         Toast.makeText(context, "加载字幕失败", Toast.LENGTH_SHORT).show()

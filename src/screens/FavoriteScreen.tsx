@@ -6,7 +6,7 @@ import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
 import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
-import VideoItem from "../models/VideoItem";
+import Video from "../models/Video";
 import {VideoList} from "../components/VideoList";
 import {Spacer} from "../components/Spacer";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
@@ -15,7 +15,7 @@ import LoadingIndicator from "../components/LoadingIndicator";
 
 const HEADER_SIZE = scaledPixels(400)
 export default function FavoriteScreen({route, navigation}) {
-    const [videosByRow, setVideosByRow] = useState<VideoItem[][]>([]);
+    const [videosByRow, setVideosByRow] = useState<Video[][]>([]);
     const [down, setDown] = useState(false);
     const {
         videos,

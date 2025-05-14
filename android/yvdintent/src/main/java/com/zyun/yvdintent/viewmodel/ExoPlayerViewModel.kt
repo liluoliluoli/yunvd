@@ -41,7 +41,7 @@ class ExoPlayerViewModel(
     }
     private var p2pml: P2PMediaLoader? = null
 
-    fun setupP2PML(url:String, subtitleUrl: String?) {
+    fun setupP2PML(url: String, subtitleUrl: String?) {
         p2pml =
             P2PMediaLoader(
                 onP2PReadyCallback = { initializePlayback(url, subtitleUrl) },
@@ -53,13 +53,13 @@ class ExoPlayerViewModel(
         p2pml!!.start(context, player)
     }
 
-    private fun initializePlayback(url:String, subtitleUrl: String?) {
+    private fun initializePlayback(url: String, subtitleUrl: String?) {
         val manifest =
             p2pml?.getManifestUrl(url)
                 ?: throw IllegalStateException("P2PML is not started")
         val loggingDataSourceFactory = LoggingDataSourceFactory(context)
         var mediaSource: HlsMediaSource? = null
-        if (subtitleUrl != null){
+        if (subtitleUrl != null) {
             val subtitleUri = Uri.parse(subtitleUrl)
             val subtitleSource = MediaItem.SubtitleConfiguration.Builder(subtitleUri)
                 .setMimeType(MimeTypes.APPLICATION_SUBRIP)
@@ -68,8 +68,11 @@ class ExoPlayerViewModel(
             mediaSource =
                 HlsMediaSource
                     .Factory(loggingDataSourceFactory)
-                    .createMediaSource(MediaItem.fromUri(manifest).buildUpon().setSubtitleConfigurations(listOf(subtitleSource)).build())
-        }else{
+                    .createMediaSource(
+                        MediaItem.fromUri(manifest).buildUpon()
+                            .setSubtitleConfigurations(listOf(subtitleSource)).build()
+                    )
+        } else {
             mediaSource =
                 HlsMediaSource
                     .Factory(loggingDataSourceFactory)
@@ -116,7 +119,8 @@ class LoggingDataSourceFactory(
 
     private val baseDataSourceFactory = DefaultDataSource.Factory(context, httpDataSourceFactory)
 
-    override fun createDataSource(): DataSource = LoggingDataSource(baseDataSourceFactory.createDataSource())
+    override fun createDataSource(): DataSource =
+        LoggingDataSource(baseDataSourceFactory.createDataSource())
 }
 
 @UnstableApi
@@ -174,8 +178,8 @@ data class Episode(
     val episode: Long,
     var episodeTitle: String,
     var url: String,
-    var platform:String,
-    var subtitles:List<Subtitle>
+    var platform: String,
+    var subtitles: List<Subtitle>
 )
 
 data class Subtitle(
@@ -191,11 +195,17 @@ data class EpisodeReq(
     val episodeId: Long,
     val secretKey: String,
     val token: String,
+    val video: Video?
+)
+
+data class Video(
+    val id: Long,
+    val episodes: List<Episode>?
 )
 
 object SubtitleApi {
     suspend fun getEpisode(
-        domain:String,
+        domain: String,
         token: String,
         secretKey: String,
         episodeId: Long,
@@ -227,7 +237,7 @@ object SubtitleApi {
         return@withContext parseJsonToEpisode(json)
     }
 
-    fun signature(path: String, timestamp: Long, secretKey: String):String{
+    fun signature(path: String, timestamp: Long, secretKey: String): String {
         try {
             val algorithm = "HmacSHA256"
             val secretKeySpec = SecretKeySpec(secretKey.toByteArray(), algorithm)
