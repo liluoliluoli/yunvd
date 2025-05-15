@@ -9,6 +9,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
@@ -25,6 +26,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
@@ -39,6 +41,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
@@ -50,6 +53,7 @@ import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -62,6 +66,7 @@ import androidx.media3.ui.PlayerView
 import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.Icon
 import androidx.tv.material3.IconButton
+import androidx.tv.material3.LocalTextStyle
 import androidx.tv.material3.Text
 import com.zyun.yvdintent.R
 import com.zyun.yvdintent.viewmodel.Episode
@@ -91,6 +96,9 @@ fun ExoPlayerScreen(
     var episode by remember { mutableStateOf<Episode?>(null) }
     var isLoading by remember { mutableStateOf(false) }
     var episodeId by remember { mutableLongStateOf(initialEpisodeId) }
+    var showSubtitleDialog by remember { mutableStateOf(false) }
+    var showEpisodeDialog by remember { mutableStateOf(false) }
+
 
     DisposableEffect(Unit) {
         val listener = object : Player.Listener {
@@ -143,15 +151,16 @@ fun ExoPlayerScreen(
         }
     }
 
-    LaunchedEffect(showController) {
+    LaunchedEffect(showController, showSubtitleDialog, showEpisodeDialog) {
         if (showController) {
-            Log.i("test", "==========screenFocusRequester.unFocus()")
             delay(100)
             sliderFocusRequester.requestFocus()
             while (showController && System.currentTimeMillis() - lastInteractionTime < 5000) {
                 delay(5000L)
             }
-            showController = false
+            if (!showSubtitleDialog && !showEpisodeDialog) {
+                showController = false
+            }
         }
     }
 
@@ -180,13 +189,13 @@ fun ExoPlayerScreen(
             .onKeyEvent { event ->
                 if (event.type == KeyEventType.KeyDown) {
                     when (event.key) {
-                        Key.DirectionDown, Key.DirectionCenter -> {
+                        Key.DirectionCenter -> {
                             showController = true
                             lastInteractionTime = System.currentTimeMillis()
                             true
                         }
 
-                        Key.DirectionLeft, Key.DirectionRight -> {
+                        Key.DirectionDown, Key.DirectionLeft, Key.DirectionRight -> {
                             lastInteractionTime = System.currentTimeMillis()
                             if (showController) {
                                 showController = true
@@ -239,7 +248,15 @@ fun ExoPlayerScreen(
                     },
                     onShowController = { newShowController ->
                         showController = newShowController
-                    }
+                    },
+                    onShowSubtitleDialog = { newShowSubtitleDialog ->
+                        showSubtitleDialog = newShowSubtitleDialog
+                        lastInteractionTime = System.currentTimeMillis()
+                    },
+                    onShowEpisodeDialog = { newShowEpisodeDialog ->
+                        showEpisodeDialog = newShowEpisodeDialog
+                        lastInteractionTime = System.currentTimeMillis()
+                    },
                 )
             }
 
@@ -273,146 +290,243 @@ fun CustomPlayerController(
     context: Context = LocalContext.current,
     viewModel: ExoPlayerViewModel,
     onEpisodeChanged: (Long) -> Unit,
-    onShowController: (Boolean) -> Unit
+    onShowController: (Boolean) -> Unit,
+    onShowSubtitleDialog: (Boolean) -> Unit,
+    onShowEpisodeDialog: (Boolean) -> Unit
 ) {
     var isPlaying by remember { mutableStateOf(player.isPlaying) }
     var isFocusedSubtitle by remember { mutableStateOf(false) }
     var isFocusedAudio by remember { mutableStateOf(false) }
     var isFocusedSpeed by remember { mutableStateOf(false) }
     var showSubtitleDialog by remember { mutableStateOf(false) }
-    val subtitleDialogFocusRequester = remember { FocusRequester() }
     var selectedSubtitle by remember { mutableStateOf<Subtitle?>(null) }
     var showEpisodeDialog by remember { mutableStateOf(false) }
-    val episodeDialogFocusRequester = remember { FocusRequester() }
-    var selectedEpisodeId by remember { mutableLongStateOf(0) }
+    var selectedEpisodeId by remember { mutableLongStateOf(episode?.id!!) }
 
     fun setSubtitle(episodeUrl: String, subtitle: Subtitle) {
         selectedSubtitle = subtitle
         setSubtitleForPlayer(player, episodeUrl, subtitle.url, context, viewModel)
         showSubtitleDialog = false
+        onShowSubtitleDialog(false)
     }
 
     fun setEpisode(episodeId: Long) {
         selectedEpisodeId = episodeId
         onEpisodeChanged(episodeId)
         showEpisodeDialog = false
+        onShowEpisodeDialog(false)
     }
 
     if (showSubtitleDialog) {
         Dialog(
-            onDismissRequest = { showSubtitleDialog = false },
-            properties = DialogProperties(usePlatformDefaultWidth = false)
+            onDismissRequest = {
+                showSubtitleDialog = false
+                onShowSubtitleDialog(false)
+            },
+            properties = DialogProperties(
+                usePlatformDefaultWidth = false,
+            )
         ) {
             Surface(
                 modifier = Modifier
-                    .width(400.dp)
-                    .padding(16.dp)
+                    .width(350.dp)
+                    .height(300.dp)
+                    .padding(1.dp)
+                    .clip(MaterialTheme.shapes.small)
+                    .border(
+                        width = 1.dp,
+                        color = Color.Gray.copy(alpha = 0.2f),
+                        shape = MaterialTheme.shapes.medium
+                    ),
+                color = Color(0xFFB0E0E6).copy(alpha = 0.8f)
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(4.dp)
                 ) {
-                    Text(
-                        "选择字幕",
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-
                     LazyColumn {
                         items(episode?.subtitles?.size ?: 0) { index ->
                             val isSelected =
                                 episode?.subtitles?.getOrNull(index) == selectedSubtitle
                             val backgroundColor =
                                 if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
+                            var isFocused by remember { mutableStateOf(false) }
+                            val itemFocusRequester = remember { FocusRequester() }
+                            if (isSelected) {
+                                LaunchedEffect(Unit) {
+                                    itemFocusRequester.requestFocus()
+                                }
+                            }
 
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(backgroundColor)
-                                    .clickable {
-                                        setSubtitle(
-                                            episode?.url!!,
-                                            episode?.subtitles?.getOrNull(index)!!
+                            Column {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(32.dp)
+                                        .background(backgroundColor)
+                                        .clickable {
+                                            setSubtitle(
+                                                episode?.url!!,
+                                                episode?.subtitles?.getOrNull(index)!!
+                                            )
+                                        }
+                                        .focusRequester(itemFocusRequester)
+                                        .focusable()
+                                        .onFocusChanged { focusState ->
+                                            isFocused = focusState.isFocused
+                                        },
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_comment),
+                                        contentDescription = "Subtitle",
+                                        tint = when {
+                                            isSelected -> Color.White
+                                            isFocused -> Color.White
+                                            else -> Color.White.copy(alpha = 0.8f)
+                                        },
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .then(
+                                                if (isSelected) {
+                                                    Modifier.background(
+                                                        color = Color.Black.copy(alpha = 0.8f),
+                                                        shape = androidx.compose.foundation.shape.CircleShape
+                                                    )
+                                                } else {
+                                                    Modifier
+                                                }
+                                            )
+                                    )
+                                    episode?.subtitles?.getOrNull(index)?.let {
+                                        Text(
+                                            "  " + it.title,
+                                            color = when {
+                                                isFocused -> Color.Red
+                                                else -> Color.White
+                                            },
+                                            style = when {
+                                                isFocused -> LocalTextStyle.current.copy(
+                                                    fontWeight = FontWeight.Bold
+                                                )
+
+                                                else -> LocalTextStyle.current
+                                            }
                                         )
                                     }
-                                    .padding(16.dp)
-                                    .focusRequester(subtitleDialogFocusRequester)
-                                    .focusable()
-                            ) {
-                                episode?.subtitles?.getOrNull(index)?.let {
-                                    Text(
-                                        it.title,
-                                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
-                                    )
                                 }
+                                HorizontalDivider(
+                                    thickness = 1.dp,
+                                    color = Color.White.copy(alpha = 0.2f)
+                                )
                             }
                         }
                     }
                 }
-            }
-        }
-
-        // 自动请求焦点
-        LaunchedEffect(showSubtitleDialog) {
-            if (showSubtitleDialog) {
-                subtitleDialogFocusRequester.requestFocus()
             }
         }
     }
 
     if (showEpisodeDialog) {
         Dialog(
-            onDismissRequest = { showEpisodeDialog = false },
-            properties = DialogProperties(usePlatformDefaultWidth = false)
+            onDismissRequest = {
+                showEpisodeDialog = false
+                onShowEpisodeDialog(false)
+            },
+            properties = DialogProperties(
+                usePlatformDefaultWidth = false,
+            )
         ) {
             Surface(
                 modifier = Modifier
-                    .width(400.dp)
-                    .padding(16.dp)
+                    .width(350.dp)
+                    .height(400.dp)
+                    .padding(1.dp)
+                    .clip(MaterialTheme.shapes.small)
+                    .border(
+                        width = 1.dp,
+                        color = Color.Gray.copy(alpha = 0.2f),
+                        shape = MaterialTheme.shapes.medium
+                    ),
+                color = Color(0xFFB0E0E6).copy(alpha = 0.8f)
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.padding(4.dp)
                 ) {
-                    Text(
-                        "选择集数",
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-
                     LazyColumn {
                         items(episodes?.size ?: 0) { index ->
                             val isSelected =
                                 episodes?.getOrNull(index)?.id == selectedEpisodeId
-                            val backgroundColor =
-                                if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
-
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(backgroundColor)
-                                    .clickable {
-                                        setEpisode(episodes?.getOrNull(index)?.id!!)
-                                    }
-                                    .padding(16.dp)
-                                    .focusRequester(episodeDialogFocusRequester)
-                                    .focusable()
-                            ) {
-                                episodes?.getOrNull(index)?.let {
-                                    Text(
-                                        it.episodeTitle,
-                                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
-                                    )
+                            val itemFocusRequester = remember { FocusRequester() }
+                            var isFocused by remember { mutableStateOf(false) }
+                            if (isSelected) {
+                                LaunchedEffect(Unit) {
+                                    delay(50)
+                                    itemFocusRequester.requestFocus()
                                 }
+                            }
+
+                            Column {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(32.dp)
+                                        .background(Color.Transparent)
+                                        .clickable {
+                                            setEpisode(episodes?.getOrNull(index)?.id!!)
+                                        }
+                                        .focusRequester(itemFocusRequester)
+                                        .focusable()
+                                        .onFocusChanged { focusState ->
+                                            isFocused = focusState.isFocused
+                                        },
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        Icons.Filled.PlayArrow,
+                                        contentDescription = "Play",
+                                        tint = when {
+                                            isSelected -> Color.White
+                                            isFocused -> Color.White
+                                            else -> Color.White.copy(alpha = 0.8f)
+                                        },
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .then(
+                                                if (isSelected) {
+                                                    Modifier.background(
+                                                        color = Color.Black.copy(alpha = 0.8f),
+                                                        shape = androidx.compose.foundation.shape.CircleShape
+                                                    )
+                                                } else {
+                                                    Modifier
+                                                }
+                                            )
+                                    )
+                                    episodes?.getOrNull(index)?.let {
+                                        Text(
+                                            "  " + it.episodeTitle,
+                                            color = when {
+                                                isFocused -> Color.Red
+                                                else -> Color.White
+                                            },
+                                            style = when {
+                                                isFocused -> LocalTextStyle.current.copy(
+                                                    fontWeight = FontWeight.Bold
+                                                )
+
+                                                else -> LocalTextStyle.current
+                                            }
+                                        )
+                                    }
+                                }
+                                HorizontalDivider(
+                                    thickness = 1.dp,
+                                    color = Color.White.copy(alpha = 0.2f)
+                                )
                             }
                         }
                     }
                 }
-            }
-        }
-
-        // 自动请求焦点
-        LaunchedEffect(showSubtitleDialog) {
-            if (showSubtitleDialog) {
-                subtitleDialogFocusRequester.requestFocus()
             }
         }
     }
@@ -458,7 +572,7 @@ fun CustomPlayerController(
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 16.sp,
                         color = Color.White,
-                        text = "倍速",
+                        text = "${player.playbackParameters.speed.toInt()}X",
                         modifier = Modifier
                             .align(Alignment.TopCenter)
                     )
@@ -466,12 +580,18 @@ fun CustomPlayerController(
 
                 IconButton(
                     onClick = {
-
+                        val currentSpeed = player.playbackParameters.speed
+                        val newSpeed = when {
+                            currentSpeed < 1.5f -> 2f
+                            currentSpeed < 2.5f -> 3f
+                            currentSpeed < 3.5f -> 4f
+                            else -> 1f
+                        }
+                        player.playbackParameters = player.playbackParameters.withSpeed(newSpeed)
                     },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .size(40.dp)
-                        .focusable()
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_speed),
@@ -502,6 +622,7 @@ fun CustomPlayerController(
                     onClick = {
                         if (episodes != null) {
                             showEpisodeDialog = true
+                            onShowEpisodeDialog(true)
                         }
                     },
                     modifier = Modifier
@@ -535,9 +656,8 @@ fun CustomPlayerController(
 
                 IconButton(
                     onClick = {
-                        if (episode?.subtitles?.isNotEmpty() == true) {
-                            showSubtitleDialog = true
-                        }
+                        showSubtitleDialog = true
+                        onShowSubtitleDialog(true)
                     },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
@@ -682,8 +802,12 @@ fun setEpisodeForPlayer(
 }
 
 fun formatRemainingTime(currentPosition: Long, duration: Long): String {
-    val remainingMillis = duration - currentPosition
-    val minutes = (remainingMillis / 60000).toInt()
-    val seconds = (remainingMillis % 60000 / 1000).toInt()
-    return String.format("%02d:%02d", minutes, seconds)
+    if (duration <= 0) {
+        return "00:00/00:00"
+    }
+    val totalMinutes = (duration / 60000).toInt()
+    val totalSeconds = (duration % 60000 / 1000).toInt()
+    val curMinutes = (currentPosition / 60000).toInt()
+    val curSeconds = (currentPosition % 60000 / 1000).toInt()
+    return String.format("%02d:%02d/%02d:%02d", curMinutes, curSeconds, totalMinutes, totalSeconds)
 }
