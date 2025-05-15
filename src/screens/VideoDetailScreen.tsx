@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Image, NativeModules, StyleSheet, View,} from 'react-native';
+import {Image, NativeEventEmitter, NativeModules, StyleSheet, View,} from 'react-native';
 import {SpatialNavigationNode, SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
 import {Page} from "../components/Page";
@@ -13,7 +13,6 @@ import {Episode} from "../components/Episode";
 import {API_BASE_URL, API_PWD, formatTime, HEADER_SIZE, STORAGE_KEYS} from "../utils/ApiConstants";
 import {useVideoItemViewModel} from "../viewModels/VideoItemViewModel";
 import Toast from "react-native-simple-toast";
-import {useFocusEffect} from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {VideoReq} from "../models/Video";
 
@@ -48,42 +47,50 @@ const VideoDetailScreen = ({route, navigation}) => {
         }
     }, [video]);
 
-    useFocusEffect(
-        useCallback(() => {
-            const updateLastPlayedInfo = async () => {
-                try {
-                    const historyJson = await AsyncStorage.getItem(STORAGE_KEYS.WATCH_HISTORY);
-                    if (historyJson) {
-                        const historyData = JSON.parse(historyJson);
-                        // 筛选出与当前视频 videoId 对应的记录
-                        const currentVideoHistory = Array.isArray(historyData)
-                            ? historyData.filter(item => item.videoId === passedVideo.id)
-                            : [historyData].filter(item => item.videoId === passedVideo.id);
+    useEffect(() => {
+        const eventEmitter = new NativeEventEmitter();
+        const subscription = eventEmitter.addListener('onPlayerClosed', (data) => {
+            console.log("onPlayerClosed:" + data)
+            fetchVideo()
+        });
+        return () => subscription.remove();
+    }, []);
 
-                        if (currentVideoHistory.length > 0) {
-                            // 找到最新的记录
-                            const latestRecord = currentVideoHistory.reduce((prev, current) =>
-                                new Date(prev.timestamp) > new Date(current.timestamp) ? prev : current
-                            );
-                            console.log("video.lastPlayedTime.getTime():" + video?.lastPlayedTime);
-                            console.log("latestRecord.timestamp:" + latestRecord.timestamp);
-                            if (video && latestRecord.timestamp > video?.lastPlayedTime) {
-                                video.lastPlayedEpisodeId = latestRecord.episodeId;
-                                video.lastPlayedPosition = latestRecord.position;
-                                video.lastPlayedTime = latestRecord.timestamp;
-                                setLastPlayedPosition(video.lastPlayedPosition);
-                                setLastPlayedEpisodeId(video.lastPlayedEpisodeId);
-                            }
-                        }
-                    }
-                } catch (error) {
-                    console.error('Error fetching watch history:', error);
-                }
-            };
-
-            updateLastPlayedInfo();
-        }, [passedVideo.id, video])
-    );
+    // useFocusEffect(
+    //     useCallback(() => {
+    //         const updateLastPlayedInfo = async () => {
+    //             try {
+    //                 const historyJson = await AsyncStorage.getItem(STORAGE_KEYS.WATCH_HISTORY);
+    //                 if (historyJson) {
+    //                     const historyData = JSON.parse(historyJson);
+    //                     // 筛选出与当前视频 videoId 对应的记录
+    //                     const currentVideoHistory = Array.isArray(historyData)
+    //                         ? historyData.filter(item => item.videoId === passedVideo.id)
+    //                         : [historyData].filter(item => item.videoId === passedVideo.id);
+    //
+    //                     if (currentVideoHistory.length > 0) {
+    //                         // 找到最新的记录
+    //                         const latestRecord = currentVideoHistory.reduce((prev, current) =>
+    //                             new Date(prev.timestamp) > new Date(current.timestamp) ? prev : current
+    //                         );
+    //                         console.log("video.lastPlayedTime.getTime():" + video?.lastPlayedTime);
+    //                         console.log("latestRecord.timestamp:" + latestRecord.timestamp);
+    //                         if (video && latestRecord.timestamp > video?.lastPlayedTime) {
+    //                             video.lastPlayedEpisodeId = latestRecord.episodeId;
+    //                             video.lastPlayedPosition = latestRecord.position;
+    //                             video.lastPlayedTime = latestRecord.timestamp;
+    //                             setLastPlayedPosition(video.lastPlayedPosition);
+    //                             setLastPlayedEpisodeId(video.lastPlayedEpisodeId);
+    //                         }
+    //                     }
+    //                 }
+    //             } catch (error) {
+    //                 console.error('Error fetching watch history:', error);
+    //             }
+    //         };
+    //
+    //     }, [])
+    // );
 
 
     const handelFavorite = useCallback(() => {
@@ -97,12 +104,12 @@ const VideoDetailScreen = ({route, navigation}) => {
         if (video.lastPlayedEpisodeId) {
             const episode = video.episodes.find(item => item.id === video?.lastPlayedEpisodeId)
             console.log("video lastPlayedPosition:" + video.lastPlayedPosition)
-            navigation.push('VideoPlayer', {episode, video});
+            navigateToVideoPlayer(episode, video)
         } else {
             const episode = video?.episodes[0]
-            navigation.push('VideoPlayer', {episode, video});
+            navigateToVideoPlayer(episode, video)
         }
-    }, [video]);
+    }, [lastPlayedPosition]);
 
     const handleNextEpisode = useCallback(() => {
         if (!video) {
@@ -111,16 +118,17 @@ const VideoDetailScreen = ({route, navigation}) => {
         const lastPlayedIndex = video.episodes.findIndex(item => item.id === lastPlayedEpisodeId)
         if (lastPlayedIndex === -1) {
             const episode = video?.episodes[0]
-            navigation.push('VideoPlayer', {episode, video});
+            navigateToVideoPlayer(episode, video)
         } else {
             if (lastPlayedIndex + 1 >= video.episodes.length) {
                 Toast.show("当前已经是最后一集", Toast.SHORT);
             } else {
                 const episode = video?.episodes[lastPlayedIndex + 1]
-                navigation.push('VideoPlayer', {episode, video});
+                navigateToVideoPlayer(episode, video)
+                // navigation.push('VideoPlayer', {episode, video});
             }
         }
-    }, [video]);
+    }, [lastPlayedEpisodeId]);
 
     const navigateToVideoPlayer = (episode, video) => {
         console.log('Navigating to video player with video:', episode.episodeTitle);
@@ -131,6 +139,7 @@ const VideoDetailScreen = ({route, navigation}) => {
                     const params: VideoReq = {
                         video: video,
                         episodeId: episode.id,
+                        lastPlayedPosition: video.lastPlayedPosition,
                         domain: API_BASE_URL,
                         secretKey: API_PWD,
                         token: token,

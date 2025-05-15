@@ -26,16 +26,17 @@ class MainActivity : ComponentActivity() {
             if (!paramsJson.isNullOrEmpty()) {
                 Gson().fromJson(paramsJson, EpisodeReq::class.java)
             } else {
-                EpisodeReq("", 0, "", "", null)
+                EpisodeReq("", 0, 0, "", "", null)
             }
         } catch (e: Exception) {
-            EpisodeReq("", 0, "", "", null)
+            EpisodeReq("", 0, 0, "", "", null)
         }
         setContent {
             ExoPlayerScreen(
                 viewModel = viewModel,
                 domain = episodeReq.domain,
                 initialEpisodeId = episodeReq.episodeId,
+                initialLastPlayedPosition = episodeReq.lastPlayedPosition,
                 secretKey = episodeReq.secretKey,
                 token = episodeReq.token,
                 episodes = episodeReq.video?.episodes
@@ -54,7 +55,8 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         viewModel.releasePlayer()
+        super.onDestroy()
+        YvdIntent.sendEventToRN("onPlayerClosed", System.currentTimeMillis().toString())
     }
 }

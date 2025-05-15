@@ -71,8 +71,8 @@ import androidx.tv.material3.Text
 import com.zyun.yvdintent.R
 import com.zyun.yvdintent.viewmodel.Episode
 import com.zyun.yvdintent.viewmodel.ExoPlayerViewModel
+import com.zyun.yvdintent.viewmodel.RemoteApi
 import com.zyun.yvdintent.viewmodel.Subtitle
-import com.zyun.yvdintent.viewmodel.SubtitleApi
 import kotlinx.coroutines.delay
 
 @UnstableApi
@@ -81,6 +81,7 @@ fun ExoPlayerScreen(
     viewModel: ExoPlayerViewModel,
     domain: String,
     initialEpisodeId: Long,
+    initialLastPlayedPosition: Long,
     secretKey: String,
     token: String,
     episodes: List<Episode>?,
@@ -98,7 +99,8 @@ fun ExoPlayerScreen(
     var episodeId by remember { mutableLongStateOf(initialEpisodeId) }
     var showSubtitleDialog by remember { mutableStateOf(false) }
     var showEpisodeDialog by remember { mutableStateOf(false) }
-
+    var lastReportTime by remember { mutableLongStateOf(0L) }
+    var lastPlayedPosition by remember { mutableLongStateOf(initialLastPlayedPosition) }
 
     DisposableEffect(Unit) {
         val listener = object : Player.Listener {
@@ -111,6 +113,12 @@ fun ExoPlayerScreen(
                             viewModel.player.currentPosition,
                             viewModel.player.duration
                         )
+                    if (lastPlayedPosition > 0) {
+                        val formatTime = formatContinueTime(lastPlayedPosition * 1000)
+                        Toast.makeText(context, "续播:$formatTime", Toast.LENGTH_SHORT).show()
+                        viewModel.player.seekTo(lastPlayedPosition * 1000)
+                        lastPlayedPosition = 0
+                    }
                 }
                 if (playbackState == Player.STATE_BUFFERING) {
                     isPlayerReady = false
@@ -141,6 +149,32 @@ fun ExoPlayerScreen(
     }
 
     LaunchedEffect(Unit) {
+        val reportInterval = 5000L
+        while (true) {
+            if (viewModel.player.isPlaying && episode != null) {
+                val currentPosition = viewModel.player.currentPosition
+                if (System.currentTimeMillis() - lastReportTime >= reportInterval) {
+                    lastReportTime = System.currentTimeMillis()
+                    try {
+                        RemoteApi.reportPlayProgress(
+                            domain = domain,
+                            token = token,
+                            secretKey = secretKey,
+                            videoId = episode?.videoId!!,
+                            episodeId = episodeId,
+                            position = currentPosition / 1000,
+                            playTimestamp = lastReportTime / 1000,
+                        )
+                    } catch (e: Exception) {
+                        Log.e("ExoPlayerScreen", "上报播放进度失败: ${e.message}")
+                    }
+                }
+            }
+            delay(reportInterval)
+        }
+    }
+
+    LaunchedEffect(Unit) {
         while (true) {
             if (viewModel.player.isPlaying && viewModel.player.duration > 0) {
                 progress = viewModel.player.currentPosition.toFloat()
@@ -167,7 +201,7 @@ fun ExoPlayerScreen(
     LaunchedEffect(episodeId) {
         try {
             isLoading = true
-            episode = SubtitleApi.getEpisode(
+            episode = RemoteApi.getEpisode(
                 domain = domain,
                 token = token,
                 secretKey = secretKey,
@@ -810,4 +844,10 @@ fun formatRemainingTime(currentPosition: Long, duration: Long): String {
     val curMinutes = (currentPosition / 60000).toInt()
     val curSeconds = (currentPosition % 60000 / 1000).toInt()
     return String.format("%02d:%02d/%02d:%02d", curMinutes, curSeconds, totalMinutes, totalSeconds)
+}
+
+fun formatContinueTime(currentPosition: Long): String {
+    val curMinutes = (currentPosition / 60000).toInt()
+    val curSeconds = (currentPosition % 60000 / 1000).toInt()
+    return String.format("%02d:%02d", curMinutes, curSeconds)
 }

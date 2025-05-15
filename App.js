@@ -3,8 +3,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ActivityIndicator, View} from 'react-native';
-
-// Import screens
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import HomeScreen from './src/screens/HomeScreen';
@@ -20,13 +18,10 @@ import MovieScreen from "./src/screens/MovieScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import FavoriteScreen from "./src/screens/FavoriteScreen";
 import SettingScreen from "./src/screens/SettingScreen";
-import {PAGE_SIZE, STORAGE_KEYS} from "./src/utils/ApiConstants";
+import {STORAGE_KEYS} from "./src/utils/ApiConstants";
 import TvSeriesScreen from "./src/screens/TvSeriesScreen";
 import TvShowScreen from "./src/screens/TvShowScreen";
 import RecordScreen from "./src/screens/RecordScreen";
-import apiService from "./src/services/ApiService";
-import ApiService from "./src/services/ApiService";
-import BackgroundTimer from 'react-native-background-timer';
 import CartoonScreen from "./src/screens/CartoonScreen";
 
 
@@ -36,45 +31,45 @@ export default function App() {
     const [isLoading, setIsLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const areFontsLoaded = useFonts();
-    const backgroundTimerIdRef = useRef(null);
+    // const backgroundTimerIdRef = useRef(null);
     if (!areFontsLoaded) {
         return null;
     }
 
-    const reportWatchHistory = async () => {
-        try {
-            if (isAuthenticated) {
-                const historyJson = await AsyncStorage.getItem(STORAGE_KEYS.WATCH_HISTORY);
-                if (historyJson) {
-                    console.log(historyJson);
-                    const historyData = JSON.parse(historyJson);
-                    const response = await ApiService.updatePlayedStatus(historyData);
-                    if (!response) {
-                        console.error('Failed to report watch history:', await response.text());
-                    } else {
-                        await AsyncStorage.removeItem(STORAGE_KEYS.WATCH_HISTORY);
-                    }
-                }
-            }
-        } catch (error) {
-            console.error('Error reporting watch history:', error);
-        }
-    };
+    // const reportWatchHistory = async () => {
+    //     try {
+    //         if (isAuthenticated) {
+    //             const historyJson = await AsyncStorage.getItem(STORAGE_KEYS.WATCH_HISTORY);
+    //             if (historyJson) {
+    //                 console.log(historyJson);
+    //                 const historyData = JSON.parse(historyJson);
+    //                 const response = await ApiService.updatePlayedStatus(historyData);
+    //                 if (!response) {
+    //                     console.error('Failed to report watch history:', await response.text());
+    //                 } else {
+    //                     await AsyncStorage.removeItem(STORAGE_KEYS.WATCH_HISTORY);
+    //                 }
+    //             }
+    //         }
+    //     } catch (error) {
+    //         console.error('Error reporting watch history:', error);
+    //     }
+    // };
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            backgroundTimerIdRef.current = BackgroundTimer.setInterval(reportWatchHistory, 60 * 1000);
-        } else {
-            if (backgroundTimerIdRef.current) {
-                BackgroundTimer.clearInterval(backgroundTimerIdRef.current);
-            }
-        }
-        return () => {
-            if (backgroundTimerIdRef.current) {
-                BackgroundTimer.clearInterval(backgroundTimerIdRef.current);
-            }
-        };
-    }, [isAuthenticated]);
+    // useEffect(() => {
+    //     if (isAuthenticated) {
+    //         backgroundTimerIdRef.current = BackgroundTimer.setInterval(reportWatchHistory, 60 * 1000);
+    //     } else {
+    //         if (backgroundTimerIdRef.current) {
+    //             BackgroundTimer.clearInterval(backgroundTimerIdRef.current);
+    //         }
+    //     }
+    //     return () => {
+    //         if (backgroundTimerIdRef.current) {
+    //             BackgroundTimer.clearInterval(backgroundTimerIdRef.current);
+    //         }
+    //     };
+    // }, [isAuthenticated]);
 
     useEffect(() => {
         const checkAuthStatus = async () => {

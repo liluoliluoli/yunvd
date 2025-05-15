@@ -1,10 +1,8 @@
 package com.zyun.yvdintent;
 
+import com.zyun.yvdintent.viewmodel.RemoteApi;
+
 import org.junit.Test;
-
-import static org.junit.Assert.*;
-
-import com.zyun.yvdintent.viewmodel.SubtitleApi;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -14,7 +12,7 @@ import com.zyun.yvdintent.viewmodel.SubtitleApi;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        String sign = SubtitleApi.INSTANCE.signature("/api/episode/get",1747076221179l, "SDDSIOPOPPP");
+        String sign = RemoteApi.INSTANCE.signature("/api/episode/get", 1747076221179l, "SDDSIOPOPPP");
         System.out.println(sign);
     }
 

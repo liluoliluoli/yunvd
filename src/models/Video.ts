@@ -27,6 +27,7 @@ export default Video;
 export type VideoReq = {
     video: Video,
     episodeId: number,
+    lastPlayedPosition: number
     domain: string,
     secretKey: string,
     token: string,

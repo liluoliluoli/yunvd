@@ -193,9 +193,21 @@ data class Subtitle(
 data class EpisodeReq(
     val domain: String,
     val episodeId: Long,
+    val lastPlayedPosition: Long,
     val secretKey: String,
     val token: String,
     val video: Video?
+)
+
+data class ReportPlayStatusBody(
+    val updatePlayedStatusList: List<ReportPlayStatus>,
+)
+
+data class ReportPlayStatus(
+    val videoId: Long,
+    val episodeId: Long,
+    val position: Long,
+    val playTimestamp: Long,
 )
 
 data class Video(
@@ -203,7 +215,7 @@ data class Video(
     val episodes: List<Episode>?
 )
 
-object SubtitleApi {
+object RemoteApi {
     suspend fun getEpisode(
         domain: String,
         token: String,
@@ -233,8 +245,47 @@ object SubtitleApi {
         }
         val json = response.body?.use { it.string() }
             ?: throw IOException("Response body is null")
-        Log.i("test", "===================json:$json")
         return@withContext parseJsonToEpisode(json)
+    }
+
+    suspend fun reportPlayProgress(
+        domain: String,
+        token: String,
+        secretKey: String,
+        videoId: Long,
+        episodeId: Long,
+        position: Long,
+        playTimestamp: Long
+    ) = withContext(Dispatchers.IO) {
+        val playRecords = ReportPlayStatusBody(
+            updatePlayedStatusList = listOf(
+                ReportPlayStatus(
+                    videoId = videoId,
+                    episodeId = episodeId,
+                    position = position,
+                    playTimestamp = playTimestamp
+                )
+            )
+        )
+        var now = System.currentTimeMillis()
+        val request = okhttp3.Request.Builder()
+            .url("${domain}/api/user/updatePlayedStatus")
+            .addHeader("Authorization", token)
+            .addHeader("Signature", signature("/api/user/updatePlayedStatus", now, secretKey))
+            .addHeader("Timestamp", now.toString())
+            .addHeader("Content-Type", "application/json")
+            .post(
+                Gson().toJson(playRecords)
+                    .toRequestBody("application/json".toMediaTypeOrNull())
+            )
+            .build()
+        val response = okHttpClient.newCall(request).execute()
+        if (!response.isSuccessful) {
+            throw IOException("Unexpected code $response")
+        }
+        val json = response.body?.use { it.string() }
+            ?: throw IOException("Response body is null")
+        Log.i("test", "===================response:$json")
     }
 
     fun signature(path: String, timestamp: Long, secretKey: String): String {
