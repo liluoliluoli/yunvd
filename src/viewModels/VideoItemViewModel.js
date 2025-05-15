@@ -10,6 +10,7 @@ export const useVideoItemViewModel = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [triggerTimestamp, setTriggerTimestamp] = useState(0);
 
     const fetchVideo = useCallback(async () => {
         if (videoId === 0) {
@@ -28,7 +29,7 @@ export const useVideoItemViewModel = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [videoId]);
+    }, [videoId, triggerTimestamp]);
 
     const updateFavorite = useCallback(async () => {
         if (videoId === 0) {
@@ -56,5 +57,7 @@ export const useVideoItemViewModel = () => {
         isFavorite,
         setIsFavorite,
         updateFavorite,
+        triggerTimestamp,
+        setTriggerTimestamp,
     };
 };

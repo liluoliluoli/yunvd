@@ -330,7 +330,7 @@ fun CustomPlayerController(
 ) {
     var isPlaying by remember { mutableStateOf(player.isPlaying) }
     var isFocusedSubtitle by remember { mutableStateOf(false) }
-    var isFocusedAudio by remember { mutableStateOf(false) }
+    var isFocusedEpisode by remember { mutableStateOf(false) }
     var isFocusedSpeed by remember { mutableStateOf(false) }
     var showSubtitleDialog by remember { mutableStateOf(false) }
     var selectedSubtitle by remember { mutableStateOf<Subtitle?>(null) }
@@ -638,10 +638,10 @@ fun CustomPlayerController(
                 modifier = Modifier
                     .size(70.dp)
                     .onFocusChanged { focusState ->
-                        isFocusedAudio = focusState.isFocused
+                        isFocusedEpisode = focusState.isFocused
                     },
             ) {
-                if (isFocusedAudio) {
+                if (isFocusedEpisode) {
                     Text(
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 16.sp,
@@ -664,7 +664,7 @@ fun CustomPlayerController(
                         .size(40.dp)
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_sound),
+                        painter = painterResource(id = R.drawable.ic_episode),
                         contentDescription = "选集"
                     )
                 }

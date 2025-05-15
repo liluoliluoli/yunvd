@@ -30,6 +30,8 @@ const VideoDetailScreen = ({route, navigation}) => {
         isFavorite,
         setIsFavorite,
         updateFavorite,
+        triggerTimestamp,
+        setTriggerTimestamp
     } = useVideoItemViewModel();
 
     useEffect(() => {
@@ -37,7 +39,7 @@ const VideoDetailScreen = ({route, navigation}) => {
         fetchVideo().then(() => {
             setIsFavorite(video.isFavorite);
         })
-    }, [videoId]);
+    }, [videoId, triggerTimestamp]);
 
     useEffect(() => {
         if (video) {
@@ -51,10 +53,11 @@ const VideoDetailScreen = ({route, navigation}) => {
         const eventEmitter = new NativeEventEmitter();
         const subscription = eventEmitter.addListener('onPlayerClosed', (data) => {
             console.log("onPlayerClosed:" + data)
-            fetchVideo()
+            setTriggerTimestamp(data)
         });
         return () => subscription.remove();
     }, []);
+
 
     // useFocusEffect(
     //     useCallback(() => {
