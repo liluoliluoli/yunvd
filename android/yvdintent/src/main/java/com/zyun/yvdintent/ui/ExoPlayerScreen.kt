@@ -125,6 +125,20 @@ fun ExoPlayerScreen(
                 if (playbackState == Player.STATE_BUFFERING) {
                     isPlayerReady = false
                 }
+                if (playbackState == Player.STATE_ENDED) {
+                    episodes?.let {
+                        val currentIndex = it.indexOfFirst { it.id == episodeId }
+                        if (currentIndex >= 0 && currentIndex + 1 < it.size) {
+                            episodeId = it[currentIndex + 1].id
+                            val episodeTitle = it[currentIndex + 1].episodeTitle
+                            Toast.makeText(
+                                context,
+                                "自动播放下一集：$episodeTitle",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
             }
 
             override fun onPositionDiscontinuity(

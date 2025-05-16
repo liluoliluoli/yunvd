@@ -1,6 +1,6 @@
 import {scaledPixels} from "../hooks/useScale";
 
-export const API_BASE_URL = 'https://5160-210-3-159-152.ngrok-free.app';
+export const API_BASE_URL = 'https://52c1-210-3-159-152.ngrok-free.app';
 export const API_PWD = "SDDSIOPOPPP";
 
 export const ENDPOINTS = {
