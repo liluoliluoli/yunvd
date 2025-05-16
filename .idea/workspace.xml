@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="android">
-      <change afterPath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_episode.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/res/drawable/ic_zoom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/viewModels/VideoItemViewModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/viewModels/VideoItemViewModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/res/values-night/themes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/res/values/themes.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,15 +178,7 @@
       <workItem from="1745912734710" duration="16870000" />
       <workItem from="1746103429732" duration="64041000" />
       <workItem from="1747020089353" duration="43466000" />
-      <workItem from="1747286075226" duration="17465000" />
-    </task>
-    <task id="LOCAL-00014" summary="init">
-      <option name="closed" value="true" />
-      <created>1744799010553</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1744799010553</updated>
+      <workItem from="1747286075226" duration="20040000" />
     </task>
     <task id="LOCAL-00015" summary="init">
       <option name="closed" value="true" />
@@ -573,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747302540615</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="android">
+      <option name="closed" value="true" />
+      <created>1747305272665</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1747305272666</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

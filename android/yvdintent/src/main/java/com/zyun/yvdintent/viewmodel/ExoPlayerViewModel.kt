@@ -176,13 +176,22 @@ data class Episode(
     val id: Long,
     val videoId: Long,
     val episode: Long,
-    var episodeTitle: String,
-    var url: String,
-    var platform: String,
-    var subtitles: List<Subtitle>
+    val episodeTitle: String,
+    val url: String,
+    val platform: String,
+    val subtitles: List<Subtitle>,
+    val audios: List<Audio>
 )
 
 data class Subtitle(
+    val id: Long,
+    val title: String,
+    val url: String,
+    val language: String,
+    val mimeType: String,
+)
+
+data class Audio(
     val id: Long,
     val title: String,
     val url: String,

@@ -69,6 +69,7 @@ import androidx.tv.material3.IconButton
 import androidx.tv.material3.LocalTextStyle
 import androidx.tv.material3.Text
 import com.zyun.yvdintent.R
+import com.zyun.yvdintent.viewmodel.Audio
 import com.zyun.yvdintent.viewmodel.Episode
 import com.zyun.yvdintent.viewmodel.ExoPlayerViewModel
 import com.zyun.yvdintent.viewmodel.RemoteApi
@@ -99,6 +100,7 @@ fun ExoPlayerScreen(
     var episodeId by remember { mutableLongStateOf(initialEpisodeId) }
     var showSubtitleDialog by remember { mutableStateOf(false) }
     var showEpisodeDialog by remember { mutableStateOf(false) }
+    var showAudioDialog by remember { mutableStateOf(false) }
     var lastReportTime by remember { mutableLongStateOf(0L) }
     var lastPlayedPosition by remember { mutableLongStateOf(initialLastPlayedPosition) }
 
@@ -185,14 +187,14 @@ fun ExoPlayerScreen(
         }
     }
 
-    LaunchedEffect(showController, showSubtitleDialog, showEpisodeDialog) {
+    LaunchedEffect(showController, showSubtitleDialog, showEpisodeDialog, showAudioDialog) {
         if (showController) {
             delay(100)
             sliderFocusRequester.requestFocus()
             while (showController && System.currentTimeMillis() - lastInteractionTime < 5000) {
                 delay(5000L)
             }
-            if (!showSubtitleDialog && !showEpisodeDialog) {
+            if (!showSubtitleDialog && !showEpisodeDialog && !showAudioDialog) {
                 showController = false
             }
         }
@@ -291,6 +293,10 @@ fun ExoPlayerScreen(
                         showEpisodeDialog = newShowEpisodeDialog
                         lastInteractionTime = System.currentTimeMillis()
                     },
+                    onShowAudioDialog = { newShowAudioDialog ->
+                        showAudioDialog = newShowAudioDialog
+                        lastInteractionTime = System.currentTimeMillis()
+                    },
                 )
             }
 
@@ -326,16 +332,20 @@ fun CustomPlayerController(
     onEpisodeChanged: (Long) -> Unit,
     onShowController: (Boolean) -> Unit,
     onShowSubtitleDialog: (Boolean) -> Unit,
-    onShowEpisodeDialog: (Boolean) -> Unit
+    onShowEpisodeDialog: (Boolean) -> Unit,
+    onShowAudioDialog: (Boolean) -> Unit
 ) {
     var isPlaying by remember { mutableStateOf(player.isPlaying) }
     var isFocusedSubtitle by remember { mutableStateOf(false) }
     var isFocusedEpisode by remember { mutableStateOf(false) }
     var isFocusedSpeed by remember { mutableStateOf(false) }
+    var isFocusedAudio by remember { mutableStateOf(false) }
     var showSubtitleDialog by remember { mutableStateOf(false) }
     var selectedSubtitle by remember { mutableStateOf<Subtitle?>(null) }
     var showEpisodeDialog by remember { mutableStateOf(false) }
     var selectedEpisodeId by remember { mutableLongStateOf(episode?.id!!) }
+    var showAudioDialog by remember { mutableStateOf(false) }
+    var selectedAudio by remember { mutableStateOf<Audio?>(null) }
 
     fun setSubtitle(episodeUrl: String, subtitle: Subtitle) {
         selectedSubtitle = subtitle
@@ -349,6 +359,13 @@ fun CustomPlayerController(
         onEpisodeChanged(episodeId)
         showEpisodeDialog = false
         onShowEpisodeDialog(false)
+    }
+
+    fun setAudio(episodeUrl: String, audio: Audio) {
+        selectedAudio = audio
+        setSubtitleForPlayer(player, episodeUrl, audio.url, context, viewModel)
+        showAudioDialog = false
+        onShowAudioDialog(false)
     }
 
     if (showSubtitleDialog) {
@@ -432,6 +449,115 @@ fun CustomPlayerController(
                                             )
                                     )
                                     episode?.subtitles?.getOrNull(index)?.let {
+                                        Text(
+                                            "  " + it.title,
+                                            color = when {
+                                                isFocused -> Color.Red
+                                                else -> Color.White
+                                            },
+                                            style = when {
+                                                isFocused -> LocalTextStyle.current.copy(
+                                                    fontWeight = FontWeight.Bold
+                                                )
+
+                                                else -> LocalTextStyle.current
+                                            }
+                                        )
+                                    }
+                                }
+                                HorizontalDivider(
+                                    thickness = 1.dp,
+                                    color = Color.White.copy(alpha = 0.2f)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (showAudioDialog) {
+        Dialog(
+            onDismissRequest = {
+                showAudioDialog = false
+                onShowAudioDialog(false)
+            },
+            properties = DialogProperties(
+                usePlatformDefaultWidth = false,
+            )
+        ) {
+            Surface(
+                modifier = Modifier
+                    .width(350.dp)
+                    .height(300.dp)
+                    .padding(1.dp)
+                    .clip(MaterialTheme.shapes.small)
+                    .border(
+                        width = 1.dp,
+                        color = Color.Gray.copy(alpha = 0.2f),
+                        shape = MaterialTheme.shapes.medium
+                    ),
+                color = Color(0xFFB0E0E6).copy(alpha = 0.8f)
+            ) {
+                Column(
+                    modifier = Modifier.padding(4.dp)
+                ) {
+                    LazyColumn {
+                        items(episode?.audios?.size ?: 0) { index ->
+                            val isSelected =
+                                episode?.audios?.getOrNull(index) == selectedAudio
+                            val backgroundColor =
+                                if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
+                            var isFocused by remember { mutableStateOf(false) }
+                            val itemFocusRequester = remember { FocusRequester() }
+                            if (isSelected) {
+                                LaunchedEffect(Unit) {
+                                    itemFocusRequester.requestFocus()
+                                }
+                            }
+
+                            Column {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(32.dp)
+                                        .background(backgroundColor)
+                                        .clickable {
+                                            setAudio(
+                                                episode?.url!!,
+                                                episode?.audios?.getOrNull(index)!!
+                                            )
+                                        }
+                                        .focusRequester(itemFocusRequester)
+                                        .focusable()
+                                        .onFocusChanged { focusState ->
+                                            isFocused = focusState.isFocused
+                                        },
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.ic_sound),
+                                        contentDescription = "Audio",
+                                        tint = when {
+                                            isSelected -> Color.White
+                                            isFocused -> Color.White
+                                            else -> Color.White.copy(alpha = 0.8f)
+                                        },
+                                        modifier = Modifier
+                                            .size(24.dp)
+                                            .then(
+                                                if (isSelected) {
+                                                    Modifier.background(
+                                                        color = Color.Black.copy(alpha = 0.8f),
+                                                        shape = androidx.compose.foundation.shape.CircleShape
+                                                    )
+                                                } else {
+                                                    Modifier
+                                                }
+                                            )
+                                    )
+                                    episode?.audios?.getOrNull(index)?.let {
                                         Text(
                                             "  " + it.title,
                                             color = when {
@@ -700,6 +826,40 @@ fun CustomPlayerController(
                     Icon(
                         painter = painterResource(id = R.drawable.ic_comment),
                         contentDescription = "字幕"
+                    )
+                }
+            }
+
+            Box(
+                modifier = Modifier
+                    .size(70.dp)
+                    .onFocusChanged { focusState ->
+                        isFocusedAudio = focusState.isFocused
+                    },
+            ) {
+                if (isFocusedAudio) {
+                    Text(
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontSize = 16.sp,
+                        color = Color.White,
+                        text = "音轨",
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                    )
+                }
+
+                IconButton(
+                    onClick = {
+                        showAudioDialog = true
+                        onShowAudioDialog(true)
+                    },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .size(40.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_sound),
+                        contentDescription = "音轨"
                     )
                 }
             }
