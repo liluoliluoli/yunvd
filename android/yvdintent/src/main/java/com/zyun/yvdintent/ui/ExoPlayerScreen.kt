@@ -273,7 +273,7 @@ fun ExoPlayerScreen(
                     this.player = viewModel.player
                     useController = false
                     descendantFocusability = ViewGroup.FOCUS_BLOCK_DESCENDANTS
-                    this.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
+                    this.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
                 }
             },
         )

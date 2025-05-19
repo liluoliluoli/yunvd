@@ -2,6 +2,7 @@ package com.novage.p2pml.webview
 
 import android.annotation.SuppressLint
 import android.net.Uri
+import android.util.Log
 import android.webkit.WebView
 import androidx.webkit.WebMessageCompat
 import androidx.webkit.WebMessagePortCompat
@@ -17,7 +18,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlin.random.Random
 
@@ -49,10 +49,12 @@ internal class WebMessageProtocol(
                     try {
                         when (message?.type) {
                             WebMessageCompat.TYPE_ARRAY_BUFFER -> {
+                                Log.i(TAG, "=================successMessage:1")
                                 handleSegmentIdBytes(message.arrayBuffer)
                             }
 
                             WebMessageCompat.TYPE_STRING -> {
+                                Log.i(TAG, "=================successMessage:2")
                                 handleMessage(message.data!!)
                             }
                         }
@@ -71,7 +73,8 @@ internal class WebMessageProtocol(
 
         coroutineScope.launch {
             val deferred =
-                getSegmentResponseCallback(requestId) ?: throw IllegalStateException("No deferred found for request ID: $requestId")
+                getSegmentResponseCallback(requestId)
+                    ?: throw IllegalStateException("No deferred found for request ID: $requestId")
 
             deferred.complete(arrayBuffer)
             removeSegmentResponseCallback(requestId)
@@ -90,6 +93,7 @@ internal class WebMessageProtocol(
 
     private fun handleErrorMessage(message: String) {
         coroutineScope.launch {
+            Log.i(TAG, "=================errorMessage:$message")
             val error = message.substringBefore("|")
             val errorParts = error.split(":")
             val requestId = errorParts[1].toInt()

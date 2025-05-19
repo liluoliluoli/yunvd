@@ -5,41 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="android">
-      <change afterPath="$PROJECT_DIR$/android/p2pml/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/consumer-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/proguard-rules.pro" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/Constants.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/CoreEventMap.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/DataModels.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/P2PMediaLoader.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/interop/EventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/interop/OnP2PReadyCallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/interop/OnP2PReadyErrorCallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/logger/Logger.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/parser/HlsManifestParser.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/parser/ParserExtensions.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/providers/ExoPlayerPlaybackProvider.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/providers/ExternalPlaybackProvider.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/providers/PlaybackProvider.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ManifestHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/SegmentHandler.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ServerModule.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ServerRoutes.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/utils/EventEmitter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/utils/P2PStateManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/utils/SegmentExceptions.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/utils/Utils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/JavaScriptInterface.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebMessageProtocol.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebViewManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/js/p2p-media-loader-core.es.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/P2PMediaLoader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/P2PMediaLoader.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ManifestHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ManifestHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/SegmentHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/SegmentHandler.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebMessageProtocol.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebMessageProtocol.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebViewManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebViewManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/js/p2p-media-loader-core.es.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/js/p2p-media-loader-core.es.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,29 +62,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "jsx.switch.disabled": "true",
-    "last_opened_file_path": "/Users/wing/Documents/react-workspace/yunvd/android/app/src/main/res/xml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.android.executor": "Run",
-    "npm.ios.executor": "Run",
-    "npm.prebuild.executor": "Run",
-    "npm.start.executor": "Debug",
-    "npm.web.executor": "Run",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "/Users/wing/Documents/react-workspace/yunvd/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jsx.switch.disabled&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/wing/Documents/react-workspace/yunvd/android/app/src/main/res/xml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.android.executor&quot;: &quot;Run&quot;,
+    &quot;npm.ios.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prebuild.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start.executor&quot;: &quot;Debug&quot;,
+    &quot;npm.web.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/wing/Documents/react-workspace/yunvd/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/android/app/src/main/res/xml" />
@@ -210,15 +186,8 @@
       <workItem from="1747020089353" duration="43466000" />
       <workItem from="1747286075226" duration="24475000" />
       <workItem from="1747387209437" duration="1000" />
-      <workItem from="1747624148386" duration="9963000" />
-    </task>
-    <task id="LOCAL-00018" summary="init">
-      <option name="closed" value="true" />
-      <created>1745152013929</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1745152013929</updated>
+      <workItem from="1747624148386" duration="18747000" />
+      <workItem from="1747661880531" duration="2719000" />
     </task>
     <task id="LOCAL-00019" summary="init">
       <option name="closed" value="true" />
@@ -604,7 +573,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747639388638</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="android">
+      <option name="closed" value="true" />
+      <created>1747643016729</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1747643016729</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

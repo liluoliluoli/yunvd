@@ -19,7 +19,7 @@ import com.novage.p2pml.utils.EventEmitter
 import com.novage.p2pml.utils.P2PStateManager
 import com.novage.p2pml.utils.Utils
 import com.novage.p2pml.webview.WebViewManager
-import io.ktor.http.encodeURLQueryComponent
+import io.ktor.util.encodeBase64
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -206,8 +206,8 @@ class P2PMediaLoader(
      */
     fun getManifestUrl(manifestUrl: String): String {
         ensureStarted()
-
-        val encodedManifestURL = manifestUrl.encodeURLQueryComponent()
+//        val encodedManifestURL = manifestUrl.encodeURLQueryComponent()
+        val encodedManifestURL = manifestUrl.encodeBase64()
         return Utils.getUrl(serverPort, "$MANIFEST$encodedManifestURL")
     }
 

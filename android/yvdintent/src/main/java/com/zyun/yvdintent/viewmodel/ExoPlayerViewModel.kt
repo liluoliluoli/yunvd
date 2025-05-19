@@ -294,7 +294,6 @@ object RemoteApi {
         }
         val json = response.body?.use { it.string() }
             ?: throw IOException("Response body is null")
-        Log.i("test", "===================response:$json")
     }
 
     fun signature(path: String, timestamp: Long, secretKey: String): String {

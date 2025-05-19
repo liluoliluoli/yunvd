@@ -18,6 +18,7 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondBytes
 import io.ktor.server.response.respondText
+import io.ktor.util.decodeBase64String
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -37,7 +38,9 @@ internal class SegmentHandler(
                     "Missing 'segment' parameter",
                     status = HttpStatusCode.BadRequest,
                 )
-        var decodedSegmentUrl = Utils.decodeBase64Url(segmentUrlParam)
+//        var decodedSegmentUrl = Utils.decodeBase64Url(segmentUrlParam)
+        var decodedSegmentUrl = segmentUrlParam.decodeBase64String()
+//        decodedSegmentUrl = decodedSegmentUrl.encodeURLQueryComponent()
 //        decodedSegmentUrl = decodedSegmentUrl.replace("%7B", "{")
 //        decodedSegmentUrl = decodedSegmentUrl.replace("%7D", "}")
 //        decodedSegmentUrl = decodedSegmentUrl.replace("%25", "%")

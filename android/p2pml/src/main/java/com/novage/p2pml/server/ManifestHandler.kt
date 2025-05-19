@@ -9,9 +9,9 @@ import com.novage.p2pml.utils.Utils
 import com.novage.p2pml.webview.WebViewManager
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.decodeURLQueryComponent
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.response.respondText
+import io.ktor.util.decodeBase64String
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -41,7 +41,7 @@ internal class ManifestHandler(
                     "Missing 'manifest' parameter",
                     status = HttpStatusCode.BadRequest,
                 )
-        val decodedManifestUrl = manifestParam.decodeURLQueryComponent()
+        val decodedManifestUrl = manifestParam.decodeBase64String()
 
         try {
             val fetchResult = fetchManifest(call, decodedManifestUrl)

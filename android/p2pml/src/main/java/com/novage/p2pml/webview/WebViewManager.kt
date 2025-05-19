@@ -21,7 +21,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 @SuppressLint("JavascriptInterface")
@@ -52,10 +51,14 @@ internal class WebViewManager(
     private var playbackInfoJob: Job? = null
 
     init {
+        WebView.setWebContentsDebuggingEnabled(true)
         customJavaScriptInterfaces.forEach { (name, obj) ->
             val isValid = validateJavaScriptInterface(obj)
             if (!isValid) {
-                Logger.e(TAG, "Object $obj does not have any methods annotated with @JavascriptInterface")
+                Logger.e(
+                    TAG,
+                    "Object $obj does not have any methods annotated with @JavascriptInterface"
+                )
                 return@forEach
             }
             webView.addJavascriptInterface(obj, name)
