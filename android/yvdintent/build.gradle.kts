@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -57,7 +56,7 @@ dependencies {
     implementation("androidx.tv:tv-material:1.0.0-rc01")
 
     implementation("com.facebook.react:react-native:+")
-    implementation("com.github.Novage:p2p-media-loader-mobile:main-SNAPSHOT")
+//    implementation("liluoliluoli:p2p-media-loader-mobile:main-SNAPSHOT")
     implementation("androidx.compose.runtime:runtime:1.5.4")
     implementation("androidx.compose.ui:ui:1.5.4")
 
