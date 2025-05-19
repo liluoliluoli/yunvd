@@ -5,9 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="android">
+      <change afterPath="$PROJECT_DIR$/android/p2pml/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/consumer-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/Constants.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/CoreEventMap.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/DataModels.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/P2PMediaLoader.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/interop/EventListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/interop/OnP2PReadyCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/interop/OnP2PReadyErrorCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/logger/Logger.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/parser/HlsManifestParser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/parser/ParserExtensions.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/providers/ExoPlayerPlaybackProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/providers/ExternalPlaybackProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/providers/PlaybackProvider.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ManifestHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/SegmentHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ServerModule.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ServerRoutes.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/utils/EventEmitter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/utils/P2PStateManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/utils/SegmentExceptions.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/utils/Utils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/JavaScriptInterface.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebMessageProtocol.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebViewManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/js/p2p-media-loader-core.es.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,15 +210,7 @@
       <workItem from="1747020089353" duration="43466000" />
       <workItem from="1747286075226" duration="24475000" />
       <workItem from="1747387209437" duration="1000" />
-      <workItem from="1747624148386" duration="6534000" />
-    </task>
-    <task id="LOCAL-00017" summary="init">
-      <option name="closed" value="true" />
-      <created>1745137875802</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1745137875802</updated>
+      <workItem from="1747624148386" duration="9963000" />
     </task>
     <task id="LOCAL-00018" summary="init">
       <option name="closed" value="true" />
@@ -572,7 +596,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747378855737</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="android">
+      <option name="closed" value="true" />
+      <created>1747639388638</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1747639388638</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

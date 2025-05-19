@@ -62,6 +62,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.Icon
@@ -272,7 +273,7 @@ fun ExoPlayerScreen(
                     this.player = viewModel.player
                     useController = false
                     descendantFocusability = ViewGroup.FOCUS_BLOCK_DESCENDANTS
-                    //this.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+                    this.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
                 }
             },
         )
