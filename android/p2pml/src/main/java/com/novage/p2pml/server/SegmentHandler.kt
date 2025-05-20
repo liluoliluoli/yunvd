@@ -38,12 +38,7 @@ internal class SegmentHandler(
                     "Missing 'segment' parameter",
                     status = HttpStatusCode.BadRequest,
                 )
-//        var decodedSegmentUrl = Utils.decodeBase64Url(segmentUrlParam)
         var decodedSegmentUrl = segmentUrlParam.decodeBase64String()
-//        decodedSegmentUrl = decodedSegmentUrl.encodeURLQueryComponent()
-//        decodedSegmentUrl = decodedSegmentUrl.replace("%7B", "{")
-//        decodedSegmentUrl = decodedSegmentUrl.replace("%7D", "}")
-//        decodedSegmentUrl = decodedSegmentUrl.replace("%25", "%")
 
         val byteRange = call.request.headers[HttpHeaders.Range]
 
@@ -59,7 +54,6 @@ internal class SegmentHandler(
                 fetchAndRespondWithSegment(call, decodedSegmentUrl, byteRange)
                 return
             }
-
             val deferredSegmentBytes =
                 webViewManager.requestSegmentBytes(decodedSegmentUrl)
                     ?: throw IllegalStateException("P2P engine is disabled")

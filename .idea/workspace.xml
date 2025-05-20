@@ -6,16 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="android">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/P2PMediaLoader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/P2PMediaLoader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ManifestHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/ManifestHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/SegmentHandler.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/server/SegmentHandler.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebMessageProtocol.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebMessageProtocol.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebViewManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/java/com/novage/p2pml/webview/WebViewManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/js/p2p-media-loader-core.es.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/src/main/resources/p2pml/static/js/p2p-media-loader-core.es.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,15 +177,7 @@
       <workItem from="1747286075226" duration="24475000" />
       <workItem from="1747387209437" duration="1000" />
       <workItem from="1747624148386" duration="18747000" />
-      <workItem from="1747661880531" duration="2719000" />
-    </task>
-    <task id="LOCAL-00019" summary="init">
-      <option name="closed" value="true" />
-      <created>1745153024584</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1745153024584</updated>
+      <workItem from="1747661880531" duration="3242000" />
     </task>
     <task id="LOCAL-00020" summary="init">
       <option name="closed" value="true" />
@@ -581,7 +563,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747643016729</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="android">
+      <option name="closed" value="true" />
+      <created>1747666069260</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1747666069260</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
