@@ -1,4 +1,5 @@
 import {scaledPixels} from "../hooks/useScale";
+import moment from "moment";
 
 export const API_BASE_URL = 'https://7441-210-3-159-152.ngrok-free.app';
 export const API_PWD = "SDDSIOPOPPP";
@@ -110,7 +111,17 @@ export const formatToYMD = (timestamp) => {
     }
     const date = new Date(timestamp * 1000);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份从0开始
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+}
+
+export const formatFriendlyTime = (timestamp) => {
+    const time = new Date(timestamp * 1000);
+    return moment(time).calendar(null, {
+        sameDay: '[今天] HH:mm',      // 今天 10:30
+        lastDay: '[昨天] HH:mm',      // 昨天 15:45
+        lastWeek: 'MM月DD日 HH:mm',   // 5月10日 09:20
+        sameElse: 'YYYY年MM月DD日 HH:mm', // 2024年5月1日 14:30
+    });
 }

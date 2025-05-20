@@ -8,6 +8,7 @@ import {
 import {scaledPixels} from "../hooks/useScale";
 import Video from "../models/Video";
 import {Ionicons} from "@expo/vector-icons";
+import {formatFriendlyTime} from "../utils/ApiConstants";
 
 interface VideoListProps {
     isHistory: boolean;
@@ -44,7 +45,7 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
                         <Text style={styles.videoTitle} numberOfLines={1}>{item.title}</Text>
                         <Text style={styles.videoInfo} numberOfLines={1}>
                             {isHistory && item.lastPlayedTime ?
-                                `最后播放: ${formatPlayTime(item.lastPlayedTime)}` :
+                                `最近播放: ${formatFriendlyTime(item.lastPlayedTime)}` :
                                 item.publishMonth.substring(0, 4)}
                         </Text>
                     </View>
@@ -68,11 +69,6 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
             </SpatialNavigationView>
         </View>
     );
-};
-
-const formatPlayTime = (timestamp: number) => {
-    const date = new Date(timestamp * 1000);
-    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
 };
 
 const styles = StyleSheet.create({

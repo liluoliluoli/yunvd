@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import {BottomArrow, TopArrow} from "../components/Arrows";
 import {SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {scaledPixels} from "../hooks/useScale";
@@ -8,9 +8,7 @@ import {theme} from "../theme/theme";
 import chunk from 'lodash/chunk';
 import Video from "../models/Video";
 import {VideoList} from "../components/VideoList";
-import {Spacer} from "../components/Spacer";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
-import {VT_MOVIE} from "../utils/ApiConstants";
 import LoadingIndicator from "../components/LoadingIndicator";
 import {useIsFocused} from "@react-navigation/native";
 
