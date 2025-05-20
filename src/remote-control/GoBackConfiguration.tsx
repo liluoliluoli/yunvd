@@ -29,8 +29,8 @@ export const GoBackConfiguration = () => {
             }
             if (pressedKey !== SupportedKeys.Back) return false;
 
-            const isHomePage = routeName === 'Home';
-            if (isHomePage) {
+            const canExitPage = routeName === 'Home' || routeName === 'Login' || routeName === 'SignUp';
+            if (canExitPage) {
                 const currentTime = Date.now();
                 if (currentTime - lastBackPressTime < 2000) {
                     BackHandler.exitApp();

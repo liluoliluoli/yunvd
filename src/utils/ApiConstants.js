@@ -81,7 +81,9 @@ function generateRecentYears(n) {
 
 export const YEAR_OPTIONS = generateRecentYears(10)
 YEAR_OPTIONS.unshift({key: "", label: "全部"})
+
 export const TAB_ROUTES = [
+    {key: 'home', title: '首页', screen: 'Home'},
     {key: 'movies', title: '电影', screen: 'Movie'},
     {key: 'tvSeries', title: '电视剧', screen: 'TvSeries'},
     {key: 'cartoon', title: '动画', screen: 'Cartoon'},

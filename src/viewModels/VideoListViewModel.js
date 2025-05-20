@@ -79,12 +79,21 @@ export const useVideoListViewModel = () => {
                 currentPage: currentPage, pageSize: PAGE_SIZE,
             });
             if (response.list && response.list.length > 0) {
-                setVideos(prev => [...prev, ...response.list]);
+                if (currentPage === 1) {
+                    setVideos(response.list)
+                } else {
+                    setVideos(prev => [...prev, ...response.list]);
+                }
                 setHasMore(true);
                 setFavoriteCount(response.page.count);
             } else {
-                setHasMore(false);
-                Toast.show("没有更多数据");
+                if (currentPage === 1) {
+                    setVideos([])
+                }
+                if (currentPage !== 1) {
+                    setHasMore(false);
+                    Toast.show("没有更多数据");
+                }
             }
         } catch (error) {
             console.error('Error fetchFavoriteVideos fetched:', error);

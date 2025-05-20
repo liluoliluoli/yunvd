@@ -10,11 +10,11 @@ import {useIsFocused, useNavigation} from '@react-navigation/native';
 interface TabBarProps {
     routes: Array<{ key: string, title: string, screen: string }>;
     currentIndex: number;
-    randomNum?: number
+    randomNum?: number;
+    onTabPress: (index: number) => void;
 }
 
-export const TabBar = ({routes, currentIndex}: TabBarProps) => {
-    const navigation = useNavigation<any>();
+export const TabBar = ({routes, currentIndex, onTabPress}: TabBarProps) => {
     const [index, setIndex] = useState(currentIndex)
     const tabRefs = React.useRef<Array<React.RefObject<SpatialNavigationNodeRef>>>([]);
     const isFocused = useIsFocused();
@@ -22,16 +22,11 @@ export const TabBar = ({routes, currentIndex}: TabBarProps) => {
         tabRefs.current = routes.map(() => React.createRef());
     }, [routes]);
 
-    React.useEffect(() => {
-        if (tabRefs.current[index]?.current && isFocused) {
-            tabRefs.current[index].current?.focus();
-        }
-    }, [tabRefs.current[index], isFocused]);
-
-    const onTabPress = useCallback((index) => {
-        setIndex(index);
-        navigation.navigate(routes[index].screen);
-    }, [index]);
+    // React.useEffect(() => {
+    //     if (tabRefs.current[index]?.current && isFocused) {
+    //         tabRefs.current[index].current?.focus();
+    //     }
+    // }, [tabRefs.current[index], isFocused]);
 
     return (
         <View>

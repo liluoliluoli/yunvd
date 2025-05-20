@@ -5,10 +5,18 @@ import {Page} from "../components/Page";
 import {BottomArrow, TopArrow} from "../components/Arrows";
 import {SpatialNavigationScrollView} from "react-tv-space-navigation";
 import {Episode} from "../components/Episode";
-import {HEADER_SIZE} from "../utils/ApiConstants";
+import {formatToYMD, HEADER_SIZE} from "../utils/ApiConstants";
 
 export default function ProfileScreen({route, navigation}) {
-    const {userName, watchCount, favoriteCount, isLoading, logout} = useAuthViewModel();
+    const {
+        userName,
+        watchCount,
+        restWatchCount,
+        packageExpiredTime,
+        favoriteCount,
+        isLoading,
+        logout
+    } = useAuthViewModel();
 
     const handleSetting = async () => {
         navigation.navigate('Setting');
@@ -54,7 +62,15 @@ export default function ProfileScreen({route, navigation}) {
                     <View style={styles.statsSection}>
                         <View style={styles.statItem}>
                             <Text style={styles.statNumber}>{watchCount}</Text>
-                            <Text style={styles.statLabel}>今天已观看</Text>
+                            <Text style={styles.statLabel}>今日已看</Text>
+                        </View>
+                        <View style={styles.statItem}>
+                            <Text style={styles.statNumber}>{restWatchCount}</Text>
+                            <Text style={styles.statLabel}>今日剩余</Text>
+                        </View>
+                        <View style={styles.statItem}>
+                            <Text style={styles.statNumber}>{formatToYMD(packageExpiredTime)}</Text>
+                            <Text style={styles.statLabel}>到期时间</Text>
                         </View>
                         <View style={styles.statItem}>
                             <Text style={styles.statNumber}>{favoriteCount}</Text>

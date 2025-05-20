@@ -114,7 +114,7 @@ export const Header = ({}) => {
                 </Modal>
                 <View style={styles.header}>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
-                    <Typography variant="title">YunVD </Typography>
+                    <Typography variant="title">YunVD</Typography>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
                     <Typography variant="body">v{currentVersion} </Typography>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
@@ -125,7 +125,7 @@ export const Header = ({}) => {
                     />
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button
-                        label={userName + '(剩余：' + restWatchCount + '，到期时间：' + formatToYMD(packageExpiredTime) + ')'}
+                        label={userName + '(' + restWatchCount + ')'}
                         onSelect={onProfile}/>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button label="赞赏" onSelect={onDonate}/>

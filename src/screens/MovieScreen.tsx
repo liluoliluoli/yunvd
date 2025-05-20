@@ -112,6 +112,7 @@ export default function MovieScreen({route, navigation}) {
                                onTabPress={(index: number) => setYear(YEAR_OPTIONS[index].key)}
                                currentIndex={0}></FilterBar>
                     <VideoList
+                        isHistory={false}
                         videosByRow={videosByRow}
                         onVideoPress={navigateToVideoDetails}
                     />

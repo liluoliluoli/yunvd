@@ -71,6 +71,7 @@ export default function SearchScreen({route, navigation}) {
                         <View style={styles.divider}/>
                     </View>
                     <VideoList
+                        isHistory={false}
                         videosByRow={videosByRow}
                         onVideoPress={navigateToVideoDetails}
                     />

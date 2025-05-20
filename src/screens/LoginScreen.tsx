@@ -1,17 +1,5 @@
 import React, {useState} from 'react';
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet,
-    Image,
-    Alert,
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    ActivityIndicator
-} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Alert, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {useAuthViewModel} from '../viewModels/AuthViewModel';
 import {Page} from "../components/Page";
 import {SpatialNavigationNode, SpatialNavigationScrollView} from "react-tv-space-navigation";
@@ -58,7 +46,7 @@ export default function LoginScreen({navigation}) {
 
     return (
         <Page>
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <SpatialNavigationScrollView
                     offsetFromStart={HEADER_SIZE + 20}
                     descendingArrow={<TopArrow/>}
@@ -91,7 +79,7 @@ export default function LoginScreen({navigation}) {
                         </View>
                     </SpatialNavigationNode>
                 </SpatialNavigationScrollView>
-            </View>
+            </SafeAreaView>
         </Page>
     );
 }

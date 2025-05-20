@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {BottomArrow, TopArrow} from "../components/Arrows";
 import {SpatialNavigationScrollView} from "react-tv-space-navigation";
@@ -13,6 +13,7 @@ import {TabBar} from "../components/Tabbar";
 import {VideoList} from "../components/VideoList";
 import {useVideoListViewModel} from '../viewModels/VideoListViewModel';
 import LoadingIndicator from "../components/LoadingIndicator";
+import {useFocusEffect} from "@react-navigation/native";
 
 
 export default function HomeScreen({route, navigation}) {
@@ -46,6 +47,12 @@ export default function HomeScreen({route, navigation}) {
         fetchFavoriteVideos,
         favoriteCount
     } = useVideoListViewModel();
+
+    useFocusEffect(
+        useCallback(() => {
+            setIndex(0);
+        }, [])
+    );
 
     useEffect(() => {
         console.log(`videos total ${videos.length}`);
@@ -90,8 +97,13 @@ export default function HomeScreen({route, navigation}) {
                     <TabBar
                         routes={TAB_ROUTES}
                         currentIndex={index}
+                        onTabPress={(newIndex) => {
+                            setIndex(newIndex)
+                            navigation.navigate(TAB_ROUTES[newIndex].screen);
+                        }}
                     />
                     <VideoList
+                        isHistory={true}
                         videosByRow={videosByRow}
                         onVideoPress={navigateToVideoDetails}
                     />

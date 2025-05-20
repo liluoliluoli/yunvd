@@ -45,7 +45,7 @@ export const useVideoItemViewModel = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [videoId]);
+    }, [videoId, isFavorite]);
 
     return {
         video,

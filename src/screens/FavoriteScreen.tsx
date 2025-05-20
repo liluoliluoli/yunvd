@@ -12,11 +12,13 @@ import {Spacer} from "../components/Spacer";
 import {useVideoListViewModel} from "../viewModels/VideoListViewModel";
 import {VT_MOVIE} from "../utils/ApiConstants";
 import LoadingIndicator from "../components/LoadingIndicator";
+import {useIsFocused} from "@react-navigation/native";
 
 const HEADER_SIZE = scaledPixels(400)
 export default function FavoriteScreen({route, navigation}) {
     const [videosByRow, setVideosByRow] = useState<Video[][]>([]);
     const [down, setDown] = useState(false);
+    const isFocus = useIsFocused()
     const {
         videos,
         setVideos,
@@ -54,7 +56,7 @@ export default function FavoriteScreen({route, navigation}) {
         if (currentPage !== 0) {
             fetchFavoriteVideos()
         }
-    }, [currentPage]);
+    }, [currentPage, isFocus]);
 
     useEffect(() => {
         if (down) {
@@ -65,7 +67,7 @@ export default function FavoriteScreen({route, navigation}) {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, []);
+    }, [isFocus]);
 
     const navigateToVideoDetails = (video) => {
         console.log('Navigating to video detail with video:', video.title);
@@ -82,12 +84,13 @@ export default function FavoriteScreen({route, navigation}) {
                     descendingArrowContainerStyle={styles.topArrowContainer}
                     ascendingArrowContainerStyle={styles.bottomArrowContainer}
                 >
-                    <View style={styles.header}>
-                        <Text style={styles.favoriteCount}>收藏数：{favoriteCount}</Text>
-                        <Spacer direction={"vertical"} gap={'$2'}/>
-                        <View style={styles.divider}/>
-                    </View>
+                    {/*<View style={styles.header}>*/}
+                    {/*    <Text style={styles.favoriteCount}>收藏数：{favoriteCount}</Text>*/}
+                    {/*    <Spacer direction={"vertical"} gap={'$2'}/>*/}
+                    {/*    <View style={styles.divider}/>*/}
+                    {/*</View>*/}
                     <VideoList
+                        isHistory={false}
                         videosByRow={videosByRow}
                         onVideoPress={navigateToVideoDetails}
                     />

@@ -10,20 +10,21 @@ import Video from "../models/Video";
 import {Ionicons} from "@expo/vector-icons";
 
 interface VideoListProps {
+    isHistory: boolean;
     videosByRow: Video[][];
     onVideoPress: (video: Video) => void;
 }
 
 const {width} = Dimensions.get('window');
-export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
-    const renderVideoItem = ({item, index}: { item: Video, index: number }) => (
+export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps) => {
+    const renderVideoItem = ({item, index, isHistory}: { item: Video, index: number, isHistory: boolean }) => (
         <SpatialNavigationFocusableView onSelect={() => onVideoPress(item)} key={index} style={{width: width / 5}}>
             {({isFocused, isRootActive}) => (
                 <View style={{
                     borderWidth: 2,
                     borderRadius: 4,
                     backgroundColor: '#fff',
-                    borderColor: isFocused && isRootActive ? 'white' : 'black',
+                    borderColor: isFocused && isRootActive ? 'gold' : 'black',
                     overflow: 'hidden',
                 }}>
                     <View style={styles.thumbnailContainer}>
@@ -42,7 +43,9 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
                     <View style={styles.videoDetails}>
                         <Text style={styles.videoTitle} numberOfLines={1}>{item.title}</Text>
                         <Text style={styles.videoInfo} numberOfLines={1}>
-                            {item.publishMonth.substring(0, 4)}
+                            {isHistory && item.lastPlayedTime ?
+                                `最后播放: ${formatPlayTime(item.lastPlayedTime)}` :
+                                item.publishMonth.substring(0, 4)}
                         </Text>
                     </View>
                 </View>
@@ -50,21 +53,26 @@ export const VideoList = ({videosByRow, onVideoPress}: VideoListProps) => {
         </SpatialNavigationFocusableView>
     );
 
-    const renderVideosByRow = (videos: Video[], index: number) => (
+    const renderVideosByRow = (videos: Video[], index: number, isHistory: boolean) => (
         <SpatialNavigationView
             style={{height: scaledPixels(520), width: '100%', justifyContent: 'flex-start', alignItems: 'center'}}
             direction="horizontal" key={index}>
-            {videos.map((item, index) => renderVideoItem({item, index}))}
+            {videos.map((item, index) => renderVideoItem({item, index, isHistory}))}
         </SpatialNavigationView>
     );
 
     return (
         <View style={{flexDirection: 'row'}}>
             <SpatialNavigationView alignInGrid direction="vertical">
-                {videosByRow.map(renderVideosByRow)}
+                {videosByRow.map((row, index) => renderVideosByRow(row, index, isHistory))}
             </SpatialNavigationView>
         </View>
     );
+};
+
+const formatPlayTime = (timestamp: number) => {
+    const date = new Date(timestamp * 1000);
+    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
 };
 
 const styles = StyleSheet.create({
