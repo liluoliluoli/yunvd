@@ -1,7 +1,7 @@
 import {scaledPixels} from "../hooks/useScale";
 import moment from "moment";
 
-export const API_BASE_URL = 'https://7441-210-3-159-152.ngrok-free.app';
+export const API_BASE_URL = 'https://dd7e-210-3-159-152.ngrok-free.app';
 export const API_PWD = "SDDSIOPOPPP";
 
 export const ENDPOINTS = {

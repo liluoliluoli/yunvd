@@ -1,76 +1,34 @@
-# yunvd
+# TV Example
 
-### yarn install
+Creates a project that can build for Apple TV and Android TV targets.
 
-### EXPO_NO_CLIENT_ENV_VARS=1 EXPO_TV=1 expo run:android
+This project uses
 
-替换androidMainifest.xml:
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.CAMERA"/>
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.RECORD_AUDIO"/>
-<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
-<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-<uses-permission android:name="android.permission.VIBRATE"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-<queries>
-<intent>
-<action android:name="android.intent.action.VIEW"/>
-<category android:name="android.intent.category.BROWSABLE"/>
-<data android:scheme="https"/>
-</intent>
-</queries>
-<application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher"
-android:allowBackup="true" android:theme="@style/AppTheme" android:supportsRtl="true">
-<meta-data android:name="expo.modules.updates.ENABLED" android:value="false"/>
-<meta-data android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH" android:value="ALWAYS"/>
-<meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
-<activity android:name=".MainActivity"
-android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|uiMode"
-android:launchMode="singleTask" android:windowSoftInputMode="adjustPan|stateHidden"
-android:theme="@style/Theme.App.SplashScreen" android:exported="true">
-<intent-filter>
-<action android:name="android.intent.action.MAIN"/>
-<category android:name="android.intent.category.LAUNCHER"/>
-<category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
-</intent-filter>
-<intent-filter>
-<action android:name="android.intent.action.VIEW"/>
-<category android:name="android.intent.category.DEFAULT"/>
-<category android:name="android.intent.category.BROWSABLE"/>
-<data android:scheme="com.zyun.yunvd"/>
-</intent-filter>
-</activity>
-<provider
-android:name="androidx.core.content.FileProvider"
-android:authorities="${applicationId}.provider"
-android:exported="false"
-android:grantUriPermissions="true">
-<!-- you might need the tools:replace thing to workaround rn-fetch-blob or other definitions of provider -->
-<!-- just make sure if you "replace" here that you include all the paths you are replacing *plus* the cache path we use -->
-<meta-data tools:replace="android:resource"
-android:name="android.support.FILE_PROVIDER_PATHS"
-android:resource="@xml/filepaths"/>
-</provider>
-</application>
-</manifest>
+- the [React Native TV fork](https://github.com/react-native-tvos/react-native-tvos), which supports both phone (Android and iOS) and TV (Android TV and Apple TV) targets
+- the [React Native TV config plugin](https://github.com/react-native-tvos/config-tv/tree/main/packages/config-tv) to allow Expo prebuild to modify the project's native files for TV builds
 
-在res目录下创建xml/filepaths.xml:
-<?xml version="1.0" encoding="utf-8"?>
-<paths xmlns:android="http://schemas.android.com/apk/res/android">
+## 🚀 How to use
 
-    <files-path
-            name="Pictures"
-            path="/"></files-path>
-    <external-path
-            name="files_root"
-            path="Android/data/${applicationId}/" />
-    <root-path
-            name="root"
-            path="/" />
+#### Creating a new project
 
-</paths>
+- Create a project: `npx create-expo-app -e with-tv`
+- `cd` into the project
+
+```sh
+export EXPO_TV=1
+npx expo prebuild
+yarn ios # Build for Apple TV
+yarn android # Build for Android TV
+```
+
+> **_NOTE:_**
+> Setting the environment variable `EXPO_TV=1` enables the `@react-native-tvos/config-tv` plugin to modify the project for TV.
+> This can also be done by setting the parameter `isTV` to true in the `app.json`.
+
+#### TV specific file extensions
+
+This project contains an [example Metro configuration](./metro.config.js) that allows Metro to resolve application source files with TV-specific code, indicated by specific file extensions (`*.ios.tv.tsx`, `*.android.tv.tsx`, `*.tv.tsx`). This config is not enabled by default, since it will impact bundling performance, but is available for developers who need this capability.
+
+#### TV specific app icons and banners
+
+This project contains placeholder images for the Android TV banner and for Apple TV brand assets (app icon and top shelf images). The `config-tv` plugin will use these images to construct the required native image files and make the right modifications in project files. You can simply replace these images with your own app images. Note that for Apple TV, the images must be the exact sizes indicated.

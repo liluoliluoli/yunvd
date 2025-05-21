@@ -1,46 +1,50 @@
 pluginManagement {
-    includeBuild(new File(["node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim()).getParentFile().toString())
+    def version = providers.exec {
+        commandLine("node", "-e", "console.log(require('react-native/package.json').version);")
+    }.standardOutput.asText.get().trim()
+    def (_, reactNativeMinor, reactNativePatch) = version.split("-")[0].tokenize('.').collect { it.toInteger() }
+
+    includeBuild(new File(["node", "--print", "require.resolve('@react-native/gradle-plugin/package.json')"].execute(null, rootDir).text.trim()).getParentFile().toString())
     repositories {
-        maven { url "https://jitpack.io" }
-        maven { url 'https://maven.aliyun.com/repository/releases' }
-//        maven { url 'https://maven.aliyun.com/repository/jcenter' }
-        maven { url 'https://maven.aliyun.com/repository/google' }
-        maven { url 'https://maven.aliyun.com/repository/central' }
-        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url 'https://maven.aliyun.com/repository/public' }
-        google()
-        mavenCentral()
-        gradlePluginPortal()
+          maven { url "https://jitpack.io" }
+          maven { url 'https://maven.aliyun.com/repository/releases' }
+          maven { url 'https://maven.aliyun.com/repository/google' }
+          maven { url 'https://maven.aliyun.com/repository/central' }
+          maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+          maven { url 'https://maven.aliyun.com/repository/public' }
+          google()
+          mavenCentral()
+          gradlePluginPortal()
     }
 }
 plugins { id("com.facebook.react.settings") }
 
 extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
-    if (System.getenv('EXPO_USE_COMMUNITY_AUTOLINKING') == '1') {
-        ex.autolinkLibrariesFromCommand()
-    } else {
-        def command = [
-                'node',
-                '--no-warnings',
-                '--eval',
-                'require(require.resolve(\'expo-modules-autolinking\', { paths: [require.resolve(\'expo/package.json\')] }))(process.argv.slice(1))',
-                'react-native-config',
-                '--json',
-                '--platform',
-                'android'
-        ].toList()
-        ex.autolinkLibrariesFromCommand(command)
-    }
+  if (System.getenv('EXPO_USE_COMMUNITY_AUTOLINKING') == '1') {
+    ex.autolinkLibrariesFromCommand()
+  } else {
+    def command = [
+      'node',
+      '--no-warnings',
+      '--eval',
+      'require(require.resolve(\'expo-modules-autolinking\', { paths: [require.resolve(\'expo/package.json\')] }))(process.argv.slice(1))',
+      'react-native-config',
+      '--json',
+      '--platform',
+      'android'
+    ].toList()
+    ex.autolinkLibrariesFromCommand(command)
+  }
 }
 
 rootProject.name = 'yunvd'
 
 dependencyResolutionManagement {
-    versionCatalogs {
-        reactAndroidLibs {
-            from(files(new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), "../gradle/libs.versions.toml")))
-        }
+  versionCatalogs {
+    reactAndroidLibs {
+      from(files(new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), "../gradle/libs.versions.toml")))
     }
+  }
 }
 
 apply from: new File(["node", "--print", "require.resolve('expo/package.json')"].execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle");
@@ -48,5 +52,6 @@ useExpoModules()
 
 include ':app'
 includeBuild(new File(["node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim()).getParentFile())
+
 include ':yvdintent'
 include ':p2pml'

@@ -1,9 +1,8 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.kotlin.serialization)
-    id("org.jlleitschuh.gradle.ktlint")
-    id("maven-publish")
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
+    id("org.jetbrains.kotlin.plugin.compose") version "2.1.0"
 }
 
 android {
@@ -35,67 +34,27 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.6.0"
+    }
 }
 
 dependencies {
-    compileOnly(libs.androidx.media3.exoplayer.hls)
-    compileOnlyApi(libs.androidx.media3.exoplayer)
-    implementation(libs.ktor.server.core)
-    implementation(libs.ktor.server.cio)
-    implementation(libs.ktor.server.cors)
-    implementation(libs.okhttp)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.androidx.webkit)
-    implementation(libs.androidx.core.ktx)
+    implementation(platform("androidx.compose:compose-bom:2025.05.01"))
+
+    compileOnly("androidx.media3:media3-exoplayer-hls:1.7.1")
+    compileOnlyApi("androidx.media3:media3-exoplayer:1.7.1")
+    implementation("io.ktor:ktor-server-core:3.1.0")
+    implementation("io.ktor:ktor-server-cio:3.1.0")
+    implementation("io.ktor:ktor-server-cors:3.1.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+    implementation("androidx.webkit:webkit:1.13.0")
+    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.compose.runtime:runtime")
+    implementation("androidx.compose.ui:ui")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-
-                groupId = "com.novage"
-                artifactId = "p2pml"
-                version = "0.0.1-SNAPSHOT"
-
-                pom {
-                    name.set("P2P Media Loader Mobile")
-                    description.set("A sample Kotlin/Android library for P2P media streaming")
-                    url.set("https://github.com/Novage/p2p-media-loader-mobile")
-
-                    licenses {
-                        license {
-                            name.set("Apache License 2.0")
-                            url.set("https://opensource.org/licenses/Apache-2.0")
-                        }
-                    }
-
-                    scm {
-                        connection.set("scm:git:git://github.com/Novage/p2p-media-loader-mobile.git")
-                        developerConnection.set("scm:git:ssh://github.com:Novage/p2p-media-loader-mobile.git")
-                        url.set("https://github.com/Novage/p2p-media-loader-mobile")
-                    }
-
-                    developers {
-                        developer {
-                            id.set("DimaDemchenko")
-                            name.set("Dmytro Demchenko")
-                        }
-                    }
-                }
-            }
-        }
-
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/Novage/p2p-media-loader-mobile")
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR") ?: ""
-                    password = System.getenv("GITHUB_TOKEN") ?: ""
-                }
-            }
-        }
-    }
-}
