@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#1a1a1a',
+        paddingLeft: 2,
+        paddingRight: 2
     },
     topArrowContainer: {
         width: '100%',

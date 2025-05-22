@@ -90,6 +90,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#1a1a1a',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingLeft: 2,
+        paddingRight: 2
     },
     inputContainer: {
         width: scaledPixels(800),

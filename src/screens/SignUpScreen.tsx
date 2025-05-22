@@ -114,6 +114,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#1a1a1a',
         justifyContent: 'center',
         alignItems: 'center',
+        paddingLeft: 2,
+        paddingRight: 2
     },
     formContainer: {
         width: '100%',

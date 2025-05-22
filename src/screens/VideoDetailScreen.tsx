@@ -255,7 +255,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         backgroundColor: '#1a1a1a',
-        padding: 10,
+        paddingLeft: 2,
+        paddingRight: 2
     },
     favorite: {
         flex: 1,

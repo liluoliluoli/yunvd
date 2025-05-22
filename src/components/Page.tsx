@@ -2,7 +2,7 @@ import {Direction} from '@bam.tech/lrud';
 import {useIsFocused} from '@react-navigation/native';
 import React, {ReactNode, useCallback, useEffect} from 'react';
 import {SpatialNavigationRoot, useLockSpatialNavigation} from 'react-tv-space-navigation';
-import {Keyboard} from 'react-native';
+import {Keyboard, SafeAreaView} from 'react-native';
 import {GoBackConfiguration} from '../remote-control/GoBackConfiguration';
 
 
@@ -56,5 +56,6 @@ export const Page = ({children, loadMore}: Props) => {
             <SpatialNavigationKeyboardLocker/>
             {children}
         </SpatialNavigationRoot>
+
     );
 };

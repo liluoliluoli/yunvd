@@ -19,7 +19,8 @@ interface VideoListProps {
 const {width} = Dimensions.get('window');
 export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps) => {
     const renderVideoItem = ({item, index, isHistory}: { item: Video, index: number, isHistory: boolean }) => (
-        <SpatialNavigationFocusableView onSelect={() => onVideoPress(item)} key={index} style={{width: width / 5}}>
+        <SpatialNavigationFocusableView onSelect={() => onVideoPress(item)} key={index}
+                                        style={{width: (width - 20) / 5}}>
             {({isFocused, isRootActive}) => (
                 <View style={{
                     borderWidth: 2,
@@ -56,7 +57,12 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
 
     const renderVideosByRow = (videos: Video[], index: number, isHistory: boolean) => (
         <SpatialNavigationView
-            style={{height: scaledPixels(520), width: '100%', justifyContent: 'flex-start', alignItems: 'center'}}
+            style={{
+                height: scaledPixels(520),
+                width: '100%',
+                justifyContent: 'flex-start',
+                gap: 4
+            }}
             direction="horizontal" key={index}>
             {videos.map((item, index) => renderVideoItem({item, index, isHistory}))}
         </SpatialNavigationView>

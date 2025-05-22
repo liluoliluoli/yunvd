@@ -115,7 +115,7 @@ export const Header = ({}) => {
                 <View style={styles.header}>
                     <Spacer direction={"horizontal"} gap={'$2'}/>
                     <Typography variant="title">YunVD</Typography>
-                    <Spacer direction={"horizontal"} gap={'$2'}/>
+                    <Spacer direction={"horizontal"} gap={'$1'}/>
                     <Typography variant="body">v{currentVersion} </Typography>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button

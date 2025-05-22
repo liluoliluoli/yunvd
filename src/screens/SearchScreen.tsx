@@ -86,6 +86,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#111111',
+        paddingLeft: 2,
+        paddingRight: 2
     },
     filterRow: {
         flexDirection: 'row',
