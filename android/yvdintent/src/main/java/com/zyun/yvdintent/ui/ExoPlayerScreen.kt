@@ -322,8 +322,8 @@ fun ExoPlayerScreen(
                         .focusable(false)
                 ) {
                     CircularProgressIndicator(
-                        color = Color.Blue,
-                        modifier = Modifier.size(20.dp),
+                        color = Color.White,
+                        modifier = Modifier.size(30.dp),
                     )
                 }
             }
@@ -957,7 +957,7 @@ fun CustomPlayerController(
                 colors = SliderDefaults.colors(
                     disabledThumbColor = Color.White,
                     disabledActiveTrackColor = Color.LightGray,
-                    disabledInactiveTickColor = Color.DarkGray,
+                    disabledInactiveTickColor = Color.Black,
                 ),
                 modifier = Modifier
                     .weight(1f)

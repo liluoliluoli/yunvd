@@ -107,10 +107,10 @@ const VideoDetailScreen = ({route, navigation}) => {
         if (video.lastPlayedEpisodeId) {
             const episode = video.episodes.find(item => item.id === video?.lastPlayedEpisodeId)
             console.log("video lastPlayedPosition:" + video.lastPlayedPosition)
-            navigateToVideoPlayer(episode, video)
+            navigateToVideoPlayer(episode, video, true)
         } else {
             const episode = video?.episodes[0]
-            navigateToVideoPlayer(episode, video)
+            navigateToVideoPlayer(episode, video, false)
         }
     }, [lastPlayedPosition]);
 
@@ -121,19 +121,19 @@ const VideoDetailScreen = ({route, navigation}) => {
         const lastPlayedIndex = video.episodes.findIndex(item => item.id === lastPlayedEpisodeId)
         if (lastPlayedIndex === -1) {
             const episode = video?.episodes[0]
-            navigateToVideoPlayer(episode, video)
+            navigateToVideoPlayer(episode, video, false)
         } else {
             if (lastPlayedIndex + 1 >= video.episodes.length) {
                 Toast.show("当前已经是最后一集", Toast.SHORT);
             } else {
                 const episode = video?.episodes[lastPlayedIndex + 1]
-                navigateToVideoPlayer(episode, video)
+                navigateToVideoPlayer(episode, video, false)
                 // navigation.push('VideoPlayer', {episode, video});
             }
         }
     }, [lastPlayedEpisodeId]);
 
-    const navigateToVideoPlayer = (episode, video) => {
+    const navigateToVideoPlayer = (episode, video, isContinue) => {
         console.log('Navigating to video player with video:', episode.episodeTitle);
         // navigation.push('VideoPlayer', {episode, video});
         AsyncStorage.getItem(STORAGE_KEYS.AUTH_TOKEN)
@@ -142,7 +142,7 @@ const VideoDetailScreen = ({route, navigation}) => {
                     const params: VideoReq = {
                         video: video,
                         episodeId: episode.id,
-                        lastPlayedPosition: video.lastPlayedPosition,
+                        lastPlayedPosition: isContinue ? video.lastPlayedPosition : 0,
                         domain: API_BASE_URL,
                         secretKey: API_PWD,
                         token: token,
@@ -199,7 +199,7 @@ const VideoDetailScreen = ({route, navigation}) => {
                     </SpatialNavigationNode>
                     {video?.episodes?.map((episode, index) => (
                         <Episode key={index} id={episode.id} label={episode.episodeTitle}
-                                 onSelect={() => navigateToVideoPlayer(episode, video)}/>
+                                 onSelect={() => navigateToVideoPlayer(episode, video, false)}/>
                     ))}
                 </SpatialNavigationScrollView>
             </View>

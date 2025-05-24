@@ -23,10 +23,9 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
                                         style={{width: (width - 20) / 5}}>
             {({isFocused, isRootActive}) => (
                 <View style={{
-                    borderWidth: 2,
+                    borderWidth: isFocused && isRootActive ? 2 : 0,
                     borderRadius: 4,
-                    backgroundColor: '#fff',
-                    borderColor: isFocused && isRootActive ? 'gold' : 'black',
+                    borderColor: isFocused && isRootActive ? 'gold' : 'white',
                     overflow: 'hidden',
                 }}>
                     <View style={styles.thumbnailContainer}>
@@ -69,7 +68,7 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
     );
 
     return (
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', paddingTop: 8}}>
             <SpatialNavigationView alignInGrid direction="vertical">
                 {videosByRow.map((row, index) => renderVideosByRow(row, index, isHistory))}
             </SpatialNavigationView>
@@ -117,6 +116,7 @@ const styles = StyleSheet.create({
     videoDetails: {
         padding: 5,
         alignItems: 'center',
+        backgroundColor: 'white',
     },
     videoTextContent: {
         flex: 1,
@@ -124,8 +124,8 @@ const styles = StyleSheet.create({
     },
     videoTitle: {
         fontSize: 14,
-        color: 'black',
-        lineHeight: 16,
+        color: '#1a1a1a',
+        lineHeight: 18,
     },
     videoInfo: {
         flexDirection: 'row',

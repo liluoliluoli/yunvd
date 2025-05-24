@@ -24,9 +24,6 @@
       "bundleIdentifier": "com.zyun.yunvd"
     },
     "android": {
-      "splash": {
-        "image": "./assets/icon-1920x720.png"
-      },
       "permissions": [
         "android.permission.RECORD_AUDIO",
         "android.permission.CAMERA",
