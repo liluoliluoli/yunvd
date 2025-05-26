@@ -384,14 +384,14 @@ fun CustomPlayerController(
     var isFocusedSpeed by remember { mutableStateOf(false) }
     var isFocusedAudio by remember { mutableStateOf(false) }
     var showSubtitleDialog by remember { mutableStateOf(false) }
-    var selectedSubtitle by remember { mutableStateOf<Subtitle?>(null) }
+    var selectedSubtitleId by remember { mutableLongStateOf(episode?.subtitles?.get(0)?.id ?: 0L) }
     var showEpisodeDialog by remember { mutableStateOf(false) }
     var selectedEpisodeId by remember { mutableLongStateOf(episode?.id!!) }
     var showAudioDialog by remember { mutableStateOf(false) }
-    var selectedAudio by remember { mutableStateOf<Audio?>(null) }
+    var selectedAudioId by remember { mutableLongStateOf(episode?.audios?.get(0)?.id ?: 0L) }
 
     fun setSubtitle(episodeUrl: String, subtitle: Subtitle) {
-        selectedSubtitle = subtitle
+        selectedSubtitleId = subtitle.id
         setSubtitleForPlayer(player, episodeUrl, subtitle.url, context, viewModel)
         showSubtitleDialog = false
         onShowSubtitleDialog(false)
@@ -405,7 +405,7 @@ fun CustomPlayerController(
     }
 
     fun setAudio(episodeUrl: String, audio: Audio) {
-        selectedAudio = audio
+        selectedAudioId = audio.id
         setSubtitleForPlayer(player, episodeUrl, audio.url, context, viewModel)
         showAudioDialog = false
         onShowAudioDialog(false)
@@ -440,9 +440,7 @@ fun CustomPlayerController(
                     LazyColumn {
                         items(episode?.subtitles?.size ?: 0) { index ->
                             val isSelected =
-                                episode?.subtitles?.getOrNull(index) == selectedSubtitle
-                            val backgroundColor =
-                                if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
+                                episode?.subtitles?.getOrNull(index)?.id == selectedSubtitleId
                             var isFocused by remember { mutableStateOf(false) }
                             val itemFocusRequester = remember { FocusRequester() }
                             if (isSelected) {
@@ -456,7 +454,6 @@ fun CustomPlayerController(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(32.dp)
-                                        .background(backgroundColor)
                                         .clickable {
                                             setSubtitle(
                                                 episode?.url!!,
@@ -549,7 +546,7 @@ fun CustomPlayerController(
                     LazyColumn {
                         items(episode?.audios?.size ?: 0) { index ->
                             val isSelected =
-                                episode?.audios?.getOrNull(index) == selectedAudio
+                                episode?.audios?.getOrNull(index)?.id == selectedAudioId
                             val backgroundColor =
                                 if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent
                             var isFocused by remember { mutableStateOf(false) }
