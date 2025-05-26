@@ -35,6 +35,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -105,12 +106,14 @@ fun ExoPlayerScreen(
     var lastReportTime by remember { mutableLongStateOf(0L) }
     var lastPlayedPosition by remember { mutableLongStateOf(initialLastPlayedPosition) }
     var showSeekTime by remember { mutableStateOf(false) }
+    var currentSeekTime by remember { mutableLongStateOf(0) }
 
     DisposableEffect(Unit) {
         val listener = object : Player.Listener {
             override fun onPlaybackStateChanged(playbackState: Int) {
                 if (playbackState == Player.STATE_READY) {
                     isPlayerReady = true
+                    showSeekTime = false
                     maxProgress = viewModel.player.duration.toFloat()
                     formattedRemainingTime =
                         formatRemainingTime(
@@ -149,16 +152,13 @@ fun ExoPlayerScreen(
                 reason: Int
             ) {
                 progress = viewModel.player.currentPosition.toFloat()
-                if (isPlayerReady) {
-                    formattedRemainingTime =
-                        formatRemainingTime(
-                            viewModel.player.currentPosition,
-                            viewModel.player.duration
-                        )
-                }
-                if (reason == Player.DISCONTINUITY_REASON_SEEK) {
-                    showSeekTime = true
-                }
+                formattedRemainingTime =
+                    formatRemainingTime(
+                        viewModel.player.currentPosition,
+                        viewModel.player.duration
+                    )
+                showSeekTime = true
+                currentSeekTime = viewModel.player.currentPosition
             }
         }
         viewModel.player.addListener(listener)
@@ -237,13 +237,6 @@ fun ExoPlayerScreen(
         }
     }
 
-    LaunchedEffect(showSeekTime) {
-        if (showSeekTime) {
-            delay(3000)
-            showSeekTime = false
-        }
-    }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -268,6 +261,15 @@ fun ExoPlayerScreen(
                             }
                         }
 
+                        Key.Back -> {
+                            if (showController) {
+                                showController = false
+                                true
+                            } else {
+                                false // 返回false让系统处理退出播放
+                            }
+                        }
+
                         else -> {
                             lastInteractionTime = System.currentTimeMillis()
                             false
@@ -289,7 +291,9 @@ fun ExoPlayerScreen(
             },
         )
 
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
             AnimatedVisibility(
                 visible = showController,
                 enter = fadeIn(),
@@ -334,7 +338,7 @@ fun ExoPlayerScreen(
                 ) {
                     CircularProgressIndicator(
                         color = Color.White,
-                        modifier = Modifier.size(30.dp),
+                        modifier = Modifier.size(45.dp),
                     )
                 }
             }
@@ -343,14 +347,11 @@ fun ExoPlayerScreen(
                 Box(
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .background(Color.Black.copy(alpha = 0.5f))
-                        .padding(16.dp)
                 ) {
                     Text(
-                        text = formatContinueTime(viewModel.player.currentPosition),
+                        text = formatContinueTime(currentSeekTime),
                         color = Color.White,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
+                        fontSize = 14.sp,
                     )
                 }
             }
@@ -756,7 +757,7 @@ fun CustomPlayerController(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .padding(horizontal = 16.dp, vertical = 80.dp),
+                .padding(horizontal = 16.dp, vertical = 60.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -912,7 +913,7 @@ fun CustomPlayerController(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter)
-                .padding(horizontal = 16.dp, vertical = 32.dp),
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(
@@ -984,7 +985,7 @@ fun CustomPlayerController(
                 colors = SliderDefaults.colors(
                     disabledThumbColor = Color.White,
                     disabledActiveTrackColor = Color.LightGray,
-                    disabledInactiveTickColor = Color.Black,
+                    disabledInactiveTrackColor = Color.Black.copy(alpha = 0.5f),
                 ),
                 modifier = Modifier
                     .weight(1f)
