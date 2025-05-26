@@ -104,6 +104,7 @@ fun ExoPlayerScreen(
     var showAudioDialog by remember { mutableStateOf(false) }
     var lastReportTime by remember { mutableLongStateOf(0L) }
     var lastPlayedPosition by remember { mutableLongStateOf(initialLastPlayedPosition) }
+    var showSeekTime by remember { mutableStateOf(false) }
 
     DisposableEffect(Unit) {
         val listener = object : Player.Listener {
@@ -154,6 +155,9 @@ fun ExoPlayerScreen(
                             viewModel.player.currentPosition,
                             viewModel.player.duration
                         )
+                }
+                if (reason == Player.DISCONTINUITY_REASON_SEEK) {
+                    showSeekTime = true
                 }
             }
         }
@@ -225,11 +229,18 @@ fun ExoPlayerScreen(
                 episodeId = episodeId,
             )
             viewModel.releaseP2P()
-            viewModel.setupP2PML(episode!!.url, null)
+            viewModel.setupP2PML(episode!!.url, episode?.subtitles?.get(0)?.url)
         } catch (e: Exception) {
             Toast.makeText(context, "请求播放地址失败：$e", Toast.LENGTH_SHORT).show()
         } finally {
             isLoading = false
+        }
+    }
+
+    LaunchedEffect(showSeekTime) {
+        if (showSeekTime) {
+            delay(3000)
+            showSeekTime = false
         }
     }
 
@@ -324,6 +335,22 @@ fun ExoPlayerScreen(
                     CircularProgressIndicator(
                         color = Color.White,
                         modifier = Modifier.size(30.dp),
+                    )
+                }
+            }
+
+            if (showSeekTime) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .background(Color.Black.copy(alpha = 0.5f))
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = formatContinueTime(viewModel.player.currentPosition),
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }

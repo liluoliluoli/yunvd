@@ -4,9 +4,14 @@ import android.app.Application
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.media3.common.C
+import androidx.media3.common.C.SELECTION_FLAG_DEFAULT
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
+import androidx.media3.common.Tracks
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DataSpec
@@ -14,20 +19,28 @@ import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.TransferListener
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.analytics.AnalyticsListener
 import androidx.media3.exoplayer.hls.HlsMediaSource
+import androidx.media3.exoplayer.source.LoadEventInfo
+import androidx.media3.exoplayer.source.MediaLoadData
+import androidx.media3.exoplayer.source.MergingMediaSource
+import com.google.common.collect.ImmutableList
 import com.google.gson.Gson
 import com.novage.p2pml.P2PMediaLoader
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
+import java.net.URL
 import java.security.InvalidKeyException
 import java.security.NoSuchAlgorithmException
 import java.time.Duration
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+
 
 @UnstableApi
 class ExoPlayerViewModel(
@@ -37,7 +50,8 @@ class ExoPlayerViewModel(
         get() = getApplication()
 
     val player: ExoPlayer by lazy {
-        ExoPlayer.Builder(context).build()
+        ExoPlayer.Builder(context)
+            .build()
     }
     private var p2pml: P2PMediaLoader? = null
 
@@ -54,33 +68,55 @@ class ExoPlayerViewModel(
     }
 
     private fun initializePlayback(url: String, subtitleUrl: String?) {
-        val manifest =
-            p2pml?.getManifestUrl(url)
-                ?: throw IllegalStateException("P2PML is not started")
-        val loggingDataSourceFactory = LoggingDataSourceFactory(context)
-        var mediaSource: HlsMediaSource? = null
-        if (subtitleUrl != null) {
-            val subtitleUri = Uri.parse(subtitleUrl)
-            val subtitleSource = MediaItem.SubtitleConfiguration.Builder(subtitleUri)
+        val manifest = p2pml?.getManifestUrl(url) ?: throw IllegalStateException("P2PML is not started")
+
+        val subtitleItem = subtitleUrl?.let { url ->
+            MediaItem.SubtitleConfiguration.Builder(url.toUri())
                 .setMimeType(MimeTypes.APPLICATION_SUBRIP)
-                .setLanguage("und")
+                .setSelectionFlags(SELECTION_FLAG_DEFAULT)
                 .build()
-            mediaSource =
-                HlsMediaSource
-                    .Factory(loggingDataSourceFactory)
-                    .createMediaSource(
-                        MediaItem.fromUri(manifest).buildUpon()
-                            .setSubtitleConfigurations(listOf(subtitleSource)).build()
-                    )
-        } else {
-            mediaSource =
-                HlsMediaSource
-                    .Factory(loggingDataSourceFactory)
-                    .createMediaSource(MediaItem.fromUri(manifest))
         }
+        val mediaItemBuilder = MediaItem.Builder()
+            .setUri(manifest)
+            .setMimeType(MimeTypes.APPLICATION_M3U8)
+
+        subtitleItem?.let {
+            mediaItemBuilder.setSubtitleConfigurations(listOf(it))
+        }
+        val mediaItem = mediaItemBuilder.build()
+
         player.apply {
+            addAnalyticsListener(object : AnalyticsListener {
+                override fun onTracksChanged(
+                    eventTime: AnalyticsListener.EventTime,
+                    tracks: Tracks
+                ) {
+                    Log.d("Subtitle", "可用轨道: ${tracks.groups.size}")
+                    for (i in 0 until tracks.groups.size) {
+                        Log.d("Subtitle", "轨道 $i: ${tracks.groups[i]}")
+                        val trackGroup = tracks.groups[i]
+                        for (j in 0 until trackGroup.length) {
+                            val format = trackGroup.getTrackFormat(j)
+                            Log.d("Subtitle", "Track $i-$j: ${format.sampleMimeType}, ${format.language}, ${format.label}")
+                        }
+                    }
+                }
+
+                override fun onLoadError(
+                    eventTime: AnalyticsListener.EventTime,
+                    loadEventInfo: LoadEventInfo,
+                    mediaLoadData: MediaLoadData,
+                    error: IOException,
+                    wasCanceled: Boolean
+                ) {
+                    if (mediaLoadData.trackType == C.TRACK_TYPE_TEXT) {
+                        Log.e("Subtitle", "字幕加载错误", error)
+                    }
+                }
+            })
+
             playWhenReady = true
-            setMediaSource(mediaSource)
+            setMediaItem(mediaItem)
             prepare()
         }
     }

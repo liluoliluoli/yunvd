@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="yangshi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/p2pml/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/p2pml/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/VideoList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VideoList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/VideoDetailScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,14 +189,8 @@
       <workItem from="1747837314874" duration="3404000" />
       <workItem from="1747876861618" duration="13761000" />
       <workItem from="1747964648746" duration="588000" />
-    </task>
-    <task id="LOCAL-00024" summary="init">
-      <option name="closed" value="true" />
-      <created>1745373602114</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1745373602114</updated>
+      <workItem from="1748072692885" duration="6206000" />
+      <workItem from="1748226446629" duration="13984000" />
     </task>
     <task id="LOCAL-00025" summary="init">
       <option name="closed" value="true" />
@@ -581,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747891318183</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="yangshi">
+      <option name="closed" value="true" />
+      <created>1748072800681</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1748072800682</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

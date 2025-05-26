@@ -45,8 +45,8 @@ android {
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2025.05.01"))
 
-    compileOnly("androidx.media3:media3-exoplayer-hls:1.7.1")
-    compileOnlyApi("androidx.media3:media3-exoplayer:1.7.1")
+    compileOnly("androidx.media3:media3-exoplayer-hls:1.3.1")
+    compileOnlyApi("androidx.media3:media3-exoplayer:1.3.1")
     implementation("io.ktor:ktor-server-core:3.1.0")
     implementation("io.ktor:ktor-server-cio:3.1.0")
     implementation("io.ktor:ktor-server-cors:3.1.0")
