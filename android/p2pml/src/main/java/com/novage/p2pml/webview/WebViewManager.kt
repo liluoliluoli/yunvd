@@ -42,7 +42,7 @@ internal class WebViewManager(
             webViewClient = WebViewClientCompat()
             visibility = View.GONE
             addJavascriptInterface(
-                JavaScriptInterface(onPageLoadFinished, eventEmitter),
+                JavaScriptInterface(onPageLoadFinished, eventEmitter, coroutineScope),
                 "Android",
             )
         }

@@ -146,6 +146,15 @@
             this.core.setIsLive(isLive);
           }
 
+          arrayBufferToBase64(buffer) {
+            let binary = '';
+            const bytes = new Uint8Array(buffer);
+            for (let i = 0; i < bytes.byteLength; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binary);
+          }
+
           async processSegmentRequest(segmentRequestJSON) {
             const segmentRequest = JSON.parse(segmentRequestJSON);
             const { segmentUrl, requestId } = segmentRequest;
@@ -155,8 +164,10 @@
                 const copyData = new ArrayBuffer(response.data.byteLength);
                 new Uint8Array(copyData).set(new Uint8Array(response.data));
 
-                this.port.postMessage(`${requestId}`);
-                this.port.postMessage(copyData, [copyData]);
+                const base64 = arrayBufferToBase64(copyData);
+                if (window.Android && typeof window.Android.onLoadSegmentBytes === 'function') {
+                    window.Android.onLoadSegmentBytes(requestId, base64);
+                }
               } catch (e) {
                 this.port.postMessage(`Error:${requestId}:failed|${segmentUrl}`);
               }

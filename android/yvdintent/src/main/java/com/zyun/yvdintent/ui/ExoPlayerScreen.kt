@@ -229,7 +229,7 @@ fun ExoPlayerScreen(
                 episodeId = episodeId,
             )
             viewModel.releaseP2P()
-            viewModel.setupP2PML(episode!!.url, episode?.subtitles?.get(0)?.url)
+            viewModel.setupP2PML(episode!!.url, episode?.subtitles?.getOrNull(0)?.url)
         } catch (e: Exception) {
             Toast.makeText(context, "请求播放地址失败：$e", Toast.LENGTH_SHORT).show()
         } finally {
@@ -384,11 +384,11 @@ fun CustomPlayerController(
     var isFocusedSpeed by remember { mutableStateOf(false) }
     var isFocusedAudio by remember { mutableStateOf(false) }
     var showSubtitleDialog by remember { mutableStateOf(false) }
-    var selectedSubtitleId by remember { mutableLongStateOf(episode?.subtitles?.get(0)?.id ?: 0L) }
+    var selectedSubtitleId by remember { mutableLongStateOf(episode?.subtitles?.getOrNull(0)?.id ?: 0L) }
     var showEpisodeDialog by remember { mutableStateOf(false) }
     var selectedEpisodeId by remember { mutableLongStateOf(episode?.id!!) }
     var showAudioDialog by remember { mutableStateOf(false) }
-    var selectedAudioId by remember { mutableLongStateOf(episode?.audios?.get(0)?.id ?: 0L) }
+    var selectedAudioId by remember { mutableLongStateOf(episode?.audios?.getOrNull(0)?.id ?: 0L) }
 
     fun setSubtitle(episodeUrl: String, subtitle: Subtitle) {
         selectedSubtitleId = subtitle.id

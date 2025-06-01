@@ -1,17 +1,28 @@
 package com.novage.p2pml.webview
 
+import android.util.Base64
 import android.webkit.JavascriptInterface
 import com.novage.p2pml.ChunkDownloadedDetails
 import com.novage.p2pml.ChunkUploadedDetails
 import com.novage.p2pml.CoreEventMap
 import com.novage.p2pml.logger.Logger
 import com.novage.p2pml.utils.EventEmitter
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.Json
 
 internal class JavaScriptInterface(
     private val onFullyLoadedCallback: () -> Unit,
     private val eventEmitter: EventEmitter,
+    private val coroutineScope: CoroutineScope
 ) {
+    private val mutex = Mutex()
+    private val segmentResponseCallbacks = mutableMapOf<Int, CompletableDeferred<ByteArray>>()
+
+
     @JavascriptInterface
     fun onWebViewLoaded() {
         onFullyLoadedCallback()
@@ -57,6 +68,17 @@ internal class JavaScriptInterface(
     }
 
     @JavascriptInterface
+    fun onLoadSegmentBytes(
+        requestId: Int,
+        base64Data: String,
+    ) {
+        val byteArray = Base64.decode(base64Data, Base64.DEFAULT)
+        handleSegmentIdBytes(requestId, byteArray)
+    }
+
+
+
+    @JavascriptInterface
     fun onChunkDownloaded(
         bytesLength: Int,
         downloadSource: String,
@@ -87,6 +109,29 @@ internal class JavaScriptInterface(
             eventEmitter.emit(event, parsedParams)
         } catch (e: Exception) {
             Logger.e("JavaScriptInterface", "Failed to parse event parameters", e)
+        }
+    }
+
+    private fun handleSegmentIdBytes(requestId:Int, arrayBuffer: ByteArray) {
+        coroutineScope.launch {
+            val deferred =
+                getSegmentResponseCallback(requestId)
+                    ?: throw IllegalStateException("No deferred found for request ID: $requestId")
+
+            deferred.complete(arrayBuffer)
+            removeSegmentResponseCallback(requestId)
+
+        }
+    }
+
+    private suspend fun getSegmentResponseCallback(requestId: Int): CompletableDeferred<ByteArray>? =
+        mutex.withLock {
+            segmentResponseCallbacks[requestId]
+        }
+
+    private suspend fun removeSegmentResponseCallback(requestId: Int) {
+        mutex.withLock {
+            segmentResponseCallbacks.remove(requestId)
         }
     }
 }
