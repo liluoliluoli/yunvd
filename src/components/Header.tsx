@@ -33,6 +33,8 @@ export const Header = ({}) => {
                 headers: {}
             },
             needUpdateApp: performUpdate => {
+                console.log(performUpdate)
+                console.log("set setHasUpdate true")
                 setHasUpdate(true);
             },
             onError: (err) => {
@@ -40,7 +42,6 @@ export const Header = ({}) => {
             }
         });
         const checkUpdate = () => {
-            console.log("checking for update");
             updater.checkUpdate();
 
         };

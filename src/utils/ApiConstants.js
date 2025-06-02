@@ -1,8 +1,43 @@
 import {scaledPixels} from "../hooks/useScale";
 import moment from "moment";
 
-export const API_BASE_URL = 'https://1bd6-219-76-131-16.ngrok-free.app';
+export let API_BASE_URL = 'https://xxx.app';
 export const API_PWD = "SDDSIOPOPPP";
+
+export const initApiBaseUrl = async () => {
+    try {
+        const response = await fetch('https://gitee.com/enjoula/VideoInfo/raw/master/video.txt');
+        const text = await response.text();
+        const jsonData = JSON.parse(text);
+
+        // 测试URL可用性并选择第一个可用的
+        const urls = [jsonData.URL1, jsonData.URL2, jsonData.URL3];
+        for (const url of urls) {
+            try {
+                console.log(`URL ${url} to request`);
+                const testResponse = await fetch(`${url}/api/version/getLastVersion`, {
+                    method: 'GET',
+                    timeout: 3000
+                });
+                console.log(`URL ${url} to response` + testResponse.ok);
+                if (testResponse.ok) {
+                    API_BASE_URL = url;
+                    break;
+                }
+            } catch (e) {
+                console.log(`URL ${url} not available`);
+            }
+        }
+
+        // 更新所有ENDPOINTS
+        Object.keys(ENDPOINTS).forEach(key => {
+            ENDPOINTS[key] = API_BASE_URL + ENDPOINTS[key].replace(/^https?:\/\/[^\/]+/, '');
+        });
+        console.log('Updated ENDPOINTS:', JSON.stringify(ENDPOINTS, null, 2));
+    } catch (error) {
+        console.error('Failed to fetch server config:', error);
+    }
+};
 
 export const ENDPOINTS = {
     GET_LAST_APP_VERSION: API_BASE_URL + '/api/version/getLastVersion',

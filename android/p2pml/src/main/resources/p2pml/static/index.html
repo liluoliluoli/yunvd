@@ -146,43 +146,32 @@
             this.core.setIsLive(isLive);
           }
 
-          arrayBufferToBase64(buffer) {
-            let binary = '';
-            const bytes = new Uint8Array(buffer);
-            for (let i = 0; i < bytes.byteLength; i++) {
-                binary += String.fromCharCode(bytes[i]);
-            }
-            return btoa(binary);
-          }
-
           async processSegmentRequest(segmentRequestJSON) {
             const segmentRequest = JSON.parse(segmentRequestJSON);
             const { segmentUrl, requestId } = segmentRequest;
 
             const onSuccess = (response) => {
               try {
-                const copyData = new ArrayBuffer(response.data.byteLength);
-                new Uint8Array(copyData).set(new Uint8Array(response.data));
-
-                const base64 = arrayBufferToBase64(copyData);
+                const bytes = new Uint8Array(response.data);
+                let binary = '';
+                for (let i = 0; i < bytes.byteLength; i++) {
+                    binary += String.fromCharCode(bytes[i]);
+                }
+                const base64Data = btoa(binary);
                 if (window.Android && typeof window.Android.onLoadSegmentBytes === 'function') {
-                    window.Android.onLoadSegmentBytes(requestId, base64);
+                    window.Android.onLoadSegmentBytes(requestId, base64Data);
                 }
               } catch (e) {
-                this.port.postMessage(`Error:${requestId}:failed|${segmentUrl}`);
+
               }
             };
 
             const onError = (error) => {
               if (error.type === "aborted") {
-                this.port.postMessage(
-                  `Error:${requestId}:${error.type}|${segmentUrl}`
-                );
+
                 return;
               }
-              this.port.postMessage(
-                `Error:${requestId}:${error.type}|${segmentUrl}`
-              );
+
             };
 
             try {
@@ -191,7 +180,7 @@
                 onError,
               });
             } catch (e) {
-              this.port.postMessage(`Error:${requestId}:not_found|${segmentUrl}`);
+
             }
           }
 

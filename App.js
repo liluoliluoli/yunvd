@@ -18,7 +18,7 @@ import MovieScreen from "./src/screens/MovieScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import FavoriteScreen from "./src/screens/FavoriteScreen";
 import SettingScreen from "./src/screens/SettingScreen";
-import {STORAGE_KEYS} from "./src/utils/ApiConstants";
+import {initApiBaseUrl, STORAGE_KEYS} from "./src/utils/ApiConstants";
 import TvSeriesScreen from "./src/screens/TvSeriesScreen";
 import TvShowScreen from "./src/screens/TvShowScreen";
 import RecordScreen from "./src/screens/RecordScreen";
@@ -35,6 +35,22 @@ export default function App() {
     if (!areFontsLoaded) {
         return null;
     }
+
+    useEffect(() => {
+        const initializeApp = async () => {
+            try {
+                await initApiBaseUrl();
+                const userToken = await AsyncStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
+                setIsAuthenticated(!!userToken);
+            } catch (error) {
+                console.error('Error initializing app:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        initializeApp();
+    }, []);
 
     // const reportWatchHistory = async () => {
     //     try {
@@ -70,21 +86,6 @@ export default function App() {
     //         }
     //     };
     // }, [isAuthenticated]);
-
-    useEffect(() => {
-        const checkAuthStatus = async () => {
-            try {
-                const userToken = await AsyncStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
-                setIsAuthenticated(!!userToken);
-            } catch (error) {
-                console.error('Error checking auth status:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        checkAuthStatus();
-    }, []);
 
     if (isLoading) {
         return (

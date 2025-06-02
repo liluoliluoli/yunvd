@@ -44,6 +44,7 @@ internal class ManifestHandler(
         val decodedManifestUrl = manifestParam.decodeBase64String()
 
         try {
+            //请求webview获取hls集合
             val fetchResult = fetchManifest(call, decodedManifestUrl)
             val doesManifestExist = manifestParser.doesManifestExist(decodedManifestUrl)
 
@@ -52,6 +53,7 @@ internal class ManifestHandler(
                 onManifestChanged()
             }
 
+            //解析返回的hls集合为webview localhost代理前缀的地址
             val modifiedManifest =
                 manifestParser.getModifiedManifest(
                     fetchResult.manifestContent,
@@ -59,6 +61,7 @@ internal class ManifestHandler(
                 )
             val needsInitialSetup = checkAndSetInitialProcessing()
 
+            //发送全部hls集合地址给到js p2p组件，组件播放时一个个回调这些地址
             handleUpdate(decodedManifestUrl, needsInitialSetup)
             call.respondText(modifiedManifest, ContentType.parse(MPEGURL_CONTENT_TYPE))
         } catch (e: Exception) {

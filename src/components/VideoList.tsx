@@ -23,7 +23,7 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
                                         style={{width: (width - 20) / 5}}>
             {({isFocused, isRootActive}) => (
                 <View style={{
-                    borderWidth: isFocused && isRootActive ? 2 : 0,
+                    borderWidth: isFocused && isRootActive ? 1.5 : 0,
                     borderRadius: 4,
                     borderColor: isFocused && isRootActive ? 'gold' : 'white',
                     overflow: 'hidden',
