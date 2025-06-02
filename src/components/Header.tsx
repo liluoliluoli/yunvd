@@ -32,9 +32,8 @@ export const Header = ({}) => {
             apkOptions: {
                 headers: {}
             },
+            fileProviderAuthority: "com.zyun.yunvd",
             needUpdateApp: performUpdate => {
-                console.log(performUpdate)
-                console.log("set setHasUpdate true")
                 setHasUpdate(true);
             },
             onError: (err) => {
@@ -63,7 +62,7 @@ export const Header = ({}) => {
             apkOptions: {
                 headers: {}
             },
-            fileProviderAuthority: "com.yun.yunvd",
+            fileProviderAuthority: "com.zyun.yunvd",
             needUpdateApp: performUpdate => {
                 setShowDownloadModal(true);
                 performUpdate(true);

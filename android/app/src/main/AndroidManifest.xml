@@ -70,7 +70,7 @@
 
         <provider
                 android:name="androidx.core.content.FileProvider"
-                android:authorities="${applicationId}.provider"
+                android:authorities="com.zyun.yunvd"
                 android:exported="false"
                 android:grantUriPermissions="true">
             <!-- you might need the tools:replace thing to workaround rn-fetch-blob or other definitions of provider -->
