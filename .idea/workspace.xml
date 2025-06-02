@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="version update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,15 +187,7 @@
       <workItem from="1748072692885" duration="6206000" />
       <workItem from="1748226446629" duration="31705000" />
       <workItem from="1748662248533" duration="1215000" />
-      <workItem from="1748757856927" duration="22634000" />
-    </task>
-    <task id="LOCAL-00033" summary="init">
-      <option name="closed" value="true" />
-      <created>1745395379701</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1745395379701</updated>
+      <workItem from="1748757856927" duration="23799000" />
     </task>
     <task id="LOCAL-00034" summary="init">
       <option name="closed" value="true" />
@@ -582,7 +573,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748850883689</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="version update">
+      <option name="closed" value="true" />
+      <created>1748852138456</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1748852138456</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
