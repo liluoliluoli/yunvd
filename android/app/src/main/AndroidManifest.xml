@@ -19,7 +19,7 @@
       <category android:name="android.intent.category.BROWSABLE"/>
       <data android:scheme="https"/>
     </intent>
-    <package android:name="com.yun.yunvd" />
+    <package android:name="com.zyun.yunvd" />
   </queries>
 
   <application
@@ -70,7 +70,7 @@
 
     <provider
         android:name="androidx.core.content.FileProvider"
-        android:authorities="com.yun.yunvd"
+        android:authorities="com.zyun.yunvd.provider"
         android:exported="false"
         android:grantUriPermissions="true">
       <!-- you might need the tools:replace thing to workaround rn-fetch-blob or other definitions of provider -->
