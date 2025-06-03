@@ -59,9 +59,18 @@ class ExoPlayerViewModel(
         if (url.contains(".m3u8") || url.contains("/m3u8")) {
             setupP2PML(url, subtitleUrl)
         } else {
-            val mediaItem = MediaItem.Builder()
+            val subtitleItem = subtitleUrl?.let { url ->
+                MediaItem.SubtitleConfiguration.Builder(url.toUri())
+                    .setMimeType(MimeTypes.APPLICATION_SUBRIP)
+                    .setSelectionFlags(SELECTION_FLAG_DEFAULT)
+                    .build()
+            }
+            val mediaItemBuilder = MediaItem.Builder()
                 .setUri(url)
-                .build()
+            subtitleItem?.let {
+                mediaItemBuilder.setSubtitleConfigurations(listOf(it))
+            }
+            val mediaItem = mediaItemBuilder.build()
 
             player.apply {
                 playWhenReady = true

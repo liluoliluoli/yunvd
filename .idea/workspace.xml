@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="播放hls切换成js通信">
+    <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="2.5m视频直接播放">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -190,15 +189,7 @@
       <workItem from="1748226446629" duration="31705000" />
       <workItem from="1748662248533" duration="1215000" />
       <workItem from="1748757856927" duration="37075000" />
-      <workItem from="1748922664850" duration="5073000" />
-    </task>
-    <task id="LOCAL-00039" summary="init">
-      <option name="closed" value="true" />
-      <created>1745552958147</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1745552958148</updated>
+      <workItem from="1748922664850" duration="8803000" />
     </task>
     <task id="LOCAL-00040" summary="init">
       <option name="closed" value="true" />
@@ -584,7 +575,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748935823059</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="2.5m视频直接播放">
+      <option name="closed" value="true" />
+      <created>1748937636832</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1748937636832</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +628,8 @@
     <MESSAGE value="yangshi" />
     <MESSAGE value="version update" />
     <MESSAGE value="播放hls切换成js通信" />
-    <option name="LAST_COMMIT_MESSAGE" value="播放hls切换成js通信" />
+    <MESSAGE value="2.5m视频直接播放" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.5m视频直接播放" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
