@@ -228,8 +228,7 @@ fun ExoPlayerScreen(
                 secretKey = secretKey,
                 episodeId = episodeId,
             )
-            viewModel.releaseP2P()
-            viewModel.setupP2PML(episode!!.url, episode?.subtitles?.getOrNull(0)?.url)
+            viewModel.setup(episode!!.url, episode?.subtitles?.getOrNull(0)?.url)
         } catch (e: Exception) {
             Toast.makeText(context, "请求播放地址失败：$e", Toast.LENGTH_SHORT).show()
         } finally {
@@ -1010,8 +1009,7 @@ fun setSubtitleForPlayer(
 ) {
     try {
         val currentPosition = player.currentPosition
-        viewModel.releaseP2P()
-        viewModel.setupP2PML(episodeUrl, subtitleUrl)
+        viewModel.setup(episodeUrl, subtitleUrl)
         player.seekTo(currentPosition)
     } catch (e: Exception) {
         Log.e("Subtitle", "Error setting subtitle", e)
@@ -1026,9 +1024,7 @@ fun setEpisodeForPlayer(
     viewModel: ExoPlayerViewModel
 ) {
     try {
-
-        viewModel.releaseP2P()
-        viewModel.setupP2PML(episode.url, null)
+        viewModel.setup(episode.url, null)
     } catch (e: Exception) {
         Log.e("Subtitle", "Error setting subtitle", e)
         Toast.makeText(context, "加载字幕失败", Toast.LENGTH_SHORT).show()

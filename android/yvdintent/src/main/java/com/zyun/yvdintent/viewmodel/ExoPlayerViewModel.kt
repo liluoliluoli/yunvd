@@ -55,7 +55,24 @@ class ExoPlayerViewModel(
     }
     private var p2pml: P2PMediaLoader? = null
 
-    fun setupP2PML(url: String, subtitleUrl: String?) {
+    fun setup(url: String, subtitleUrl: String?){
+        if (url.contains(".m3u8") || url.contains("/m3u8")) {
+            setupP2PML(url, subtitleUrl)
+        } else {
+            val mediaItem = MediaItem.Builder()
+                .setUri(url)
+                .build()
+
+            player.apply {
+                playWhenReady = true
+                setMediaItem(mediaItem)
+                prepare()
+            }
+        }
+    }
+
+    private fun setupP2PML(url: String, subtitleUrl: String?) {
+        releaseP2P()
         p2pml =
             P2PMediaLoader(
                 onP2PReadyCallback = { initializePlayback(url, subtitleUrl) },
@@ -86,35 +103,6 @@ class ExoPlayerViewModel(
         val mediaItem = mediaItemBuilder.build()
 
         player.apply {
-            addAnalyticsListener(object : AnalyticsListener {
-                override fun onTracksChanged(
-                    eventTime: AnalyticsListener.EventTime,
-                    tracks: Tracks
-                ) {
-                    Log.d("Subtitle", "可用轨道: ${tracks.groups.size}")
-                    for (i in 0 until tracks.groups.size) {
-                        Log.d("Subtitle", "轨道 $i: ${tracks.groups[i]}")
-                        val trackGroup = tracks.groups[i]
-                        for (j in 0 until trackGroup.length) {
-                            val format = trackGroup.getTrackFormat(j)
-                            Log.d("Subtitle", "Track $i-$j: ${format.sampleMimeType}, ${format.language}, ${format.label}")
-                        }
-                    }
-                }
-
-                override fun onLoadError(
-                    eventTime: AnalyticsListener.EventTime,
-                    loadEventInfo: LoadEventInfo,
-                    mediaLoadData: MediaLoadData,
-                    error: IOException,
-                    wasCanceled: Boolean
-                ) {
-                    if (mediaLoadData.trackType == C.TRACK_TYPE_TEXT) {
-                        Log.e("Subtitle", "字幕加载错误", error)
-                    }
-                }
-            })
-
             playWhenReady = true
             setMediaItem(mediaItem)
             prepare()
@@ -131,7 +119,7 @@ class ExoPlayerViewModel(
         p2pml?.stop()
     }
 
-    fun releaseP2P() {
+    private fun releaseP2P() {
         p2pml?.stop()
     }
 
