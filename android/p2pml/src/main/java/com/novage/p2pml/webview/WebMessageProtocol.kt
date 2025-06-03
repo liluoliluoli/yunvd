@@ -24,11 +24,12 @@ import kotlin.random.Random
 internal class WebMessageProtocol(
     private val webView: WebView,
     private val coroutineScope: CoroutineScope,
+    private val segmentResponseCallbacks : MutableMap<Int, CompletableDeferred<ByteArray>>
 ) {
-    @SuppressLint("RequiresFeature")
-    private val channels: Array<WebMessagePortCompat> =
-        WebViewCompat.createWebMessageChannel(webView)
-    private val segmentResponseCallbacks = mutableMapOf<Int, CompletableDeferred<ByteArray>>()
+//    @SuppressLint("RequiresFeature")
+//    private val channels: Array<WebMessagePortCompat> =
+//        WebViewCompat.createWebMessageChannel(webView)
+
     private val mutex = Mutex()
     private var incomingRequestId: Int? = null
 
@@ -40,30 +41,30 @@ internal class WebMessageProtocol(
 
     @SuppressLint("RequiresFeature")
     private fun initializeWebMessageCallback() {
-        channels[0].setWebMessageCallback(
-            object : WebMessagePortCompat.WebMessageCallbackCompat() {
-                override fun onMessage(
-                    port: WebMessagePortCompat,
-                    message: WebMessageCompat?,
-                ) {
-                    try {
-                        when (message?.type) {
-                            WebMessageCompat.TYPE_ARRAY_BUFFER -> {
-                                Log.i(TAG, "=================successMessage:1")
-                                handleSegmentIdBytes(message.arrayBuffer)
-                            }
-
-                            WebMessageCompat.TYPE_STRING -> {
-                                Log.i(TAG, "=================successMessage:2")
-                                handleMessage(message.data!!)
-                            }
-                        }
-                    } catch (e: Exception) {
-                        Logger.e(TAG, "Error while handling message: ${e.message}", e)
-                    }
-                }
-            },
-        )
+//        channels[0].setWebMessageCallback(
+//            object : WebMessagePortCompat.WebMessageCallbackCompat() {
+//                override fun onMessage(
+//                    port: WebMessagePortCompat,
+//                    message: WebMessageCompat?,
+//                ) {
+//                    try {
+//                        when (message?.type) {
+//                            WebMessageCompat.TYPE_ARRAY_BUFFER -> {
+//                                Log.i(TAG, "=================successMessage:1")
+//                                handleSegmentIdBytes(message.arrayBuffer)
+//                            }
+//
+//                            WebMessageCompat.TYPE_STRING -> {
+//                                Log.i(TAG, "=================successMessage:2")
+//                                handleMessage(message.data!!)
+//                            }
+//                        }
+//                    } catch (e: Exception) {
+//                        Logger.e(TAG, "Error while handling message: ${e.message}", e)
+//                    }
+//                }
+//            },
+//        )
     }
 
     private fun handleSegmentIdBytes(arrayBuffer: ByteArray) {
@@ -126,15 +127,16 @@ internal class WebMessageProtocol(
     @SuppressLint("RequiresFeature")
     suspend fun sendInitialMessage() {
         if (wasInitialMessageSent) return
-        withContext(Dispatchers.Main) {
-            val initialMessage = WebMessageCompat("", arrayOf(channels[1]))
-            WebViewCompat.postWebMessage(
-                webView,
-                initialMessage,
-                Uri.parse("*"),
-            )
-            wasInitialMessageSent = true
-        }
+//        withContext(Dispatchers.Main) {
+//            val initialMessage = WebMessageCompat("", arrayOf(channels[1]))
+//            WebViewCompat.postWebMessage(
+//                webView,
+//                initialMessage,
+//                Uri.parse("*"),
+//            )
+//            wasInitialMessageSent = true
+//        }
+        wasInitialMessageSent = true
     }
 
     suspend fun requestSegmentBytes(segmentUrl: String): CompletableDeferred<ByteArray> {

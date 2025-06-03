@@ -34,6 +34,8 @@ internal class WebViewManager(
     customJavaScriptInterfaces: List<Pair<String, Any>>,
     onPageLoadFinished: () -> Unit,
 ) {
+    private val segmentResponseCallbacks = mutableMapOf<Int, CompletableDeferred<ByteArray>>()
+
     @SuppressLint("SetJavaScriptEnabled")
     private val webView =
         WebView(context).apply {
@@ -42,11 +44,11 @@ internal class WebViewManager(
             webViewClient = WebViewClientCompat()
             visibility = View.GONE
             addJavascriptInterface(
-                JavaScriptInterface(onPageLoadFinished, eventEmitter, coroutineScope),
+                JavaScriptInterface(onPageLoadFinished, eventEmitter, coroutineScope, segmentResponseCallbacks),
                 "Android",
             )
         }
-    private val webMessageProtocol = WebMessageProtocol(webView, coroutineScope)
+    private val webMessageProtocol = WebMessageProtocol(webView, coroutineScope, segmentResponseCallbacks)
 
     private var playbackInfoJob: Job? = null
 

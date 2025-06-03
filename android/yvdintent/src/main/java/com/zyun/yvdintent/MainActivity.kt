@@ -2,6 +2,7 @@ package com.zyun.yvdintent
 
 import android.os.Bundle
 import android.webkit.WebView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.OptIn
@@ -13,6 +14,8 @@ import com.zyun.yvdintent.viewmodel.ExoPlayerViewModel
 
 @UnstableApi
 class MainActivity : ComponentActivity() {
+    private var backPressedTime: Long = 0
+
     private val viewModel: ExoPlayerViewModel by lazy {
         ExoPlayerViewModel(application)
     }
@@ -58,5 +61,14 @@ class MainActivity : ComponentActivity() {
         viewModel.releasePlayer()
         super.onDestroy()
         YvdIntent.sendEventToRN("onPlayerClosed", System.currentTimeMillis().toString())
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - backPressedTime < 2000) {
+            super.onBackPressed()
+        } else {
+            backPressedTime = System.currentTimeMillis()
+            Toast.makeText(this, "再按一次退出播放", Toast.LENGTH_SHORT).show()
+        }
     }
 }

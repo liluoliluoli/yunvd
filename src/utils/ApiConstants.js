@@ -1,7 +1,7 @@
 import {scaledPixels} from "../hooks/useScale";
 import moment from "moment";
 
-export let API_BASE_URL = 'https://1bd6-219-76-131-16.ngrok-free.app';
+export let API_BASE_URL = 'https://234f-112-120-48-120.ngrok-free.app';
 export const API_PWD = "SDDSIOPOPPP";
 
 export const initApiBaseUrl = async () => {
@@ -11,7 +11,7 @@ export const initApiBaseUrl = async () => {
         const jsonData = JSON.parse(text);
 
         // 测试URL可用性并选择第一个可用的
-        const urls = [jsonData.URL1, jsonData.URL2, jsonData.URL3];
+        const urls = [API_BASE_URL, jsonData.URL1, jsonData.URL2, jsonData.URL3];
         for (const url of urls) {
             try {
                 console.log(`URL ${url} to request`);

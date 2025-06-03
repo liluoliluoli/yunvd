@@ -17,11 +17,10 @@ import kotlinx.serialization.json.Json
 internal class JavaScriptInterface(
     private val onFullyLoadedCallback: () -> Unit,
     private val eventEmitter: EventEmitter,
-    private val coroutineScope: CoroutineScope
+    private val coroutineScope: CoroutineScope,
+    private val segmentResponseCallbacks : MutableMap<Int, CompletableDeferred<ByteArray>>
 ) {
     private val mutex = Mutex()
-    private val segmentResponseCallbacks = mutableMapOf<Int, CompletableDeferred<ByteArray>>()
-
 
     @JavascriptInterface
     fun onWebViewLoaded() {
@@ -68,17 +67,6 @@ internal class JavaScriptInterface(
     }
 
     @JavascriptInterface
-    fun onLoadSegmentBytes(
-        requestId: Int,
-        base64Data: String,
-    ) {
-        val byteArray = Base64.decode(base64Data, Base64.DEFAULT)
-        handleSegmentIdBytes(requestId, byteArray)
-    }
-
-
-
-    @JavascriptInterface
     fun onChunkDownloaded(
         bytesLength: Int,
         downloadSource: String,
@@ -96,6 +84,15 @@ internal class JavaScriptInterface(
             )
 
         eventEmitter.emit(CoreEventMap.OnChunkDownloaded, details)
+    }
+
+    @JavascriptInterface
+    fun onLoadSegmentBytes(
+        requestId: Int,
+        base64Data: String,
+    ) {
+        val byteArray = Base64.decode(base64Data, Base64.DEFAULT)
+        handleSegmentIdBytes(requestId, byteArray)
     }
 
     private inline fun <reified T> handleEvent(
