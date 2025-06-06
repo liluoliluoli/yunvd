@@ -146,6 +146,18 @@
             this.core.setIsLive(isLive);
           }
 
+          uint8ToBase64(bytes) {
+            const chunkSize = 32768;
+            let base64 = '';
+
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+                const chunk = bytes.subarray(i, Math.min(i + chunkSize, bytes.length));
+                base64 += String.fromCharCode.apply(null, chunk);
+            }
+
+            return btoa(base64);
+          }
+
           async processSegmentRequest(segmentRequestJSON) {
             const segmentRequest = JSON.parse(segmentRequestJSON);
             const { segmentUrl, requestId } = segmentRequest;
@@ -153,11 +165,13 @@
             const onSuccess = (response) => {
               try {
                 const bytes = new Uint8Array(response.data);
-                let binary = '';
-                for (let i = 0; i < bytes.byteLength; i++) {
-                    binary += String.fromCharCode(bytes[i]);
+                const chunkSize = 32768;
+                let base64 = '';
+                for (let i = 0; i < bytes.length; i += chunkSize) {
+                    const chunk = bytes.subarray(i, Math.min(i + chunkSize, bytes.length));
+                    base64 += String.fromCharCode.apply(null, chunk);
                 }
-                const base64Data = btoa(binary);
+                const base64Data = btoa(base64)
                 if (window.Android && typeof window.Android.onLoadSegmentBytes === 'function') {
                     window.Android.onLoadSegmentBytes(requestId, base64Data);
                 }
