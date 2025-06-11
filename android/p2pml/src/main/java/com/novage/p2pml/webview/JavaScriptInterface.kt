@@ -1,6 +1,7 @@
 package com.novage.p2pml.webview
 
 import android.util.Base64
+import android.util.Log
 import android.webkit.JavascriptInterface
 import com.novage.p2pml.ChunkDownloadedDetails
 import com.novage.p2pml.ChunkUploadedDetails
@@ -13,6 +14,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.json.Json
+import java.io.ByteArrayOutputStream
+import java.util.concurrent.ConcurrentHashMap
 
 internal class JavaScriptInterface(
     private val onFullyLoadedCallback: () -> Unit,
@@ -21,6 +24,7 @@ internal class JavaScriptInterface(
     private val segmentResponseCallbacks : MutableMap<Int, CompletableDeferred<ByteArray>>
 ) {
     private val mutex = Mutex()
+    private val pendingData = ConcurrentHashMap<Int, ByteArrayOutputStream>()
 
     @JavascriptInterface
     fun onWebViewLoaded() {
@@ -87,12 +91,34 @@ internal class JavaScriptInterface(
     }
 
     @JavascriptInterface
-    fun onLoadSegmentBytes(
-        requestId: Int,
-        base64Data: String,
-    ) {
-        val byteArray = Base64.decode(base64Data, Base64.DEFAULT)
-        handleSegmentIdBytes(requestId, byteArray)
+    fun onTransferStart(requestId: Int, totalChunks: Int) {
+        pendingData[requestId] = if (totalChunks > 10) {
+            ByteArrayOutputStream(64 * 1024 * totalChunks)
+        } else {
+            ByteArrayOutputStream()
+        }
+    }
+
+    @JavascriptInterface
+    fun onReceiveChunk(requestId: Int, chunkIndex: Int, base64Chunk: String) {
+        try {
+            val byteArray = Base64.decode(base64Chunk, Base64.DEFAULT)
+            pendingData[requestId]?.write(byteArray)
+        } catch (e: Exception) {
+            Log.e("JavaScriptInterface", "Chunk process error", e)
+        }
+    }
+
+    @JavascriptInterface
+    fun onTransferComplete(requestId: Int) {
+        val outputStream = pendingData[requestId] ?: return
+        try {
+            val completeData = outputStream.toByteArray()
+            handleSegmentIdBytes(requestId, completeData)
+        } finally {
+            pendingData.remove(requestId)
+            outputStream.close()
+        }
     }
 
     private inline fun <reified T> handleEvent(

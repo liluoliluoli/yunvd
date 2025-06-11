@@ -164,16 +164,35 @@
 
             const onSuccess = (response) => {
               try {
-                const bytes = new Uint8Array(response.data);
-                const chunkSize = 32768;
-                let base64 = '';
-                for (let i = 0; i < bytes.length; i += chunkSize) {
-                    const chunk = bytes.subarray(i, Math.min(i + chunkSize, bytes.length));
-                    base64 += String.fromCharCode.apply(null, chunk);
-                }
-                const base64Data = btoa(base64)
+                const binaryData = new Uint8Array(response.data);
                 if (window.Android && typeof window.Android.onLoadSegmentBytes === 'function') {
-                    window.Android.onLoadSegmentBytes(requestId, base64Data);
+                    window.Android.onLoadSegmentBytes(
+                        requestId,
+                        binaryData
+                    );
+                }
+
+                const CHUNK_SIZE = 64 * 1024;
+                const totalChunks = Math.ceil(binaryData.length / CHUNK_SIZE);
+                if (window.Android?.onTransferStart) {
+                    window.Android.onTransferStart(requestId, totalChunks);
+                }
+                for (let i = 0; i < totalChunks; i++) {
+                    const start = i * CHUNK_SIZE;
+                    const end = Math.min(start + CHUNK_SIZE, binaryData.length);
+                    const chunk = binaryData.slice(start, end);
+                    const base64Chunk = btoa(String.fromCharCode(...chunk));
+                    try {
+                        if (window.Android?.onReceiveChunk) {
+                            window.Android.onReceiveChunk(requestId, i, base64Chunk);
+                        }
+                    } catch (e) {
+                        console.error(`Chunk ${i} send failed:`, e);
+                        break;
+                    }
+                }
+                if (window.Android?.onTransferComplete) {
+                    window.Android.onTransferComplete(requestId);
                 }
               } catch (e) {
 
