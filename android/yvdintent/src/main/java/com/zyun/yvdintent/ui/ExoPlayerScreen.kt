@@ -60,6 +60,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
@@ -107,11 +108,21 @@ fun ExoPlayerScreen(
     var lastPlayedPosition by remember { mutableLongStateOf(initialLastPlayedPosition) }
     var showSeekTime by remember { mutableStateOf(false) }
     var currentSeekTime by remember { mutableLongStateOf(0) }
+    var showError by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
 
     DisposableEffect(Unit) {
         val listener = object : Player.Listener {
+            override fun onPlayerError(error: PlaybackException) {
+                isLoading = false
+                showError = true
+                errorMessage = error.message!!
+                Toast.makeText(context, "播放器加载失败: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
             override fun onPlaybackStateChanged(playbackState: Int) {
                 if (playbackState == Player.STATE_READY) {
+                    isLoading = false
+                    showError = false
                     isPlayerReady = true
                     showSeekTime = false
                     maxProgress = viewModel.player.duration.toFloat()
@@ -129,6 +140,7 @@ fun ExoPlayerScreen(
                 }
                 if (playbackState == Player.STATE_BUFFERING) {
                     isPlayerReady = false
+                    isLoading = true
                 }
                 if (playbackState == Player.STATE_ENDED) {
                     episodes?.let {
@@ -329,7 +341,7 @@ fun ExoPlayerScreen(
                 )
             }
 
-            if (!isPlayerReady || isLoading) {
+            if (isLoading) {
                 Box(
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -349,6 +361,18 @@ fun ExoPlayerScreen(
                 ) {
                     Text(
                         text = formatContinueTime(currentSeekTime),
+                        color = Color.White,
+                        fontSize = 14.sp,
+                    )
+                }
+            }
+            if (showError) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                ) {
+                    Text(
+                        text = errorMessage,
                         color = Color.White,
                         fontSize = 14.sp,
                     )
