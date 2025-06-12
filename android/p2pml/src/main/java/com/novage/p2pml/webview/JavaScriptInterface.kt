@@ -100,10 +100,9 @@ internal class JavaScriptInterface(
     }
 
     @JavascriptInterface
-    fun onReceiveChunk(requestId: Int, chunkIndex: Int, base64Chunk: String) {
+    fun onReceiveChunk(requestId: Int, chunkIndex: Int, chunk: ByteArray) {
         try {
-            val byteArray = Base64.decode(base64Chunk, Base64.DEFAULT)
-            pendingData[requestId]?.write(byteArray)
+            pendingData[requestId]?.write(chunk)
         } catch (e: Exception) {
             Log.e("JavaScriptInterface", "Chunk process error", e)
         }

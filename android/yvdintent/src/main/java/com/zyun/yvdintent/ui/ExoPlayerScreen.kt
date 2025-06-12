@@ -1067,6 +1067,9 @@ fun formatRemainingTime(currentPosition: Long, duration: Long): String {
 }
 
 fun formatContinueTime(currentPosition: Long): String {
+    if (currentPosition == 0L){
+        return ""
+    }
     val curMinutes = (currentPosition / 60000).toInt()
     val curSeconds = (currentPosition % 60000 / 1000).toInt()
     return String.format("%02d:%02d", curMinutes, curSeconds)

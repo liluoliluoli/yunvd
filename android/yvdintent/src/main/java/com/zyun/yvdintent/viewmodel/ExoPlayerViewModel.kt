@@ -61,9 +61,17 @@ class ExoPlayerViewModel(
         if (url.contains(".m3u8") || url.contains("/m3u8")) {
             setupP2PML(url, subtitleUrl)
         } else {
-            val subtitleItem = subtitleUrl?.let { subtitleUrl ->
-                MediaItem.SubtitleConfiguration.Builder(subtitleUrl.toUri())
-                    .setMimeType(MimeTypes.APPLICATION_SUBRIP)
+            val subtitleItem = subtitleUrl?.let { subUrl ->
+                val mimeType = when {
+                    subUrl.contains(".vtt") -> MimeTypes.TEXT_VTT
+                    subUrl.contains(".ttml") -> MimeTypes.APPLICATION_TTML
+                    subUrl.contains(".ssa", ignoreCase = true) -> MimeTypes.TEXT_SSA
+                    subUrl.contains(".ass", ignoreCase = true) -> MimeTypes.TEXT_SSA
+                    else -> MimeTypes.APPLICATION_SUBRIP
+                }
+
+                MediaItem.SubtitleConfiguration.Builder(subUrl.toUri())
+                    .setMimeType(mimeType)
                     .setSelectionFlags(SELECTION_FLAG_DEFAULT)
                     .build()
             }
@@ -98,9 +106,17 @@ class ExoPlayerViewModel(
     private fun initializePlayback(url: String, subtitleUrl: String?) {
         val manifest = p2pml?.getManifestUrl(url) ?: throw IllegalStateException("P2PML is not started")
 
-        val subtitleItem = subtitleUrl?.let { subtitleUrl ->
-            MediaItem.SubtitleConfiguration.Builder(subtitleUrl.toUri())
-                .setMimeType(MimeTypes.APPLICATION_SUBRIP)
+        val subtitleItem = subtitleUrl?.let { subUrl ->
+            val mimeType = when {
+                subUrl.contains(".vtt") -> MimeTypes.TEXT_VTT
+                subUrl.contains(".ttml") -> MimeTypes.APPLICATION_TTML
+                subUrl.contains(".ssa", ignoreCase = true) -> MimeTypes.TEXT_SSA
+                subUrl.contains(".ass", ignoreCase = true) -> MimeTypes.TEXT_SSA
+                else -> MimeTypes.APPLICATION_SUBRIP
+            }
+
+            MediaItem.SubtitleConfiguration.Builder(subUrl.toUri())
+                .setMimeType(mimeType)
                 .setSelectionFlags(SELECTION_FLAG_DEFAULT)
                 .build()
         }
