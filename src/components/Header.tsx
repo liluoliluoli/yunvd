@@ -11,6 +11,7 @@ import {version} from '../../package.json'
 import {Typography} from "./Typography";
 import {useAuthViewModel} from "../viewModels/AuthViewModel";
 import {ENDPOINTS, formatToYMD} from "../utils/ApiConstants";
+import MarqueeTextWithModal from "./MarqueeText";
 
 export const Header = ({}) => {
     const navigation = useNavigation<any>();
@@ -118,6 +119,13 @@ export const Header = ({}) => {
                     <Spacer direction={"horizontal"} gap={'$1'}/>
                     <Typography variant="body">v{currentVersion} </Typography>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
+                    <MarqueeTextWithModal
+                        text="你有新的版本，详情点击查看"
+                        speed={25}
+                        fontSize={12}
+                        detailContent="版本2.0.0发布了"
+                    />
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button
                         label={downloadProgress === 0 ? `更新` : `${downloadProgress}%`}
                         onSelect={onUpdate}
@@ -179,10 +187,9 @@ const styles = StyleSheet.create({
         height: 30,
     },
     searchContainer: {
-        width: scaledPixels(400),
+        width: scaledPixels(200),
         flexDirection: 'row',
-        marginHorizontal: 10,
-        height: 40,
+        height: 30,
     },
     modalOverlay: {
         flex: 1,

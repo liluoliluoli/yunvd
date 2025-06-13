@@ -38,8 +38,8 @@ export const Button = ({label, onSelect, hidden}: ButtonProps) => {
 const Container = styled(Animated.View)<{ isFocused: boolean; hidden: boolean }>(({isFocused, hidden}) => ({
     alignSelf: 'baseline',
     backgroundColor: isFocused ? 'white' : 'black',
-    padding: theme.spacings.$4,
-    borderRadius: scaledPixels(12),
+    padding: scaledPixels(10),
+    borderRadius: scaledPixels(8),
     cursor: 'pointer',
     display: hidden ? 'none' : 'flex',
 }));

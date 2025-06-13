@@ -23,10 +23,13 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
                                         style={{width: (width - 20) / 5}}>
             {({isFocused, isRootActive}) => (
                 <View style={{
-                    borderWidth: isFocused && isRootActive ? 1.5 : 0,
+                    borderWidth: isFocused && isRootActive ? 1 : 0,
                     borderRadius: 4,
-                    borderColor: isFocused && isRootActive ? 'gold' : 'white',
+                    borderColor: isFocused && isRootActive ? 'rgba(255, 255, 255, 1)' : 'black',
                     overflow: 'hidden',
+                    flex: 1,
+                    alignItems: 'center',
+                    marginBottom: 10
                 }}>
                     <View style={styles.thumbnailContainer}>
                         <Image
@@ -79,17 +82,21 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
 const styles = StyleSheet.create({
     thumbnailContainer: {
         height: scaledPixels(400),
-        width: '100%',
+        width: '94%',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     thumbnail: {
         width: '100%',
-        height: '100%',
+        height: '94%',
+        borderRadius: 2,
     },
     rateButton: {
         position: 'absolute',
-        top: 5,
+        top: 10,
         right: 5,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)',
         width: 30,
         height: 30,
         borderRadius: 16,
@@ -103,8 +110,8 @@ const styles = StyleSheet.create({
     },
     ratioButton: {
         position: 'absolute',
-        top: 8,
-        left: 5,
+        top: 12,
+        left: 6,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -114,9 +121,9 @@ const styles = StyleSheet.create({
         marginBottom: 2,
     },
     videoDetails: {
-        padding: 5,
         alignItems: 'center',
-        backgroundColor: 'white',
+        width: '94%',
+        paddingBottom: 5
     },
     videoTextContent: {
         flex: 1,
@@ -124,13 +131,13 @@ const styles = StyleSheet.create({
     },
     videoTitle: {
         fontSize: 14,
-        color: '#1a1a1a',
-        lineHeight: 18,
+        color: 'rgba(255, 255, 255, 1)',
+        lineHeight: 16,
     },
     videoInfo: {
         flexDirection: 'row',
         fontSize: 12,
-        color: 'gray',
+        color: 'rgba(255, 255, 255, 0.7)',
         alignItems: 'center',
     },
 });
