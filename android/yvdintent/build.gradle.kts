@@ -66,4 +66,9 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.test.ext:junit:1.2.1")
 
+    implementation("com.orhanobut:logger:2.2.0")
+    implementation("com.google.code.gson:gson:2.9.0")
+    implementation("com.cdnbye:datachannel_native:1.0.226")
+    implementation("com.cdnbye:p2p_engine:latest.release")
+
 }

@@ -4,9 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="2.5m视频直接播放">
+    <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="播放错误处理">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/proguard-rules.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/zyun/yunvd/MainApplication.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/zyun/yunvd/MainApplication.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ApiConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ApiConstants.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,39 +197,9 @@
       <workItem from="1748226446629" duration="31705000" />
       <workItem from="1748662248533" duration="1215000" />
       <workItem from="1748757856927" duration="37075000" />
-      <workItem from="1748922664850" duration="8803000" />
-    </task>
-    <task id="LOCAL-00040" summary="init">
-      <option name="closed" value="true" />
-      <created>1745678008921</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1745678008921</updated>
-    </task>
-    <task id="LOCAL-00041" summary="init">
-      <option name="closed" value="true" />
-      <created>1745725552277</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1745725552277</updated>
-    </task>
-    <task id="LOCAL-00042" summary="init">
-      <option name="closed" value="true" />
-      <created>1745744810173</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1745744810173</updated>
-    </task>
-    <task id="LOCAL-00043" summary="init">
-      <option name="closed" value="true" />
-      <created>1745749640548</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1745749640548</updated>
+      <workItem from="1748922664850" duration="56743000" />
+      <workItem from="1749711085387" duration="572000" />
+      <workItem from="1749711847881" duration="4644000" />
     </task>
     <task id="LOCAL-00044" summary="init">
       <option name="closed" value="true" />
@@ -583,7 +561,39 @@
       <option name="project" value="LOCAL" />
       <updated>1748937636832</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="2.5m视频直接播放">
+      <option name="closed" value="true" />
+      <created>1748947122081</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1748947122082</updated>
+    </task>
+    <task id="LOCAL-00090" summary="分段base64视频编码传输">
+      <option name="closed" value="true" />
+      <created>1749618044116</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1749618044116</updated>
+    </task>
+    <task id="LOCAL-00091" summary="播放错误处理">
+      <option name="closed" value="true" />
+      <created>1749695577697</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1749695577697</updated>
+    </task>
+    <task id="LOCAL-00092" summary="播放错误处理">
+      <option name="closed" value="true" />
+      <created>1749705798479</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1749705798480</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +639,9 @@
     <MESSAGE value="version update" />
     <MESSAGE value="播放hls切换成js通信" />
     <MESSAGE value="2.5m视频直接播放" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.5m视频直接播放" />
+    <MESSAGE value="分段base64视频编码传输" />
+    <MESSAGE value="播放错误处理" />
+    <option name="LAST_COMMIT_MESSAGE" value="播放错误处理" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

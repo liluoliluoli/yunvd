@@ -49,6 +49,7 @@ class MainApplication : Application(), ReactApplication {
       load()
     }
     ApplicationLifecycleDispatcher.onApplicationCreate(this)
+
   }
 
   override fun onConfigurationChanged(newConfig: Configuration) {

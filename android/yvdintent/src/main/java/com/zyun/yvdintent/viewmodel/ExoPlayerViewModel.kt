@@ -29,6 +29,13 @@ import androidx.media3.exoplayer.source.MergingMediaSource
 import com.google.common.collect.ImmutableList
 import com.google.gson.Gson
 import com.novage.p2pml.P2PMediaLoader
+import com.p2pengine.core.p2p.EngineExceptionListener
+import com.p2pengine.core.p2p.P2pConfig
+import com.p2pengine.core.p2p.P2pStatisticsListener
+import com.p2pengine.core.tracking.TrackerZone
+import com.p2pengine.core.utils.EngineException
+import com.p2pengine.core.utils.LogLevel
+import com.p2pengine.sdk.P2pEngine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -59,7 +66,8 @@ class ExoPlayerViewModel(
 
     fun setup(url: String, subtitleUrl: String?){
         if (url.contains(".m3u8") || url.contains("/m3u8")) {
-            setupP2PML(url, subtitleUrl)
+//            setupP2PML(url, subtitleUrl)
+            setupCdnByeP2PML(url, subtitleUrl)
         } else {
             val subtitleItem = subtitleUrl?.let { subUrl ->
                 val mimeType = when {
@@ -87,6 +95,91 @@ class ExoPlayerViewModel(
                 setMediaItem(mediaItem)
                 prepare()
             }
+        }
+    }
+
+    private fun setupCdnByeP2PML(url: String, subtitleUrl: String?) {
+        val config = P2pConfig.Builder()
+            .p2pEnabled(true)
+            .logEnabled(true)
+            .logLevel(LogLevel.DEBUG)
+            .trackerZone(TrackerZone.Europe)
+//            .trackerZone(TrackerZone.HongKong)
+//            .trackerZone(TrackerZone.USA)
+            .build()
+
+        println("MainActivity P2pEngine init")
+        P2pEngine.init(context, "ZMuO5qHZg", config)
+
+        P2pEngine.instance?.registerExceptionListener(object : EngineExceptionListener {
+            override fun onTrackerException(e: EngineException) {
+                println("onTrackerException ${e.message}")
+            }
+
+            override fun onSignalException(e: EngineException) {
+                println("onSignalException ${e.message}")
+            }
+
+            override fun onSchedulerException(e: EngineException) {
+                println("onSchedulerException ${e.message}")
+            }
+
+            override fun onOtherException(e: EngineException) {
+                println("onOtherException ${e.message}")
+            }
+
+        })
+
+        P2pEngine.instance?.addP2pStatisticsListener(object : P2pStatisticsListener {
+            override fun onHttpDownloaded(value: Int) {
+                println("===onHttpDownloaded $value")
+            }
+
+            override fun onP2pDownloaded(value: Int, speed: Int) {
+                println("===p2p download speed $speed")
+            }
+
+            override fun onP2pUploaded(value: Int, speed: Int) {
+                println("===p2p upload speed $value")
+            }
+
+            override fun onPeers(peers: List<String>) {
+                println("===p2p peers size :" + peers.size)
+            }
+
+            override fun onServerConnected(connected: Boolean) {
+                println("===p2p peer id :" + P2pEngine.instance?.peerId + String.format("Connected: %s", if (connected) "Yes" else "No"))
+            }
+        })
+
+        val manifest = P2pEngine.instance?.parseStreamUrl(url)
+        val subtitleItem = subtitleUrl?.let { subUrl ->
+            val mimeType = when {
+                subUrl.contains(".vtt") -> MimeTypes.TEXT_VTT
+                subUrl.contains(".ttml") -> MimeTypes.APPLICATION_TTML
+                subUrl.contains(".ssa", ignoreCase = true) -> MimeTypes.TEXT_SSA
+                subUrl.contains(".ass", ignoreCase = true) -> MimeTypes.TEXT_SSA
+                else -> MimeTypes.APPLICATION_SUBRIP
+            }
+
+            MediaItem.SubtitleConfiguration.Builder(subUrl.toUri())
+                .setMimeType(mimeType)
+                .setSelectionFlags(SELECTION_FLAG_DEFAULT)
+                .build()
+        }
+        val mediaItemBuilder = MediaItem.Builder()
+            .setUri(manifest)
+            .setMimeType(MimeTypes.APPLICATION_M3U8)
+
+        subtitleItem?.let {
+            mediaItemBuilder.setSubtitleConfigurations(listOf(it))
+        }
+        val mediaItem = mediaItemBuilder.build()
+
+        player.apply {
+            playWhenReady = true
+            setMediaItem(mediaItem)
+            prepare()
         }
     }
 

@@ -11,4 +11,11 @@
 -keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
 
+-dontwarn com.p2pengine.**
+-keep class com.p2pengine.**{*;}
+-keep interface com.p2pengine.**{*;}
+-keep class com.cdnbye.libdc.**{*;}
+-keep interface com.cdnbye.libdc.**{*;}
+-keep class com.snapchat.djinni.**{*;}
+
 # Add any project specific keep options here:
