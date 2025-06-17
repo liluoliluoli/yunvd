@@ -34,7 +34,7 @@ const MarqueeTextWithModal: React.FC<MarqueeProps> = ({
     const containerWidth = useRef(20);
 
     useEffect(() => {
-        if (textWidth.current > 0 && containerWidth.current > 0) {
+        if (text && text !== "" && textWidth.current > 0 && containerWidth.current > 0) {
             const animationDuration = (textWidth.current / speed) * 1000;
 
             // 重置初始位置
@@ -50,6 +50,9 @@ const MarqueeTextWithModal: React.FC<MarqueeProps> = ({
 
             animation.start();
             return () => animation.stop();
+        } else {
+            // 当text为空时重置动画位置
+            translateX.setValue(0);
         }
     }, [text, speed, textWidth.current, containerWidth.current]);
 

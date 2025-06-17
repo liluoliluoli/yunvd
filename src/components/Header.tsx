@@ -118,17 +118,13 @@ export const Header = ({}) => {
                     <Typography variant="title">YunVD</Typography>
                     <Spacer direction={"horizontal"} gap={'$1'}/>
                     <Typography variant="body">v{currentVersion} </Typography>
-                    {noticeTitle && noticeTitle !== "" && (
-                        <>
-                            <Spacer direction={"horizontal"} gap={'$6'}/>
-                            <MarqueeTextWithModal
-                                text={noticeTitle}
-                                speed={25}
-                                fontSize={12}
-                                detailContent={noticeContent}
-                            />
-                        </>
-                    )}
+                    <Spacer direction={"horizontal"} gap={'$6'}/>
+                    <MarqueeTextWithModal
+                        text={noticeTitle}
+                        speed={25}
+                        fontSize={12}
+                        detailContent={noticeContent}
+                    />
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button
                         label={downloadProgress === 0 ? `更新` : `${downloadProgress}%`}
