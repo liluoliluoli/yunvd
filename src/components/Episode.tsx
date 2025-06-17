@@ -22,7 +22,6 @@ const EpisodeContent = forwardRef<View, { label: string; isFocused: boolean }>((
             <View style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                borderColor: isFocused ? theme.colors.primary.light : 'transparent',
             }}>
                 <Ionicons name="play" style={{marginLeft: 5, color: '#fff',}}/>
                 <Text style={{marginLeft: 5, color: '#fff',}}>{label}</Text>
@@ -45,7 +44,7 @@ export const Episode = ({label, onSelect}: EpisodeProps) => {
 
 const Container = styled(Animated.View)<{ isFocused: boolean }>(({isFocused}) => ({
     alignSelf: 'baseline',
-    backgroundColor: isFocused ? 'gray' : '#1a1a1a',
+    backgroundColor: isFocused ? 'rgba(255, 255, 255, 0.2)' : '#1a1a1a',
     padding: theme.spacings.$4,
     borderRadius: scaledPixels(12),
     cursor: 'pointer',

@@ -6,7 +6,7 @@ import {
     Animated,
     TouchableOpacity,
     Modal,
-    Dimensions, ScrollView
+    Dimensions, ScrollView, Image
 } from 'react-native';
 import {SpatialNavigationFocusableView} from 'react-tv-space-navigation';
 
@@ -61,13 +61,16 @@ const MarqueeTextWithModal: React.FC<MarqueeProps> = ({
             <SpatialNavigationFocusableView
                 onSelect={() => setModalVisible(true)}
             >
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => setModalVisible(true)}
-                    style={styles.container}
-                >
+                {({isFocused, isRootActive}) => (
                     <View
-                        style={[styles.marqueeContainer, {width: '100%'}]}
+                        style={[styles.marqueeContainer, {
+                            width: '100%',
+                            borderWidth: isFocused ? 1 : 0,
+                            borderColor: 'rgba(255, 255, 255, 0.5)',
+                            borderRadius: 3,
+                            height: 25,
+                            paddingTop: 5,
+                        }]}
                         onLayout={(e) => containerWidth.current = e.nativeEvent.layout.width}
                     >
                         <Animated.Text
@@ -76,7 +79,7 @@ const MarqueeTextWithModal: React.FC<MarqueeProps> = ({
                                 {
                                     fontSize,
                                     color,
-                                    transform: [{translateX}]
+                                    transform: [{translateX}],
                                 }
                             ]}
                             onLayout={handleTextLayout}
@@ -85,14 +88,36 @@ const MarqueeTextWithModal: React.FC<MarqueeProps> = ({
                             {text}
                         </Animated.Text>
                     </View>
-                </TouchableOpacity>
+                )}
             </SpatialNavigationFocusableView>
+            <Modal
+                visible={modalVisible}
+                transparent={true}
+                animationType="fade"
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <TouchableOpacity
+                    style={styles.modalOverlay}
+                    activeOpacity={1}
+                    onPress={() => setModalVisible(false)}
+                >
+                    <Image
+                        source={require('../../assets/icon.png')} // 替换为你的赞赏图片路径
+                        resizeMode="contain"
+                    />
+                </TouchableOpacity>
+            </Modal>
         </>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {},
+    modalOverlay: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.7)',
+    },
     marqueeContainer: {
         height: 15,
         overflow: 'hidden',

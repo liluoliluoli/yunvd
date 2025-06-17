@@ -66,10 +66,10 @@ export const TextInput = ({placeholder, onEnterPress, height, isPassword = false
 
 const StyledTextInput = styled(RNTextInput)<{ isFocused: boolean, height: number }>(({isFocused, height}) => ({
     borderColor: isFocused ? 'white' : 'black',
-    borderBottomWidth: 1,
-    backgroundColor: theme.colors.background.mainHover,
+    borderWidth: 1,
+    borderRadius: 2,
+    // backgroundColor: theme.colors.background.mainHover,
     width: '100%',
     paddingLeft: theme.spacings.$4,
-    color: 'white',
     height: height,
 }));

@@ -120,7 +120,7 @@ export const Header = ({}) => {
                     <Typography variant="body">v{currentVersion} </Typography>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <MarqueeTextWithModal
-                        text="你有新的版本，详情点击查看"
+                        text="欢迎使用yunvd，详情请看公告"
                         speed={25}
                         fontSize={12}
                         detailContent="版本2.0.0发布了"
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         height: 30,
     },
     searchContainer: {
-        width: scaledPixels(200),
+        width: scaledPixels(250),
         flexDirection: 'row',
         height: 30,
     },
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     },
     divider: {
         height: 0.3,
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255, 255, 255, 0.5)',
         width: '100%',
     },
     downloadProgressContainer: {
