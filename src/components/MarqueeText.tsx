@@ -66,11 +66,10 @@ const MarqueeTextWithModal: React.FC<MarqueeProps> = ({
                     <View
                         style={[styles.marqueeContainer, {
                             width: '100%',
-                            borderWidth: isFocused ? 1 : 0,
+                            borderBottomWidth: isFocused ? 1 : 0,
                             borderColor: 'rgba(255, 255, 255, 0.5)',
-                            borderRadius: 3,
                             height: 25,
-                            paddingTop: 5,
+                            paddingTop: 6,
                         }]}
                         onLayout={(e) => containerWidth.current = e.nativeEvent.layout.width}
                     >

@@ -163,6 +163,7 @@ export const Header = ({}) => {
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <View style={styles.searchContainer}>
                         <TextInput placeholder='搜索'
+                                   height={30}
                                    onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
                     </View>
 
