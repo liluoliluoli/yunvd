@@ -118,13 +118,17 @@ export const Header = ({}) => {
                     <Typography variant="title">YunVD</Typography>
                     <Spacer direction={"horizontal"} gap={'$1'}/>
                     <Typography variant="body">v{currentVersion} </Typography>
-                    <Spacer direction={"horizontal"} gap={'$6'}/>
-                    <MarqueeTextWithModal
-                        text={noticeTitle}
-                        speed={25}
-                        fontSize={12}
-                        detailContent={noticeContent}
-                    />
+                    {noticeTitle && noticeTitle !== "" && (
+                        <>
+                            <Spacer direction={"horizontal"} gap={'$6'}/>
+                            <MarqueeTextWithModal
+                                text={noticeTitle}
+                                speed={25}
+                                fontSize={12}
+                                detailContent={noticeContent}
+                            />
+                        </>
+                    )}
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button
                         label={downloadProgress === 0 ? `更新` : `${downloadProgress}%`}
@@ -163,7 +167,6 @@ export const Header = ({}) => {
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <View style={styles.searchContainer}>
                         <TextInput placeholder='搜索'
-                                   height={30}
                                    onEnterPress={(text) => navigation.navigate('Search', {keyword: text})}/>
                     </View>
 

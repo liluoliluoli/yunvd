@@ -7,8 +7,6 @@
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="样式优化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MarqueeText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MarqueeText.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TextInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TextInput.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,15 +191,7 @@
       <workItem from="1748757856927" duration="37075000" />
       <workItem from="1748922664850" duration="56743000" />
       <workItem from="1749711085387" duration="572000" />
-      <workItem from="1749711847881" duration="30965000" />
-    </task>
-    <task id="LOCAL-00047" summary="xuanji">
-      <option name="closed" value="true" />
-      <created>1745831121649</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1745831121650</updated>
+      <workItem from="1749711847881" duration="32080000" />
     </task>
     <task id="LOCAL-00048" summary="xuanji">
       <option name="closed" value="true" />
@@ -587,7 +577,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750142816754</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="样式优化">
+      <option name="closed" value="true" />
+      <created>1750143437770</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1750143437771</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
