@@ -9,6 +9,7 @@ import {
     Dimensions, ScrollView, Image
 } from 'react-native';
 import {SpatialNavigationFocusableView} from 'react-tv-space-navigation';
+import {Typography} from "./Typography";
 
 const {width: screenWidth} = Dimensions.get('window');
 
@@ -101,10 +102,7 @@ const MarqueeTextWithModal: React.FC<MarqueeProps> = ({
                     activeOpacity={1}
                     onPress={() => setModalVisible(false)}
                 >
-                    <Image
-                        source={require('../../assets/icon.png')} // 替换为你的赞赏图片路径
-                        resizeMode="contain"
-                    />
+                    <Typography variant="body">{detailContent} </Typography>
                 </TouchableOpacity>
             </Modal>
         </>

@@ -34,6 +34,8 @@ export const useAuthViewModel = () => {
     const [packageExpiredTime, setPackageExpiredTime] = useState(0);
     const [favoriteCount, setFavoriteCount] = useState(0);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [noticeTitle, setNoticeTitle] = useState("");
+    const [noticeContent, setNoticeContent] = useState("");
 
     useEffect(() => {
         console.log('AuthViewModel initialized');
@@ -78,6 +80,8 @@ export const useAuthViewModel = () => {
                 setFavoriteCount(profileData.favoriteCount);
                 setRestWatchCount(profileData.restWatchCount);
                 setPackageExpiredTime(profileData.packageExpiredTime);
+                setNoticeTitle(profileData.noticeTitle);
+                setNoticeContent(profileData.noticeContent);
                 await storage.setItem(STORAGE_KEYS.USER_NAME, profileData.userName);
             }
         } catch (error) {
@@ -169,7 +173,9 @@ export const useAuthViewModel = () => {
         clearError,
         checkAuthStatus,
         restWatchCount,
-        packageExpiredTime
+        packageExpiredTime,
+        noticeTitle,
+        noticeContent
     };
 };
 

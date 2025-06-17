@@ -18,7 +18,7 @@ export const Header = ({}) => {
     const [hasUpdate, setHasUpdate] = useState<boolean>(false);
     const [currentVersion, setCurrentVersion] = useState<string>(version);
     const [downloadProgress, setDownloadProgress] = useState<number>(0);
-    const {userName, watchCount, restWatchCount, packageExpiredTime} = useAuthViewModel();
+    const {userName, watchCount, restWatchCount, packageExpiredTime, noticeTitle, noticeContent} = useAuthViewModel();
     const [showDonateModal, setShowDonateModal] = useState(false);
     const [showDownloadModal, setShowDownloadModal] = useState(false);
 
@@ -120,10 +120,10 @@ export const Header = ({}) => {
                     <Typography variant="body">v{currentVersion} </Typography>
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <MarqueeTextWithModal
-                        text="欢迎使用yunvd，详情请看公告"
+                        text={noticeTitle}
                         speed={25}
                         fontSize={12}
-                        detailContent="版本2.0.0发布了"
+                        detailContent={noticeContent}
                     />
                     <Spacer direction={"horizontal"} gap={'$6'}/>
                     <Button
