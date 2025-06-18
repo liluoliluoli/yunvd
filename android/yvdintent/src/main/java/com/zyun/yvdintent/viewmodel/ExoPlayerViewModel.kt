@@ -66,8 +66,8 @@ class ExoPlayerViewModel(
 
     fun setup(url: String, subtitleUrl: String?){
         if (url.contains(".m3u8") || url.contains("/m3u8")) {
-            setupP2PML(url, subtitleUrl)
-//            setupCdnByeP2PML(url, subtitleUrl)
+//            setupP2PML(url, subtitleUrl)
+            setupCdnByeP2PML(url, subtitleUrl)
         } else {
             val subtitleItem = subtitleUrl?.let { subUrl ->
                 val mimeType = when {

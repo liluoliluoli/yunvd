@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="859c4907-154f-4e3e-9f0f-7a466d6ba5c5" name="Changes" comment="样式优化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MarqueeText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MarqueeText.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/ui/ExoPlayerScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/yvdintent/src/main/java/com/zyun/yvdintent/viewmodel/ExoPlayerViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
