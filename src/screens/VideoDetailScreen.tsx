@@ -179,7 +179,7 @@ const VideoDetailScreen = ({route, navigation}) => {
                                             style={{textAlign: 'center'}}>{passedVideo?.title}{video?.episodes.length && "("}{video?.episodes.length}{video?.episodes.length && ")"}</Typography>
                                 <Spacer gap={'$6'}/>
                                 <Tag variant="body"
-                                     style={{textAlign: 'center'}}>{passedVideo?.region} {passedVideo?.publishMonth} {passedVideo?.genres?.join('/')}</Tag>
+                                     style={{textAlign: 'center'}}>{passedVideo?.region} {passedVideo?.publishDay} {passedVideo?.genres?.join('/')}</Tag>
                                 <Actor variant="body"
                                        style={{textAlign: 'center'}}>{passedVideo?.directors?.map(actor => actor.name).join(' / ')}</Actor>
                                 <Actor variant="body"

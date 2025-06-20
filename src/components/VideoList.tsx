@@ -49,7 +49,7 @@ export const VideoList = ({isHistory, videosByRow, onVideoPress}: VideoListProps
                         <Text style={styles.videoInfo} numberOfLines={1}>
                             {isHistory && item.lastPlayedTime ?
                                 `最近播放: ${formatFriendlyTime(item.lastPlayedTime)}` :
-                                item.publishMonth.substring(0, 4)}
+                                item.publishDay.substring(0, 4)}
                         </Text>
                     </View>
                 </View>

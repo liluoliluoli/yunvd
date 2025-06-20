@@ -10,7 +10,7 @@ export type Video = {
     region: string,
     totalEpisode: number,
     description: string,
-    publishMonth: string,
+    publishDay: string,
     thumbnail: string,
     directors: string[]
     actors: Actor[]

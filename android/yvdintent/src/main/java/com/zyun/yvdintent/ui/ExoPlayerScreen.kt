@@ -1005,7 +1005,7 @@ fun CustomPlayerController(
                 colors = SliderDefaults.colors(
                     disabledThumbColor = Color.White,
                     disabledActiveTrackColor = Color(0x00A1D6FF).copy(alpha = 0.8f),
-                    disabledInactiveTrackColor = Color.DarkGray.copy(alpha = 0.5f),
+                    disabledInactiveTrackColor = Color(0x505050FF).copy(alpha = 0.8f),
                 ),
                 modifier = Modifier
                     .weight(1f)
